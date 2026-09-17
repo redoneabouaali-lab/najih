@@ -25,11 +25,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
   && mkdir -p /app/data /app/bundle \
   && chown -R node:node /app
 USER node
+COPY --from=deps --chown=node:node /app/node_modules ./node_modules
 COPY --from=builder --chown=node:node /app/public ./public
 COPY --from=builder --chown=node:node /app/dev.db ./bundle/dev.db
 COPY --from=builder --chown=node:node /app/.next/standalone ./
 COPY --from=builder --chown=node:node /app/.next/static ./.next/static
 COPY --chown=node:node docker/entrypoint.sh ./entrypoint.sh
+RUN rm -f .env
 ENV DATABASE_PATH=/app/data/dev.db
 EXPOSE 3000
 ENTRYPOINT ["sh", "./entrypoint.sh"]
