@@ -1,0 +1,1462 @@
+[
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2026 — Session normale — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2026 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1Axc5TvvcW_lHEEyWLlZzr1MaN-HgaT8Q/view?usp=sharing",
+    "year": 2026,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2026 — Session normale — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2026 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1iIdSMkdpLbJ2Ik4IbrnrdcWHWroG7wqj/view?usp=sharing",
+    "year": 2026,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2026 — Session normale — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2026 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1PaRIdqQXvJGMPf-aJ--mQrc3dnU0QNSL/view?usp=sharing",
+    "year": 2026,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2026 — Session normale — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2026 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/11_mQwMKCq5g17hVL3j4aYKuue7FeL0Fn/view?usp=sharing",
+    "year": 2026,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2026 — Session normale — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2026 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1bZQepO07AmNWdTEKIXMuBXaCS6-qPWT_/view?usp=sharing",
+    "year": 2026,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2026 — Session normale — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2026 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1c2HGgMyaa9R-x4ghq4X-eTlAUWffJSmJ/view?usp=sharing",
+    "year": 2026,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2026 — Rattrapage — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2026 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1EKqF6XzXy-Toq2D7jZHUwSISNi8ST_UT/view?usp=sharing",
+    "year": 2026,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2026 — Rattrapage — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2026 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1Q7fPXgyLtWiTfXegiGuwG2RRMuHEzoHJ/view?usp=sharing",
+    "year": 2026,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2026 — Rattrapage — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2026 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1tV7eg_3Yv7ZZFCCLlB6KA0c15OcHeXpt/view?usp=sharing",
+    "year": 2026,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2026 — Rattrapage — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2026 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1cylM68cM3u-GRke3bQmDF3IDNv1eUI8k/view?usp=sharing",
+    "year": 2026,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2026 — Rattrapage — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2026 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1MfO0r_usHmiNt8P6enDXB3zsIk4-LK6t/view?usp=sharing",
+    "year": 2026,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2026 — Rattrapage — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2026 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1eyfRgD-w8izW6YdU5Yy5xBs4_zpmTUL5/view?usp=sharing",
+    "year": 2026,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2025 — Session normale — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2025 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1KSsiAdWfrc6LwLSpNlb56IlwdQrClXA1/view?usp=sharing",
+    "year": 2025,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2025 — Session normale — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2025 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1MY471IML-_pEoxR50D4QoKEtKjzXkZSe/view?usp=sharing",
+    "year": 2025,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2025 — Session normale — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2025 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1oaNqvWlb2skAgvcTu8AwnWwnCqqcwQ7Z/view?usp=sharing",
+    "year": 2025,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2025 — Session normale — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2025 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1djEWWOhf3TdvhsHvTsa-ZrE9fj6T4Zhn/view?usp=sharing",
+    "year": 2025,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2025 — Session normale — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2025 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1rIkL6cpvuFGQgRe-fAbtE7ex5bv6EaYS/view?usp=sharing",
+    "year": 2025,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2025 — Session normale — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2025 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1l6fZQ6ubVyx0-ogcUbHj9aeLgxOGEOGL/view?usp=sharing",
+    "year": 2025,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2025 — Rattrapage — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2025 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1J9lWlDvWr6Bj64rnI2Eenr5l_cBqllzE/view?usp=sharing",
+    "year": 2025,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2025 — Rattrapage — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2025 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1w78ODtDK-Kkmx2ZwNJVtb42DB9sSCffP/view?usp=sharing",
+    "year": 2025,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2025 — Rattrapage — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2025 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/13pCadjZcxLtCzEpAP4rgApztXc4LuuYL/view?usp=sharing",
+    "year": 2025,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2025 — Rattrapage — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2025 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1q0jocehtM2nE3vS8kdZ_SnlK7Ot9S2SJ/view?usp=sharing",
+    "year": 2025,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2025 — Rattrapage — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2025 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1rcbYV6Xl33mOUN8NT00flQz4-l8zV_HC/view?usp=sharing",
+    "year": 2025,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2025 — Rattrapage — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2025 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1pcdfa8rjAmfTG7fGwGxbijy-PTAtE3xk/view?usp=sharing",
+    "year": 2025,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2024 — Session normale — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2024 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1zzypkhJZQQuTp8WI7BgX6GiVECYAds3u/view?usp=sharing",
+    "year": 2024,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2024 — Session normale — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2024 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/19G_sTzpE_EsKiPBeP7mWLwuxKJ3SCjXu/view?usp=sharing",
+    "year": 2024,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2024 — Session normale — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2024 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1xMVXSonpJTe6WUDDm8YTiPmPNu5Cw6fn/view?usp=sharing",
+    "year": 2024,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2024 — Session normale — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2024 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1ryNDw4b1wCisPYqaqCqGNYfONnXVyGCi/view?usp=sharing",
+    "year": 2024,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2024 — Session normale — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2024 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1nn0x81YhGoJHzWTSBmYNESkRn9KNLhFQ/view?usp=sharing",
+    "year": 2024,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2024 — Session normale — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2024 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1rgqpmKfL34h6RkgSzxQ6zC-IVwA_pmOB/view?usp=sharing",
+    "year": 2024,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2024 — Rattrapage — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2024 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1dVMJWqqz_2GUm76U8x821ugmveAOG8jM/view?usp=sharing",
+    "year": 2024,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2024 — Rattrapage — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2024 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1aX257qp-0mgLbWhycDdvSFFZhUSCNpWI/view?usp=sharing",
+    "year": 2024,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2024 — Rattrapage — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2024 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1t7K8VH_pnjf6EzbsllaZrCdp68w_YaMe/view?usp=sharing",
+    "year": 2024,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2024 — Rattrapage — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2024 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1nTKiiL1eEPquvlHS1FDcBoCDYazoBUUw/view?usp=sharing",
+    "year": 2024,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2024 — Rattrapage — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2024 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1S49S3kqSSrz8CioC4SR1GZxP9hcDE00j/view?usp=sharing",
+    "year": 2024,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2024 — Rattrapage — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2024 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1nWnErMvjCQNy11sMwblJ8oon4p7OWs4Y/view?usp=sharing",
+    "year": 2024,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2023 — Session normale — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2023 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1f-Y_gZq8pnLGsirXzGjdIXzytWmGMwtv/view?usp=sharing",
+    "year": 2023,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2023 — Session normale — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2023 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1tr3TYkP6V7i9HX_tvV_uBGY2OveA7R5l/view?usp=sharing",
+    "year": 2023,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2023 — Session normale — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2023 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/14aWq8kyuLv2yXlX7r6D2iKgcNLp82M2t/view?usp=sharing",
+    "year": 2023,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2023 — Session normale — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2023 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1CA5MFSAn8fMdDhshRkED4liJQAVdNgBB/view?usp=sharing",
+    "year": 2023,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2023 — Session normale — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2023 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1fCxaN0orgfrPGK89e9f6BgOGfVhz4oMg/view?usp=sharing",
+    "year": 2023,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2023 — Session normale — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2023 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1nPbyvfJT2v_SwTv7RN5GWY2nzAvpYQco/view?usp=sharing",
+    "year": 2023,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2023 — Rattrapage — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2023 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/13X7ReFJxrttaN4VHsTiDGuosbU4-WQK2/view?usp=sharing",
+    "year": 2023,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2023 — Rattrapage — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2023 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1EXfRP8auGLbWhEIR9EkH78CGHLlTRNfi/view?usp=sharing",
+    "year": 2023,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2023 — Rattrapage — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2023 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1Om6FPeXUP0mPtXu0qQl0a05-Hb_u3Wda/view?usp=sharing",
+    "year": 2023,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2023 — Rattrapage — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2023 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1asFsCEKjVwXCx-8XmCy4gnJeFMaHNHFl/view?usp=sharing",
+    "year": 2023,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2023 — Rattrapage — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2023 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1Hf4om_4BtfkX0u1HLUzbPY9D_q3MQDX9/view?usp=sharing",
+    "year": 2023,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2023 — Rattrapage — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2023 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1v21IqW2AulYshz5Xb7phQTg6Zm4FfbS9/view?usp=sharing",
+    "year": 2023,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2022 — Session normale — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2022 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/15NmADluPanjiXWUivrpzpg17C24_4w3K/view?usp=sharing",
+    "year": 2022,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2022 — Session normale — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2022 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1DpK9VvFsdvQ5Rb5UqpcMYPJZs27QjZzA/view?usp=sharing",
+    "year": 2022,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2022 — Session normale — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2022 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1bwAevSaTrn5-o23id8RJ4BK8u7_ZmOiG/view?usp=sharing",
+    "year": 2022,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2022 — Session normale — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2022 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1CGCgOgFboOtoofBf18hvkgPsIKhv3jSp/view?usp=sharing",
+    "year": 2022,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2022 — Session normale — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2022 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1lcdmXijVv02GjuCkXh7hpOow8F_B71K7/view?usp=sharing",
+    "year": 2022,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2022 — Session normale — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2022 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1lx9RcLQVBnNaDv1MrPsQbB_FJkQnrsSf/view?usp=sharing",
+    "year": 2022,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2022 — Rattrapage — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2022 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1Zs364KeXLSaQoSzGqLAkwNxQvH_JqTA5/view?usp=share_link",
+    "year": 2022,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2022 — Rattrapage — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2022 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1ZKGGfkeZY2hhQ42zB18YDPneG1q3QSAU/view?usp=share_link",
+    "year": 2022,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2022 — Rattrapage — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2022 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1ZM03XQAcB-xjoPWO47NGPpZxuRZjdMtp/view?usp=share_link",
+    "year": 2022,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2022 — Rattrapage — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2022 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1Zsv3teUaBFk4zvHC2uU_0ib8brhEAf-H/view?usp=share_link",
+    "year": 2022,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2022 — Rattrapage — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2022 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1ZaDxVe8_s2tF3Kn-3HVfzC0eBQQfOkNh/view?usp=share_link",
+    "year": 2022,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2022 — Rattrapage — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2022 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1ZjH39oUVOAff2ucRBlsrmhV-DyLPMdDd/view?usp=share_link",
+    "year": 2022,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2021 — Session normale — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2021 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1fnUBq6gnWxIGaZMSHHLilzP0N9Hkv-hR/view?usp=sharing",
+    "year": 2021,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2021 — Session normale — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2021 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1U6515aIat38eFA6BTfppz03zhUk_nnZ1/view?usp=sharing",
+    "year": 2021,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2021 — Session normale — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2021 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1kRxwD7IlporubqHVGb9IsJ3YIFiGyjhK/view?usp=sharing",
+    "year": 2021,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2021 — Session normale — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2021 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1VUSaZzO4SLHP-1X89sUsU5iQElfEklTF/view?usp=sharing",
+    "year": 2021,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2021 — Session normale — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2021 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1fQN-83GYGHNhiOyNxEOSfHnWXdSf2Ayx/view?usp=sharing",
+    "year": 2021,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2021 — Session normale — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2021 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1_Y-N4BCA6rxzO2nLuuJ1Dsy4RsO_3dsJ/view?usp=sharing",
+    "year": 2021,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2020 — Session normale — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2020 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1YQfCCl5wG1boEg3rey1xdMszffKGxcnM/view?usp=sharing",
+    "year": 2020,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2020 — Session normale — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2020 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/13_m69PUuN5mNK-ySpFGyP7kG9FvpysQG/view?usp=sharing",
+    "year": 2020,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2020 — Session normale — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2020 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1EpKbQao6obo_1q01DzYjGRsl4l5PEqfh/view?usp=sharing",
+    "year": 2020,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2020 — Session normale — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2020 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1iRIzmnO0ugs-qGyJa9dHMjMxISxeZTBu/view?usp=sharing",
+    "year": 2020,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2020 — Session normale — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2020 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1M1gc4H0Nvq7RIdhyUQp_gvoeE707uvDB/view?usp=sharing",
+    "year": 2020,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2020 — Session normale — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2020 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1GCAi9KH7uQoKYIJ7Hd0_rkWiu3qVfwBa/view?usp=sharing",
+    "year": 2020,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2019 — Session normale — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2019 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1K6ggokbccX3QtRxVafImK4QKvie6LNc0/view?usp=sharing",
+    "year": 2019,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2019 — Session normale — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2019 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1yq0jqsLuJ8QoLV4Ac7OyTHJUIjyD6v0a/view?usp=sharing",
+    "year": 2019,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2019 — Session normale — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2019 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/0B1HVPMKquFwvMmlYSVVYNFBUdklxYVJKM2xDMlUzc2VhZWdR/view?usp=sharing&amp;resourcekey=0-VbVN6-yFxVI6d_DYftLQvQ",
+    "year": 2019,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2019 — Session normale — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2019 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/0B1HVPMKquFwvc2dKRUo5eTVCQ3VuVExjdERTQ3hMcWRLaHBN/view?usp=sharing&amp;resourcekey=0-6DBra3Gq-5wyiOtNmzj0Iw",
+    "year": 2019,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2019 — Session normale — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2019 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1_dj8zsvkX1C9Z3C6gl7r_kp_xleRx4S8/view?usp=sharing",
+    "year": 2019,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2019 — Session normale — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2019 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/0B1HVPMKquFwvQ1gyaFdCSDNwMmJzaFBuLTZ1cmY0VXBBQlBj/view?usp=sharing&amp;resourcekey=0-EHrGbunGJKEbfeMHzIJMhw",
+    "year": 2019,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2018 — Session normale — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2018 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1L75tISesuypK0L3Qd1stYteu_dhYFBWe/view?usp=sharing",
+    "year": 2018,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2018 — Session normale — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2018 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/16OQhHxvuG3hwau1sQIuS1QPW5BYgWJjD/view?usp=sharing",
+    "year": 2018,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2018 — Session normale — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2018 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1Tp50zfkLZ0Lsbrk5pzAbxGBMao7v5S3C/view?usp=sharing",
+    "year": 2018,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2018 — Session normale — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2018 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1x6aGFQX-mNrWzAu7m_lE7ZrBB2HmxrZy/view?usp=sharing",
+    "year": 2018,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2018 — Session normale — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2018 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1uMYgjrtKizlBAttGzKVgzEclcAnp1XYR/view?usp=sharing",
+    "year": 2018,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2018 — Session normale — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2018 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/0B1HVPMKquFwvSHVNbFFoSkw5a0tKZ0I3ckFYeG50QmNRSmJN/view?usp=sharing&amp;resourcekey=0-RRINt0CFr5gY_LTWXQRmZg",
+    "year": 2018,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2017 — Session normale — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2017 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/0B1HVPMKquFwvMmdfRHZqNHo2V0U/view?usp=sharing&amp;resourcekey=0-XxZbEvhpY58BrvFswI2Ypg",
+    "year": 2017,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2017 — Session normale — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2017 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/0B1HVPMKquFwvd3hlZ25HdkFxMUU/view?usp=sharing&amp;resourcekey=0-pzdLus5-ROT3RUMH0tQKcw",
+    "year": 2017,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2017 — Session normale — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2017 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1VmBrstmS9Bv_Ih0MH-oOHfoXO3PfUgA8/view?usp=sharing",
+    "year": 2017,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2017 — Session normale — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2017 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1_5v5RfmK3Qawu8ltdq-YVxQKCYtMSz7f/view?usp=sharing",
+    "year": 2017,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2017 — Session normale — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2017 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/0B1HVPMKquFwvX0ZSWl8tb1hVV3c/view?usp=sharing&amp;resourcekey=0-aoxW9J_6HIwm3S_AwUIFcQ",
+    "year": 2017,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2017 — Session normale — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2017 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/0B1HVPMKquFwvZWF3MDJhaVdfUTg/view?usp=sharing&amp;resourcekey=0-K7Gj8hwZhVmLfklrnxRKNg",
+    "year": 2017,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2017 — Rattrapage — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2017 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1RZiyZ9VSR32C0xsDhZaRbbIs09lmyHyi/view?usp=sharing",
+    "year": 2017,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2017 — Rattrapage — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2017 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1DaWPWuCAtaDQh22UIPGoneCDTS2wlkLv/view?usp=sharing",
+    "year": 2017,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2017 — Rattrapage — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2017 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/0B1HVPMKquFwvTm1EZFdnai1UMUk/view?usp=sharing&amp;resourcekey=0-VZUzufB4NX1mvE7yniqAgQ",
+    "year": 2017,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2017 — Rattrapage — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2017 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/0B1HVPMKquFwvNm1tRXlwZ0dyTDg/view?usp=sharing&amp;resourcekey=0-FazjO6jXf7z0YMJ-34nUlA",
+    "year": 2017,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2017 — Rattrapage — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2017 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1jOIp7tIoAxQpXfVMm0YDINdBfim7XE4r/view?usp=sharing",
+    "year": 2017,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2017 — Rattrapage — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2017 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1YzLq4tPu3rK-I_s9EiUIDlYPzrnD1ETf/view?usp=sharing",
+    "year": 2017,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2016 — Session normale — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2016 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1pdoxeNSdMAzFEMs8bGTldKT4H2biySh2/view?usp=sharing",
+    "year": 2016,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2016 — Session normale — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2016 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1YCPBwi2kegJYncxhg5KNUrPdXAX-5WMy/view?usp=drive_link",
+    "year": 2016,
+    "session": "normal",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2016 — Session normale — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2016 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1x8gEZcXtROpU1BYTdg9exaK9zojq-XYk/view?usp=drive_link",
+    "year": 2016,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2016 — Session normale — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2016 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1sezO9l7VEWhmkPYpUHDGrUlYVf-LRw_W/view?usp=drive_link",
+    "year": 2016,
+    "session": "normal",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2016 — Session normale — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2016 — الدورة العادية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1Nc_kLH-FSiO0-cVP1yyTAdDW8Pbo2fA9/view?usp=drive_link",
+    "year": 2016,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2016 — Session normale — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2016 — الدورة العادية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1GiQhb3iLKIQAllF0smaKJqGtUWYaRib1/view?usp=drive_link",
+    "year": 2016,
+    "session": "normal",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2016 — Rattrapage — Sujet",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2016 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1KREvN7o_ZvCTpAGvdv11Ch50XDpI6mrJ/view?usp=drive_link",
+    "year": 2016,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences de la Vie et de la Terre — Examen National 2016 — Rattrapage — Correction",
+    "titleAr": "علوم الحياة والأرض — الامتحان الوطني 2016 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1uQ_GMsl0BDNNrhfsgR1jeja_PRYiK92D/view?usp=drive_link",
+    "year": 2016,
+    "session": "rattrapage",
+    "subjectKey": "svt",
+    "branchSlug": "svt"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2016 — Rattrapage — Sujet",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2016 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/16soHOR4BUefSrw4pS9zMVyv0WLylkn3P/view?usp=drive_link",
+    "year": 2016,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Physiques — Examen National 2016 — Rattrapage — Correction",
+    "titleAr": "علوم فيزيائية — الامتحان الوطني 2016 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1JdfusnTbefOM17xPJ-aU7GYhLE9NCWjg/view?usp=drive_link",
+    "year": 2016,
+    "session": "rattrapage",
+    "subjectKey": "sp",
+    "branchSlug": "sp"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2016 — Rattrapage — Sujet",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2016 — التعويضية — الموضوع",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1ISIE770wNnPENGR7NkTmyFx3x4X9qKrG/view?usp=drive_link",
+    "year": 2016,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Sciences Mathématiques A — Examen National 2016 — Rattrapage — Correction",
+    "titleAr": "علوم رياضية — الامتحان الوطني 2016 — التعويضية — التصحيح",
+    "kind": "exam",
+    "url": "https://drive.google.com/file/d/1Oc7jc3v-zCC_MlkVO1hYi1sYdWbss3hv/view?usp=drive_link",
+    "year": 2016,
+    "session": "rattrapage",
+    "subjectKey": "sm",
+    "branchSlug": "sm"
+  },
+  {
+    "titleFr": "Test Your Readiness for the English BAC Exam Online!",
+    "titleAr": "Test Your Readiness for the English BAC Exam Online!",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac-english-exam-readiness-test/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "BAC 2 SMART REVISION &#8211; ANSWER KEY",
+    "titleAr": "BAC 2 SMART REVISION &#8211; ANSWER KEY",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac-2-smart-revision-answer-key/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "BAC2 English Smart Revision : Simplified Lesson Summaries with Exam-Style Exercises (2026)",
+    "titleAr": "BAC2 English Smart Revision : Simplified Lesson Summaries with Exam-Style Exercises (2026)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac-english-lessons-exams/",
+    "year": 2026,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "All-type Writing Samples for BAC Exam (2026) جميع النماذج",
+    "titleAr": "All-type Writing Samples for BAC Exam (2026) جميع النماذج",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac-writing-samples/",
+    "year": 2026,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Passive Voice Made Easy for BAC2: Worksheet + National Exam Exercises",
+    "titleAr": "Passive Voice Made Easy for BAC2: Worksheet + National Exam Exercises",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/passive-voice-bac2/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Download Passive Voice Made Easy Worksheet (BAC2)",
+    "titleAr": "Download Passive Voice Made Easy Worksheet (BAC2)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/download-passive-voice-bac2/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Back to School Ready Made Diagnostic Tests Designed by Experienced Teachers",
+    "titleAr": "Back to School Ready Made Diagnostic Tests Designed by Experienced Teachers",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/diagnostic-test/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Download Review of All Bac2 Functions ( 2-page PDF)",
+    "titleAr": "Download Review of All Bac2 Functions ( 2-page PDF)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac2-functions-review-pdf/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Descriptive Paragraph Writing: Practical Worksheets and Simple Examples &#8211; BAC2",
+    "titleAr": "Descriptive Paragraph Writing: Practical Worksheets and Simple Examples &#8211; BAC2",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/descriptive-paragraph-writing/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Cause / Effect Paragraph Writing: Practical Worksheets and Simple Examples &#8211; BAC2",
+    "titleAr": "Cause / Effect Paragraph Writing: Practical Worksheets and Simple Examples &#8211; BAC2",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/cause-effect-paragraph-writing-practical/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Argumentative Paragraph Writing: Practical Worksheets and Simple Examples &#8211; BAC2",
+    "titleAr": "Argumentative Paragraph Writing: Practical Worksheets and Simple Examples &#8211; BAC2",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/argumentative-paragraph-writing-practical/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Review of Tenses + Exercises from National Exams (BAC2)  تمارين من الامتحانات الوطنية+ تلخيص موجز للأزمنة",
+    "titleAr": "Review of Tenses + Exercises from National Exams (BAC2)  تمارين من الامتحانات الوطنية+ تلخيص موجز للأزمنة",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/tenses-review-practice-bac2/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Summary of All Language Functions (BAC2) + Practice  ( 2-Page PDF)",
+    "titleAr": "Summary of All Language Functions (BAC2) + Practice  ( 2-Page PDF)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac2-all-functions-summary/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "All-type Writing Example for BAC Exam جميع الأمثلة",
+    "titleAr": "All-type Writing Example for BAC Exam جميع الأمثلة",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac-writing-samples-2020-3/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Compilation of Reading Texts with Comprehension Questions (BAC2)",
+    "titleAr": "Compilation of Reading Texts with Comprehension Questions (BAC2)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/reading-texts-bac2/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Collection of Mock Exams 2020 + Correction &#8211; BAC حزمة امتحانات تجريبية",
+    "titleAr": "Collection of Mock Exams 2020 + Correction &#8211; BAC حزمة امتحانات تجريبية",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/7-mock-exams-2020-correction/",
+    "year": 2020,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Download Quick Tenses Review + Exercises (BAC2) تلخيص موجز للأزمنة",
+    "titleAr": "Download Quick Tenses Review + Exercises (BAC2) تلخيص موجز للأزمنة",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/download-tenses-review-bac/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Quick Tenses Review + Exercises (BAC2) تلخيص موجز للأزمنة",
+    "titleAr": "Quick Tenses Review + Exercises (BAC2) تلخيص موجز للأزمنة",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/tenses-review-bac-2/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Download 5-UNIT COLLOCATION  1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "titleAr": "Download 5-UNIT COLLOCATION  1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/download-collocation-bac-1-page-summary/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "5-UNIT COLLOCATION  1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "titleAr": "5-UNIT COLLOCATION  1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/collocation-bac-1-page-summary/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Download Relative Pronouns &#8211; 1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "titleAr": "Download Relative Pronouns &#8211; 1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/download-relative-pronouns-1-page-summary/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Relative Pronouns &#8211; 1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "titleAr": "Relative Pronouns &#8211; 1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/relative-pronouns-1-page-summary/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Modal Verbs &#8211; 1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "titleAr": "Modal Verbs &#8211; 1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/modal-verbs-1-page-summary/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Download Modal Verbs &#8211; 1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "titleAr": "Download Modal Verbs &#8211; 1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/download-modal-verbs-1-page-summary/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "BAC2 FUNCTIONS 3 (Linking Words &#038; Modals)  التطبيق مع الامتحانات الوطنية",
+    "titleAr": "BAC2 FUNCTIONS 3 (Linking Words &#038; Modals)  التطبيق مع الامتحانات الوطنية",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac2-functions-3-linking-words-modals-%d8%a7%d9%84%d8%aa%d8%b7%d8%a8%d9%8a%d9%82-%d9%85%d8%b9-%d8%a7%d9%84%d8%a7%d9%85%d8%aa%d8%ad%d8%a7%d9%86%d8%a7%d8%aa-%d8%a7%d9%84%d9%88%d8%b7%d9%86%d9%8a/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Linking Words &#8211; 1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "titleAr": "Linking Words &#8211; 1 page &#8211; Summary + Practice with Exams ( BAC2)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/linking-words-summary-bac/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Answers : Practice Linking Words with Exams ( BAC2)",
+    "titleAr": "Answers : Practice Linking Words with Exams ( BAC2)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/exams-linking-words-answers/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Video Lesson : Linking Words ( Bac2 / Upper-intermediate)",
+    "titleAr": "Video Lesson : Linking Words ( Bac2 / Upper-intermediate)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/linking-words-grammar/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Video Lesson : The Future Perfect Tense ( Bac2 / Upper-intermediate)",
+    "titleAr": "Video Lesson : The Future Perfect Tense ( Bac2 / Upper-intermediate)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/future-prefect/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Video Lesson : Conditional Type 3  (2nd Bac)",
+    "titleAr": "Video Lesson : Conditional Type 3  (2nd Bac)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/conditional-3/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Video: Gerund or Infinitive made simple (Bac2 )",
+    "titleAr": "Video: Gerund or Infinitive made simple (Bac2 )",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/gerund-infinitive/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Video: Writing Paragraph Effectively and Easily (BAC2)",
+    "titleAr": "Video: Writing Paragraph Effectively and Easily (BAC2)",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/effective-paragraph-writing/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "BAC2 RESULTS 2018  طريقةالاطلاع على نتائج امتحانات الباك",
+    "titleAr": "BAC2 RESULTS 2018  طريقةالاطلاع على نتائج امتحانات الباك",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac2018/",
+    "year": 2018,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "2018 Bac English Exams",
+    "titleAr": "2018 Bac English Exams",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/2018-bac-exams/",
+    "year": 2018,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "BAC2 MOST COMMON PHRASAL VERBS  + PRACTICE WITH EXAMS SINCE 2010",
+    "titleAr": "BAC2 MOST COMMON PHRASAL VERBS  + PRACTICE WITH EXAMS SINCE 2010",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/word-formation-%d9%84%d8%a7%d8%a6%d8%ad%d8%a9-%d9%84%d8%a3%d9%87%d9%85-%d8%a7%d9%84%d9%85%d8%b5%d8%b7%d9%84%d8%ad%d8%a7%d8%aa-%d8%aa%d8%b7%d8%a8%d9%8a%d9%82-%d9%85%d8%b9-%d8%a7%d9%84%d8%a7%d9%85-3/",
+    "year": 2010,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "ANSWERS : Practice BAC2 PHRASAL VERBS WITH National EXAMS",
+    "titleAr": "ANSWERS : Practice BAC2 PHRASAL VERBS WITH National EXAMS",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac-phrasal-verb-exercise-key/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Most Common Writing Types , Plannings, Examples &#038; Tips &#8211; BAC2",
+    "titleAr": "Most Common Writing Types , Plannings, Examples &#038; Tips &#8211; BAC2",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac2-common-exam-writing-types-part1-pragraph-essay-writing-2-2-2-2/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  },
+  {
+    "titleFr": "Bac2 : Report  Writing",
+    "titleAr": "Bac2 : Report  Writing",
+    "kind": "exam",
+    "url": "https://moroccoenglish.com/bac2-common-exam-writing-types-part1-pragraph-essay-writing-2-2-2-2-2/",
+    "year": null,
+    "session": null,
+    "subjectKey": "anglais",
+    "branchSlug": "lettres"
+  }
+]

@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Branch {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  nameAr    String
+  nameFr    String
+  order     Int       @default(0)
+  subjects  Subject[]
+  resources Resource[]
+  createdAt DateTime  @default(now())
+}
+
+model Subject {
+  id        String    @id @default(cuid())
+  slug      String
+  nameAr    String
+  nameFr    String
+  icon      String    @default("📘")
+  order     Int       @default(0)
+  branchId  String
+  branch    Branch    @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  chapters  Chapter[]
+  createdAt DateTime  @default(now())
+
+  @@unique([branchId, slug])
+}
+
+model Chapter {
+  id        String    @id @default(cuid())
+  slug      String
+  titleAr   String
+  titleFr   String
+  order     Int       @default(0)
+  subjectId String
+  subject   Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  questions Question[]
+  lesson    Lesson?
+  createdAt DateTime  @default(now())
+
+  @@unique([subjectId, slug])
+}
+
+model Lesson {
+  id        String   @id @default(cuid())
+  contentAr String
+  contentFr String
+  chapterId String   @unique
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Question {
+  id            String    @id @default(cuid())
+  promptAr      String
+  promptFr      String
+  year          Int?
+  session       String? // "normal" | "rattrapage"
+  source        String? // e.g. "Examen National 2024 - SVT"
+  explanationAr String?
+  explanationFr String?
+  chapterId     String
+  chapter       Chapter   @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  options       Option[]
+  answers       QuizAnswer[]
+  createdAt     DateTime  @default(now())
+}
+
+model Option {
+  id          String   @id @default(cuid())
+  textAr      String
+  textFr      String
+  order       Int      @default(0)
+  isCorrect   Boolean  @default(false)
+  questionId  String
+  question    Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}
+
+model QuizResult {
+  id        String       @id @default(cuid())
+  quizType  String       @default("chapter") // "chapter" | "subject" | "mixed"
+  total     Int
+  score     Int
+  durationS Int?
+  branchId  String?
+  subjectId String?
+  chapterId String?
+  answers   QuizAnswer[]
+  createdAt DateTime     @default(now())
+}
+
+model QuizAnswer {
+  id          String     @id @default(cuid())
+  isCorrect   Boolean
+  quizResult  QuizResult @relation(fields: [quizResultId], references: [id], onDelete: Cascade)
+  quizResultId String
+  question    Question   @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId  String
+  optionId    String?
+  createdAt   DateTime   @default(now())
+}
+
+model Resource {
+  id        String   @id @default(cuid())
+  titleAr   String
+  titleFr   String
+  kind      String   @default("exam") // "exam" | "exercise"
+  url       String
+  year      Int?
+  session   String? // "normal" | "rattrapage"
+  subjectKey String? // "svt" | "sp" | "sm" | "maths" | ...
+  branchId  String?
+  branch    Branch?  @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}

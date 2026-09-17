@@ -1,0 +1,126 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { t, type Lang } from "@/lib/lang";
+
+type Msg = { role: "user" | "assistant"; content: string };
+
+export function Chat({ lang }: { lang: Lang }) {
+  const [msgs, setMsgs] = useState<Msg[]>([]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [msgs, loading]);
+
+  const send = async () => {
+    const text = input.trim();
+    if (!text || loading) return;
+    setInput("");
+    const userMsg: Msg = { role: "user", content: text };
+    setMsgs((m) => [...m, userMsg]);
+    setLoading(true);
+    try {
+      const system =
+        lang === "ar"
+          ? "أنت مرشد تعليمي لطلاب الباكالوريا المغربية. أجب بالعربية أو بالفرنسية حسب لغة السؤال. اشرح ببساطة واستعن بأمثلة. لا تطنب إلا عند الضرورة."
+          : "Tu es un tuteur pour les candidats au Bac marocain. Réponds en arabe ou en français selon la langue de la question. Explique simplement avec des exemples. Sois concis.";
+
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: [
+            { role: "system", content: system },
+            ...msgs.map((m) => ({ role: m.role, content: m.content })),
+            { role: "user", content: text },
+          ],
+        }),
+      });
+
+      const data = await res.json();
+      const reply =
+        data.choices?.[0]?.message?.content ??
+        (lang === "ar" ? "عتذر، حدث خطأ." : "Désolé, une erreur est survenue.");
+      setMsgs((m) => [...m, { role: "assistant", content: reply }]);
+    } catch {
+      setMsgs((m) => [
+        ...m,
+        {
+          role: "assistant",
+          content:
+            lang === "ar"
+              ? "خطأ في الاتصال بالخادم."
+              : "Erreur de connexion au serveur.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto px-4 sm:px-8 py-10 flex flex-col min-h-[78vh]">
+      <div className="mb-8">
+        <div className="label mb-4">🦉 {t(lang, "chatTitle")}</div>
+        <h1 className="sec-title text-[var(--b)]">{t(lang, "chatTitle")}</h1>
+        <p className="sec-sub mt-3">{t(lang, "chatSub")}</p>
+      </div>
+
+      <div className="flex-1 space-y-4 overflow-y-auto mb-4 max-h-[55vh] pr-1">
+        {msgs.length === 0 && (
+          <p className="sec-sub text-[var(--l)]">{t(lang, "chatExample")}</p>
+        )}
+        {msgs.map((m, i) => (
+          <div
+            key={i}
+            dir={lang === "ar" ? "rtl" : "ltr"}
+            className={`max-w-[85%] ${m.role === "user" ? "ml-auto" : "mr-auto w-full"}`}
+          >
+            <div className="mono text-[10px] uppercase tracking-[.14em] text-[var(--l)] mb-1">
+              {m.role === "user"
+                ? lang === "ar" ? "أنت" : "Vous"
+                : lang === "ar" ? "المرشد" : "Tuteur"}
+            </div>
+            <div
+              className={`p-4 ${m.role === "user" ? "bg-[var(--b)] text-[var(--of)]" : "panel p-5 text-[var(--b)]"}`}
+              dir="auto"
+            >
+              <div className="whitespace-pre-wrap">{m.content}</div>
+            </div>
+          </div>
+        ))}
+        {loading && (
+          <p className="mono text-xs text-[var(--p)]">{t(lang, "chatThinking")}</p>
+        )}
+        <div ref={bottomRef} />
+      </div>
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          send();
+        }}
+        className="flex gap-2 mt-2"
+      >
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder={t(lang, "chatPlaceholder")}
+          className="flex-1 p-4 border border-[var(--p)] bg-[var(--w)] text-[var(--b)] text-base rounded-none focus:outline-none focus:border-[var(--b)] transition-colors"
+          dir={lang === "ar" ? "rtl" : "ltr"}
+        />
+        <button
+          type="submit"
+          disabled={loading || !input.trim()}
+          className="btn btn-emerald !px-6 disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          {t(lang, "chatSend")}
+        </button>
+      </form>
+    </div>
+  );
+}

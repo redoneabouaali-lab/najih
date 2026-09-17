@@ -1,0 +1,48 @@
+{
+  "name": "najih",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "seed": "tsx prisma/seed.ts",
+    "seed:resources": "tsx scripts/seed-resources.ts",
+    "scrape": "node scripts/scrape-resources.mjs",
+    "content": "tsx scripts/generate-content.ts",
+    "seed:lessons": "tsx scripts/seed-lessons.ts",
+    "seed:questions": "tsx scripts/seed-questions.ts",
+    "seed:exercises": "tsx scripts/seed-exercises.ts",
+    "seed:subjects": "tsx scripts/seed-subjects.ts",
+    "seed:content": "tsx scripts/seed-full-content.ts",
+    "seed:repair": "tsx scripts/repair-arabic-content.ts",
+    "seed:sm": "tsx scripts/seed-sm.ts",
+    "seed:sm:lessons": "tsx scripts/seed-sm-lessons.ts",
+    "seed:sm:philo": "tsx scripts/seed-sm-philo.ts",
+    "postinstall": "prisma skills sync || exit 0"
+  },
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "better-sqlite3": "^13.0.3",
+    "dexie": "^4.4.6",
+    "dotenv": "^17.4.2",
+    "next": "16.3.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "prisma": "^7.10.0",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.13",
+    "typescript": "^5",
+    "wrangler": "^4.132.0"
+  }
+}

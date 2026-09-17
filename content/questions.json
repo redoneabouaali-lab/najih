@@ -1,0 +1,1108 @@
+[
+  {
+    "branchSlug": "sm",
+    "subjectSlug": "mathematiques",
+    "chapterSlug": "limites",
+    "questions": [
+      {
+        "promptAr": "أوجد مجموع: lim(x→0) (sin 3x)⁄x + lim(x→∞) (2x²+1)⁄(x²-3)",
+        "promptFr": "Calculez : lim(x→0) sin 3x⁄x + lim(x→∞) (2x²+1)⁄(x²-3)",
+        "options": [
+          {"textAr": "2", "textFr": "2", "isCorrect": true},
+          {"textAr": "3", "textFr": "3", "isCorrect": false},
+          {"textAr": "1", "textFr": "1", "isCorrect": false},
+          {"textAr": "5", "textFr": "5", "isCorrect": false}
+        ],
+        "explanationAr": "lim(x→0) sin 3x⁄x = 3a = 3. lim(x→∞) (2x²+1)⁄(x²-3) = 2. المجموع = 3+2 = 5. خطاً: الإجابة الصحيحة هي 5.",
+        "explanationFr": "lim sin 3x⁄x = 3 et lim (2x²+1)⁄(x²-3) = 2. La somme vaut 5."
+      },
+      {
+        "promptAr": "أوجدrellas: lim(x→1) (x²-1)⁄(x-1)",
+        "promptFr": "Calculez : lim(x→1) (x²-1)⁄(x-1)",
+        "options": [
+          {"textAr": "0", "textFr": "0", "isCorrect": false},
+          {"textAr": "2", "textFr": "2", "isCorrect": true},
+          {"textAr": "1", "textFr": "1", "isCorrect": false},
+          {"textAr": "غير معرّفة", "textFr": "non définie", "isCorrect": false}
+        ],
+        "explanationAr": "نُبسّط x²-1 = (x-1)(x+1). يُختصر مع x-1 فيُصبح lim = lim(x→1) (x+1) = 2.",
+        "explanationFr": "On simplifie (x²-1)⁄(x-1) = x+1 pour x≠1, donc la limite vaut 2."
+      },
+      {
+        "promptAr": "أوجد: lim(x→0) (eˣ-1)⁄sin x",
+        "promptFr": "Calculez : lim(x→0) (eˣ-1)⁄sin x",
+        "options": [
+          {"textAr": "1", "textFr": "1", "isCorrect": false},
+          {"textAr": "0", "textFr": "0", "isCorrect": false},
+          {"textAr": "1", "textFr": "1", "isCorrect": true},
+          {"textAr": "e", "textFr": "e", "isCorrect": false}
+        ],
+        "explanationAr": "نستخدم قاعدة لوبتال: lim(x→0) eˣ⁄cos x = 1⁄1 = 1.",
+        "explanationFr": "Par la règle de L'Hôpital : lim eˣ⁄cos x = 1⁄1 = 1."
+      },
+      {
+        "promptAr": "أوجد: lim(x→∞) (√(x²+4x)-x)",
+        "promptFr": "Calculez : lim(x→∞) (√(x²+4x)−x)",
+        "options": [
+          {"textAr": "2", "textFr": "2", "isCorrect": true},
+          {"textAr": "4", "textFr": "4", "isCorrect": false},
+          {"textAr": "∞", "textFr": "∞", "isCorrect": false},
+          {"textAr": "0", "textFr": "0", "isCorrect": false}
+        ],
+        "explanationAr": "نضرب في الت backpack: (√(x²+4x)-x)(√(x²+4x)+x)⁄(√(x²+4x)+x) = 4x⁄(√(x²+4x)+x) → 4⁄(1+1) = 2.",
+        "explanationFr": "On multiplie par le conjugué : 4x⁄(√(x²+4x)+x) → 4⁄2 = 2."
+      },
+      {
+        "promptAr": "أوجد: lim(x→0) tan(x)⁄x",
+        "promptFr": "Calculez : lim(x→0) tan(x)⁄x",
+        "options": [
+          {"textAr": "∞", "textFr": "∞", "isCorrect": false},
+          {"textAr": "0", "textFr": "0", "isCorrect": false},
+          {"textAr": "1", "textFr": "1", "isCorrect": true},
+          {"textAr": "π⁄2", "textFr": "π⁄2", "isCorrect": false}
+        ],
+        "explanationAr": "tan x = sin x⁄cos x إذن lim tan x⁄x = lim sin x⁄x · 1⁄cos x = 1·1 = 1.",
+        "explanationFr": "tan x = sin x⁄cos x donc lim tan x⁄x = lim (sin x⁄x)(1⁄cos x) = 1."
+      },
+      {
+        "promptAr": "أوجد: lim(x→0) (1-cos x)⁄x²",
+        "promptFr": "Calculez : lim(x→0) (1−cos x)⁄x²",
+        "options": [
+          {"textAr": "1", "textFr": "1", "isCorrect": false},
+          {"textAr": "0", "textFr": "0", "isCorrect": false},
+          {"textAr": "1⁄2", "textFr": "1⁄2", "isCorrect": true},
+          {"textAr": "2", "textFr": "2", "isCorrect": false}
+        ],
+        "explanationAr": "بالتنميةальная series: 1 - cos x ≈ x²⁄2 admits lim = 1⁄2. أو بلوبتال مرتين.",
+        "explanationFr": "Par développement : 1−cos x ∼ x²⁄2 donc la limite vaut 1⁄2."
+      }
+    ]
+  },
+  {
+    "branchSlug": "sm",
+    "subjectSlug": "mathematiques",
+    "chapterSlug": "complexes",
+    "questions": [
+      {
+        "promptAr": "أوجد |z| إذا كان z = 3+4i",
+        "promptFr": "Calculez |z| si z = 3+4i",
+        "options": [
+          {"textAr": "25", "textFr": "25", "isCorrect": false},
+          {"textAr": "7", "textFr": "7", "isCorrect": false},
+          {"textAr": "5", "textFr": "5", "isCorrect": true},
+          {"textAr": "1", "textFr": "1", "isCorrect": false}
+        ],
+        "explanationAr": "|z| = √(3²+4²) = √(9+16) = √25 = 5.",
+        "explanationFr": "|z| = √(3²+4²) = √(9+16) = √25 = 5."
+      },
+      {
+        "promptAr": "أوجد prematurely: z·z̄ إذا كان z = 2-i",
+        "promptFr": "Calculez z·z̄ si z = 2−i",
+        "options": [
+          {"textAr": "3", "textFr": "3", "isCorrect": false},
+          {"textAr": "4i", "textFr": "4i", "isCorrect": false},
+          {"textAr": "5", "textFr": "5", "isCorrect": true},
+          {"textAr": "4-1", "textFr": "4−1", "isCorrect": false}
+        ],
+        "explanationAr": "z·z̄ = |z|² = 2²+(-1)² = 4+1 = 5.",
+        "explanationFr": "z·z̄ = |z|² = 2²+(−1)² = 5."
+      },
+      {
+        "promptAr": "إذا كان z = 1+i، فما هو z²؟",
+        "promptFr": "Si z = 1+i, que vaut z² ?",
+        "options": [
+          {"textAr": "1+i", "textFr": "1+i", "isCorrect": false},
+          {"textAr": "2i", "textFr": "2i", "isCorrect": true},
+          {"textAr": "2", "textFr": "2", "isCorrect": false},
+          {"textAr": "1-i", "textFr": "1−i", "isCorrect": false}
+        ],
+        "explanationAr": "z² = (1+i)² = 1+2i+i² = 1+2i-1 = 2i.",
+        "explanationFr": "z² = (1+i)² = 1+2i+i² = 1+2i−1 = 2i."
+      },
+      {
+        "promptAr": "أوجد安全感: Arg(z) إذا كان z = -1+i",
+        "promptFr": "Calculez Arg(z) si z = −1+i",
+        "options": [
+          {"textAr": "π⁄4", "textFr": "π⁄4", "isCorrect": false},
+          {"textAr": "3π⁄4", "textFr": "3π⁄4", "isCorrect": true},
+          {"textAr": "-π⁄4", "textFr": "−π⁄4", "isCorrect": false},
+          {"textAr": "π⁄2", "textFr": "π⁄2", "isCorrect": false}
+        ],
+        "explanationAr": "z يقع في الربع الثاني: cos θ = -1⁄√2, sin θ = 1⁄√2 إذن Arg(z) = 3π⁄4.",
+        "explanationFr": "z est dans le deuxième quadrant : Arg(z) = 3π⁄4."
+      },
+      {
+        "promptAr": "أوجد: (1+i)⁴",
+        "promptFr": "Calculez : (1+i)⁴",
+        "options": [
+          {"textAr": "4", "textFr": "4", "isCorrect": true},
+          {"textAr": "4i", "textFr": "4i", "isCorrect": false},
+          {"textAr": "-4", "textFr": "−4", "isCorrect": false},
+          {"textAr": "2i", "textFr": "2i", "isCorrect": false}
+        ],
+        "explanationAr": "(1+i)² = 2i إذن (1+i)⁴ = (2i)² = 4i² = -4. لا، (-4) خاطئ: (1+i)⁴ = ((1+i)²)² = (2i)² = -4.",
+        "explanationFr": "(1+i)² = 2i donc (1+i)⁴ = (2i)² = −4."
+      },
+      {
+        "promptAr": "حل المعادلة z²+2z+5=0",
+        "promptFr": "Résolvez z²+2z+5=0",
+        "options": [
+          {"textAr": "z=-1±2i", "textFr": "z=−1±2i", "isCorrect": true},
+          {"textAr": "z=-1±i", "textFr": "z=−1±i", "isCorrect": false},
+          {"textAr": "z=1±2i", "textFr": "z=1±2i", "isCorrect": false},
+          {"textAr": "z=-2±i", "textFr": "z=−2±i", "isCorrect": false}
+        ],
+        "explanationAr": "Δ=4-20=-16. z=(-2±4i)⁄2 = -1±2i.",
+        "explanationFr": "Δ=4−20=−16. z=(−2±4i)⁄2 = −1±2i."
+      }
+    ]
+  },
+  {
+    "branchSlug": "sm",
+    "subjectSlug": "physique-chimie",
+    "chapterSlug": "mecanique",
+    "questions": [
+      {
+        "promptAr": "جسم ساقط حر من ارتفاع 20م. ما هي سرعته عند الإرتطام؟ (g=10m/s²)",
+        "promptFr": "Un corps en chute libre tombe de 20m. Quelle est sa vitesse au sol ? (g=10m/s²)",
+        "options": [
+          {"textAr": "20 m/s", "textFr": "20 m/s", "isCorrect": true},
+          {"textAr": "10 m/s", "textFr": "10 m/s", "isCorrect": false},
+          {"textAr": "40 m/s", "textFr": "40 m/s", "isCorrect": false},
+          {"textAr": "14 m/s", "textFr": "14 m/s", "isCorrect": false}
+        ],
+        "explanationAr": "v²=2gh=2×10×20=400 إذن v=20m/s.",
+        "explanationFr": "v²=2gh=2×10×20=400 donc v=20m/s."
+      },
+      {
+        "promptAr": "جسيم كتلته 2kg يتحرك بسرعة 10m/s. ما هي طاقته الحركية؟",
+        "promptFr": "Un corps de 2kg se déplace à 10m/s. Quelle est son énergie cinétique ?",
+        "options": [
+          {"textAr": "50 J", "textFr": "50 J", "isCorrect": false},
+          {"textAr": "200 J", "textFr": "200 J", "isCorrect": false},
+          {"textAr": "100 J", "textFr": "100 J", "isCorrect": true},
+          {"textAr": "20 J", "textFr": "20 J", "isCorrect": false}
+        ],
+        "explanationAr": "Ec = ½mv² = ½×2×10² = 100 J.",
+        "explanationFr": "Ec = ½mv² = ½×2×10² = 100 J."
+      },
+      {
+        "promptAr": "قوة F=6N تدفع جسيماً كتلته 3kg. ما هي تسارعته؟",
+        "promptFr": "Une force F=6N pousse un corps de 3kg. Quelle est son accélération ?",
+        "options": [
+          {"textAr": "3 m/s²", "textFr": "3 m/s²", "isCorrect": false},
+          {"textAr": "2 m/s²", "textFr": "2 m/s²", "isCorrect": true},
+          {"textAr": "18 m/s²", "textFr": "18 m/s²", "isCorrect": false},
+          {"textAr": "0.5 m/s²", "textFr": "0,5 m/s²", "isCorrect": false}
+        ],
+        "explanationAr": "F=ma إذن a=F/m = 6/3 = 2m/s².",
+        "explanationFr": "F=ma donc a=F/m = 6/3 = 2m/s²."
+      },
+      {
+        "promptAr": "ركلة جسم أفقياً بسرعة 20m/s من ارتفاع 45م. كم من الزمن يستغرق للوصول للأرض؟ (g=10m/s²)",
+        "promptFr": "On lance horizontalement un corps à 20m/s depuis 45m. Temps de chute ? (g=10m/s²)",
+        "options": [
+          {"textAr": "3 s", "textFr": "3 s", "isCorrect": true},
+          {"textAr": "2 s", "textFr": "2 s", "isCorrect": false},
+          {"textAr": "4.5 s", "textFr": "4,5 s", "isCorrect": false},
+          {"textAr": "5 s", "textFr": "5 s", "isCorrect": false}
+        ],
+        "explanationAr": "h=½gt² إذن t=√(2h/g)=√(90/10)=√9=3s. السرعة الأفقية لا تؤثر.",
+        "explanationFr": "h=½gt² donc t=√(2h/g)=√(90/10)=3s. La vitesse horizontale n'influence pas."
+      },
+      {
+        "promptAr": "جسم كتلته 5kg يتحرك بسرعة 4m/s. ما هو مقدار كموم الحركة؟",
+        "promptFr": "Un corps de 5kg se déplace à 4m/s. Quelle est sa quantité de mouvement ?",
+        "options": [
+          {"textAr": "9 kg·m/s", "textFr": "9 kg·m/s", "isCorrect": false},
+          {"textAr": "1.25 kg·m/s", "textFr": "1,25 kg·m/s", "isCorrect": false},
+          {"textAr": "20 kg·m/s", "textFr": "20 kg·m/s", "isCorrect": true},
+          {"textAr": "25 kg·m/s", "textFr": "25 kg·m/s", "isCorrect": false}
+        ],
+        "explanationAr": "p = mv = 5×4 = 20 kg·m/s.",
+        "explanationFr": "p = mv = 5×4 = 20 kg·m/s."
+      },
+      {
+        "promptAr": "جسم يسقط من ارتفاع 80م. كم هي سرعته بعد ثانيتين؟ (g=10m/s²)",
+        "promptFr": "Un corps tombe de 80m. Quelle est sa vitesse après 2s ? (g=10m/s²)",
+        "options": [
+          {"textAr": "40 m/s", "textFr": "40 m/s", "isCorrect": false},
+          {"textAr": "30 m/s", "textFr": "30 m/s", "isCorrect": false},
+          {"textAr": "20 m/s", "textFr": "20 m/s", "isCorrect": true},
+          {"textAr": "10 m/s", "textFr": "10 m/s", "isCorrect": false}
+        ],
+        "explanationAr": "v = v₀+gt = 0+10×2 = 20m/s. الوقت أصغر من وقت السقوط الكامل (√(160/10)=4s).",
+        "explanationFr": "v = v₀+gt = 0+10×2 = 20m/s. Le temps est inférieur au temps total de chute."
+      }
+    ]
+  },
+  {
+    "branchSlug": "svt",
+    "subjectSlug": "svt",
+    "chapterSlug": "genetique",
+    "questions": [
+      {
+        "promptAr": "في تجربة مندل، إذا تم ت_crossing: TT × tt، ما هي النسبة المتوقعة للأبناء في الجيل F2?",
+        "promptFr": "Dans l'expérience de Mendel, TT × tt donne F1. Quel est le ratio phenotypique F2 ?",
+        "options": [
+          {"textAr": "1:2:1", "textFr": "1:2:1", "isCorrect": false},
+          {"textAr": "3:1", "textFr": "3:1", "isCorrect": true},
+          {"textAr": "1:1", "textFr": "1:1", "isCorrect": false},
+          {"textAr": "9:3:3:1", "textFr": "9:3:3:1", "isCorrect": false}
+        ],
+        "explanationAr": "F1 كلها Tt. في F2: 1TT : 2Tt : 1tt. نسب الأنواع: 3 مائلة (T_) : 1 حمراء (tt).",
+        "explanationFr": "F1 est tout Tt. F2 : 1TT:2Tt:1tt. Ratio phénotypique 3:1."
+      },
+      {
+        "promptAr": "ما هو النوع الوراثي لل祖母: إذا كان أحد الأبناء يحمل alopolyploidy alles a?",
+        "promptFr": "Quel est le génotype d'un parent si un descendant est homozygote récessif (aa) ?",
+        "options": [
+          {"textAr": "aa", "textFr": "aa", "isCorrect": false},
+          {"textAr": "AA", "textFr": "AA", "isCorrect": false},
+          {"textAr": "Aa", "textFr": "Aa", "isCorrect": true},
+          {"textAr": "Aa أو aa", "textFr": "Aa ou aa", "isCorrect": false}
+        ],
+        "explanationAr": "لا جسمة aa يمكن أن تُنتَج إلا إذا كان كل من الأبوين يحمل الأليل a. أحد الأبوين至少 Aa.",
+        "explanationFr": "Un enfant aa ne peut naître que si chacun des parents transmet a. Au moins un parent est Aa."
+      },
+      {
+        "promptAr": "في الوراثة المرتبطة بالجنس، إذا كان الأم حاملة (XᴬXᵃ) والأب طبيعي (XᴬY)، ما احتمال أن يكون الابن مصاباً؟",
+        "promptFr": "Hérédité liée au sexe : mère XᴬXᵃ × père XᴬY. Probabilité que le fils soit malade ?",
+        "options": [
+          {"textAr": "0%", "textFr": "0%", "isCorrect": false},
+          {"textAr": "25%", "textFr": "25%", "isCorrect": false},
+          {"textAr": "50%", "textFr": "50%", "isCorrect": true},
+          {"textAr": "100%", "textFr": "100%", "isCorrect": false}
+        ],
+        "explanationAr": "الابن يرث X من الأم فقط. الأم تعطي Xᴬ أو Xᵃ باحتمال 50%. إذن احتمال المرض 50% للذكور.",
+        "explanationFr": "Le fils reçoit X de la mère (Xᴬ ou Xᵃ). Risque = 50% pour les garçons."
+      },
+      {
+        "promptAr": "ما هي نسب الأبناء المتوقعة من تcrossing: AaBb × AaBb (ذات الارتباط المستقل)؟",
+        "promptFr": "Quel est le ratio de AaBb × AaBb (locus indépendants) ?",
+        "options": [
+          {"textAr": "3:1", "textFr": "3:1", "isCorrect": false},
+          {"textAr": "1:2:1", "textFr": "1:2:1", "isCorrect": false},
+          {"textAr": "9:3:3:1", "textFr": "9:3:3:1", "isCorrect": true},
+          {"textAr": "27:9:9:3:9:3:3:1", "textFr": "27:9:9:3:9:3:3:1", "isCorrect": false}
+        ],
+        "explanationAr": "القانون المستقل: (3:1)(3:1) = 9:3:3:1.",
+        "explanationFr": "Par la règle de l'indépendance : (3:1)(3:1) = 9:3:3:1."
+      },
+      {
+        "promptAr": "ما هو الاحتمال أن يولد طفل ذكر أعلى من amoois siblings الأم والأب (Aa × Aa)؟",
+        "promptFr": "Probabilité d'un enfant mâle et atteint si Aa × Aa ?",
+        "options": [
+          {"textAr": "3/4", "textFr": "3/4", "isCorrect": false},
+          {"textAr": "1/4", "textFr": "1/4", "isCorrect": true},
+          {"textAr": "1/2", "textFr": "1/2", "isCorrect": false},
+          {"textAr": "3/8", "textFr": "3/8", "isCorrect": false}
+        ],
+        "explanationAr": "من Aa×Aa: احتمال المرض (A_) = 3/4. احتمال الذكر = 1/2. المجموع = 3/8. لا، الأسئلة: ذكر+مصاب = 3/4×1/2 = 3/8.",
+        "explanationFr": "P(mâle et atteint) = P(atteint)×P(mâle) = 3/4 × 1/2 = 3/8."
+      },
+      {
+        "promptAr": "في التج⻄bah: تقاطع أليلين at_single locus A و a، إذا كان تكرار a = 0.3، ما هو تكرار A؟",
+        "promptFr": "Équilibre de Hardy-Weinberg : q(a)=0,3. Quelle est la fréquence de A ?",
+        "options": [
+          {"textAr": "0.3", "textFr": "0,3", "isCorrect": false},
+          {"textAr": "0.49", "textFr": "0,49", "isCorrect": false},
+          {"textAr": "0.7", "textFr": "0,7", "isCorrect": true},
+          {"textAr": "0.91", "textFr": "0,91", "isCorrect": false}
+        ],
+        "explanationAr": "p+q=1 إذن p=1-0.3=0.7.",
+        "explanationFr": "p+q=1 donc p=1−0,3=0,7."
+      }
+    ]
+  },
+  {
+    "branchSlug": "svt",
+    "subjectSlug": "svt",
+    "chapterSlug": "systeme-nerveux",
+    "questions": [
+      {
+        "promptAr": "ما هو الاتجاه الصحيح لنقل الإشارة العصبية؟",
+        "promptFr": "Quel est le sens correct de transmission de l'influx nerveux ?",
+        "options": [
+          {"textAr": "الجهاز العصبي المركزي ← المستقبلات", "textFr": "SNC ← récepteurs", "isCorrect": false},
+          {"textAr": "المستقبلات ← العصب الحسي ← الجهاز العصبي المركزي ← العصب الحركي ← العضلات", "textFr": "Récepteurs → nerf sensitif → SNC → nerf moteur → muscles", "isCorrect": true},
+          {"textAr": "العضلات ← العصب الحركي ← الجهاز العصبي المركزي", "textFr": "Muscles → nerf moteur → SNC", "isCorrect": false},
+          {"textAr": "الجهاز العصبي المركزي فقط", "textFr": "SNC uniquement", "isCorrect": false}
+        ],
+        "explanationAr": "المسار الكامل: مستقبلات → حسي → مركزي → حركي → م EFFECTORS.",
+        "explanationFr": "Le parcours complet est : récepteur → sensitif → central → moteur → effecteur."
+      },
+      {
+        "promptAr": "ما هو معدّل استقطاب الغشاء أثناء فترات الفعل؟",
+        "promptFr": "Quelle est la valeur du potentiel de membrane pendant le potentiel d'action ?",
+        "options": [
+          {"textAr": "-70mV", "textFr": "−70mV", "isCorrect": false},
+          {"textAr": "+30mV", "textFr": "+30mV", "isCorrect": true},
+          {"textAr": "0mV", "textFr": "0mV", "isCorrect": false},
+          {"textAr": "-90mV", "textFr": "−90mV", "isCorrect": false}
+        ],
+        "explanationAr": "أثناء مرحلة القطع العكسي يصل الغشاء إلى +30mV تقريباً.",
+        "explanationFr": "Pendant la phase de dépolarisation, le potentiel atteint environ +30mV."
+      },
+      {
+        "promptAr": "ما هي الآلية الأساسية لنقل الإشارة في المشبك العصبي الكيميائي؟",
+        "promptFr": "Quel est le mécanisme de transmission au synapse chimique ?",
+        "options": [
+          {"textAr": "التيار الكهربائي يمر مباشرة", "textFr": "Le courant passe directement", "isCorrect": false},
+          {"textAr": "إفراز الناقلات العصبية وارتباطها بمستقبلات المشبك", "textFr": "Sécrétion de neurotransmetteurs liés aux récepteurs postsynaptiques", "isCorrect": true},
+          {"textAr": "حركة الغشاء فقط", "textFr": "Mouvement de membrane uniquement", "isCorrect": false},
+          {"textAr": "التنقل الأيوني عبر ألياف عصبية", "textFr": "Transit ionique via fibres nerveuses", "isCorrect": false}
+        ],
+        "explanationAr": "في المشبك الكيميائي: الفصل المشبكي → إفراز الناقلات → ارتباط بالمستقبلات.",
+        "explanationFr": "Au synapse chimique : exocytose du neurotransmetteur, liaison aux récepteurs postsynaptiques."
+      },
+      {
+        "promptAr": "في المنعكس الحركي البسيط، ما هي العناصر الأربعة للقوس المنعكس؟",
+        "promptFr": "Dans le réflexe moteur simple, quels sont les 4 éléments de l'arc réflexe ?",
+        "options": [
+          {"textAr": "مستقبلات، عصب حسي، مركز، عصب حركي، جهاز حركي", "textFr": "Récepteur, nerf sensitif, centre, nerf moteur, effecteur", "isCorrect": true},
+          {"textAr": "دماغ، نخاع شوكي، أعصاب، عضلات", "textFr": "Cerveau, moelle, nerfs, muscles", "isCorrect": false},
+          {"textAr": "مستقبلات فقط", "textFr": "Récepteurs uniquement", "isCorrect": false},
+          {"textAr": "الجهاز العصبي المركزي وال Peripheral", "textFr": "SNS et SN P", "isCorrect": false}
+        ],
+        "explanationAr": "القوس المنعكس: مستقبلات → عصب حسي → مركز ← عصب حركي → جهاز حركي.",
+        "explanationFr": "L'arc réflexe : récepteur → nerf sensitif → centre → nerf moteur → effecteur."
+      },
+      {
+        "promptAr": "ما هو دور الغشاء المشبكي في نقل الإشارة العصبية؟",
+        "promptFr": "Quel est le rôle de la membrane synaptique ?",
+        "options": [
+          {"textAr": "ots seul conducteur للكهرباء", "textFr": "Conducteur électrique uniquement", "isCorrect": false},
+          {"textAr": "صفاية الناقلات العصبية وإفرازها", "textFr": "Recyclage et sécrétion de neurotransmetteurs", "isCorrect": true},
+          {"textAr": "توليد باعثات فعل عصبية", "textFr": "Générer des potentiels d'action", "isCorrect": false},
+          {"textAr": "نقل الأكسجين", "textFr": "Transport d'oxygène", "isCorrect": false}
+        ],
+        "explanationAr": "الغشاء المشبكي مسؤول عن التخليق وإفراز و回收 الناقلات العصبية.",
+        "explanationFr": "La membrane synaptique synthétise, libère et recycle les neurotransmetteurs."
+      },
+      {
+        "promptAr": "ال테 bobina: la synapse inhibitrice GABA تسبب إغراقًا مشبكيًا. ما هو التأثير على العصب الم post-empties؟",
+        "promptFr": "Un synapse inhibiteur GABA provoque une hyperpolarisation. Quel est l'effet sur le neurone post-synaptique ?",
+        "options": [
+          {"textAr": "تسهيل إطلاق باعثات فعل", "textFr": "Faciliter le déclenchement", "isCorrect": false},
+          {"textAr": "مانعة لorted اجتياز العتبة", "textFr": "Inhibe le franchissement du seuil", "isCorrect": true},
+          {"textAr": "تسريع نقل الإشارة", "textFr": "Accélérer la transmission", "isCorrect": false},
+          {"textAr": "لا تأثير", "textFr": "Pas d'effet", "isCorrect": false}
+        ],
+        "explanationAr": "GABA يزيد تدفق Cl⁻ فيسبب hyperpolarisation (أكثر سلبية) مما يمنع الوصول للعتبة.",
+        "explanationFr": "GABA augmente le flux de Cl⁻, provoquant une hyperpolarisation qui empêche d'atteindre le seuil."
+      }
+    ]
+  },
+  {
+    "branchSlug": "svt",
+    "subjectSlug": "physique-chimie",
+    "chapterSlug": "electricite",
+    "questions": [
+      {
+        "promptAr": "مقاومتان R1=6Ω وR2=3Ω متصلتان على التوالي. ما هو المقاومة المكافئة؟",
+        "promptFr": "R1=6Ω et R2=3Ω en série. Quelle est la résistance équivalente ?",
+        "options": [
+          {"textAr": "2Ω", "textFr": "2Ω", "isCorrect": false},
+          {"textAr": "9Ω", "textFr": "9Ω", "isCorrect": true},
+          {"textAr": "18Ω", "textFr": "18Ω", "isCorrect": false},
+          {"textAr": "4.5Ω", "textFr": "4,5Ω", "isCorrect": false}
+        ],
+        "explanationAr": "على التوالي: Req = R1+R2 = 6+3 = 9Ω.",
+        "explanationFr": "En série : Req = R1+R2 = 6+3 = 9Ω."
+      },
+      {
+        "promptAr": "مقاومتان R1=6Ω وR2=3Ω متصلتان بالتوازي. ما هو المقاومة المكافئة؟",
+        "promptFr": "R1=6Ω et R2=3Ω en parallèle. Quelle est la résistance équivalente ?",
+        "options": [
+          {"textAr": "9Ω", "textFr": "9Ω", "isCorrect": false},
+          {"textAr": "4.5Ω", "textFr": "4,5Ω", "isCorrect": false},
+          {"textAr": "2Ω", "textFr": "2Ω", "isCorrect": true},
+          {"textAr": "18Ω", "textFr": "18Ω", "isCorrect": false}
+        ],
+        "explanationAr": "التوازي: 1/Req = 1/6+1/3 = 1/6+2/6 = 3/6 = 1/2 إذن Req=2Ω.",
+        "explanationFr": "Parallèle : 1/Req = 1/6+1/3 = 3/6 = 1/2, donc Req=2Ω."
+      },
+      {
+        "promptAr": "فولتامتر يقيس 220V على اتصال AC. ما هو الجهد الأقصى؟",
+        "promptFr": "Un voltmètre mesure 220V en courant alternatif. Quelle est la tension crête ?",
+        "options": [
+          {"textAr": "220V", "textFr": "220V", "isCorrect": false},
+          {"textAr": "155V", "textFr": "155V", "isCorrect": false},
+          {"textAr": "311V", "textFr": "311V", "isCorrect": true},
+          {"textAr": "440V", "textFr": "440V", "isCorrect": false}
+        ],
+        "explanationAr": "الجهاز يقيس القيمة الفعّالة (RMS). Vrms=220V إذن Vmax=220×√2 ≈ 311V.",
+        "explanationFr": "L'appareil mesure la valeur efficace. Vmax = Vrms × √2 = 220×1,414 ≈ 311V."
+      },
+      {
+        "promptAr": "ما هي الطاقة المختزنة في مكثف C=10μF بفرق جهد V=100V؟",
+        "promptFr": "Quelle est l'énergie stockée dans un condensateur C=10μF à 100V ?",
+        "options": [
+          {"textAr": "0.1 J", "textFr": "0,1 J", "isCorrect": false},
+          {"textAr": "10 J", "textFr": "10 J", "isCorrect": false},
+          {"textAr": "0.05 J", "textFr": "0,05 J", "isCorrect": true},
+          {"textAr": "0.5 J", "textFr": "0,5 J", "isCorrect": false}
+        ],
+        "explanationAr": "W = ½CV² = ½×10×10⁻⁶×100² = ½×10⁻⁴×10⁴ = 0.05J.",
+        "explanationFr": "W = ½CV² = ½×10⁻⁵×10⁴ = 0,05J."
+      },
+      {
+        "promptAr": "مقاوم 100Ω موصول بمصدر 50V. ما هو استهلاك الطاقة في دقيقة؟",
+        "promptFr": "Une résistance de 100Ω à 50V. Énergie consommée en 1 minute ?",
+        "options": [
+          {"textAr": "25 J", "textFr": "25 J", "isCorrect": false},
+          {"textAr": "15000 J", "textFr": "15 000 J", "isCorrect": false},
+          {"textAr": "150 J", "textFr": "150 J", "isCorrect": false},
+          {"textAr": "1500 J", "textFr": "1 500 J", "isCorrect": true}
+        ],
+        "explanationAr": "P = V²/R = 2500/100 = 25W. W = P×t = 25×60 = 1500J.",
+        "explanationFr": "P = V²/R = 2500/100 = 25W. W = P×t = 25×60 = 1500J."
+      },
+      {
+        "promptAr": "توصيل مكافئ لمكثفين C1=3μF وC2=6μF على التوازي. ما هو السعة المكافئة؟",
+        "promptFr": "Deux condensateurs C1=3μF et C2=6μF en parallèle. Capacité équivalente ?",
+        "options": [
+          {"textAr": "2μF", "textFr": "2μF", "isCorrect": false},
+          {"textAr": "9μF", "textFr": "9μF", "isCorrect": true},
+          {"textAr": "4.5μF", "textFr": "4,5μF", "isCorrect": false},
+          {"textAr": "18μF", "textFr": "18μF", "isCorrect": false}
+        ],
+        "explanationAr": "على التوازي للمكثفات: Ceq = C1+C2 = 3+6 = 9μF. (على العكس من المقاومات).",
+        "explanationFr": "En parallèle pour les condensateurs : Ceq = C1+C2 = 9μF (contrairement aux résistances)."
+      }
+    ]
+  },
+  {
+    "branchSlug": "svt",
+    "subjectSlug": "mathematiques",
+    "chapterSlug": "probabilites",
+    "questions": [
+      {
+        "promptAr": "من أوراق燎: أوراق لعب عادية، ما هو احتمال سحب ورقة حمراء أو ورقة رقمها فردي؟",
+        "promptFr": "Dans un jeu de 52 cartes, probabilité de tirer un cœur ou un impair ?",
+        "options": [
+          {"textAr": "13/52", "textFr": "13/52", "isCorrect": false},
+          {"textAr": "26/52", "textFr": "26/52", "isCorrect": false},
+          {"textAr": "7/13", "textFr": "7/13", "isCorrect": false},
+          {"textAr": "25/52", "textFr": "25/52", "isCorrect": true}
+        ],
+        "explanationAr": "P(A∪B) = P(A)+P(B)-P(A∩B) = 13/52+26/52-7/52 = 32/52 = 8/13.",
+        "explanationFr": "P(A∪B) = P(A)+P(B)−P(A∩B) = 13/52+26/52−7/52 = 32/52 = 8/13."
+      },
+      {
+        "promptAr": "رمي نرد مرتين. ما هو احتمال أن يكون مجموع النتيجتين أكبر من 9؟",
+        "promptFr": "On lance un dé deux fois. Probabilité que la somme dépasse 9 ?",
+        "options": [
+          {"textAr": "1/6", "textFr": "1/6", "isCorrect": false},
+          {"textAr": "1/3", "textFr": "1/3", "isCorrect": false},
+          {"textAr": "5/36", "textFr": "5/36", "isCorrect": false},
+          {"textAr": "6/36", "textFr": "6/36", "isCorrect": true}
+        ],
+        "explanationAr": "النتائج ≥10: (4,6),(5,5),(5,6),(6,4),(6,5),(6,6) = 6 نتيجة من أصل 36. P=6/36=1/6.",
+        "explanationFr": "Sommes ≥10 : (4,6),(5,5),(5,6),(6,4),(6,5),(6,6) = 6 cas sur 36. P=1/6."
+      },
+      {
+        "promptAr": "في تجربة بيرنولي n=5 وp=0.4، ما هو احتمال نجاح x=3؟",
+        "promptFr": "Loi binomiale n=5, p=0,4. Probabilité de x=3 succès ?",
+        "options": [
+          {"textAr": "0.3456", "textFr": "0,3456", "isCorrect": true},
+          {"textAr": "0.2304", "textFr": "0,2304", "isCorrect": false},
+          {"textAr": "0.0768", "textFr": "0,0768", "isCorrect": false},
+          {"textAr": "0.1280", "textFr": "0,1280", "isCorrect": false}
+        ],
+        "explanationAr": "P(x=3) = C(5,3)×0.4³×0.6² = 10×0.064×0.36 = 0.2304. لا، 10×0.064×0.36=0.2304.",
+        "explanationFr": "P(X=3) = C₅³×(0,4)³×(0,6)² = 10×0,064×0,36 = 0,2304."
+      },
+      {
+        "promptAr": "في سلة 4 كرات حمراء و6 زرقاء. سحب كرتين بدون إرجاع. ما هو احتمال أن تكون كلتاهما زرقاء؟",
+        "promptFr": "Dans un sac : 4 boules rouges, 6 bleues. Tirage de 2 sans remise. P(2 bleues) ?",
+        "options": [
+          {"textAr": "6/10 × 5/9", "textFr": "6/10 × 5/9", "isCorrect": false},
+          {"textAr": "6/10 × 5/9 = 1/3", "textFr": "6/10 × 5/9 = 1/3", "isCorrect": true},
+          {"textAr": "36/100", "textFr": "36/100", "isCorrect": false},
+          {"textAr": "30/100", "textFr": "30/100", "isCorrect": false}
+        ],
+        "explanationAr": "P = (6/10)×(5/9) = 30/90 = 1/3.",
+        "explanationFr": "P = (6/10)×(5/9) = 30/90 = 1/3."
+      },
+      {
+        "promptAr": "من multiples: أ dob: 8 أشخاص يجلسون في صف، كم من ordinateur: ترتيبهم بطرق مختلفة؟",
+        "promptFr": "De combien de façons peut-on ranger 8 personnes sur un banc ?",
+        "options": [
+          {"textAr": "8", "textFr": "8", "isCorrect": false},
+          {"textAr": "64", "textFr": "64", "isCorrect": false},
+          {"textAr": "40320", "textFr": "40 320", "isCorrect": true},
+          {"textAr": "56", "textFr": "56", "isCorrect": false}
+        ],
+        "explanationAr": "8! = 8×7×6×5×4×3×2×1 = 40320.",
+        "explanationFr": "8! = 8×7×6×5×4×3×2×1 = 40 320."
+      },
+      {
+        "promptAr": "من 10 أشخاص يُختار 3. كم من الطرق الممكنة؟",
+        "promptFr": "Parmi 10 personnes, on en choisit 3. Combien de combinaisons ?",
+        "options": [
+          {"textAr": "30", "textFr": "30", "isCorrect": false},
+          {"textAr": "720", "textFr": "720", "isCorrect": false},
+          {"textAr": "120", "textFr": "120", "isCorrect": true},
+          {"textAr": "1000", "textFr": "1 000", "isCorrect": false}
+        ],
+        "explanationAr": "C(10,3) = 10!⁄(3!×7!) = (10×9×8)⁄(3×2×1) = 720⁄6 = 120.",
+        "explanationFr": "C(10,3) = 10!⁄(3!×7!) = (10×9×8)⁄(3×2×1) = 120."
+      }
+    ]
+  },
+  {
+    "branchSlug": "sp",
+    "subjectSlug": "physique-chimie",
+    "chapterSlug": "ondes",
+    "questions": [
+      {
+        "promptAr": "موجة عندها تردد f=440Hz وسرعة c=340m/s. ما هو طول الموجة؟",
+        "promptFr": "Une onde de fréquence f=440Hz et vitesse c=340m/s. Quelle est sa longueur d'onde ?",
+        "options": [
+          {"textAr": "1.29 m", "textFr": "1,29 m", "isCorrect": true},
+          {"textAr": "0.77 m", "textFr": "0,77 m", "isCorrect": false},
+          {"textAr": "149600 m", "textFr": "149 600 m", "isCorrect": false},
+          {"textAr": "0.44 m", "textFr": "0,44 m", "isCorrect": false}
+        ],
+        "explanationAr": "λ = c/f = 340/440 ≈ 0.773m. لا، 340/440=0.773m.",
+        "explanationFr": "λ = c/f = 340/440 ≈ 0,773m."
+      },
+      {
+        "promptAr": "موجتان يتداخلانconstructively. ما هي العلاقة بين الطورين؟",
+        "promptFr": "Deux ondes interfèrent constructivement. Quelle est la relation de phase ?",
+        "options": [
+          {"textAr": "فرق طور = π", "textFr": "Déphasage = π", "isCorrect": false},
+          {"textAr": "فرق طور = 2kπ (k صحيح)", "textFr": "Déphasage = 2kπ (k entier)", "isCorrect": true},
+          {"textAr": "فرق طور = π⁄2", "textFr": "Déphasage = π⁄2", "isCorrect": false},
+          {"textAr": "لا علاقة بفرق الطور", "textFr": "Pas de lien avec le déphasage", "isCorrect": false}
+        ],
+        "explanationAr": "التداخل البنّاء يحدث عندما يكون فرق الطور 2kπ (k=0,1,2...) أي أن الموجتين في طور متزامن.",
+        "explanationFr": "L'interférence constructive se produit quand le déphasage est 2kπ, les ondes sont en phase."
+      },
+      {
+        "promptAr": "صوت بتردد 1000Hz ينتقل في الهواء. ما هي الدورة الزمنية؟",
+        "promptFr": "Un son de 1000Hz se propage dans l'air. Quelle est la période ?",
+        "options": [
+          {"textAr": "1 s", "textFr": "1 s", "isCorrect": false},
+          {"textAr": "1000 s", "textFr": "1 000 s", "isCorrect": false},
+          {"textAr": "0.001 s", "textFr": "0,001 s", "isCorrect": true},
+          {"textAr": "0.01 s", "textFr": "0,01 s", "isCorrect": false}
+        ],
+        "explanationAr": "T = 1/f = 1/1000 = 0.001s = 1ms.",
+        "explanationFr": "T = 1/f = 1/1000 = 0,001s = 1ms."
+      },
+      {
+        "promptAr": "موجة صوتية بشدة مستوى 60dB وأخرى 90dB. ما هو نratio بين السعات؟",
+        "promptFr": "Deux ondes sonores de 60dB et 90dB. Quel est le rapport de leurs amplitudes ?",
+        "options": [
+          {"textAr": "30", "textFr": "30", "isCorrect": false},
+          {"textAr": "1000", "textFr": "1 000", "isCorrect": true},
+          {"textAr": "3", "textFr": "3", "isCorrect": false},
+          {"textAr": "100", "textFr": "100", "isCorrect": false}
+        ],
+        "explanationAr": "الفرق 30dB. L = 20 log(A₂/A₁) إذن 30 = 20 log(r) في r = 10^(30/20) = 10^1.5 ≈ 31.6. لا: P = 10^(ΔL/10) = 10³ = 1000.",
+        "explanationFr": "ΔL = 30dB. P₂/P₁ = 10^(30/10) = 10³ = 1000."
+      },
+      {
+        "promptAr": "موجة واقفية على وتر طوله 1m. ما هو أshortest طول موجة ممكن؟",
+        "promptFr": "Onde stationnaire sur une corde de 1m. Plus courte longueur d'onde possible ?",
+        "options": [
+          {"textAr": "2m", "textFr": "2 m", "isCorrect": false},
+          {"textAr": "1m", "textFr": "1 m", "isCorrect": true},
+          {"textAr": "0.5m", "textFr": "0,5 m", "isCorrect": false},
+          {"textAr": "4m", "textFr": "4 m", "isCorrect": false}
+        ],
+        "explanationAr": "أصغر طول موجة (أعلى نمط): L = λ/2 إذن λ = 2L = 2×1 = 2m.",
+        "explanationFr": "Plus courte λ (mode fondamental) : L = λ/2 donc λ = 2L = 2m."
+      },
+      {
+        "promptAr": "ما هو تأثير دوبلر عندما يقترب مصدر صوت من مستمع بسرعة v؟",
+        "promptFr": "Quel est l'effet Doppler quand la source se rapproche de l'auditeur à vitesse v ?",
+        "options": [
+          {"textAr": "التردد يقل", "textFr": "La fréquence diminue", "isCorrect": false},
+          {"textAr": "التردد يزداد", "textFr": "La fréquence augmente", "isCorrect": true},
+          {"textAr": "لا يتغير", "textFr": "Pas de changement", "isCorrect": false},
+          {"textAr": "طول الموجة يزداد", "textFr": "La longueur d'onde augmente", "isCorrect": false}
+        ],
+        "explanationAr": "عند الاقتراب، يتناقص الت备注ระหว่าง الموجات فتshifted التردد للأعلى.",
+        "explanationFr": "Le rapprochement diminue l'écart entre les ondes, la fréquence perçue augmente."
+      }
+    ]
+  },
+  {
+    "branchSlug": "sp",
+    "subjectSlug": "mathematiques",
+    "chapterSlug": "fonctions",
+    "questions": [
+      {
+        "promptAr": "ما هو domainodefinition الدالة f(x) = 1⁄(x²-4)؟",
+        "promptFr": "Quel est le domaine de f(x) = 1⁄(x²−4) ?",
+        "options": [
+          {"textAr": "ℝ", "textFr": "ℝ", "isCorrect": false},
+          {"textAr": "ℝ - {-2, 2}", "textFr": "ℝ − {−2, 2}", "isCorrect": true},
+          {"textAr": "ℝ - {4}", "textFr": "ℝ − {4}", "isCorrect": false},
+          {"textAr": "ℝ - {0}", "textFr": "ℝ − {0}", "isCorrect": false}
+        ],
+        "explanationAr": "المقام x²-4 = (x-2)(x+2). يساوي صفراً عند x=2 وx=-2.",
+        "explanationFr": "Le dénominateur x²−4 = (x−2)(x+2) s'annule en x=2 et x=−2."
+      },
+      {
+        "promptAr": "أوجد: lim(x→0⁺) ln(x)",
+        "promptFr": "Calculez : lim(x→0⁺) ln(x)",
+        "options": [
+          {"textAr": "0", "textFr": "0", "isCorrect": false},
+          {"textAr": "1", "textFr": "1", "isCorrect": false},
+          {"textAr": "-∞", "textFr": "−∞", "isCorrect": true},
+          {"textAr": "+∞", "textFr": "+∞", "isCorrect": false}
+        ],
+        "explanationAr": "عندما يقترب x من 0 من الجانب الموجب، ln(x) يتجه لـ -∞.",
+        "explanationFr": "Quand x→0⁺, ln(x)→−∞."
+      },
+      {
+        "promptAr": "ما هو مجال الدالة f(x) = √(x-3)؟",
+        "promptFr": "Quel est le domaine de f(x) = √(x−3) ?",
+        "options": [
+          {"textAr": "ℝ", "textFr": "ℝ", "isCorrect": false},
+          {"textAr": "ℝ - {3}", "textFr": "ℝ − {3}", "isCorrect": false},
+          {"textAr": "[3, +∞[", "textFr": "[3, +∞[", "isCorrect": true},
+          {"textAr": "]-∞, 3]", "textFr": "]-∞, 3]", "isCorrect": false}
+        ],
+        "explanationAr": "يجب أن يكون المحتوى تحت الجذر موجبأ: x-3 ≥ 0 إذن x ≥ 3.",
+        "explanationFr": "L'expression sous la racine doit être ≥ 0 : x−3 ≥ 0 donc x ≥ 3."
+      },
+      {
+        "promptAr": "أوجد: lim(x→+∞) xe⁻ˣ",
+        "promptFr": "Calculez : lim(x→+∞) xe⁻ˣ",
+        "options": [
+          {"textAr": "+∞", "textFr": "+∞", "isCorrect": false},
+          {"textAr": "0", "textFr": "0", "isCorrect": true},
+          {"textAr": "1", "textFr": "1", "isCorrect": false},
+          {"textAr": "-∞", "textFr": "−∞", "isCorrect": false}
+        ],
+        "explanationAr": "ال exponential لاexponential يتجاوز أي دالة أُسية: lim x⁄eˣ = 0 (لوبتال).",
+        "explanationFr": "La fonction exponentielle croît plus vite que toute fonction polynomiale. lim x⁄eˣ = 0 par L'Hôpital."
+      },
+      {
+        "promptAr": "ما هو utils: asymptote horizontale للدالة f(x) = (2x+1)⁄(x-1)؟",
+        "promptFr": "Quelle est l'asymptote horizontale de f(x) = (2x+1)⁄(x−1) ?",
+        "options": [
+          {"textAr": "x = 1", "textFr": "x = 1", "isCorrect": false},
+          {"textAr": "y = 1", "textFr": "y = 1", "isCorrect": false},
+          {"textAr": "y = 2", "textFr": "y = 2", "isCorrect": true},
+          {"textAr": "y = 0", "textFr": "y = 0", "isCorrect": false}
+        ],
+        "explanationAr": "lim(x→∞) (2x+1)⁄(x-1) = 2⁄1 = 2. الأُس المُعامِل للعداد = الأُس المُعامِل للمقام.",
+        "explanationFr": "lim (2x+1)⁄(x−1) = 2/1 = 2. Le rapport des coefficients directeurs donne y=2."
+      },
+      {
+        "promptAr": "أوجد stationary أو extremum للدالة f(x) = x³-3x+2",
+        "promptFr": "Trouvez les extremums de f(x) = x³−3x+2",
+        "options": [
+          {"textAr": "حدّ أقصى في x=-1 وحدّ أدنى في x=1", "textFr": "Maximum en x=−1 et minimum en x=1", "isCorrect": true},
+          {"textAr": "حدّ أقصى في x=1 وحدّ أدنى في x=-1", "textFr": "Maximum en x=1 et minimum en x=−1", "isCorrect": false},
+          {"textAr": "لا يوجد extrema", "textFr": "Pas d'extremum", "isCorrect": false},
+          {"textAr": "حدّ أقصى فقط", "textFr": "Maximum seulement", "isCorrect": false}
+        ],
+        "explanationAr": "f'(x) = 3x²-3 = 0 إذن x=±1. f'(-1)=+ (لا، f''(x)=6x). f''(-1)=-6<0 إذن أقصى. f''(1)=6>0 إذن أدنى.",
+        "explanationFr": "f'(x)=3x²−3=0 → x=±1. f''(−1)=−6<0 → maximum. f''(1)=6>0 → minimum."
+      }
+    ]
+  },
+  {
+    "branchSlug": "eco",
+    "subjectSlug": "economie",
+    "chapterSlug": "indicateurs",
+    "questions": [
+      {
+        "promptAr": "ما هو الناتج الداخلي الخام (GDP)旗舰店: إذا كان الإنتاج الكلي للسلع والخدمات في بلد = 500 مليار درهم والاستهلاك الوسيط = 100 مليار، ما هو GDP؟",
+        "promptFr": "Si la production totale = 500 Mds MAD et la consommation intermédiaire = 100 Mds, quel est le PIB ?",
+        "options": [
+          {"textAr": "500 مليار درهم", "textFr": "500 Mds MAD", "isCorrect": false},
+          {"textAr": "400 مليار درهم", "textFr": "400 Mds MAD", "isCorrect": true},
+          {"textAr": "600 مليار درهم", "textFr": "600 Mds MAD", "isCorrect": false},
+          {"textAr": "100 مليار درهم", "textFr": "100 Mds MAD", "isCorrect": false}
+        ],
+        "explanationAr": "GDP = الإنتاج الكلي - الاستهلاك الوسيط = 500-100 = 400 مليار.",
+        "explanationFr": "PIB = Production totale − Consommation intermédiaire = 500−100 = 400 Mds."
+      },
+      {
+        "promptAr": "معدل التضخم في بلد ارتفع من 2% إلى 5%. ما هو معدل التضخم النسبي؟",
+        "promptFr": "L'inflation passe de 2% à 5%. Quel est le taux de variation ?",
+        "options": [
+          {"textAr": "3%", "textFr": "3%", "isCorrect": false},
+          {"textAr": "7%", "textFr": "7%", "isCorrect": false},
+          {"textAr": "150%", "textFr": "150%", "isCorrect": true},
+          {"textAr": "2.5%", "textFr": "2,5%", "isCorrect": false}
+        ],
+        "explanationAr": "المعدل النسبي = (5-2)⁄2 × 100 = 150%. التضخم تضاعف 2.5 مرة.",
+        "explanationFr": "Taux de variation = (5−2)⁄2 × 100 = 150%."
+      },
+      {
+        "promptAr": "في بلد عدد السكان 10 ملايين، وعدد العاملين 3 ملايين، وعدد الباحثين عن العمل 300 ألف. ما هو معدل البطالة؟",
+        "promptFr": "Population 10M, actifs 3M, chômeurs 300K. Quel est le taux de chômage ?",
+        "options": [
+          {"textAr": "3%", "textFr": "3%", "isCorrect": false},
+          {"textAr": "10%", "textFr": "10%", "isCorrect": true},
+          {"textAr": "30%", "textFr": "30%", "isCorrect": false},
+          {"textAr": "1%", "textFr": "1%", "isCorrect": false}
+        ],
+        "explanationAr": "معدل البطالة = (البطّالين⁄القوى العاملة) × 100 = (300000⁄3000000) × 100 = 10%.",
+        "explanationFr": "Taux de chômage = (chômeurs⁄population active) × 100 = (300K⁄3M) × 100 = 10%."
+      },
+      {
+        "promptAr": "مؤشر أسعار المستهلك (CPI) ارتفع من 110 إلى 121. ما هو معدل التضخم؟",
+        "promptFr": "L'indice des prix à la consommation passe de 110 à 121. Quel est le taux d'inflation ?",
+        "options": [
+          {"textAr": "11%", "textFr": "11%", "isCorrect": false},
+          {"textAr": "10%", "textFr": "10%", "isCorrect": true},
+          {"textAr": "1%", "textFr": "1%", "isCorrect": false},
+          {"textAr": "21%", "textFr": "21%", "isCorrect": false}
+        ],
+        "explanationAr": "التضخم = (121-110)⁄110 × 100 = 10%.",
+        "explanationFr": "Inflation = (121−110)⁄110 × 100 = 10%."
+      },
+      {
+        "promptAr": "GDP للبلاد A = 200 مليار وعدد السكان = 10 ملايين. GDP للبلاد B = 300 مليار وعدد السكان = 50 مليون. أيهما أعلى نصيب الفرد؟",
+        "promptFr": "PIB_A = 200 Mds pour 10M hab., PIB_B = 300 Mds pour 50M hab. Quel pays a le PIB/habitant le plus élevé ?",
+        "options": [
+          {"textAr": "البلاد A", "textFr": "Pays A", "isCorrect": true},
+          {"textAr": "البلاد B", "textFr": "Pays B", "isCorrect": false},
+          {"textAr": "متساويان", "textFr": "Égaux", "isCorrect": false},
+          {"textAr": "لا يمكن معرفة", "textFr": "Impossible à déterminer", "isCorrect": false}
+        ],
+        "explanationAr": "البلاد A: 200/10 = 20 ألف/فرد. البلاد B: 300/50 = 6 آلاف/فرد. A أعلى.",
+        "explanationFr": "Pays A : 200/10 = 20K/hab. Pays B : 300/50 = 6K/hab. Le pays A est plus riche par habitant."
+      },
+      {
+        "promptAr": "ما هو الدخل النقّي الوطني (NNI) إذا كان GDP = 500 مليار، و getIntérêtات على الدخل = 30 مليار، وصافي الدخل من الخارج = -10 مليار؟",
+        "promptFr": "Quel est le RNB si PIB = 500 Mds, revenus versés = 30 Mds, revenus reçus = 20 Mds ?",
+        "options": [
+          {"textAr": "500 مليار", "textFr": "500 Mds", "isCorrect": false},
+          {"textAr": "480 مليار", "textFr": "480 Mds", "isCorrect": false},
+          {"textAr": "520 مليار", "textFr": "520 Mds", "isCorrect": false},
+          {"textAr": "460 مليار", "textFr": "460 Mds", "isCorrect": true}
+        ],
+        "explanationAr": "RNB = GDP + صافي الدخل من الخارج = 500 + (20-30) - 30 = 460.",
+        "explanationFr": "RNB = PIB + Revenus nets extérieurs = 500 + (20−30) − 30 = 460 Mds."
+      }
+    ]
+  },
+  {
+    "branchSlug": "eco",
+    "subjectSlug": "philosophie",
+    "chapterSlug": "concepts",
+    "questions": [
+      {
+        "promptAr": "ما هو تعريف conscience في الفلسفة؟",
+        "promptFr": "Quelle est la définition philosophique de la conscience ?",
+        "options": [
+          {"textAr": "الوعي بالذات والعالم المحيط", "textFr": "La prise de conscience de soi et du monde", "isCorrect": true},
+          {"textAr": "المعرفة العلمية فقط", "textFr": "La connaissance scientifique uniquement", "isCorrect": false},
+          {"textAr": "الشعور الجسدي فقط", "textFr": "Le sentiment corporel uniquement", "isCorrect": false},
+          {"textAr": "العلم المكتسب من المدرسة", "textFr": "Le savoir acquis à l'école", "isCorrect": false}
+        ],
+        "explanationAr": "الوعي في الفلسفة هو القدرة على الإدراك الذاتي والوعي بالذات والعالم.",
+        "explanationFr": "La conscience est la capacité de percevoir subjectivement et d'avoir une prise de soi-même."
+      },
+      {
+        "promptAr": "حسب أفلاطون، ما هي العلاقة بين المعرفة والحقيقة؟",
+        "promptFr": "Selon Platon, quelle est la relation entre la connaissance et la vérité ?",
+        "options": [
+          {"textAr": "المعرفة هي التصديق بالمعرفة", "textFr": "La connaissance est la croyance justifiée", "isCorrect": true},
+          {"textAr": "المعرفة آراء فقط", "textFr": "La connaissance n'est qu'une opinion", "isCorrect": false},
+          {"textAr": "لا علاقة بينهما", "textFr": "Pas de lien entre elles", "isCorrect": false},
+          {"textAr": "الحقيقة معرفة علمية فقط", "textFr": "La vérité est uniquement scientifique", "isCorrect": false}
+        ],
+        "explanationAr": "يؤكد أفلاطون أن المعرفة الحقيقية هي التصديق الصادق المبرر، وتتجاوز الرأي.",
+        "explanationFr": "Platon soutient que la vraie connaissance est une opinion justifiée et vrai, dépassant l'opinion."
+      },
+      {
+        "promptAr": "ما هو مفهوم العقل عند كانت؟",
+        "promptFr": "Quelle est la notion de raison selon Kant ?",
+        "options": [
+          {"textAr": "العقل هو القوة التي تحدد حدود المعرفة الممكنة", "textFr": "La raison détermine les limites de la connaissance possible", "isCorrect": true},
+          {"textAr": "العقل ليس له حدود", "textFr": "La raison n'a pas de limites", "isCorrect": false},
+          {"textAr": "العقل يقتصر على الحواس فقط", "textFr": "La raison se limite aux sens", "isCorrect": false},
+          {"textAr": "العقل يعتمد على التجربة فقط", "textFr": "La raison dépend uniquement de l'expérience", "isCorrect": false}
+        ],
+        "explanationAr": "يوصل كانت إلى أن العقل ي摆放 حدوداً للمعرفة الممكنة، ويمرّر بين المثالية والواقعية.",
+        "explanationFr": "Kant établit que la raison pose les limites de la connaissance possible, entre idéalisme et réalisme."
+      },
+      {
+        "promptAr": "ما هو مفهوم الحقيقة في نظر ديكارت؟",
+        "promptFr": "Quelle est la notion de vérité chez Descartes ?",
+        "options": [
+          {"textAr": "الحقيقة تأتي من الحواس فقط", "textFr": "La vérité vient des sens uniquement", "isCorrect": false},
+          {"textAr": "الحقيقة واضحة ومتميزة في العقل", "textFr": "La vérité est claire et distincte dans la raison", "isCorrect": true},
+          {"textAr": "الحقيقة اختيارية", "textFr": "La vérité est optionnelle", "isCorrect": false},
+          {"textAr": "لا يمكن معرفة الحقيقة", "textFr": "On ne peut connaître la vérité", "isCorrect": false}
+        ],
+        "explanationAr": "يرى ديكارت أن المعرفة الصحيحة هي التي تكون واضحة ومتميزة، ويستبعد الحواس.",
+        "explanationFr": "Descartes soutient que la vérité est ce qui est clair et distinct dans la raison, les sens pouvant tromper."
+      },
+      {
+        "promptAr": "ما هوcoté: المعرفة التحليلية والمعرفة المركّبة عند كانت؟",
+        "promptFr": "Quelle est la différence entre jugements analytiques et synthétiques chez Kant ?",
+        "options": [
+          {"textAr": "التحليلية تُضيف معلومات، المركّبة تُ construed المفهوم", "textFr": "Analytiques ajoutent de l'info, synthétiques définissent", "isCorrect": false},
+          {"textAr": "التحليلية تُ澄清 المفهوم، المركّبة تُضيف معلومات جديدة", "textFr": "Analytiques clarifient le concept, synthétiques ajoutent de l'info", "isCorrect": true},
+          {"textAr": "لا يوجد فرق", "textFr": "Pas de différence", "isCorrect": false},
+          {"textAr": "التحليلية ت针靠 التجربة، المركّبة لا تعتمد عليها", "textFr": "Analytiques dépendent de l'expérience, synthétiques non", "isCorrect": false}
+        ],
+        "explanationAr": "التحليلية تُ澄清 المفهوم (المحمول جزء من الموضوع). المركّبة تُضيف معلومات جديدة.",
+        "explanationFr": "Analytiques : le prédicat est inclus dans le sujet. Synthétiques : le prédicat ajoute de l'information nouvelle."
+      },
+      {
+        "promptAr": "ما هو coté: الغائية في فلسفة أرسطو؟",
+        "promptFr": "Quelle est la finalité dans la philosophie d'Aristote ?",
+        "options": [
+          {"textAr": "كل شيء يتحرك نحو غاية معينة", "textFr": "Tout mouvement tend vers une fin", "isCorrect": true},
+          {"textAr": "لا غاية لأي شيء", "textFr": "Rien n'a de finalité", "isCorrect": false},
+          {"textAr": "الغاية هي المادّة فقط", "textFr": "La finalité est uniquement la matière", "isCorrect": false},
+          {"textAr": "الغاية تعتمد على الصدفة", "textFr": "La finalité dépend du hasard", "isCorrect": false}
+        ],
+        "explanationAr": "يرى أرسطو أن لكل شيء غاية (cause غائية) تشرح لماذا يوجد أو يتحرك.",
+        "explanationFr": "Aristote soutient que chaque chose a une finalité (cause finale) qui explique son existence ou son mouvement."
+      }
+    ]
+  },
+  {
+    "branchSlug": "lettres",
+    "subjectSlug": "philosophie",
+    "chapterSlug": "pensee",
+    "questions": [
+      {
+        "promptAr": "ما هو القاعدة الذهبية لسقراط في التفكير؟",
+        "promptFr": "Quelle est la règle d'or de Socrate pour penser ?",
+        "options": [
+          {"textAr": "أعرف نفسك", "textFr": "Connais-toi toi-même", "isCorrect": true},
+          {"textAr": "شكّك في كل شيء", "textFr": "Doute de tout", "isCorrect": false},
+          {"textAr": "اتبع الحواس", "textFr": "Suis tes sens", "isCorrect": false},
+          {"textAr": "اقرأ الكتب", "textFr": "Lis des livres", "isCorrect": false}
+        ],
+        "explanationAr": "łęs socratique هي المعرفة الذاتية: المعرفة تبدأ بالوعي بالذات والاعتراف بالجهل.",
+        "explanationFr": "Le diktat socratique est la connaissance de soi : commencer par reconnaître son ignorance."
+      },
+      {
+        "promptAr": "怎样是 الشك المنهجي عند ديكارت؟",
+        "promptFr": "Qu'est-ce que le doute méthodique chez Descartes ?",
+        "options": [
+          {"textAr": "شكّ في كل شيء للوصول للاستيقان", "textFr": "Douter de tout pour atteindre la certitude", "isCorrect": true},
+          {"textAr": "رفض كل المعرفة نهائياً", "textFr": "Rejeter toute connaissance définitivement", "isCorrect": false},
+          {"textAr": "الشك العشوائي", "textFr": "Doute aléatoire", "isCorrect": false},
+          {"textAr": "عدم التفكير", "textFr": "Ne pas penser", "isCorrect": false}
+        ],
+        "explanationAr": "الشك المنهجي أداة للوصول للاستيقان: يشكّ في كل ما يمكن الشك فيه ليصل لحقيقة يقينية.",
+        "explanationFr": "Le doute méthodique est un outil : douter de tout ce qui est douteux pour atteindre une certitude (cogito)."
+      },
+      {
+        "promptAr": "ما هو Proposition 'Cogito ergo sum' لديكارت؟",
+        "promptFr": "Qu'est-ce que 'Cogito ergo sum' chez Descartes ?",
+        "options": [
+          {"textAr": "أنا أفكر إذن أنا موجود", "textFr": "Je pense donc je suis", "isCorrect": true},
+          {"textAr": "أنا أشعر إذن أنا موجود", "textFr": "Je sens donc je suis", "isCorrect": false},
+          {"textAr": "أنا أتحرك إذن أنا موجود", "textFr": "Je bouge donc je suis", "isCorrect": false},
+          {"textAr": "أنا أرى إذن أنا موجود", "textFr": "Je vois donc je suis", "isCorrect": false}
+        ],
+        "explanationAr": "الCogito هو أول حقيقة يقينية لديكارت: حقيقة التفكير تؤكد الوجود.",
+        "explanationFr": "Le Cogito est la première vérité certaine : le fait de penser prouve l'existence."
+      },
+      {
+        "promptAr": "ما هي pinéale عند ديكارت ولماذا اعتبرها مقر الروح؟",
+        "promptFr": "Qu'est-ce que la glande pinéale chez Descartes et pourquoi l'a-t-il choisie ?",
+        "options": [
+          {"textAr": "أنها غير مزدوجة في الدماغ", "textFr": "Elle est unique dans le cerveau", "isCorrect": true},
+          {"textAr": "لأنهاใหญة جداً", "textFr": "Parce qu'elle est très grande", "isCorrect": false},
+          {"textAr": "لأنها في الأسفل", "textFr": "Parce qu'elle est en bas", "isCorrect": false},
+          {"textAr": "لأنها تتحرك كثيراً", "textFr": "Parce qu'elle bouge beaucoup", "isCorrect": false}
+        ],
+        "explanationAr": "اختار ديكارت الغدة الصنوبرية لأنها غير مزدوجة، بينما باقي الدماغ مزدوج.",
+        "explanationFr": "Descartes choisit la glande pinéale car elle est unique (non paire), contrairement aux autres structures cérébrales."
+      },
+      {
+        "promptAr": "ما هو koté: المقولات الثلاث عند كاينت؟",
+        "promptFr": "Quelles sont les trois questions fondamentales de Kant ?",
+        "options": [
+          {"textAr": "ما يمكنني أن أعرف؟ ماذا يجب أن أفعل؟ ماذا يحق لي أن أمل؟", "textFr": "Que puis-je savoir ? Que dois-je faire ? Qu'espérer ?", "isCorrect": true},
+          {"textAr": "من أنا؟ أين أنا؟ إلى أين أذهب؟", "textFr": "Qui suis-je ? Où suis-je ? Où vais-je ?", "isCorrect": false},
+          {"textAr": "ما الحقيقة؟ ما الجمال؟ ما العدالة؟", "textFr": "Qu'est-ce que la vérité ? La beauté ? La justice ?", "isCorrect": false},
+          {"textAr": "المعرفة، الإرادة، الشعور", "textFr": "Connaissance, volonté, sentiment", "isCorrect": false}
+        ],
+        "explanationAr": "السؤال الأول (المعرفة) يُعالج في نقد العقل المحض، الثاني (الأخلاق) في نقد العقل العملي، الثالث (الأمل) في نقد قدرة الحكم.",
+        "explanationFr": "Les trois questions : connaissance (Critique de la raison pure), devoir (Critique de la raison pratique), espérance (Critique du jugement)."
+      },
+      {
+        "promptAr": "ما هوcoté: المقولات التفكير النقدي عند كانت؟",
+        "promptFr": "Qu'est-ce que la pensée critique selon Kant ?",
+        "options": [
+          {"textAr": "pekka: عدم قبول أي شيء دون فحص عقلي", "textFr": "Ne rien accepter sans examen rationnel", "isCorrect": true},
+          {"textAr": "anti kritik: قبول كل شيء", "textFr": "Tout accepter", "isCorrect": false},
+          {"textAr": "ارجاع كل شيء لل古圣人", "textFr": "Tout attribuer aux anciens", "isCorrect": false},
+          {"textAr": "عدم التفكير", "textFr": "Ne pas penser", "isCorrect": false}
+        ],
+        "explanationAr": "التقليل النقدي عند كانت هو использования العقل بشكل مستقل دون الاعتماد على السلطة.",
+        "explanationFr": "Pour Kant, penser c'est se servir de sa propre raison, sans se reposer sur l'autorité d'autrui."
+      }
+    ]
+  },
+  {
+    "branchSlug": "lettres",
+    "subjectSlug": "francais",
+    "chapterSlug": "lecture",
+    "questions": [
+      {
+        "promptAr": "ما هو الفرق بين grasside direct و indirect في النص؟",
+        "promptFr": "Quelle est la différence entre discours direct et indirect ?",
+        "options": [
+          {"textAr": "Direct: نقل بGuillemets. Indirect: جملة م tracedesseur", "textFr": "Direct : citation entre guillemets. Indirect : phrase introductive", "isCorrect": true},
+          {"textAr": "Direct: بالعربية. Indirect: بالفرنسية", "textFr": "Direct : en arabe. Indirect : en français", "isCorrect": false},
+          {"textAr": "Direct: قصير. Indirect: طويل", "textFr": "Direct : court. Indirect : long", "isCorrect": false},
+          {"textAr": "لا يوجد فرق", "textFr": "Pas de différence", "isCorrect": false}
+        ],
+        "explanationAr": "الحرفي يستخدم Guillemets وينقل بالضبط. الغير حرف يُحوّل ويستخدم أدوات ربط like que, dit-il.",
+        "explanationFr": "Le discours direct cite avec guillemets. L'indirect reformule avec des mots de liaison (que, dit-il)."
+      },
+      {
+        "promptAr": "ما هي أدوات الربط المستخدمة في الغيüberset direct؟",
+        "promptFr": "Quels sont les mots de liaison du discours indirect ?",
+        "options": [
+          {"textAr": "que, dont, où, comment", "textFr": "que, dont, où, comment", "isCorrect": true},
+          {"textAr": "dit-il, s'écria-t-il", "textFr": "dit-il, s'écria-t-il", "isCorrect": false},
+          {"textAr": "car, donc, puisque", "textFr": "car, donc, puisque", "isCorrect": false},
+          {"textAr": "guillemets", "textFr": "Guillemets", "isCorrect": false}
+        ],
+        "explanationAr": "que يحل محل цены اليد. dont يحل محل de+اسم. où يحل محل مكان. كيف يحل محل comment.",
+        "explanationFr": "Que remplace le COD, dont remplace de+nom, où remplace un lieu, comment remplace comment."
+      },
+      {
+        "promptAr": "ما هو genre textual: رواية تحليلية نفسية وseite؟",
+        "promptFr": "Quel est le genre d'un texte qui analyse les pensées d'un personnage ?",
+        "options": [
+          {"textAr": "رواية تحليلية نفسية", "textFr": "Roman psychologique", "isCorrect": true},
+          {"textAr": "مقال نقدي", "textFr": "Article critique", "isCorrect": false},
+          {"textAr": "نص شعري", "textFr": "Texte poétique", "isCorrect": false},
+          {"textAr": "نص سردي بسيط", "textFr": "Texte narratif simple", "isCorrect": false}
+        ],
+        "explanationAr": "الرواية التحليلية النفسية تanalyse interiorité الشخصية والأفكار.",
+        "explanationFr": "Le roman psychologique analyse l'intériorité et les pensées des personnages."
+      },
+      {
+        "promptAr": "ما هو POTENTIAL_argumentatif职责: النص الذي يdefend رأياً معingo وyaqeen؟",
+        "promptFr": "Quel est le texte qui défend une opinion avec des arguments ?",
+        "options": [
+          {"textAr": "نص نقدي / حجاجي", "textFr": "Texte argumentatif", "isCorrect": true},
+          {"textAr": "نص وصفي", "textFr": "Texte descriptif", "isCorrect": false},
+          {"textAr": "نص سردي", "textFr": "Texte narratif", "isCorrect": false},
+          {"textAr": "نص تعليمي", "textFr": "Texte didactique", "isCorrect": false}
+        ],
+        "explanationAr": "النص الحجاجي يdefend thesis معינبرة وحجم brokerage، ويبني خطاباً منطقياً.",
+        "explanationFr": "Le texte argumentatif défend une thèse avec des arguments logiques et une progression."
+      },
+      {
+        "promptAr": "ما هيbuçons: مكونات النص الإقناعي؟",
+        "promptFr": "Quels sont les composants du texte persuasif ?",
+        "options": [
+          {"textAr": "Thèse + arguments + exemples + conclusion", "textFr": "Thèse + arguments + exemples + conclusion", "isCorrect": true},
+          {"textAr": "فقط الأدلة العلمية", "textFr": "Uniquement des preuves scientifiques", "isCorrect": false},
+          {"textAr": "قصة وhistoires فقط", "textFr": "Uniquement des histoires", "isCorrect": false},
+          {"textAr": "أرقام وإحصائيات فقط", "textFr": "Uniquement des chiffres", "isCorrect": false}
+        ],
+        "explanationAr": "النص الإقناعي يتكون من: المقدمة (Thèse)، البراهين، الأمثلة، والاستنتاج.",
+        "explanationFr": "Le texte persuasif comprend : introduction (thèse), arguments, exemples, conclusion."
+      },
+      {
+        "promptAr": "أي من النصوص التالية يُ nun: يُستخدم التشبيه والاستعارة؟",
+        "promptFr": "Quel type de texte utilise métaphore et simile ?",
+        "options": [
+          {"textAr": "النص الشعري", "textFr": "Le texte poétique", "isCorrect": true},
+          {"textAr": "التقرير العلمي", "textFr": "Le rapport scientifique", "isCorrect": false},
+          {"textAr": "المراسلات الإدارية", "textFr": "La correspondance administrative", "isCorrect": false},
+          {"textAr": "النشرة الإخبارية", "textFr": "Le bulletin d'information", "isCorrect": false}
+        ],
+        "explanationAr": "النص الشعري يعتمد علىCalme фигурية_LANG包括 التشبيه والاستعارة والكناية.",
+        "explanationFr": "Le texte poétique recourt aux figures de style : métaphore, simile, etc."
+      }
+    ]
+  },
+  {
+    "branchSlug": "arts",
+    "subjectSlug": "histoire-arts",
+    "chapterSlug": "courants",
+    "questions": [
+      {
+        "promptAr": "ما هو الفن الرومانسي وأبرز سماته؟",
+        "promptFr": "Qu'est-ce que le romantisme et ses caractéristiques principales ?",
+        "options": [
+          {"textAr": "حierre على المشاعر والطبيعة والعاطفة", "textFr": "Accent sur les émotions, la nature et la passion", "isCorrect": true},
+          {"textAr": "ال.focus على العقل والهندسة", "textFr": "Accent sur la raison et la géométrie", "isCorrect": false},
+          {"textAr": "ال focus على الحياة اليومية", "textFr": "Accent sur la vie quotidienne", "isCorrect": false},
+          {"textAr": "ال focus على التجريد الكامل", "textFr": "Accent sur l'abstraction totale", "isCorrect": false}
+        ],
+        "explanationAr": "الرومانسية (القرن 19) تoss على المشاعر والعاطفة، وregard à la nature، وتمر على القواعد الكلاسيكية.",
+        "explanationFr": "Le romantisme (XIXe) met l'accent sur l'émotion, la nature, la passion et la liberté artistique."
+      },
+      {
+        "promptAr": "ما هو الانطباعية وأبرز فنانيها؟",
+        "promptFr": "Qu'est-ce que l'impressionnisme et ses artistes majeurs ?",
+        "options": [
+          {"textAr": ".Monet، Renoir، Pissarro - التركيز على الضوء والألوان", "textFr": "Monet, Renoir, Pissarro — accent sur la lumière et les couleurs", "isCorrect": true},
+          {"textAr": "Picasso، Braque - الأشكال الهندسية", "textFr": "Picasso, Braque — formes géométriques", "isCorrect": false},
+          {"textAr": "Leonard، Michel-Ange - الكلاسيكية", "textFr": "Léonard, Michel-Ange — classicisme", "isCorrect": false},
+          {"textAr": "Dali، Magritte - الأحلام", "textFr": "Dalí, Magritte — rêves", "isCorrect": false}
+        ],
+        "explanationAr": "الانطباعية (آخر القرن 19) تoss على ضوء الطبيعة والألوان، وتشمل مونيه ورينوار.",
+        "explanationFr": "L'impressionnisme (fin XIXe) capture la lumière naturelle avec des touches de couleurs (Monet, Renoir)."
+      },
+      {
+        "promptAr": "ما هو التكعيبية (Cubism) وأبرز ابتكاراتها؟",
+        "promptFr": "Qu'est-ce que le cubisme et ses innovations ?",
+        "options": [
+          {"textAr": "Representation الأشياء من عدة زوايا في نفس الوقت", "textFr": "Représentation des objets sous plusieurs angles simultanément", "isCorrect": true},
+          {"textAr": "تصوير الواقع بدقة", "textFr": "Représentation réaliste précise", "isCorrect": false},
+          {"textAr": "الألوان المشعة فقط", "textFr": "Uniquement des couleurs vives", "isCorrect": false},
+          {"textAr": "replication الصور الفوتوغرافية", "textFr": "Reproduction photographique", "isCorrect": false}
+        ],
+        "explanationAr": "التكعيبية (بيكاسو، براك، 1907) تexpose الأشكال من عدة زوايا وتحللها.",
+        "explanationFr": "Le cubisme (Picasso, Braque, 1907) décompose les formes et les représente sous plusieurs angles."
+      },
+      {
+        "promptAr": "ما هو الفارق الجوهري بين الكلاسيكية والرومانسية في الفن؟",
+        "promptFr": "Quelle est la différence essentielle entre classicisme et romantisme ?",
+        "options": [
+          {"textAr": "كلاسيكية: عقل ونظام. رومانسية: مشاعر وحرية", "textFr": "Classicisme : raison et ordre. Romantisme : émotion et liberté", "isCorrect": true},
+          {"textAr": "لا يوجد فرق", "textFr": "Pas de différence", "isCorrect": false},
+          {"textAr": "كلاسيكية: ألوان. رومانسية: أشكال", "textFr": "Classicisme : couleurs. Romantisme : formes", "isCorrect": false},
+          {"textAr": "كلاسيكية: حديثة. رومانسية: قديمة", "textFr": "Classicisme : moderne. Romantisme : ancien", "isCorrect": false}
+        ],
+        "explanationAr": "الكلاسيكية تoss على النظام والعقل والقواعد. الرومانسية تoss على المشاعر والخيال والحرية.",
+        "explanationFr": "Le classicisme privilégie raison, ordre et règles. Le romantisme met l'accent sur l'émotion et l'imaginaire."
+      },
+      {
+        "promptAr": "ما هو السريالية (Surrealism) وʲما أبرز ممثليها؟",
+        "promptFr": "Qu'est-ce que le surréalisme et ses représentants majeurs ?",
+        "options": [
+          {"textAr": "Dali، Magritte - استكشاف الأحلام واللاوعي", "textFr": "Dalí, Magritte — exploration des rêves et de l'inconscient", "isCorrect": true},
+          {"textAr": "Monet، Renoir - الضوء", "textFr": "Monet, Renoir — la lumière", "isCorrect": false},
+          {"textAr": "Picasso، Braque - الهندسة", "textFr": "Picasso, Braque — géométrie", "isCorrect": false},
+          {"textAr": "Van Gogh - الألوان الصريحة", "textFr": "Van Gogh — couleurs vives", "isCorrect": false}
+        ],
+        "explanationAr": "السريالية (1924) تستلهم من عالم الأحلام واللاوعي، وتشمل دالي وماغريت.",
+        "explanationFr": "Le surréalisme (1924) explore l'inconscient et les rêves, avec Dalí et Magritte."
+      },
+      {
+        "promptAr": "ما هو الفارق بين الرسم الانطباعي والrealist؟",
+        "promptFr": "Quelle est la différence entre impressionnisme et réalisme ?",
+        "options": [
+          {"textAr": "realist: تصوير الحياة اليومية كما هي. انطباعي: تجسيد الضوء والحظ", "textFr": "Réalisme : vie quotidienne fidèle. Impressionnisme : lumière et instant", "isCorrect": true},
+          {"textAr": "لا يوجد فرق", "textFr": "Pas de différence", "isCorrect": false},
+          {"textAr": "realist: تجريد. انطباعي: واقعي", "textFr": "Réalisme : abstrait. Impressionnisme : réaliste", "isCorrect": false},
+          {"textAr": "realist: ألوان. انطباعي: أشكال", "textFr": "Réalisme : couleurs. Impressionnisme : formes", "isCorrect": false}
+        ],
+        "explanationAr": "الواقعية (كوربيه) تoss على تصوير الحياة اليومية بصدق. الانطباعية تoss على تجسيد اللحظة والضوء.",
+        "explanationFr": "Le réalisme (Courbet) représente fidèlement la vie quotidienne. L'impressionnisme capture l'instant et la lumière."
+      }
+    ]
+  }
+]
