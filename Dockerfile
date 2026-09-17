@@ -14,7 +14,8 @@ RUN npx prisma generate
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npx prisma generate \
+RUN mkdir -p /app/data && cp dev.db /app/data/dev.db \
+  && npx prisma generate \
   && npm run build
 
 FROM base AS runner
