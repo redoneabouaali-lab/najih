@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
-import { t, type Lang } from "@/lib/lang";
+import { t } from "@/lib/lang";
 import Link from "next/link";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -53,8 +53,9 @@ export default async function BranchResourcesPage({ params }: Props) {
   if (!branch)
     return <div className="p-8 text-center text-gray-500">Branch not found</div>;
 
-  const exams = branch.resources.filter((r) => r.kind !== "exercise");
+  const lessons = branch.resources.filter((r) => r.kind === "lesson");
   const exercises = branch.resources.filter((r) => r.kind === "exercise");
+  const exams = branch.resources.filter((r) => r.kind === "exam");
 
   // group: { year } -> sessions
   const byYear = new Map<number | null, SessionGroup[]>();
@@ -103,6 +104,7 @@ export default async function BranchResourcesPage({ params }: Props) {
         <h1 className="sec-title text-[var(--b)]">{lang === "ar" ? branch.nameAr : branch.nameFr}</h1>
         <p className="sec-sub mt-3">{t(lang, "resourcesSub")}</p>
         <div className="mt-6 flex flex-wrap gap-3">
+          <span className="tag">📚 {lessons.length}</span>
           <span className="tag">{exercises.length} ✍️</span>
           <span className="tag">{exams.length} 📄</span>
         </div>
@@ -112,9 +114,30 @@ export default async function BranchResourcesPage({ params }: Props) {
         <p className="text-[var(--l)]">{t(lang, "noResources")}</p>
       )}
 
+      {lessons.length > 0 && (
+        <section className="mb-16">
+          <div className="label mb-5">01 — {t(lang, "lessonPdfSection")}</div>
+          <div className="journal">
+            {lessons.map((e, i) => (
+              <a
+                key={e.id}
+                href={e.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="entry"
+              >
+                <span className="entry__idx">0{i + 1}<i /></span>
+                <span className="entry__title block">{lang === "ar" ? e.titleAr : e.titleFr}</span>
+                <span className="entry__meta"><b>⬇ PDF</b></span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
       {exercises.length > 0 && (
         <section className="mb-16">
-          <div className="label mb-5">01 — {t(lang, "exerciseSection")}</div>
+          <div className="label mb-5">02 — {t(lang, "exerciseSection")}</div>
           <div className="journal">
             {exercises.map((e, i) => (
               <a
@@ -137,7 +160,7 @@ export default async function BranchResourcesPage({ params }: Props) {
         const sessions = byYear.get(year)!.sort((a, b) => sessionOrder(a.session, b.session));
         return (
           <section key={String(year)} className="mb-16">
-            <div className="label mb-5">{String(yi + (exercises.length ? 2 : 1)).padStart(2, "0")} — {year ?? t(lang, "countExams")}</div>
+            <div className="label mb-5">{String(yi + (lessons.length ? 1 : 0) + (exercises.length ? 1 : 0) + 1).padStart(2, "0")} — {year ?? t(lang, "countExams")}</div>
 
             {sessions.map((sg) => (
               <div key={String(sg.session)} className="mb-8">

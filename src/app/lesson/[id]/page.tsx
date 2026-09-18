@@ -66,12 +66,18 @@ export default async function LessonPage({ params }: Props) {
       </div>
 
       <div className="flex flex-wrap gap-3 mb-12">
-        <Link
-          href={`/quiz/${chapter.id}`}
-          className="btn btn-emerald"
-        >
-          🎯 {t(lang, "startQuiz")} ({chapter._count.questions})
-        </Link>
+        {chapter._count.questions > 0 ? (
+          <Link
+            href={`/quiz/${chapter.id}`}
+            className="btn btn-emerald"
+          >
+            🎯 {t(lang, "startQuiz")} ({chapter._count.questions})
+          </Link>
+        ) : (
+          <span className="btn btn-ghost !cursor-default opacity-60">
+            🎯 {t(lang, "questions")} 0
+          </span>
+        )}
         <Link
           href={`/resources/${branchSlug}`}
           className="btn btn-ghost"

@@ -54,6 +54,23 @@ export default async function QuizPage({ params }: Props) {
     })),
   );
 
+  if (questions.length === 0)
+    return (
+      <div className="max-w-2xl mx-auto px-6 py-16 text-center">
+        <div className="text-5xl mb-6">📭</div>
+        <h1 className="sec-title text-[var(--b)] mb-4">
+          {lang === "ar" ? chapter.titleAr : chapter.titleFr}
+        </h1>
+        <p className="text-[var(--l)] mb-8">{t(lang, "noQuestionsYet")}</p>
+        <Link
+          href={`/lesson/${chapter.id}`}
+          className="btn btn-emerald"
+        >
+          ← {t(lang, "backToLessons")}
+        </Link>
+      </div>
+    );
+
   return (
     <div>
       <div className="max-w-2xl mx-auto px-6 pt-6 text-sm">

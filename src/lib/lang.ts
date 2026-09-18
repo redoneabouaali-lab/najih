@@ -152,6 +152,10 @@ const dict: Record<string, { ar: string; fr: string }> = {
     fr: "Aucun exercice pour cette filière pour l'instant",
   },
   lessonNotFound: { ar: "لم يُضف هذا الدرس بعد", fr: "Cette leçon n'est pas encore disponible" },
+  noQuestionsYet: {
+    ar: "لا تتوفر أسئلة لهذا الفصل بعد — راجع ملفات الدرس أعلاه",
+    fr: "Pas encore de questions pour ce chapitre — consulte les fichiers de la leçon ci-dessus",
+  },
   matiere: { ar: "المادة", fr: "Matière" },
   pickBranchFirst: { ar: "اختر شعبتك لبدء التعلم", fr: "Choisis ta filière pour commencer" },
   pickMatiere: { ar: "اختر المادة", fr: "Choisis la matière" },
