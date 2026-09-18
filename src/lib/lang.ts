@@ -146,6 +146,7 @@ const dict: Record<string, { ar: string; fr: string }> = {
   lessonPdfSection: { ar: "ملخصات وكتب الدروس PDF", fr: "Résumés et livres de cours PDF" },
   exerciseSection: { ar: "تمارين تفاعلية", fr: "Exercices interactifs" },
   examSection: { ar: "الامتحانات الوطنية", fr: "Examens nationaux" },
+  examsMatiereTitle: { ar: "الامتحانات الوطنية للمادة", fr: "Examens nationaux de la matière" },
   noExercises: {
     ar: "لا توجد تمارين لهذه الشعبة بعد",
     fr: "Aucun exercice pour cette filière pour l'instant",

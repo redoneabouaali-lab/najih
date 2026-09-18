@@ -31,6 +31,8 @@ COPY --from=builder --chown=node:node /app/public ./public
 COPY --from=builder --chown=node:node /app/dev.db ./bundle/dev.db
 COPY --from=builder --chown=node:node /app/.next/standalone ./
 COPY --from=builder --chown=node:node /app/.next/static ./.next/static
+COPY --from=builder --chown=node:node /app/scripts ./scripts
+COPY --from=builder --chown=node:node /app/content ./content
 COPY --chown=node:node docker/entrypoint.sh ./entrypoint.sh
 RUN rm -f .env
 ENV DATABASE_PATH=/app/data/dev.db

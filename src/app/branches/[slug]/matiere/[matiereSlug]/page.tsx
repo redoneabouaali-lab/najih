@@ -21,11 +21,6 @@ const SUBJECT_KEYMAP: Record<string, string[]> = {
   "tarbia-islamia": ["islam", "islamic", "tarbia"],
 };
 
-const SESSION_KEY: Record<string, string> = {
-  normal: "sessionNormal",
-  rattrapage: "sessionRattrapage",
-};
-
 export default async function MatierePage({ params }: Props) {
   const { slug, matiereSlug } = await params;
   const lang = await getLang();
@@ -59,20 +54,7 @@ export default async function MatierePage({ params }: Props) {
 
   const exercises = resources.filter((r) => r.kind === "exercise");
   const lessons = resources.filter((r) => r.kind === "lesson");
-  const exams = resources.filter((r) => r.kind === "exam");
-
-  const byYear = new Map<number | null, { session: string | null; rows: typeof exams }[]>();
-  for (const e of exams) {
-    if (!byYear.has(e.year)) byYear.set(e.year, []);
-    const arr = byYear.get(e.year)!;
-    let sg = arr.find((s) => s.session === e.session);
-    if (!sg) {
-      sg = { session: e.session, rows: [] };
-      arr.push(sg);
-    }
-    sg.rows.push(e);
-  }
-  const years = [...byYear.keys()].sort((a, b) => (b ?? 0) - (a ?? 0));
+  const examCount = resources.filter((r) => r.kind === "exam").length;
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10">
@@ -153,44 +135,20 @@ export default async function MatierePage({ params }: Props) {
         </section>
       )}
 
-      {exams.length > 0 && (
+      {examCount > 0 && (
         <section>
           <div className="label mb-5">05 — {t(lang, "examSection")}</div>
-          {years.map((year) => {
-            const sessions = byYear.get(year)!.sort((a, b) => {
-              const rank = (s: string | null) => (s === "normal" ? 0 : s === "rattrapage" ? 1 : 2);
-              return rank(a.session) - rank(b.session);
-            });
-            return (
-              <div key={String(year)} className="mb-8">
-                <div className="label mb-3">{year}</div>
-                <div className="journal">
-                  {sessions.flatMap((sg) =>
-                    sg.rows.map((r, i) => (
-                      <a
-                        key={r.id}
-                        href={r.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="entry"
-                      >
-                        <span className="entry__idx">0{i + 1}<i /></span>
-                        <span>
-                          <span className="entry__title block">
-                            {sg.session ? t(lang, SESSION_KEY[sg.session]) : year}
-                          </span>
-                          <span className="entry__role block mt-2">
-                            {r.titleFr.toLowerCase().includes("correction") ? `✅ ${t(lang, "kCorrection")}` : `📋 ${t(lang, "kSujet")}`}
-                          </span>
-                        </span>
-                        <span className="entry__meta"><b>↗</b></span>
-                      </a>
-                    )),
-                  )}
-                </div>
-              </div>
-            );
-          })}
+          <Link
+            href={`/branches/${slug}/matiere/${matiereSlug}/examens`}
+            className="panel panel-hover p-5 flex items-center justify-between gap-4"
+          >
+            <div>
+              <div className="mono text-xs text-[var(--l)] mb-2">🗓️ {t(lang, "examSection")}</div>
+              <div className="font-bold text-[var(--b)]">{t(lang, "examsMatiereTitle")}</div>
+              <div className="mt-1 text-sm text-[var(--l)]">{examCount} {t(lang, "countExams")}</div>
+            </div>
+            <span className="btn btn-emerald btn-sm !px-4">↗</span>
+          </Link>
         </section>
       )}
     </div>

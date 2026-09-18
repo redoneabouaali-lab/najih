@@ -47,3 +47,6 @@ next-env.d.ts
 
 # prisma scaffold local db (real data lives at ./dev.db)
 /prisma/dev.db
+
+# scraper cache (raw HTML, not needed by seeder or docker)
+/content/sites/.cache/
