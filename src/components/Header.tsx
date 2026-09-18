@@ -34,27 +34,38 @@ export function Header() {
     { href: "/results", key: "navProgress" },
   ];
 
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/");
+
   return (
     <>
       <ScrollProgress />
       <header className={`hdr ${scrolled ? "scrolled" : ""}`}>
-        <div className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-8 py-4">
-          <Link href="/" className="text-[15px] font-normal tracking-[0.06em] uppercase">
-            <span className="text-[var(--b)]">ناجِح</span>
-            <span className="text-[var(--b)] opacity-50">.bac</span>
+        <div className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-8 py-3">
+          <Link href="/" className="flex items-center gap-2.5">
+            <span className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-sky-500 text-white text-[15px] shadow-[var(--shadow-md)]">
+              ✦
+            </span>
+            <span className="text-[17px] font-bold text-[var(--b)] tracking-tight">
+              ناجح<span className="text-[var(--acc)]">.bac</span>
+            </span>
           </Link>
 
-          <nav className="hdr-nav hidden md:flex items-center gap-8">
+          <nav className="hdr-nav hidden md:flex" aria-label="Main">
             {links.map((l) => (
-              <Link key={l.href} href={l.href} className={pathname === l.href ? "text-[var(--b)]" : ""}>
+              <Link
+                key={l.href}
+                href={l.href}
+                className={isActive(l.href) ? "active" : ""}
+              >
                 {t(lang, l.key)}
               </Link>
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <LangToggle lang={lang} />
-            <Link href="/branches" className="btn btn-emerald btn-sm">
+            <Link href="/branches" className="btn btn-emerald btn-sm !py-2.5">
               {t(lang, "homeStart")} <span aria-hidden>→</span>
             </Link>
           </div>

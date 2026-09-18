@@ -20,13 +20,13 @@ export function setClientLang(lang: Lang) {
 }
 
 const dict: Record<string, { ar: string; fr: string }> = {
-  appName: { ar: "ناجِح", fr: "Najih" },
+  appName: { ar: "ناجح", fr: "Najih" },
   tagline: { ar: "تحضيرك للباكالوريا — بذكاء وبدون إنترنت", fr: "Préparation au Bac — intelligente et hors-ligne" },
   navHome: { ar: "الرئيسية", fr: "Accueil" },
   navBranches: { ar: "الشعب", fr: "Filières" },
   navAi: { ar: "المرشد الذكي", fr: "Tuteur IA" },
   navProgress: { ar: "تقدمي", fr: "Progression" },
-  homeHeroTitle: { ar: "ناجِح: أعدّك للباكالوريا", fr: "Najih : ton Bac, enfin à ta portée" },
+  homeHeroTitle: { ar: "ناجح: أعدّك للباكالوريا", fr: "Najih : ton Bac, enfin à ta portée" },
   homeHeroSub: {
     ar: "بنك أسئلة من الامتحانات الوطنية، اختبارات تفاعلية ومرشد ذكي. مجاني 100% ويعمل بدون إنترنت.",
     fr: "Banque de questions des examens nationaux, quiz interactifs et tuteur IA. 100% gratuit, 100% hors-ligne.",
@@ -75,7 +75,7 @@ const dict: Record<string, { ar: string; fr: string }> = {
   chatThinking: { ar: "يجيب المرشد...", fr: "Le tuteur réfléchit..." },
   chatExample: { ar: "مثال: اشرح لي النهايات بطريقة مبسطة", fr: "Ex : explique-moi les limites simplement" },
   langLabel: { ar: "اللغة", fr: "Langue" },
-  footer: { ar: "ناجِح — تحضير مجاني للباكالوريا المغربية 🇲🇦", fr: "Najih — préparation gratuite au Bac Maroc 🇲🇦" },
+  footer: { ar: "ناجح — تحضير مجاني للباكالوريا المغربية 🇲🇦", fr: "Najih — préparation gratuite au Bac Maroc 🇲🇦" },
   examYear: { ar: "الامتحان الوطني", fr: "Examen national" },
   navResources: { ar: "الامتحانات", fr: "Examens" },
   resourcesTitle: { ar: "الامتحانات الوطنية", fr: "Examens nationaux" },

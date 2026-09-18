@@ -85,7 +85,7 @@ export function Chat({ lang }: { lang: Lang }) {
                 : lang === "ar" ? "المرشد" : "Tuteur"}
             </div>
             <div
-              className={`p-4 ${m.role === "user" ? "bg-[var(--b)] text-[var(--of)]" : "panel p-5 text-[var(--b)]"}`}
+              className={`p-4 rounded-2xl ${m.role === "user" ? "bg-gradient-to-br from-indigo-600 to-indigo-700 text-white shadow-[var(--shadow-md)]" : "panel p-5 text-[var(--b)]"}`}
               dir="auto"
             >
               <div className="whitespace-pre-wrap">{m.content}</div>
@@ -110,7 +110,7 @@ export function Chat({ lang }: { lang: Lang }) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={t(lang, "chatPlaceholder")}
-          className="flex-1 p-4 border border-[var(--p)] bg-[var(--w)] text-[var(--b)] text-base rounded-none focus:outline-none focus:border-[var(--b)] transition-colors"
+          className="flex-1 p-4 border border-[var(--p)] bg-[var(--w)] text-[var(--b)] text-base rounded-2xl focus:outline-none focus:border-[var(--acc)] transition-colors shadow-sm"
           dir={lang === "ar" ? "rtl" : "ltr"}
         />
         <button

@@ -61,7 +61,7 @@ export default async function LessonPage({ params }: Props) {
         <p className="mono text-sm text-[var(--l)] mt-4">{chapter._count.questions} {t(lang, "questions")}</p>
       </div>
 
-      <div className="panel panel-hover p-6 sm:p-10 mb-10 rounded-none">
+      <div className="panel panel-hover p-6 sm:p-10 mb-10">
         <Markdown content={lessonContent} />
       </div>
 
