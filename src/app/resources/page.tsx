@@ -1,7 +1,22 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
+import { mkMeta } from "@/lib/seo";
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getLang();
+  return mkMeta({
+    lang,
+    path: "/resources",
+    title: lang === "ar" ? "الموارد والامتحانات" : "Ressources & examens",
+    description:
+      lang === "ar"
+        ? "جميع الموارد: امتحانات وطنية، تمارين ودروس PDF لكل الشعب — تحميل مباشر ومجاني."
+        : "Toutes les ressources : examens nationaux, exercices et cours PDF pour toutes les filières — téléchargement direct et gratuit.",
+  });
+}
 
 const ICONS: Record<string, string> = {
   sm: "📐",

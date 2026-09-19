@@ -1,9 +1,24 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
+import { mkMeta } from "@/lib/seo";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getLang();
+  return mkMeta({
+    lang,
+    path: "/",
+    title: lang === "ar" ? "الرئيسية — دروس وامتحانات الباكالوريا المغربية" : "Accueil — Cours & examens du Bac Maroc",
+    description:
+      lang === "ar"
+        ? "ناجح: دروس، تمارين، امتحانات وطنية تفاعلية ومرشد ذكي لتحضير الباكالوريا المغربية. مجاني 100%."
+        : "Najih : cours, exercices, examens nationaux interactifs et tuteur IA pour préparer le Bac marocain. 100% gratuit.",
+  });
+}
 
 const ICONS: Record<string, string> = {
   sm: "📐",

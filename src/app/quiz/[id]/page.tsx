@@ -1,11 +1,32 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
+import { mkMeta } from "@/lib/seo";
+import type { Metadata } from "next";
 import { shuffle } from "@/lib/shuffle";
 import Link from "next/link";
 import { Quiz } from "@/components/Quiz";
 
 type Props = { params: Promise<{ id: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const lang = await getLang();
+  const chapter = await prisma.chapter.findUnique({
+    where: { id },
+    select: { titleAr: true, titleFr: true, subject: { select: { nameAr: true, nameFr: true } } },
+  });
+  if (!chapter) return {};
+  return mkMeta({
+    lang,
+    path: `/quiz/${id}`,
+    title: `${lang === "ar" ? chapter.titleAr : chapter.titleFr} — ${lang === "ar" ? "اختبار تفاعلي" : "quiz interactif"}`,
+    description:
+      lang === "ar"
+        ? `اختبر نفسك في "${lang === "ar" ? chapter.titleAr : chapter.titleFr}" بأسئلة من الامتحانات الوطنية مع التصحيح الفوري.`
+        : `Teste-toi sur « ${chapter.titleFr} » avec des questions des examens nationaux et corrigé immédiat.`,
+  });
+}
 
 export default async function QuizPage({ params }: Props) {
   const { id } = await params;

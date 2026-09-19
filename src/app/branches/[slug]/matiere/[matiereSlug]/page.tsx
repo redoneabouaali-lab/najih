@@ -1,9 +1,34 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
+import { mkMeta } from "@/lib/seo";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 type Props = { params: Promise<{ slug: string; matiereSlug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug, matiereSlug } = await params;
+  const lang = await getLang();
+  const branch = await prisma.branch.findUnique({ where: { slug } });
+  const subject = branch
+    ? await prisma.subject.findUnique({
+        where: { branchId_slug: { branchId: branch.id, slug: matiereSlug } },
+      })
+    : null;
+  if (!branch || !subject) return {};
+  const name = lang === "ar" ? subject.nameAr : subject.nameFr;
+  return mkMeta({
+    lang,
+    path: `/branches/${slug}/matiere/${matiereSlug}`,
+    title: `${subject.icon} ${name} — ${lang === "ar" ? "دروس وتمارين" : "cours et exercices"}`,
+    description:
+      lang === "ar"
+        ? `دروس وتمارين مادة ${name} لشعبة ${branch.nameAr}: منهاج كامل مع اختبارات تفاعلية وامتحانات.`
+        : `Cours et exercices de ${subject.nameFr} (${branch.nameFr}) : programme complet, quiz interactifs et examens.`,
+    keywords: [name],
+  });
+}
 
 const SUBJECT_KEYMAP: Record<string, string[]> = {
   mathematiques: ["sm", "maths", "math"],

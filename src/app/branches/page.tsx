@@ -1,7 +1,22 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
+import { mkMeta } from "@/lib/seo";
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getLang();
+  return mkMeta({
+    lang,
+    path: "/branches",
+    title: lang === "ar" ? "الشعب والمسالك" : "Filières",
+    description:
+      lang === "ar"
+        ? "اختر شعبتك: العلوم الرياضية، الفيزياء، علوم الحياة والأرض، الآداب، الاقتصاد... دروس وامتحانات لكل شعبة."
+        : "Choisis ta filière : sciences maths, physique, SVT, lettres, économie… Cours et examens pour chaque filière.",
+  });
+}
 
 const ICONS: Record<string, string> = {
   sm: "📐",

@@ -58,15 +58,42 @@ function matchedSubjects(q: string): string[] {
   return [...set];
 }
 
+function normalizeSubjectKey(k: string | null): string {
+  return k === "pc" ? "physique-chimie" : (k ?? "");
+}
+
 function scoreRow(r: Row, q: string, tks: string[], subjects: string[], corrIntent: boolean): number {
   const title = `${r.titleAr ?? ""} ${r.titleFr ?? ""}`.toLowerCase();
+  const clean = title.replace(/[\s\u00a0]+/g, " ").trim();
   let s = 0;
+
   for (const tk of tks) if (title.includes(tk)) s += 1;
-  if (subjects.includes(r.subjectKey ?? "")) s += 3;
+
+  const subjKey = normalizeSubjectKey(r.subjectKey);
+  if (subjects.includes(subjKey)) s += 3;
+
   const years = tks.filter((t) => /^\d{4}$/.test(t));
-  for (const y of years) if (title.includes(y)) s += 2;
+  for (const y of years) if (title.includes(y)) s += 4;
+
   if (corrIntent && CORR_RE.test(title)) s += 2;
+
+  const ym = /(19|20)\d{2}/.exec(title);
+  if (ym) s += 1 + Math.max(0, Math.min(Number(ym[1]) - 2020, 6));
+
+  if (
+    clean.length < 6 ||
+    /^(تحميل|download|télécharger)([\s\u00a0]|$)/.test(clean) ||
+    /^\d{1,2}[\s\u00a0-]*$/.test(clean)
+  ) {
+    s -= 12;
+  }
+  if (/تذكير|إرسالية|إشعار|خبر|جديد/.test(clean)) s -= 4;
+
   return s;
+}
+
+function titleKeyOf(r: Row): string {
+  return `${r.titleAr ?? ""} ${r.titleFr ?? ""}`.replace(/\s+/g, " ").trim().toLowerCase();
 }
 
 async function lookup(question: string): Promise<Row[]> {
@@ -74,8 +101,10 @@ async function lookup(question: string): Promise<Row[]> {
   if (tks.length === 0) return [];
 
   const subjects = matchedSubjects(question);
+  if (subjects.includes("physique-chimie")) subjects.push("pc");
   const examIntent = EXAM_RE.test(question);
   const corrIntent = CORR_RE.test(question);
+  const lessonIntent = LESSON_RE.test(question);
 
   const termWhere = {
     OR: [
@@ -85,12 +114,16 @@ async function lookup(question: string): Promise<Row[]> {
   };
 
   const rows: Row[] = [];
-  const seen = new Set<string>();
+  const seenUrls = new Set<string>();
   const scoreOf = new Map<string, number>();
+  const seenTitles = new Set<string>();
   const add = (rs: Row[]) => {
     for (const r of rs) {
-      if (seen.has(r.url)) continue;
-      seen.add(r.url);
+      if (seenUrls.has(r.url)) continue;
+      seenUrls.add(r.url);
+      const tk = titleKeyOf(r);
+      if (tk && seenTitles.has(tk)) continue;
+      if (tk) seenTitles.add(tk);
       scoreOf.set(r.url, scoreRow(r, question, tks, subjects, corrIntent));
       rows.push(r);
     }
@@ -99,35 +132,40 @@ async function lookup(question: string): Promise<Row[]> {
   if (examIntent) {
     const exams = await prisma.resource.findMany({
       where: { AND: [termWhere, { kind: "exam" }] },
-      take: 60,
+      take: 120,
+      orderBy: { createdAt: "desc" },
     });
     add(exams);
   }
-  if (LESSON_RE.test(question) || !examIntent) {
+  if (lessonIntent || !examIntent) {
     const lessons = await prisma.resource.findMany({
       where: { AND: [termWhere, { OR: [{ kind: "lesson" }, { kind: "exercise" }] }] },
-      take: 50,
+      take: 80,
+      orderBy: { createdAt: "desc" },
     });
     add(lessons);
   }
 
-  // Fallback: a subject/stream is clearly requested but nothing matched
-  // specific terms (e.g. "i need sm exams") — pull that subject's files directly.
+  // Fallback: a subject/stream is clearly requested but nothing specific
+  // matched terms (e.g. "i need some SM exams") — pull that subject's files.
   if (rows.length === 0 && subjects.length > 0) {
     const bySubject = { OR: subjects.map((k) => ({ subjectKey: k })) };
-    if (examIntent || !LESSON_RE.test(question)) {
+    if (examIntent || !lessonIntent) {
       const exams = await prisma.resource.findMany({
         where: { AND: [bySubject, { kind: "exam" }] },
-        take: 60,
+        take: 120,
         orderBy: { createdAt: "desc" },
       });
       add(exams);
     }
-    const lessons = await prisma.resource.findMany({
-      where: { AND: [bySubject, { OR: [{ kind: "lesson" }, { kind: "exercise" }] }] },
-      take: 30,
-    });
-    add(lessons);
+    if (lessonIntent || !examIntent) {
+      const lessons = await prisma.resource.findMany({
+        where: { AND: [bySubject, { OR: [{ kind: "lesson" }, { kind: "exercise" }] }] },
+        take: 60,
+        orderBy: { createdAt: "desc" },
+      });
+      add(lessons);
+    }
   }
 
   rows.sort((a, b) => (scoreOf.get(b.url) ?? 0) - (scoreOf.get(a.url) ?? 0));
@@ -233,6 +271,23 @@ export async function POST(req: Request) {
     }
 
     const data = await res.json();
+    const content = data?.choices?.[0]?.message?.content;
+    if (typeof content === "string" && rows.length > 0) {
+      const mentioned = new Set([...content.matchAll(/https?:\/\/[^\s)\]]+/g)].map((m) => m[0]));
+      const extra = buildLibrary(rows)
+        .split("\n")
+        .filter((line) => {
+          const u = line.match(/https?:\/\/[^\s)\]]+/)?.[0];
+          return u && !mentioned.has(u);
+        });
+      if (extra.length > 0) {
+        const heading =
+          lang === "ar"
+            ? "\n\n**📚 ملفات من مكتبة ناجح (روابط مباشرة):**"
+            : "\n\n**📚 Fichiers disponibles sur Najih (liens directs) :**";
+        data.choices[0].message.content = `${content}${heading}\n${extra.join("\n")}`;
+      }
+    }
     return NextResponse.json(data);
   } catch (e) {
     return NextResponse.json(

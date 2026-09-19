@@ -1,9 +1,33 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
+import { mkMeta } from "@/lib/seo";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { BranchMatierePicker } from "@/components/BranchMatierePicker";
 
 type Props = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const lang = await getLang();
+  const branch = await prisma.branch.findUnique({
+    where: { slug },
+    select: { nameAr: true, nameFr: true },
+  });
+  if (!branch) return {};
+  return mkMeta({
+    lang,
+    path: `/branches/${slug}`,
+    title:
+      lang === "ar"
+        ? `شعبة ${branch.nameAr} — دروس وامتحانات`
+        : `${branch.nameFr} — cours et examens`,
+    description:
+      lang === "ar"
+        ? `كل ما تحتاجه لشعبة ${branch.nameAr}: دروس، تمارين، امتحانات وطنية واختبارات تفاعلية عشية الباكالوريا.`
+        : `Tout pour la filière ${branch.nameFr} : cours, exercices, examens nationaux et quiz interactifs pour préparer le Bac.`,
+  });
+}
 
 export default async function BranchPage({ params }: Props) {
   const { slug } = await params;

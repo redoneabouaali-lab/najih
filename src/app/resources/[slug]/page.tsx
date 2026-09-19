@@ -1,9 +1,33 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
+import { mkMeta } from "@/lib/seo";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 type Props = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const lang = await getLang();
+  const branch = await prisma.branch.findUnique({
+    where: { slug },
+    select: { nameAr: true, nameFr: true },
+  });
+  if (!branch) return {};
+  return mkMeta({
+    lang,
+    path: `/resources/${slug}`,
+    title:
+      lang === "ar"
+        ? `موارد وامتحانات شعبة ${branch.nameAr}`
+        : `Ressources & examens — ${branch.nameFr}`,
+    description:
+      lang === "ar"
+        ? `موارد شعبة ${branch.nameAr}: امتحانات وطنية، تمارين ودروس PDF — تحميل مباشر ومجاني عشية الباكالوريا.`
+        : `Ressources ${branch.nameFr} : examens nationaux, exercices et cours PDF — téléchargement direct et gratuit.`,
+  });
+}
 
 export async function generateStaticParams() {
   const branches = await prisma.branch.findMany({ select: { slug: true } });
@@ -108,6 +132,12 @@ export default async function BranchResourcesPage({ params }: Props) {
           <span className="tag">{exercises.length} ✍️</span>
           <span className="tag">{exams.length} 📄</span>
         </div>
+        <Link
+          href={`/branches/${slug}`}
+          className="inline-flex items-center gap-2 mt-6 btn btn-ghost"
+        >
+          📖 {t(lang, "lessonsAndQuiz")} <span aria-hidden>→</span>
+        </Link>
       </div>
 
       {branch.resources.length === 0 && (

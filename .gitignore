@@ -50,3 +50,7 @@ next-env.d.ts
 
 # scraper cache (raw HTML, not needed by seeder or docker)
 /content/sites/.cache/
+
+dev.db-wal
+dev.db-shm
+

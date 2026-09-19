@@ -1,11 +1,37 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
+import { mkMeta, SITE_URL } from "@/lib/seo";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Markdown } from "@/components/Markdown";
+import { JsonLd } from "@/components/JsonLd";
 
 type Props = { params: Promise<{ id: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const lang = await getLang();
+  const chapter = await prisma.chapter.findUnique({
+    where: { id },
+    include: { subject: { include: { branch: true } } },
+  });
+  if (!chapter) return {};
+  const title = lang === "ar" ? chapter.titleAr : chapter.titleFr;
+  const subject = lang === "ar" ? chapter.subject.nameAr : chapter.subject.nameFr;
+  const branch = lang === "ar" ? chapter.subject.branch.nameAr : chapter.subject.branch.nameFr;
+  return mkMeta({
+    lang,
+    path: `/lesson/${chapter.id}`,
+    title: `${title} — ${subject}`,
+    description:
+      lang === "ar"
+        ? `درس "${title}" في مادة ${subject} (${branch}): شرح كامل، أمثلة وتمارين مع اختبار تفاعلي للباكالوريا.`
+        : `Leçon « ${title} » de ${subject} (${branch}) : explication complète, exemples, exercices et quiz interactif pour le Bac.`,
+    keywords: [subject, branch, title],
+  });
+}
 
 export default async function LessonPage({ params }: Props) {
   const { id } = await params;
@@ -79,12 +105,46 @@ export default async function LessonPage({ params }: Props) {
           </span>
         )}
         <Link
+          href={`/branches/${branchSlug}/matiere/${chapter.subject.slug}/examens`}
+          className="btn btn-ghost"
+        >
+          🗓️ {t(lang, "examSection")}
+        </Link>
+        <Link
           href={`/resources/${branchSlug}`}
           className="btn btn-ghost"
         >
           📄 {t(lang, "navResources")}
         </Link>
       </div>
+
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          headline: lang === "ar" ? chapter.titleAr : chapter.titleFr,
+          inLanguage: lang,
+          about: lang === "ar" ? chapter.subject.nameAr : chapter.subject.nameFr,
+          isPartOf: {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Najih", item: SITE_URL },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: lang === "ar" ? chapter.subject.branch.nameAr : chapter.subject.branch.nameFr,
+                item: `${SITE_URL}/branches/${branchSlug}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: `${lang === "ar" ? chapter.subject.nameAr : chapter.subject.nameFr} — ${lang === "ar" ? chapter.titleAr : chapter.titleFr}`,
+                item: `${SITE_URL}/lesson/${chapter.id}`,
+              },
+            ],
+          },
+        }}
+      />
 
       {exercises.length > 0 && (
         <section>

@@ -10,6 +10,7 @@ import { ScrollProgress } from "./ScrollProgress";
 export function Header() {
   const [lang, setLang] = useState<Lang>("ar");
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -26,6 +27,8 @@ export function Header() {
       clearInterval(iv);
     };
   }, []);
+
+  const closeMenu = () => setMenuOpen(false);
 
   const links = [
     { href: "/branches", key: "navBranches" },
@@ -65,11 +68,39 @@ export function Header() {
 
           <div className="flex items-center gap-2.5">
             <LangToggle lang={lang} />
-            <Link href="/branches" className="btn btn-emerald btn-sm !py-2.5">
+            <Link href="/branches" className="btn btn-emerald btn-sm !py-2.5 hidden md:inline-flex">
               {t(lang, "homeStart")} <span aria-hidden>→</span>
             </Link>
+            <button
+              type="button"
+              aria-label={lang === "ar" ? "القائمة" : "Menu"}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((v) => !v)}
+              className="btn btn-ghost btn-sm !px-3.5 md:hidden"
+            >
+              <span aria-hidden>{menuOpen ? "✕" : "☰"}</span>
+            </button>
           </div>
         </div>
+        {menuOpen && (
+          <nav
+            aria-label="Main mobile"
+            className="md:hidden border-t border-[var(--p)] bg-white/95 backdrop-blur"
+          >
+            <div className="max-w-6xl mx-auto flex flex-col px-4 py-3 gap-1">
+              {links.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={closeMenu}
+                  className={`rounded-lg px-4 py-3 text-[15px] font-semibold ${isActive(l.href) ? "text-[var(--acc)]" : "text-[var(--b)]"}`}
+                >
+                  {t(lang, l.key)}
+                </Link>
+              ))}
+            </div>
+          </nav>
+        )}
       </header>
     </>
   );
