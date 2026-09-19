@@ -104,7 +104,7 @@ export default async function MatierePage({ params }: Props) {
         {subject.chapters.length === 0 && (
           <p className="text-[var(--l)]">{t(lang, "noLessonsMatiere")}</p>
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="stagger grid grid-cols-1 sm:grid-cols-2 gap-4">
           {subject.chapters.map((ch, i) => (
             <Link
               key={ch.id}

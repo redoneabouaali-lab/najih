@@ -80,8 +80,8 @@ export default async function Home() {
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 via-white to-sky-100" aria-hidden />
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-sky-200/60 blur-3xl" aria-hidden />
-        <div className="absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-indigo-200/70 blur-3xl" aria-hidden />
+        <div className="blob absolute -top-24 -right-24 w-96 h-96 rounded-full bg-sky-200/60 blur-3xl" aria-hidden />
+        <div className="blob absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-indigo-200/70 blur-3xl" style={{ animationDuration: "18s" }} aria-hidden />
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-8 py-14 sm:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -96,7 +96,7 @@ export default async function Home() {
                   <>
                     تعلّم، تمرّن،
                     <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500 txt-shimmer">
                       ننجح في الباك.
                     </span>
                   </>
@@ -127,7 +127,7 @@ export default async function Home() {
           </div>
 
           <Reveal delay={200} className="relative">
-            <div className="relative rounded-[28px] overflow-hidden border-[6px] border-white shadow-[0_24px_60px_-20px_rgba(79,70,229,0.4)]">
+            <div className="float relative rounded-[28px] overflow-hidden border-[6px] border-white shadow-[0_24px_60px_-20px_rgba(79,70,229,0.4)]">
               <Image
                 src="/images/hero-najih.webp"
                 alt={lang === "ar" ? "طلاب ناجح يدرسون" : "Élèves Najih qui révisent"}
@@ -138,8 +138,8 @@ export default async function Home() {
                 className="w-full h-auto object-cover"
               />
             </div>
-            <div className="absolute -bottom-5 left-6 sm:left-10 rounded-2xl bg-white border border-[var(--p)] shadow-[var(--shadow-md)] px-5 py-3 flex items-center gap-3">
-              <span className="text-2xl">🎓</span>
+            <div className="float-sm absolute -bottom-5 left-6 sm:left-10 rounded-2xl bg-white border border-[var(--p)] shadow-[var(--shadow-md)] px-5 py-3 flex items-center gap-3" style={{ animationDelay: "0.6s" }}>
+              <span className="glow-dot w-2.5 h-2.5 bg-gradient-to-br from-indigo-500 to-sky-400" />
               <span className="text-[13px] font-bold text-[var(--b)]">
                 +{branches.length} {t(lang, "navBranches")}
                 <span className="block text-[11px] font-medium text-[var(--l)]">100% gratuit</span>

@@ -54,7 +54,7 @@ export default async function ResourcesPage() {
         <p className="sec-sub mt-3">{t(lang, "resourcesSub")}</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {branches.map((b, i) => (
           <Link key={b.id} href={`/resources/${b.slug}`} className="svc-card">
             <span className="svc-card__idx">0{i + 1} — {lang === "ar" ? b.nameAr : b.nameFr}</span>
