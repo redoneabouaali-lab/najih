@@ -20,7 +20,12 @@ function tokens(...inputs: string[]): string[] {
   const set = new Set<string>();
   for (const s of inputs) {
     for (const w of s.toLowerCase().split(/[^\p{L}\p{N}]+/u)) {
-      if (w.length >= 3 && !STOP.has(w) && /[a-z\u0600-\u06FF]/.test(w) && !/^\d+$/.test(w)) set.add(w);
+      if (w.length < 3 || STOP.has(w)) continue;
+      if (/^\d{4}$/.test(w)) {
+        set.add(w);
+        continue;
+      }
+      if (/[a-z\u0600-\u06FF]/.test(w)) set.add(w);
     }
   }
   return [...set].slice(0, 6);
@@ -30,12 +35,17 @@ type Row = { kind: string; subjectKey: string | null; titleAr: string | null; ti
 
 const SUBJ_KEYS: [string, string][] = [
   ["رياضيات", "mathematiques"], ["رياضية", "mathematiques"], ["رياضي", "mathematiques"], ["math", "mathematiques"],
+  ["mathématiques", "mathematiques"], ["mathematiques", "mathematiques"], ["علوم رياضية", "mathematiques"],
+  ["sm", "mathematiques"], ["sciences math", "mathematiques"], ["sciences-math", "mathematiques"],
   ["فيزياء", "physique-chimie"], ["كيمياء", "physique-chimie"], ["كمياء", "physique-chimie"], ["physique", "physique-chimie"],
+  ["physique-chimie", "physique-chimie"], ["شعبة العلوم الفيزيائية", "physique-chimie"], ["sp", "physique-chimie"],
   ["علوم الحياة", "svt"], ["svt", "svt"], ["biologie", "svt"], ["biology", "svt"],
-  ["اقتصاد", "economie"], ["محاسبة", "comptabilite"], ["comptabilité", "comptabilite"], ["comptabilite", "comptabilite"],
+  ["اقتصاد", "economie"], ["eco", "economie"], ["économie", "economie"], ["economie", "economie"],
+  ["محاسبة", "comptabilite"], ["comptabilité", "comptabilite"], ["comptabilite", "comptabilite"],
   ["فلسفة", "philosophie"], ["philo", "philosophie"],
-  ["عربية", "arabe"], ["فرنسية", "francais"], ["français", "francais"], ["انجليزية", "anglais"], ["إنجليزية", "anglais"],
-  ["التاريخ", "histoire-geo"], ["جغرافيا", "histoire-geo"],
+  ["عربية", "arabe"], ["فرنسية", "francais"], ["français", "francais"], ["francais", "francais"],
+  ["انجليزية", "anglais"], ["إنجليزية", "anglais"],
+  ["التاريخ", "histoire-geo"], ["جغرافيا", "histoire-geo"], ["histoire", "histoire-geo"],
   ["تربية", "tarbia-islamia"], ["فنون", "histoire-arts"], ["arts", "histoire-arts"],
 ];
 
@@ -101,6 +111,25 @@ async function lookup(question: string): Promise<Row[]> {
     add(lessons);
   }
 
+  // Fallback: a subject/stream is clearly requested but nothing matched
+  // specific terms (e.g. "i need sm exams") — pull that subject's files directly.
+  if (rows.length === 0 && subjects.length > 0) {
+    const bySubject = { OR: subjects.map((k) => ({ subjectKey: k })) };
+    if (examIntent || !LESSON_RE.test(question)) {
+      const exams = await prisma.resource.findMany({
+        where: { AND: [bySubject, { kind: "exam" }] },
+        take: 60,
+        orderBy: { createdAt: "desc" },
+      });
+      add(exams);
+    }
+    const lessons = await prisma.resource.findMany({
+      where: { AND: [bySubject, { OR: [{ kind: "lesson" }, { kind: "exercise" }] }] },
+      take: 30,
+    });
+    add(lessons);
+  }
+
   rows.sort((a, b) => (scoreOf.get(b.url) ?? 0) - (scoreOf.get(a.url) ?? 0));
   return rows.slice(0, 8);
 }
@@ -126,18 +155,19 @@ function buildLibrary(rows: Row[]): string {
 function systemPrompt(lang: string, library: string): string {
   const libraryBlock =
     library ||
-    "(لا روابط مستجابة لهذا السؤال — وجّه الطالب لصفحات الموقع الحقيقية: /branches للشعب و /resources للامتحانات و /ai للأسئلة)";
+    "(لم يستجب ملفات لهذا السؤال — اشرحه باختصار ثم وجّه الطالب لصفحات الموقع الحقيقية: /branches للشعب و /resources للامتحانات)";
   return `أنت "${lang === "ar" ? "المرشد الذكي" : "Tuteur IA"}" في موقع ناجح (Najih) — منصة مجانية لتحضير الباكالوريا المغربية.
 
 القواعد:
 1. أجب بنفس لغة الطالب حرفياً: الدارجة المغربية، العربية الفصحى، أو الفرنسية — مهما كتب هو.
 2. كن موجزاً ومفيداً. اشرح خطوة بخطوة بأمثلة سهلة، وكن مشجعاً ومحفزاً.
 3. الموقع (ناجح) يحتوي: كل الشعب (SM، SP، SVT، Eco، Lettres، Arts)، موادها، دروس PDF صافية، تمارين، اختبارات تفاعلية، والامتحانات الوطنية 2022–2026 مع تصحيحاتها الرسمية.
-4. إذا طلب الطالب درساً: اشرحه باختصار ثم أرفق روابط "مكتبة ناجح" الموجودة في السياق تحتها إذا وُجدت.
-5. إذا طلب امتحاناً أو تصحيحاً: أعطِ الروابط من "مكتبة ناجح" أدناه حرفياً كما هي، ورتّبها بحسب المادة والسنة والدورة، وميّز الامتحان من تصحيحه.
-6. استعمل صيغة markdown (عناوين صغيرة، نقاط، روابط [نص](رابط)) لتقريب الإجابة.
-7. لا تخترع ولا تلصق أي رابط غير وارد في مكتبة ناجح أو في معرفتك بموقع ناجح. إذا لم تجد التصحيح المطلوب، قل ذلك واقترح المتاح من الامتحانات الفعلية.
-8. ممنوع تشجيع الغش: نَصح بالتصحيح الذاتي والمراجعة بعد المحاولة.
+4. أساسي جداً: الروابط الفعلية أمامك دائماً في "مكتبة ناجح" أدناه. متى طلب الطالب درساً أو امتحاناً أو تصحيحاً أو امتحانات مادة/شعبة، **أعطه الروابط مباشرة** من المكتبة حرفياً كما هي — لا تحوله أبداً إلى صفحات أو فهارس، ولا تقل أن الروابط "غير مدرجة". استعمل في ردك **كل الروابط** الواردة في المكتبة التي تناسب الطلب (لا تكتفِ برابط أو رابطين) إلا إذا كان الطلب يخص مرجعاً محددا وواحداً.
+5. إذا طلب امتحانات شعبة أو مادة بدون سنة محددة (مثل "امتحانات sm" أو "عندي امتحانات رياضيات"): اعرض القائمة **كاملة وبكل الروابط** مرتبة من الأحدث إلى الأقدم (2026 ثم 2025 ثم 2024...) حتى تشمل كل سنوات المكتبة، واذكر لكل سنة رابط الامتحان ثم رابط تصحيحه إن وُجد، واضعاً [امتحان] أو [تصحيح] بجانب كل رابط.
+6. إذا طلب درساً: اشرحه باختصار ثم أرفق روابط "مكتبة ناجح" الموجودة في السياق تحتها.
+7. استعمل صيغة markdown (عناوين صغيرة، نقاط، روابط [نص](رابط)) لتقريب الإجابة.
+8. لا تخترع ولا تلصق أي رابط غير وارد في مكتبة ناجح أو في معرفتك بموقع ناجح. إذا لم تجد التصحيح المطلوب، قل ذلك واقترح المتاح من الامتحانات الفعلية.
+9. ممنوع تشجيع الغش: نَصح بالتصحيح الذاتي والمراجعة بعد المحاولة.
 
 مكتبة ناجح المتاحة لهذا السؤال:
 ${libraryBlock}`;

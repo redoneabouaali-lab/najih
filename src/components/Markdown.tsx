@@ -1,14 +1,52 @@
+function renderLinks(text: string) {
+  const nodes: (string | React.ReactNode)[] = [];
+  const re = /\[([^\]]+)\]\(([^)\s]+)\)|(https?:\/\/[^\s)\]]+)/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) nodes.push(text.slice(last, m.index));
+    if (m[1] !== undefined) {
+      nodes.push(
+        <a
+          key={m.index}
+          href={m[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[var(--p)] underline break-all"
+        >
+          {renderLinks(m[1])}
+        </a>,
+      );
+    } else {
+      nodes.push(
+        <a
+          key={m.index}
+          href={m[3]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[var(--p)] underline break-all"
+        >
+          {m[3]}
+        </a>,
+      );
+    }
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes.length ? nodes : text;
+}
+
 function inline(text: string) {
   const parts: (string | React.ReactNode)[] = [];
   const re = /\*\*(.+?)\*\*/g;
   let last = 0;
   let m: RegExpExecArray | null;
   while ((m = re.exec(text)) !== null) {
-    if (m.index > last) parts.push(text.slice(last, m.index));
-    parts.push(<strong key={m.index}>{m[1]}</strong>);
+    if (m.index > last) parts.push(...renderLinks(text.slice(last, m.index)));
+    parts.push(<strong key={m.index}>{renderLinks(m[1])}</strong>);
     last = m.index + m[0].length;
   }
-  if (last < text.length) parts.push(text.slice(last));
+  if (last < text.length) parts.push(...renderLinks(text.slice(last)));
   return parts.length ? parts : text;
 }
 
