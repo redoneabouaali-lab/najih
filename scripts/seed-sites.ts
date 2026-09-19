@@ -126,6 +126,18 @@ const id = () => randomUUID();
 
 const existingUrls = new Set((db.prepare("SELECT url FROM Resource").all() as { url: string }[]).map((r) => r.url));
 
+const REMOVED_FILE = path.join(SITES_DIR, "removed-urls.txt");
+const removedUrls = new Set<string>();
+try {
+  for (const line of readFileSync(REMOVED_FILE, "utf8").split(/\r?\n/)) {
+    const u = line.trim();
+    if (u) removedUrls.add(u);
+  }
+  console.log(`[seed] loaded ${removedUrls.size} removed/denylisted urls from ${REMOVED_FILE}`);
+} catch (e) {
+  console.log(`[seed] no removed-urls denylist at ${REMOVED_FILE} (${(e as Error).message})`);
+}
+
 const stmt = {
   branchBySlug: db.prepare("SELECT id FROM Branch WHERE slug = ?"),
   subjectByBranchSlug: db.prepare("SELECT id FROM Subject WHERE branchId = ? AND slug = ?"),
@@ -243,7 +255,7 @@ const seed = db.transaction(() => {
 
     for (const r of site.resources ?? []) {
       const url = (r.url ?? "").trim();
-      if (!url || existingUrls.has(url)) {
+      if (!url || existingUrls.has(url) || removedUrls.has(url)) {
         resourcesSkipped++;
         continue;
       }
