@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { getClientLang, normalizeLang, t, type Lang } from "@/lib/lang";
 import { LangToggle } from "./LangToggle";
 import { ScrollProgress } from "./ScrollProgress";
+import { CommandPalette } from "./CommandPalette";
 
 export function Header() {
   const [lang, setLang] = useState<Lang>("ar");
@@ -67,6 +68,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2.5">
+            <CommandPalette />
             <LangToggle lang={lang} />
             <Link href="/branches" className="btn btn-emerald btn-sm !py-2.5 hidden md:inline-flex">
               {t(lang, "homeStart")} <span aria-hidden>→</span>
