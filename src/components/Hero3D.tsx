@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useState, useSyncExternalStore } from "react";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 const HeroScene = dynamic(() => import("./three/HeroScene"), { ssr: false });
 
@@ -44,7 +45,9 @@ export function Hero3D({ alt }: { alt: string }) {
           className={`absolute inset-0 transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}
           aria-hidden
         >
-          <HeroScene onReady={() => setReady(true)} />
+          <ErrorBoundary>
+            <HeroScene onReady={() => setReady(true)} />
+          </ErrorBoundary>
         </div>
       )}
     </div>
