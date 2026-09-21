@@ -7,6 +7,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Markdown } from "@/components/Markdown";
 import { JsonLd } from "@/components/JsonLd";
+import { AskTutorButton } from "@/components/AskTutorButton";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -116,6 +117,15 @@ export default async function LessonPage({ params }: Props) {
         >
           📄 {t(lang, "navResources")}
         </Link>
+        <AskTutorButton
+          lang={lang}
+          promptAr={`أنا أدرس الآن درس "${lang === "ar" ? chapter.titleAr : chapter.titleFr}". لخص لي هذا الدرس بطريقة مبسطة، نقاط أساسية.`}
+          promptFr={`J'étudie la leçon « ${lang === "ar" ? chapter.titleAr : chapter.titleFr} ». Résume-moi ce cours simplement, points clés.`}
+          contextAr={`الطالب يقرأ درس "${lang === "ar" ? chapter.titleAr : chapter.titleFr}"`}
+          contextFr={`L'étudiant lit la leçon « ${lang === "ar" ? chapter.titleAr : chapter.titleFr} »`}
+          labelAr="لخص لي الدرس"
+          labelFr="Résume-moi ce cours"
+        />
       </div>
 
       <JsonLd

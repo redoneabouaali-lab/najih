@@ -47,8 +47,16 @@ export function Header() {
       <header className={`hdr ${scrolled ? "scrolled" : ""}`}>
         <div className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-8 py-3">
           <Link href="/" className="flex items-center gap-2.5">
-            <span className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-sky-500 text-white text-[15px] shadow-[var(--shadow-md)]">
-              ✦
+            <span className="grid place-items-center w-9 h-9 rounded-xl overflow-hidden shadow-[var(--shadow-md)] bg-white">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/img/logo-sm.png"
+                alt=""
+                width={36}
+                height={36}
+                className="w-full h-full object-cover"
+                loading="eager"
+              />
             </span>
             <span className="text-[17px] font-bold text-[var(--b)] tracking-tight">
               ناجح<span className="text-[var(--acc)]">.bac</span>

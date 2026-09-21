@@ -5,6 +5,7 @@ import Link from "next/link";
 import { t, type Lang } from "@/lib/lang";
 import { shuffle } from "@/lib/shuffle";
 import { db } from "@/lib/db";
+import { openAssistant } from "@/lib/assist";
 
 type Option = { id: string; textAr: string; textFr: string; isCorrect: boolean };
 
@@ -166,6 +167,23 @@ export function Quiz({
       <div className="panel p-6 sm:p-8 text-lg leading-relaxed font-bold text-[var(--b)]">
         {lang === "ar" ? q.promptAr : q.promptFr}
       </div>
+      <button
+        type="button"
+        onClick={() =>
+          openAssistant({
+            prompt:
+              lang === "ar"
+                ? `ما فهمت هذا السؤال، اشرح لي خطوة بخطوة: «${q.promptAr}»`
+                : `Je n'ai pas compris cette question, explique-moi pas à pas : «${q.promptFr}»`,
+            context:
+              lang === "ar" ? "أنا أجيب الآن عن سؤال في اختبار" : "Je réponds à une question de quiz",
+          })
+        }
+        className="inline-flex align-middle items-center gap-2 px-4 py-2 rounded-xl border border-dashed border-[var(--acc)] text-[13px] font-semibold text-[var(--acc)] hover:bg-[var(--acc-soft)] transition-colors"
+      >
+        <span aria-hidden>🦉</span>
+        {lang === "ar" ? "ما فهمت السؤال — أشرحه لي" : "Je n'ai pas compris — explique-moi"}
+      </button>
       <div className="space-y-3">
         {q.options.map((opt, oi) => {
           const text = lang === "ar" ? opt.textAr : opt.textFr;

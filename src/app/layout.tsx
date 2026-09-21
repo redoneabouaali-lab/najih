@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { LangSync } from "@/components/LangSync";
 import { Header } from "@/components/Header";
 import { SWRegister } from "@/components/SWRegister";
+import { AIAssistant } from "@/components/AIAssistant";
 
 const siteName = SITE_NAME;
 
@@ -39,8 +40,13 @@ export const metadata: Metadata = {
     siteName,
     locale: "ar_MA",
     alternateLocale: "fr_FR",
+    images: [{ url: `${SITE_URL}/img/logo.png`, width: 1024, height: 1024, alt: siteName }],
   },
   twitter: { card: "summary_large_image" },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/icon-192.png",
+  },
   robots: {
     index: true,
     follow: true,
@@ -98,6 +104,7 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col">
         <LangSync lang={lang} />
         <SWRegister />
+        <AIAssistant lang={lang} />
         <div className="scroll-progress" aria-hidden="true" />
         <Header />
         <main className="flex-1">{children}</main>

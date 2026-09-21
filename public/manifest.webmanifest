@@ -1,7 +1,7 @@
 {
-  "name": "ناجح | Najih",
-  "short_name": "Najih",
-  "description": "Préparation gratuite au Bac Maroc — quiz, examens nationaux, tuteur IA",
+  "name": "ناجح | Najih — Préparation Bac Maroc",
+  "short_name": "ناجح",
+  "description": "Préparation gratuite au Bac Maroc : quiz, examens nationaux, tuteur IA",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8fafc",
