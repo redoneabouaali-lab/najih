@@ -172,6 +172,22 @@ const dict: Record<string, { ar: string; fr: string }> = {
     ar: "لا توجد دروس لهذه المادة بعد",
     fr: "Aucune leçon pour cette matière pour l'instant",
   },
+  thanksLabel: { ar: "بكل امتنان", fr: "Avec gratitude" },
+  thanksTitle: { ar: "شكراً للمواقع المرجعية", fr: "Merci à nos sources" },
+  thanksSub: {
+    ar: "جمعنا الدروس والامتحانات الوطنية من مواقع تعليمية مغربية موثوقة. هذه المواقع هي المرجع الأصلي — زُرها لمزيد من المحتوى المجاني.",
+    fr: "Nous avons rassemblé les cours et les examens nationaux depuis des sites éducatifs marocains de confiance. Ce sont les sources originales — visite-les pour plus de contenu gratuit.",
+  },
+  thanksVisit: { ar: "زيارة الموقع", fr: "Visiter le site" },
+  thanksFiles: { ar: "مرجع", fr: "réf." },
+  thanksCta: {
+    ar: "لمزيد من الدروس والتمارين والامتحانات، توجّه مباشرة إلى هذه المواقع — فهي المرجع الأصلي والمجاني.",
+    fr: "Pour plus de cours, d'exercices et d'examens, rends-toi directement sur ces sites — ce sont les sources originales et gratuites.",
+  },
+  thanksNote: {
+    ar: "الملكية الفكرية لكل المحتوى المرجعي تبقى لأصحاب هذه المواقع. ناجح يجمعها ويفهرِسها فقط لتسهيل الوصول إليها، ولا يدّعي ملكيتها.",
+    fr: "La propriété intellectuelle de tout le contenu de référence reste aux sites concernés. Najih se contente de l'agréger et de l'indexer pour faciliter l'accès, sans en revendiquer la propriété.",
+  },
 };
 
 export function t(lang: Lang, key: string): string {

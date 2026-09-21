@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
+import { SourceCredits } from "@/components/SourceCredits";
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
@@ -80,6 +81,12 @@ export default async function Home() {
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 via-white to-sky-100" aria-hidden />
+        <div className="aurora aurora-light" aria-hidden>
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
         <div className="blob absolute -top-24 -right-24 w-96 h-96 rounded-full bg-sky-200/60 blur-3xl" aria-hidden />
         <div className="blob absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-indigo-200/70 blur-3xl" style={{ animationDuration: "18s" }} aria-hidden />
 
@@ -264,6 +271,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* THANKS / SOURCE CREDITS */}
+      <SourceCredits lang={lang} />
     </main>
   );
 }

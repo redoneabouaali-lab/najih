@@ -569,6 +569,13 @@ main {
   75%{ transform: translate(-50px,-20px) scale(1.08); }
 }
 
+/* soft aurora for light backgrounds */
+.aurora-light span {
+  mix-blend-mode: multiply;
+  opacity: .22;
+  filter: blur(80px);
+}
+
 /* 3D tilt card (JS adds --rx/--ry) */
 .tilt { transform: perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0); transition: transform .15s var(--ease); will-change: transform; }
 .tilt-acc::before { content:""; position:absolute; inset:0; border-radius:inherit; background:linear-gradient(120deg, rgba(79,70,229,.28), rgba(56,189,248,.18)); opacity:0; transition:opacity .35s; pointer-events:none; }
