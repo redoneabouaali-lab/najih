@@ -78,7 +78,7 @@ const CONFETTI = [
 export function SourceCredits({ lang }: { lang: Lang }) {
   return (
     <section id="sources" className="relative overflow-hidden bg-[#0a0f2e] text-white">
-      <div className="aurora" aria-hidden>
+      <div className="aurora" aria-hidden data-fx="parallax" data-fx-speed="0.15">
         <span />
         <span />
         <span />

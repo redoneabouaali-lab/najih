@@ -10,6 +10,7 @@ import { LangSync } from "@/components/LangSync";
 import { Header } from "@/components/Header";
 import { SWRegister } from "@/components/SWRegister";
 import { AIAssistant } from "@/components/AIAssistant";
+import { Motion } from "@/components/Motion";
 
 const siteName = SITE_NAME;
 
@@ -104,6 +105,7 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col">
         <LangSync lang={lang} />
         <SWRegister />
+        <Motion />
         <AIAssistant lang={lang} />
         <div className="scroll-progress" aria-hidden="true" />
         <Header />

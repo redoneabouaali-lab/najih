@@ -75,7 +75,7 @@ export function Chat({ lang }: { lang: Lang }) {
         <p className="sec-sub mt-3">{t(lang, "chatSub")}</p>
       </div>
 
-      <div className="flex-1 space-y-4 overflow-y-auto mb-4 max-h-[55vh] pr-1">
+      <div className="flex-1 space-y-4 overflow-y-auto mb-4 max-h-[55vh] pr-1" data-lenis-prevent>
         {msgs.length === 0 && (
           <p className="sec-sub text-[var(--l)]">{t(lang, "chatExample")}</p>
         )}

@@ -724,3 +724,17 @@ main {
   .ai-fab { width: 52px; height: 52px; border-radius: 18px; inset-inline-end: 14px; bottom: 14px; }
   .ai-panel { inset-inline-end: 10px; bottom: 78px; width: calc(100vw - 20px); height: calc(100vh - 100px); border-radius: 18px; }
 }
+
+/* ============ LENIS SMOOTH SCROLL ============ */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ============ GSAP SPLIT-TEXT WORDS ============ */
+.fx-word { display: inline-block; will-change: transform, opacity; }
+
+/* soften skew on the velocity-driven marquee */
+.marquee { transform-origin: center; will-change: transform; }
+

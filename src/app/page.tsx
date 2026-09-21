@@ -4,8 +4,8 @@ import { t } from "@/lib/lang";
 import { mkMeta } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
+import { Hero3D } from "@/components/Hero3D";
 import { SourceCredits } from "@/components/SourceCredits";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -81,7 +81,7 @@ export default async function Home() {
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 via-white to-sky-100" aria-hidden />
-        <div className="aurora aurora-light" aria-hidden>
+        <div className="aurora aurora-light" aria-hidden data-fx="parallax" data-fx-speed="0.18">
           <span />
           <span />
           <span />
@@ -99,23 +99,15 @@ export default async function Home() {
             </Reveal>
             <Reveal delay={80}>
               <h1 className="display-1 text-[var(--b)] mt-6 sm:text-6xl text-[42px] leading-[1.05]">
-                {lang === "ar" ? (
-                  <>
-                    تعلّم، تمرّن،
-                    <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500 txt-shimmer">
-                      ننجح في الباك.
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    Passe ton
-                    <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500">
-                      #Bac, serein.
-                    </span>
-                  </>
-                )}
+                <span className="block" data-fx="split">
+                  {lang === "ar" ? "تعلّم، تمرّن،" : "Passe ton"}
+                </span>
+                <span
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500 txt-shimmer"
+                  data-fx="rise"
+                >
+                  {lang === "ar" ? "ننجح في الباك." : "#Bac, serein."}
+                </span>
               </h1>
             </Reveal>
             <Reveal delay={160}>
@@ -134,16 +126,8 @@ export default async function Home() {
           </div>
 
           <Reveal delay={200} className="relative">
-            <div className="float relative rounded-[28px] overflow-hidden border-[6px] border-white shadow-[0_24px_60px_-20px_rgba(79,70,229,0.4)]">
-              <Image
-                src="/images/hero-najih.webp"
-                alt={lang === "ar" ? "طلاب ناجح يدرسون" : "Élèves Najih qui révisent"}
-                width={1600}
-                height={900}
-                priority
-                sizes="(max-width:1024px) 100vw, 640px"
-                className="w-full h-auto object-cover"
-              />
+            <div className="float">
+              <Hero3D alt={lang === "ar" ? "طلاب ناجح يدرسون" : "Élèves Najih qui révisent"} />
             </div>
             <div className="float-sm absolute -bottom-5 left-6 sm:left-10 rounded-2xl bg-white border border-[var(--p)] shadow-[var(--shadow-md)] px-5 py-3 flex items-center gap-3" style={{ animationDelay: "0.6s" }}>
               <span className="glow-dot w-2.5 h-2.5 bg-gradient-to-br from-indigo-500 to-sky-400" />
@@ -186,16 +170,16 @@ export default async function Home() {
       <section className="max-w-6xl mx-auto px-4 sm:px-8 pb-12">
         <div className="stats">
           <Reveal>
-            <div className="stat"><div className="stat-num">{branches.length}</div><div className="stat-label">{t(lang, "navBranches")}</div></div>
+            <div className="stat"><div className="stat-num" data-fx="counter" data-to={branches.length}>{branches.length}</div><div className="stat-label">{t(lang, "navBranches")}</div></div>
           </Reveal>
           <Reveal delay={60}>
-            <div className="stat"><div className="stat-num">{totalLessons}</div><div className="stat-label">{t(lang, "lessons")}</div></div>
+            <div className="stat"><div className="stat-num" data-fx="counter" data-to={totalLessons}>{totalLessons}</div><div className="stat-label">{t(lang, "lessons")}</div></div>
           </Reveal>
           <Reveal delay={120}>
-            <div className="stat"><div className="stat-num">{totalQuestions}</div><div className="stat-label">{t(lang, "questions")}</div></div>
+            <div className="stat"><div className="stat-num" data-fx="counter" data-to={totalQuestions}>{totalQuestions}</div><div className="stat-label">{t(lang, "questions")}</div></div>
           </Reveal>
           <Reveal delay={180}>
-            <div className="stat"><div className="stat-num">{totalResources}</div><div className="stat-label">{t(lang, "navResources")}</div></div>
+            <div className="stat"><div className="stat-num" data-fx="counter" data-to={totalResources}>{totalResources}</div><div className="stat-label">{t(lang, "navResources")}</div></div>
           </Reveal>
         </div>
       </section>
