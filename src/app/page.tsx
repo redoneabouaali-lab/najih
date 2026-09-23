@@ -112,37 +112,29 @@ export default async function Home() {
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-8 py-14 sm:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <Reveal>
-              <span className="label">
-                📌 {lang === "ar" ? "برنامج الباكالوريا الوطني" : "Programme national du Bac"}
+            <span className="label">
+              📌 {lang === "ar" ? "برنامج الباكالوريا الوطني" : "Programme national du Bac"}
+            </span>
+            <h1 className="display-1 text-[var(--b)] mt-6 sm:text-6xl text-[42px] leading-[1.05]">
+              <span className="block" data-fx="split">
+                {lang === "ar" ? "تعلّم، تمرّن،" : "Passe ton"}
               </span>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1 className="display-1 text-[var(--b)] mt-6 sm:text-6xl text-[42px] leading-[1.05]">
-                <span className="block" data-fx="split">
-                  {lang === "ar" ? "تعلّم، تمرّن،" : "Passe ton"}
-                </span>
-                <span
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500 txt-shimmer"
-                  data-fx="rise"
-                >
-                  {lang === "ar" ? "ننجح في الباك." : "#Bac, serein."}
-                </span>
-              </h1>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="sec-sub mt-6">{t(lang, "homeHeroSub")}</p>
-            </Reveal>
-            <Reveal delay={240}>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link href="/branches" className="btn">
-                  {t(lang, "homeStart")} <span aria-hidden>→</span>
-                </Link>
-                <Link href="/resources" className="btn btn-ghost">
-                  📄 {t(lang, "navResources")}
-                </Link>
-              </div>
-            </Reveal>
+              <span
+                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500 txt-shimmer"
+                data-fx="rise"
+              >
+                {lang === "ar" ? "ننجح في الباك." : "#Bac, serein."}
+              </span>
+            </h1>
+            <p className="sec-sub mt-6">{t(lang, "homeHeroSub")}</p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link href="/branches" className="btn">
+                {t(lang, "homeStart")} <span aria-hidden>→</span>
+              </Link>
+              <Link href="/resources" className="btn btn-ghost">
+                📄 {t(lang, "navResources")}
+              </Link>
+            </div>
           </div>
 
           <Reveal delay={200} className="relative">
