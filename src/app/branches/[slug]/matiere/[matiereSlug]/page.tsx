@@ -1,9 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
-import { mkMeta } from "@/lib/seo";
+import { mkMeta, SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { JsonLd } from "@/components/JsonLd";
 
 type Props = { params: Promise<{ slug: string; matiereSlug: string }> };
 
@@ -83,6 +84,27 @@ export default async function MatierePage({ params }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: t(lang, "navHome"), item: SITE_URL },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: lang === "ar" ? branch.nameAr : branch.nameFr,
+              item: `${SITE_URL}/branches/${slug}`,
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: lang === "ar" ? subject.nameAr : subject.nameFr,
+              item: `${SITE_URL}/branches/${slug}/matiere/${matiereSlug}`,
+            },
+          ],
+        }}
+      />
       <div className="crumb mb-8">
         <Link href="/">{t(lang, "navHome")}</Link>
         <span className="mx-2 text-[var(--p)]">/</span>

@@ -33,6 +33,32 @@ const dict: Record<string, { ar: string; fr: string }> = {
   },
   homeStart: { ar: "ابدأ الآن", fr: "C'est parti" },
   homeBrowse: { ar: "تصفح الشعب", fr: "Voir les filières" },
+  faqTitle: { ar: "أسئلة شائعة", fr: "Questions fréquentes" },
+  faq1q: { ar: "هل ناجح مجاني؟", fr: "Est-ce que Najih est gratuit ?" },
+  faq1a: {
+    ar: "نعم، ناجح مجاني 100% بدون أي اشتراك، ويبقى كذلك دائماً.",
+    fr: "Oui, Najih est gratuit à 100 %, sans abonnement, et le restera.",
+  },
+  faq2q: { ar: "هل يعمل بدون إنترنت؟", fr: "Fonctionne-t-il hors-ligne ?" },
+  faq2a: {
+    ar: "نعم، بعد تثبيت التطبيق من المتصفح يمكنك مراجعة الدروس واجتياز الاختبارات بدون اتصال.",
+    fr: "Oui, après l'installation de l'app dans le navigateur, tu révises et fais tes quiz même sans connexion.",
+  },
+  faq3q: { ar: "ما هي الشعب المتوفرة؟", fr: "Quelles filières sont disponibles ?" },
+  faq3a: {
+    ar: "نغطي جميع شعب الباكالوريا المغربية: العلوم الرياضية، الفيزياء والكيمياء، علوم الحياة والأرض، الآداب، الاقتصاد والفنون.",
+    fr: "Toutes les filières du Bac marocain : sciences maths, physique-chimie, SVT, lettres, économie et arts.",
+  },
+  faq4q: { ar: "هل الأسئلة من الامتحانات الوطنية؟", fr: "Les questions viennent des examens nationaux ?" },
+  faq4a: {
+    ar: "نعم، بنك الأسئلة مبنى على الامتحانات الوطنية لسنوات سابقة ومصنف حسب الشعبة والمادة والدرس.",
+    fr: "Oui, la banque de questions est issue des examens nationaux des années passées, classée par filière, matière et leçon.",
+  },
+  faq5q: { ar: "كيف يساعدني المرشد الذكي؟", fr: "Comment le tuteur IA peut-il m'aider ?" },
+  faq5a: {
+    ar: "المرشد الذكي يشرح لك أي سؤال خطوة بخطوة بالعربية أو الفرنسية، ويقدم أمثلة وتلميحات للتفوق في الباكالوريا.",
+    fr: "Le tuteur IA t'explique n'importe quelle question pas à pas en arabe ou en français, avec des exemples et des astuces.",
+  },
   homeFeat1t: { ar: "مجاني 100%", fr: "Gratuit 100%" },
   homeFeat1d: { ar: "بدون دفع، بدون حدود", fr: "Sans payement, sans limites" },
   homeFeat2t: { ar: "يعمل بدون إنترنت", fr: "Fonctionne hors-ligne" },

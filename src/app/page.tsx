@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Hero3D } from "@/components/Hero3D";
 import { SourceCredits } from "@/components/SourceCredits";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
@@ -76,8 +77,27 @@ export default async function Home() {
 
   const marqueeWords = ["دروس", "تمارين", "امتحانات", "اختبارات", "مرشد ذكي", "باكالوريا"];
 
+  const faqs: { q: string; a: string }[] = [
+    { q: t(lang, "faq1q"), a: t(lang, "faq1a") },
+    { q: t(lang, "faq2q"), a: t(lang, "faq2a") },
+    { q: t(lang, "faq3q"), a: t(lang, "faq3a") },
+    { q: t(lang, "faq4q"), a: t(lang, "faq4a") },
+    { q: t(lang, "faq5q"), a: t(lang, "faq5a") },
+  ];
+
   return (
     <main>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }}
+      />
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 via-white to-sky-100" aria-hidden />
@@ -253,6 +273,31 @@ export default async function Home() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16">
+        <Reveal>
+          <div className="mb-8 text-center">
+            <span className="label mb-3">{t(lang, "navAi")}</span>
+            <h2 className="sec-title text-[var(--b)] mt-2">{t(lang, "faqTitle")}</h2>
+          </div>
+        </Reveal>
+        <div className="max-w-3xl mx-auto flex flex-col gap-3">
+          {faqs.map((f, i) => (
+            <Reveal key={i} delay={i * 60}>
+              <details className="panel panel-hover p-5 group" open={i === 0}>
+                <summary className="flex items-center justify-between gap-4 font-bold text-[var(--b)] cursor-pointer list-none">
+                  {f.q}
+                  <span className="text-[var(--acc)] transition-transform group-open:rotate-45" aria-hidden>
+                    +
+                  </span>
+                </summary>
+                <p className="text-sm text-[var(--l)] mt-3 leading-6">{f.a}</p>
+              </details>
+            </Reveal>
+          ))}
         </div>
       </section>
 

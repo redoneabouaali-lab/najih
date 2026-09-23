@@ -68,8 +68,52 @@ export default async function LessonPage({ params }: Props) {
     take: 8,
   });
 
+  const title = lang === "ar" ? chapter.titleAr : chapter.titleFr;
+  const subjectName = lang === "ar" ? chapter.subject.nameAr : chapter.subject.nameFr;
+  const branchName = lang === "ar" ? chapter.subject.branch.nameAr : chapter.subject.branch.nameFr;
+  const lessonUrl = `${SITE_URL}/lesson/${chapter.id}`;
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-8 py-10">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: t(lang, "navHome"), item: SITE_URL },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: branchName,
+                  item: `${SITE_URL}/branches/${branchSlug}`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: subjectName,
+                  item: `${SITE_URL}/branches/${branchSlug}/matiere/${chapter.subject.slug}`,
+                },
+                { "@type": "ListItem", position: 4, name: title, item: lessonUrl },
+              ],
+            },
+            {
+              "@type": "LearningResource",
+              headline: title,
+              name: title,
+              inLanguage: lang === "ar" ? "ar" : "fr",
+              about: subjectName,
+              isAccessibleForFree: true,
+              mainEntityOfPage: lessonUrl,
+              url: lessonUrl,
+              educationalLevel: "baccalauréat (Maroc)",
+              author: { "@type": "Organization", name: "Najih", url: SITE_URL },
+              publisher: { "@type": "Organization", name: "Najih", url: SITE_URL },
+            },
+          ],
+        }}
+      />
       <div className="crumb mb-8">
         <Link href="/">{t(lang, "navHome")}</Link>
         <span className="mx-2 text-[var(--p)]">/</span>

@@ -2,8 +2,10 @@ import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { mkMeta } from "@/lib/seo";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { t } from "@/lib/lang";
 import { BranchMatierePicker } from "@/components/BranchMatierePicker";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE_URL } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -68,13 +70,37 @@ export default async function BranchPage({ params }: Props) {
     questionCount: sub.chapters.reduce((s, c) => s + c._count.questions, 0),
   }));
 
+  const branchName = lang === "ar" ? branch.nameAr : branch.nameFr;
+
   return (
-    <BranchMatierePicker
-      lang={lang}
-      branchSlug={slug}
-      branchNameAr={branch.nameAr}
-      branchNameFr={branch.nameFr}
-      matieres={matieres}
-    />
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: t(lang, "navHome"),
+              item: SITE_URL,
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: branchName,
+              item: `${SITE_URL}/branches/${slug}`,
+            },
+          ],
+        }}
+      />
+      <BranchMatierePicker
+        lang={lang}
+        branchSlug={slug}
+        branchNameAr={branch.nameAr}
+        branchNameFr={branch.nameFr}
+        matieres={matieres}
+      />
+    </>
   );
 }
