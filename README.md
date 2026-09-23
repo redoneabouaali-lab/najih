@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ناجح | Najih 🎓
 
-## Getting Started
+**Préparation gratuite au Bac Maroc — 100% gratuit · hors-ligne · avec un tuteur IA**
 
-First, run the development server:
+> 🌐 **Live : [https://najih.abouaaliahmed.com](https://najih.abouaaliahmed.com)**
+
+Najih est une plateforme de révision gratuite pour le Baccalauréat marocain : une banque d'examens nationaux classée par filière et matière, des quiz interactifs corrigés instantanément, et un tuteur IA qui explique n'importe quelle question en arabe ou en français.
+
+باكالوريا المغربية في متناول يدك: امتحانات وطنية سابقة مصنفة حسب الشعبة والمادة، اختبارات تفاعلية بالتصحيح الفوري، ومرشد ذكي يشرح لك أي سؤال بالعربية أو الفرنسية — مجاناً 100% وبدون إنترنت.
+
+## ✨ Fonctionnalités / المزايا
+
+- 📚 **Examens nationaux** classés par filière (Sciences Maths, PC, SVT, Lettres, Éco, Arts)
+- 🎯 **Quiz interactifs** avec correction instantanée
+- 🤖 **Tuteur IA / مرشد ذكي** — explique, donne des exemples et des astuces
+- 📴 **Hors-ligne** — fonctionne via PWA après installation
+- 💯 **Gratuit** — sans compte, sans abonnement
+- 🌍 **AR / FR** — double langue
+
+## 🛠️ Stack technique
+
+- **Next.js 16** (App Router, Turbopack) · React 19
+- **Prisma + SQLite** (better-sqlite3)
+- **Tailwind CSS 4**
+- **GSAP + Lenis + Three.js** (@react-three/fiber) pour l'animation
+- **Vercel AI / Nvidia API** pour le tuteur IA
+
+## 🚀 Lancer en local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrez [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🙏 Sources
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Les contenus proviennent de ressources éducatives publiques marocaines (madarisy.com, moutamadris.ma, dyrassa.ma, doross.ma…) — voir la section **Sources / Credits** en bas de la page d'accueil.
 
-## Learn More
+## 📫 Contact & participation
 
-To learn more about Next.js, take a look at the following resources:
+Le projet est ouvert : signalez un bug, proposez une idée ou contribuez via une *issue* ou une *pull request*.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+⭐ Si ce projet vous aide, mettez une ⭐ et partagez-le — ça aide un élève de plus. 💙
