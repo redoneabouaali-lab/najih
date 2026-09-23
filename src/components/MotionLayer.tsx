@@ -59,7 +59,7 @@ export function MotionLayer() {
       });
 
       gsap.utils.toArray<HTMLElement>("[data-fx='split']").forEach((el) => {
-        const split = SplitText.create(el, { type: "words", wordsClass: "fx-word" });
+        const split = SplitText.create(el, { type: "words", wordsClass: "fx-word", aria: "none" });
         splits.push(split);
         gsap.from(split.words, {
           yPercent: 70,

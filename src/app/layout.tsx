@@ -12,6 +12,7 @@ import { Header } from "@/components/Header";
 import { SWRegister } from "@/components/SWRegister";
 import { AIAssistant } from "@/components/AIAssistant";
 import { Motion } from "@/components/Motion";
+import { WebMCP } from "@/components/WebMCP";
 import { GaInit } from "@/components/GaInit";
 import { Analytics } from "@/components/Analytics";
 
@@ -117,6 +118,10 @@ export default async function RootLayout({
           }}
         />
         {gaId ? <GaInit id={gaId} /> : null}
+        <link
+          rel="ai-catalog"
+          href={`${SITE_URL}/.well-known/ai-catalog.json`}
+        />
       </head>
       <body
         className={`min-h-full flex flex-col ${spaceGrotesk.variable} ${ibmPlexSansArabic.variable}`}
@@ -125,6 +130,7 @@ export default async function RootLayout({
         <LangSync lang={lang} />
         <SWRegister />
         <Motion />
+        <WebMCP />
         <AIAssistant lang={lang} />
         <div className="scroll-progress" aria-hidden="true" />
         <Header />

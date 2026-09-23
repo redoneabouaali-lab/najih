@@ -1,0 +1,28 @@
+# Najih — ناجح
+
+> Najih (ناجح) is a free Moroccan Baccalaureate (الباكالوريا) preparation platform. It covers all branches (SM, SP, SVT, Eco, Lettres, Arts), interactive lessons, exercises, quick-tip PDFs and the official national exams 2022–2026 with their corrections. The site is fully bilingual Arabic/French and includes a free AI tutor that explains lessons, quizzes and national exams step by step.
+
+## Branches (الشعب)
+- [Science Mathématiques (SM)](https://najih.abouaaliahmed.com/branches/sm): lessons, quizzes and national exams for the Math branch.
+- [Sciences Physiques (SP)](https://najih.abouaaliahmed.com/branches/sp): lessons, quizzes and national exams for the Physics branch.
+- [Sciences de la Vie et de la Terre (SVT)](https://najih.abouaaliahmed.com/branches/svt): lessons, quizzes and national exams for the Biology branch.
+- [Économie et Gestion (Eco)](https://najih.abouaaliahmed.com/branches/eco): lessons, quizzes and national exams for the Economics branch.
+- [Lettres et Sciences Humaines](https://najih.abouaaliahmed.com/branches/lettres): lessons and exams for the Humanities branch.
+- [Arts Appliqués](https://najih.abouaaliahmed.com/branches/arts): lessons and exams for the Applied Arts branch.
+
+## Matière pages (المواد)
+- [Mathématiques — cours and exercises](https://najih.abouaaliahmed.com/branches/sm/matiere/mathematiques)
+- [Physique-Chimie — cours and exercises](https://najih.abouaaliahmed.com/branches/sp/matiere/physique-chimie)
+- [SVT — cours and exercises](https://najih.abouaaliahmed.com/branches/svt/matiere/svt)
+
+## Resources & examens (الموارد والامتحانات)
+- [All resources (PDF lessons, exercises and exams per branch)](https://najih.abouaaliahmed.com/resources)
+- [SVT resources & national exams](https://najih.abouaaliahmed.com/resources/svt)
+- [Physics-Chimie resources & national exams](https://najih.abouaaliahmed.com/resources/sp)
+- [National exams — Math branch](https://najih.abouaaliahmed.com/branches/sm/matiere/mathematiques/examens)
+- [National exams — Physics branch](https://najih.abouaaliahmed.com/branches/sp/matiere/physique-chimie/examens)
+- [National exams — SVT branch](https://najih.abouaaliahmed.com/branches/svt/matiere/svt/examens)
+
+## AI tutor (المرشد الذكي)
+- [Chat with the Najih AI tutor](/ai): explains lessons, solves national exam exercises step by step, always in Arabic/Darija or French, with worked examples.
+- [Sitemap](https://najih.abouaaliahmed.com/sitemap.xml): full list of indexed pages (3,000+).

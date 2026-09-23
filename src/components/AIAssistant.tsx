@@ -244,6 +244,11 @@ export function AIAssistant({ lang }: { lang: Lang }) {
               </div>
             )}
             <form
+              {...{
+                toolname: "ask_tutor",
+                tooldescription:
+                  "Ask the Najih AI tutor (المرشد الذكي) a question about the Moroccan Bac: explain a lesson, a quiz question or a national exam exercise with worked examples, in Arabic/Darija or French.",
+              }}
               onSubmit={(e) => {
                 e.preventDefault();
                 void sendMessage(input);
@@ -252,10 +257,15 @@ export function AIAssistant({ lang }: { lang: Lang }) {
             >
               <input
                 ref={inputRef}
+                name="message"
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={t(lang, "chatPlaceholder")}
+                {...{
+                  toolparamdescription:
+                    "The student's question about the Baccalaureate (lessons, subjects, exercises, national exams), in Arabic, Darija or French.",
+                }}
                 className="flex-1 min-w-0 p-3.5 border border-[var(--p)] bg-[var(--of)] text-[var(--b)] text-[14px] rounded-xl focus:outline-none focus:border-[var(--acc)] transition-colors"
                 dir={lang === "ar" ? "rtl" : "ltr"}
               />

@@ -1,0 +1,34 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Najih — Moroccan Bac preparation (ناجح)"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:najih.abouaaliahmed.com:api:chat",
+      "displayName": "Najih AI tutor chat API",
+      "type": "application/openapi+json",
+      "mediaType": "application/openapi+json",
+      "url": "https://najih.abouaaliahmed.com/openapi.json",
+      "description": "OpenAPI description of the Najih AI tutor (/api/chat) and site search (/api/search) endpoints. The tutor explains lessons, quizzes and national exam exercises step by step in Arabic/Darija or French, with worked examples.",
+      "representativeQueries": [
+        "explain the current lesson with an example",
+        "solve a national exam exercise in math with a worked example",
+        "search for SVT resources and national exams"
+      ]
+    },
+    {
+      "identifier": "urn:air:najih.abouaaliahmed.com:docs:llms",
+      "displayName": "Najih site catalog (llms.txt)",
+      "type": "text/markdown",
+      "mediaType": "text/markdown",
+      "url": "https://najih.abouaaliahmed.com/llms.txt",
+      "description": "Markdown catalog of the whole Najih platform: branches, subjects, resources, national exams and the AI tutor, with direct links for LLM crawlers.",
+      "representativeQueries": [
+        "list the high school branches covered by Najih",
+        "where can a student find Moroccan national exams with corrections",
+        "how does the Najih AI tutor help bac students"
+      ]
+    }
+  ]
+}
