@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Space_Grotesk, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
@@ -15,6 +16,20 @@ import { GaInit } from "@/components/GaInit";
 import { Analytics } from "@/components/Analytics";
 
 const siteName = SITE_NAME;
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-space-grotesk",
+});
+
+const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-ibm-plex-arabic",
+});
 
 const gaId =
   (process.env.NAJIH_GA_ID || process.env.NEXT_PUBLIC_GA_ID || "").trim() ||
@@ -79,16 +94,6 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-          media="print"
-          onLoad={(e) => {
-            e.currentTarget.media = "all";
-          }}
-        />
         <JsonLd
           data={{
             "@context": "https://schema.org",
@@ -113,7 +118,9 @@ export default async function RootLayout({
         />
         {gaId ? <GaInit id={gaId} /> : null}
       </head>
-      <body className="min-h-full flex flex-col">
+      <body
+        className={`min-h-full flex flex-col ${spaceGrotesk.variable} ${ibmPlexSansArabic.variable}`}
+      >
         {gaId ? <Analytics id={gaId} /> : null}
         <LangSync lang={lang} />
         <SWRegister />
