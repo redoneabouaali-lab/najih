@@ -11,8 +11,14 @@ import { Header } from "@/components/Header";
 import { SWRegister } from "@/components/SWRegister";
 import { AIAssistant } from "@/components/AIAssistant";
 import { Motion } from "@/components/Motion";
+import { GaInit } from "@/components/GaInit";
+import { Analytics } from "@/components/Analytics";
 
 const siteName = SITE_NAME;
+
+const gaId =
+  (process.env.NAJIH_GA_ID || process.env.NEXT_PUBLIC_GA_ID || "").trim() ||
+  null;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -101,8 +107,10 @@ export default async function RootLayout({
             ],
           }}
         />
+        {gaId ? <GaInit id={gaId} /> : null}
       </head>
       <body className="min-h-full flex flex-col">
+        {gaId ? <Analytics id={gaId} /> : null}
         <LangSync lang={lang} />
         <SWRegister />
         <Motion />
