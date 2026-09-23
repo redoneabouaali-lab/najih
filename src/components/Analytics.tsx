@@ -28,7 +28,7 @@ export function Analytics({ id }: { id: string | null }) {
   return (
     <Script
       src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`}
-      strategy="afterInteractive"
+      strategy="lazyOnload"
     />
   );
 }
