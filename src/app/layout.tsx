@@ -140,7 +140,7 @@ export default async function RootLayout({
               <ul className="flex flex-col gap-1.5">
                 {branches.map((b) => (
                   <li key={b.slug}>
-                    <Link href={`/branches/${b.slug}`} className="hover:text-[var(--acc)]">
+                    <Link href={`/branches/${b.slug}`} className="text-[var(--p)] underline underline-offset-2 hover:opacity-75">
                       {lang === "ar" ? b.nameAr : b.nameFr}
                     </Link>
                   </li>
@@ -150,9 +150,9 @@ export default async function RootLayout({
             <nav aria-label="Footer 2">
               <div className="font-bold text-[var(--b)] mb-2">{t(lang, "navHome")}</div>
               <ul className="flex flex-col gap-1.5">
-                <li><Link href="/resources" className="hover:text-[var(--acc)]">{t(lang, "navResources")}</Link></li>
-                <li><Link href="/ai" className="hover:text-[var(--acc)]">{t(lang, "navAi")}</Link></li>
-                <li><Link href="/results" className="hover:text-[var(--acc)]">{t(lang, "navProgress")}</Link></li>
+                <li><Link href="/resources" className="text-[var(--p)] underline underline-offset-2 hover:opacity-75">{t(lang, "navResources")}</Link></li>
+                <li><Link href="/ai" className="text-[var(--p)] underline underline-offset-2 hover:opacity-75">{t(lang, "navAi")}</Link></li>
+                <li><Link href="/results" className="text-[var(--p)] underline underline-offset-2 hover:opacity-75">{t(lang, "navProgress")}</Link></li>
               </ul>
             </nav>
           </div>
