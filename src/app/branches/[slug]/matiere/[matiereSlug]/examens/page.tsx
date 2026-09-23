@@ -4,6 +4,7 @@ import { t } from "@/lib/lang";
 import { mkMeta } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PageContext } from "@/components/PageContext";
 
 type Props = { params: Promise<{ slug: string; matiereSlug: string }> };
 
@@ -86,8 +87,11 @@ export default async function MatiereExamensPage({ params }: Props) {
   }
   const years = [...byYear.keys()].sort((a, b) => (b ?? 0) - (a ?? 0));
 
+  const assistContext = `الطالب يتصفح صفحة الامتحانات الوطنية لمادة ${lang === "ar" ? subject.nameAr : subject.nameFr} (شعبة ${lang === "ar" ? branch.nameAr : branch.nameFr}) لفتح ملفات PDF لأسئلة الامتحانات وتصحيحاتها (${years.length} سنوات، ${exams.length} ملف). لا يمكنك رؤية محتوى ملف الـ PDF المفتوح، لذلك اشرح للطالب الطريقة المنهجية لحل موضوع في هذا الامتحان، واعرض مثالاً محلولاً كاملاً بأسلوب "الدورة العادية"، ثم مثالاً إضافياً مختلفاً، ونصيحة للتدرب على التصحيح.`;
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10">
+      <PageContext context={assistContext} />
       <div className="crumb mb-8">
         <Link href="/">{t(lang, "navHome")}</Link>
         <span className="mx-2 text-[var(--p)]">/</span>

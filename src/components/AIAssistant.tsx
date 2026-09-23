@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { t, type Lang } from "@/lib/lang";
 import { renderMd } from "@/lib/md";
-import type { AssistOpenDetail } from "@/lib/assist";
+import { subscribePageContext, type AssistOpenDetail } from "@/lib/assist";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -56,6 +56,12 @@ export function AIAssistant({ lang }: { lang: Lang }) {
   useEffect(() => {
     msgsRef.current = msgs;
   }, [msgs]);
+
+  useEffect(() => {
+    return subscribePageContext((c) => {
+      contextRef.current = c ?? "";
+    });
+  }, []);
 
   const seedWelcome = useCallback(
     (withOpen: boolean) => {

@@ -4,6 +4,7 @@ import { t } from "@/lib/lang";
 import { mkMeta } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PageContext } from "@/components/PageContext";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -115,6 +116,9 @@ export default async function BranchResourcesPage({ params }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10">
+      <PageContext
+        context={`الطالب يبحث في صفحة موارد شعبة ${lang === "ar" ? branch.nameAr : branch.nameFr}: دروس PDF (${lessons.length})، تمارين (${exercises.length}) وامتحانات وطنية (${exams.length}) مع تصحيحاتها. الروابط في هذه الصفحة تفتح ملفات PDF. عندما يطلب الطالب مساعدة، اشرح له موضوع المادة وقدم مثالاً محلولاً وبسّط له المفاهيم كمعلم، واذكر له أن الملفات موجودة في السولار أعلاه.`}
+      />
       <div className="crumb mb-8 flex items-center gap-1">
         <Link href="/">{t(lang, "navHome")}</Link>
         <span className="mx-2 text-[var(--p)]">/</span>

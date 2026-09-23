@@ -6,6 +6,7 @@ import { t } from "@/lib/lang";
 import { BranchMatierePicker } from "@/components/BranchMatierePicker";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/seo";
+import { PageContext } from "@/components/PageContext";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -74,6 +75,9 @@ export default async function BranchPage({ params }: Props) {
 
   return (
     <>
+      <PageContext
+        context={`الطالب يختار المواد لشعبة ${branchName}: ${matieres.map((m) => `${m.nameAr} (${m.chapterCount} دروس)`).join("، ")}. كن معلمه: ساعد الطالب في فهم منهج المادة، واشرح ببساطة أي مفهوم مع مثال محلول وإضافة مثال ثاني مختلف.`}
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",

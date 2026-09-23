@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { shuffle } from "@/lib/shuffle";
 import Link from "next/link";
 import { Quiz } from "@/components/Quiz";
+import { PageContext } from "@/components/PageContext";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -35,7 +36,9 @@ export default async function QuizPage({ params }: Props) {
   const chapter = await prisma.chapter.findUnique({
     where: { id },
     include: {
-      subject: { select: { branch: { select: { slug: true } } } },
+      subject: {
+        select: { branch: { select: { slug: true } }, nameAr: true, nameFr: true },
+      },
       questions: {
         include: {
           options: {
@@ -94,6 +97,13 @@ export default async function QuizPage({ params }: Props) {
 
   return (
     <div>
+      <PageContext
+        context={`الطالب يمارس اختباراً تفاعلياً في درس «${lang === "ar" ? chapter.titleAr : chapter.titleFr}» (مادة ${lang === "ar" ? chapter.subject.nameAr : chapter.subject.nameFr}) بأسئلة من الامتحانات الوطنية المغربية، مع تصحيح فوري وشرح لكل إجابة. عدد الأسئلة: ${questions.length}.${
+          questions[0]
+            ? `\nمثال سؤال على الشاشة الآن: «${lang === "ar" ? questions[0].promptAr : questions[0].promptFr}»`
+            : ""
+        }`}
+      />
       <div className="max-w-2xl mx-auto px-6 pt-6 text-sm">
         <Link
           href={`/branches/${chapter.subject.branch.slug}`}

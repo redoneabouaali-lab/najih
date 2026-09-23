@@ -4,6 +4,7 @@ import { t } from "@/lib/lang";
 import { mkMeta } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PageContext } from "@/components/PageContext";
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
@@ -42,6 +43,9 @@ export default async function ResourcesPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10">
+      <PageContext
+        context="الطالب يستكشف صفحة الموارد التي تضم امتحانات وطنية وسلاسل تمارين ودروس PDF لجميع الشعب المغربية (العلوم، التقني، الاقتصاد...). عندما يطلب مساعدة، اقترح له الشعبة الأنسب وسهّل عليه الأمر كمدرس وبيّن له مثالاً."
+      />
       <div className="crumb mb-8">
         <Link href="/">{t(lang, "navHome")}</Link>
         <span className="mx-2 text-[var(--p)]">/</span>

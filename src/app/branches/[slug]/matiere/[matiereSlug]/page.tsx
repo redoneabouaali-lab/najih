@@ -5,6 +5,7 @@ import { mkMeta, SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
+import { PageContext } from "@/components/PageContext";
 
 type Props = { params: Promise<{ slug: string; matiereSlug: string }> };
 
@@ -82,8 +83,16 @@ export default async function MatierePage({ params }: Props) {
   const lessons = resources.filter((r) => r.kind === "lesson");
   const examCount = resources.filter((r) => r.kind === "exam").length;
 
+  const lessonCount = subject.chapters.reduce(
+    (n, c) => n + (c.lesson ? 1 : 0),
+    0,
+  );
+
+  const assistContext = `الطالب يتابع دروس مادة ${lang === "ar" ? subject.nameAr : subject.nameFr} لشعبة ${lang === "ar" ? branch.nameAr : branch.nameFr}. تحتوي الصفحة على ${subject.chapters.length} دروس، ${lessonCount} ملف درس PDF، ${exercises.length} تمارين و${examCount} امتحاناً. كن معلمه: عندما يسأل عن مفهوم من هذه المادة، اشرحه ببساطة بالعربية المغربية مع مثال تطبيقي محلول ثم مثال إضافي مختلف.`;
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10">
+      <PageContext context={assistContext} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

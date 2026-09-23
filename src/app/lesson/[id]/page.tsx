@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import { Markdown } from "@/components/Markdown";
 import { JsonLd } from "@/components/JsonLd";
 import { AskTutorButton } from "@/components/AskTutorButton";
+import { PageContext } from "@/components/PageContext";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -73,8 +74,16 @@ export default async function LessonPage({ params }: Props) {
   const branchName = lang === "ar" ? chapter.subject.branch.nameAr : chapter.subject.branch.nameFr;
   const lessonUrl = `${SITE_URL}/lesson/${chapter.id}`;
 
+  const excerpt = (s: string) => {
+    const plain = s.replace(/[`#>*_\[\]!]/g, " ").replace(/\s+/g, " ").trim();
+    return plain.length > 900 ? `${plain.slice(0, 900)}…` : plain;
+  };
+  const assistContext = `الطالب يقرأ الآن درس «${title}» في مادة ${subjectName} (شعبة ${branchName}). محتوى الدرس:
+${excerpt(lessonContent)}`;
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-8 py-10">
+      <PageContext context={assistContext} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
