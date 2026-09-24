@@ -54,6 +54,22 @@ const SUBJ_KEYS: [string, string][] = [
   ["تربية", "tarbia-islamia"], ["فنون", "histoire-arts"], ["arts", "histoire-arts"],
 ];
 
+const SUBJ_ALIASES: Record<string, string[]> = {
+  mathematiques: ["sm", "mathematiques"],
+  "physique-chimie": ["sp", "pc", "physique-chimie"],
+  svt: ["svt"],
+  economie: ["economie", "comptabilite"],
+  comptabilite: ["economie", "comptabilite"],
+  philosophie: ["philo", "philosophie"],
+  arabe: ["arabe"],
+  francais: ["francais"],
+  anglais: ["anglais"],
+  "histoire-geo": ["histoire-geo"],
+  "histoire-arts": ["histoire-arts"],
+  "tarbia-islamia": ["tarbia", "tarbia-islamia"],
+  espagnol: ["espagnol"],
+};
+
 function matchedSubjects(q: string): string[] {
   const set = new Set<string>();
   const lower = q.toLowerCase();
@@ -64,7 +80,23 @@ function matchedSubjects(q: string): string[] {
 }
 
 function normalizeSubjectKey(k: string | null): string {
-  return k === "pc" ? "physique-chimie" : (k ?? "");
+  const map: Record<string, string> = {
+    pc: "physique-chimie",
+    sp: "physique-chimie",
+    sm: "mathematiques",
+    philo: "philosophie",
+    tarbia: "tarbia-islamia",
+  };
+  const v = map[k ?? ""] ?? k ?? "";
+  return v;
+}
+
+function subjectKeyScope(subjects: string[]): string[] {
+  const out = new Set<string>();
+  for (const k of subjects) {
+    for (const a of SUBJ_ALIASES[k] ?? [k]) out.add(a);
+  }
+  return [...out];
 }
 
 function scoreRow(r: Row, q: string, tks: string[], subjects: string[], corrIntent: boolean): number {
@@ -107,6 +139,9 @@ async function lookup(question: string): Promise<Row[]> {
 
   const subjects = matchedSubjects(question);
   if (subjects.includes("physique-chimie")) subjects.push("pc");
+  const subjectKeys = subjectKeyScope(subjects);
+  const subjectScope =
+    subjectKeys.length > 0 ? { subjectKey: { in: subjectKeys } } : null;
   const examIntent = EXAM_RE.test(question);
   const corrIntent = CORR_RE.test(question);
   const lessonIntent = LESSON_RE.test(question);
@@ -114,7 +149,7 @@ async function lookup(question: string): Promise<Row[]> {
   const termWhere = {
     OR: [
       ...tks.map((t) => ({ OR: [{ titleAr: { contains: t } }, { titleFr: { contains: t } }] })),
-      ...subjects.map((k) => ({ subjectKey: k })),
+      ...subjectKeys.map((k) => ({ subjectKey: k })),
     ],
   };
 
@@ -136,7 +171,7 @@ async function lookup(question: string): Promise<Row[]> {
 
   if (examIntent) {
     const exams = await prisma.resource.findMany({
-      where: { AND: [termWhere, { kind: "exam" }] },
+      where: { AND: [{ ...termWhere }, { kind: "exam" }, ...(subjectScope ? [subjectScope] : [])] },
       take: 120,
       orderBy: { createdAt: "desc" },
     });
@@ -144,7 +179,9 @@ async function lookup(question: string): Promise<Row[]> {
   }
   if (lessonIntent || !examIntent) {
     const lessons = await prisma.resource.findMany({
-      where: { AND: [termWhere, { OR: [{ kind: "lesson" }, { kind: "exercise" }] }] },
+      where: {
+        AND: [{ ...termWhere }, { OR: [{ kind: "lesson" }, { kind: "exercise" }] }, ...(subjectScope ? [subjectScope] : [])],
+      },
       take: 80,
       orderBy: { createdAt: "desc" },
     });
@@ -154,10 +191,12 @@ async function lookup(question: string): Promise<Row[]> {
   // Fallback: a subject/stream is clearly requested but nothing specific
   // matched terms (e.g. "i need some SM exams") — pull that subject's files.
   if (rows.length === 0 && subjects.length > 0) {
-    const bySubject = { OR: subjects.map((k) => ({ subjectKey: k })) };
+    const bySubject = {
+      OR: subjectKeys.map((k) => ({ subjectKey: k })),
+    };
     if (examIntent || !lessonIntent) {
       const exams = await prisma.resource.findMany({
-        where: { AND: [bySubject, { kind: "exam" }] },
+        where: { AND: [bySubject, { kind: "exam" }, ...(subjectScope ? [subjectScope] : [])] },
         take: 120,
         orderBy: { createdAt: "desc" },
       });
@@ -165,7 +204,7 @@ async function lookup(question: string): Promise<Row[]> {
     }
     if (lessonIntent || !examIntent) {
       const lessons = await prisma.resource.findMany({
-        where: { AND: [bySubject, { OR: [{ kind: "lesson" }, { kind: "exercise" }] }] },
+        where: { AND: [bySubject, { OR: [{ kind: "lesson" }, { kind: "exercise" }] }, ...(subjectScope ? [subjectScope] : [])] },
         take: 60,
         orderBy: { createdAt: "desc" },
       });

@@ -29,6 +29,40 @@ export type QuizProps = {
   questions: Question[];
 };
 
+function tutorPrompt(
+  lang: Lang,
+  q: Question,
+  chosen: Option,
+  correct: boolean,
+): { prompt: string; context: string } {
+  const correctOpt = q.options.find((o) => o.isCorrect);
+  if (lang === "ar") {
+    const options = q.options
+      .map((o, i) => `${String.fromCharCode(97 + i)}) ${o.textAr}`)
+      .join(" — ");
+    const explain = q.explanationAr
+      ? `\nالشرح الرسمي المعتمد للتصحيح: ${q.explanationAr}`
+      : "";
+    const prompt = correct
+      ? `الطالب أجاب عن سؤال في اختبار: «${q.promptAr}»\nاختيارات السؤال: ${options}\nإجابة الطالب: «${chosen.textAr}» — وهي الصحيحة ✓\n${explain}\nمهمتك: أثنِ على إجابته بإيجاز وودّ، ثم اسأله سؤالاً بسيطاً واحداً يتأكد من أنه فهم **لماذا** هذه هي الإجابة الصحيحة (اطلب منه أن يشرح السبب بطريقته). لا تعطه المزيد من الحل إلا بعده.`
+      : `الطالب أجاب عن سؤال في اختبار: «${q.promptAr}»\nاختيارات السؤال: ${options}\nإجابة الطالب: «${chosen.textAr}» — وهي خاطئة ✗\nالإجابة الصحيحة: «${correctOpt?.textAr ?? ""}»\n${explain}\nمهمتك كمعلّم صبور (الدارجة/العربية):\n1) طمّنه بعبارة قصيرة لطيفة أنها محاولة عادية.\n2) اشرح له خطوة بخطوة ولماذا الإجابة الصحيحة صحيحة، وماذا في اختياره كان ناقصاً أو مضلّلاً.\n3) اطرح عليه سؤالاً واحداً خفيفاً للتأكد أنه فهم الفكرة الآن.\n4) اختم بتوجيهه كيف كان عليه أن يفكّر ليصل وحده إلى الجواب الصحيح. لا تكشف أكثر ولا تعطه سؤالاً آخر من الاختبار.`;
+    return {
+      prompt,
+      context: `أنا أجيب الآن عن سؤال في اختبار تفاعلي لدرس «${q.promptAr}»`,
+    };
+  }
+  const options = q.options
+    .map((o, i) => `${String.fromCharCode(97 + i)}) ${o.textFr}`)
+    .join(" — ");
+  const explain = q.explanationFr
+    ? `\nExplication officielle : ${q.explanationFr}`
+    : "";
+  const prompt = correct
+    ? `L'élève a répondu à une question de quiz : « ${q.promptFr} »\nOptions : ${options}\nSa réponse : « ${chosen.textFr} » — correcte ✓\n${explain}\nFélicite-le brièvement et chaleureusement, puis pose-lui UNE seule question simple pour vérifier qu'il comprend POURQUOI c'est la bonne réponse (demande-lui d'expliquer à sa façon). Ne développe pas davantage avant sa réponse.`
+    : `L'élève a répondu à une question de quiz : « ${q.promptFr} »\nOptions : ${options}\nSa réponse : « ${chosen.textFr} » — incorrecte ✗\nLa bonne réponse : « ${correctOpt?.textFr ?? ""} »\n${explain}\nEn professeur patient :\n1) Rassure-le d'un mot court et gentil.\n2) Explique pas à pas pourquoi la bonne réponse est correcte et ce qui manquait dans son choix.\n3) Pose-lui UNE question simple pour vérifier qu'il a compris.\n4) Termine en lui montrant comment il aurait dû raisonner pour trouver seul la réponse. N'en dis pas plus, et ne lui donne pas une autre question du quiz.`;
+  return { prompt, context: `Je réponds à une question de quiz sur « ${q.promptFr} »` };
+}
+
 export function Quiz({
   lang,
   chapterId,
@@ -55,8 +89,13 @@ export function Quiz({
       const correct = q.options.find((o) => o.id === optId)?.isCorrect ?? false;
       setAcc((a) => (correct ? a + 1 : a));
       setAnswers((a) => [...a, { qId: q.id, correct }]);
+      const chosen = q.options.find((o) => o.id === optId);
+      if (chosen) {
+        const { prompt, context } = tutorPrompt(lang, q, chosen, correct);
+        openAssistant({ prompt, context, open: true });
+      }
     },
-    [deck, idx, feedback],
+    [deck, idx, feedback, lang],
   );
 
   const advance = useCallback(() => {

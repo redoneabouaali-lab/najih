@@ -227,8 +227,14 @@ export function AIAssistant({ lang }: { lang: Lang }) {
       const detail = (e as CustomEvent<AssistOpenDetail>).detail ?? {};
       if (detail.context) contextRef.current = detail.context;
       if (!hasGreeted) seedWelcome(true);
-      if (detail.prompt) void sendMessage(detail.prompt);
-      else setOpen(true);
+      if (detail.prompt) {
+        setOpen(true);
+        void sendMessage(detail.prompt);
+      } else if (detail.open) {
+        setOpen(true);
+      } else {
+        setOpen(true);
+      }
     };
     window.addEventListener("najih:assist", handler);
     return () => window.removeEventListener("najih:assist", handler);

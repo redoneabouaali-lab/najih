@@ -75,6 +75,28 @@ const STOP = new Set([
   "le", "la", "un", "a", "et", "du", "au", "ce", "il", "elle", "je", "tu",
 ]);
 
+const SUBJECT_GATE: [RegExp, string][] = [
+  [/رياضي|رياضيات|math|mathématiques|mathematiques/i, "mathematiques"],
+  [/فيزياء|كيمياء|physique|chimie/i, "physique-chimie"],
+  [/علوم الحياة|svt|بيولوجيا|biologi/i, "svt"],
+  [/اقتصاد|محاسبة|تدبير|eco|économie|economie|gestion|comptabil/i, "economie"],
+  [/فلسف|philosoph|philo/i, "philosophie"],
+  [/إسلامية|تربية|tarbia|islam/i, "tarbia-islamia"],
+  [/عربية|arab/i, "arabe"],
+  [/فرنسية|français|francais/i, "francais"],
+  [/انجليزية|إنجليزية|anglais/i, "anglais"],
+  [/تاريخ|histoire/i, "histoire-geo"],
+  [/جغرافيا|جغرافية|géographie|geographie|géo/i, "histoire-geo"],
+  [/فنون|الفن|arts/i, "histoire-arts"],
+  [/إسبانية|espagnol/i, "espagnol"],
+];
+
+function subjectsOf(text: string): string[] {
+  const out = new Set<string>();
+  for (const [re, slug] of SUBJECT_GATE) if (re.test(text)) out.add(slug);
+  return [...out];
+}
+
 function tokens(s: string): string[] {
   const set = new Set<string>();
   for (const w of s.toLowerCase().split(/[^\p{L}\p{N}]+/u)) {
@@ -125,10 +147,18 @@ export async function retrieveKnowledge(
   try {
     const chunks = await loadKnowledge();
     const tk = tokens(`${query} ${context}`);
-    const scored = chunks
+    const subjects = subjectsOf(`${query} ${context}`);
+    let scored = chunks
       .map((c) => ({ c, s: scoreChunk(c, query, context, tk) }))
       .filter((x) => x.s > 0)
       .sort((a, b) => b.s - a.s);
+    if (subjects.length > 0) {
+      const gated = chunks
+        .filter((c) => subjects.includes(c.subjectSlug))
+        .map((c) => ({ c, s: scoreChunk(c, query, context, tk) }))
+        .sort((a, b) => b.s - a.s);
+      scored = gated.length > 0 ? gated : scored;
+    }
     const picked = scored.slice(0, limit).map((x) => x.c);
 
     if (picked.length === 0) {
