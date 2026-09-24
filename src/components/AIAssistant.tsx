@@ -261,13 +261,14 @@ export function AIAssistant({ lang }: { lang: Lang }) {
         <div className="ai-panel" dir={lang === "ar" ? "rtl" : "ltr"}>
           <div className="ai-panel__head">
             <div className="flex items-center gap-3">
-              <span className="grid place-items-center w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-sky-500 text-white text-lg shadow-[var(--shadow-md)]">
+              <span className="ai-avatar">
                 🦉
+                <span className="ai-avatar__ring" aria-hidden />
               </span>
               <div className="leading-tight">
                 <div className="font-bold text-[15px] text-[var(--b)]">{t(lang, "navAi")}</div>
                 <div className="mono text-[11px] text-emerald-600 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
+                  <span className="ai-live" aria-hidden />
                   {lang === "ar" ? "متصل وجاهز للمساعدة" : "En ligne, prêt à aider"}
                 </div>
               </div>
@@ -275,7 +276,7 @@ export function AIAssistant({ lang }: { lang: Lang }) {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="grid place-items-center w-8 h-8 rounded-lg text-[var(--l)] hover:bg-black/5"
+              className="ai-panel__close"
               aria-label={lang === "ar" ? "إغلاق" : "Fermer"}
             >
               ✕
@@ -283,7 +284,7 @@ export function AIAssistant({ lang }: { lang: Lang }) {
           </div>
 
           <div className="ai-panel__body" data-lenis-prevent>
-            <div className="space-y-3">
+            <div className="space-y-1">
               {msgs.map((m, i) => {
                 let lastQ = "";
                 for (let k = i - 1; k >= 0; k--) {
@@ -292,25 +293,40 @@ export function AIAssistant({ lang }: { lang: Lang }) {
                     break;
                   }
                 }
+                const isAss = m.role === "assistant";
                 return (
                   <div
                     key={i}
-                    className={`ai-bubble ${m.role === "user" ? "ai-bubble--user" : "ai-bubble--bot"}`}
+                    className={`ai-msg ${isAss ? "ai-row--ass" : "ai-row--user"}`}
+                    style={{ animationDelay: `${Math.min(i * 40, 400)}ms` }}
                   >
-                    {m.role === "assistant" ? (
-                      <>
-                        <div className="ai-bubble__md">{renderMd(m.content)}</div>
-                        <AiFeedback question={lastQ} lang={lang === "ar" ? "ar" : "fr"} />
-                      </>
-                    ) : (
-                      <div className="whitespace-pre-wrap text-[14px]">{m.content}</div>
-                    )}
+                    {isAss && <span className="ai-avatar ai-avatar--mini">🦉</span>}
+                    <div className={`ai-bubble ${isAss ? "ai-bubble--bot" : "ai-bubble--user"}`}>
+                      {isAss ? (
+                        <>
+                          <div className="ai-bubble__md">{renderMd(m.content)}</div>
+                          <AiFeedback question={lastQ} lang={lang === "ar" ? "ar" : "fr"} />
+                        </>
+                      ) : (
+                        <div className="whitespace-pre-wrap text-[14px]">{m.content}</div>
+                      )}
+                    </div>
                   </div>
                 );
               })}
               {loading && (
-                <div className="ai-bubble ai-bubble--bot">
-                  <div className="typing-dot" />
+                <div className="ai-msg ai-row--ass">
+                  <span className="ai-avatar ai-avatar--mini">🦉</span>
+                  <div className="ai-bubble ai-bubble--bot ai-think">
+                    <span className="ai-think__dots">
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                    <span className="ai-think__label">
+                      {lang === "ar" ? "أحلّل سؤالك… انتظر الإجابة لحظة ✨" : "J'analyse ta question… un instant ✨"}
+                    </span>
+                  </div>
                 </div>
               )}
               <div ref={bottomRef} />
@@ -361,15 +377,20 @@ export function AIAssistant({ lang }: { lang: Lang }) {
                   toolparamdescription:
                     "The student's question about the Baccalaureate (lessons, subjects, exercises, national exams), in Arabic, Darija or French.",
                 }}
-                className="flex-1 min-w-0 p-3.5 border border-[var(--p)] bg-[var(--of)] text-[var(--b)] text-[14px] rounded-xl focus:outline-none focus:border-[var(--acc)] transition-colors"
+                className="ai-input"
                 dir={lang === "ar" ? "rtl" : "ltr"}
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="btn btn-emerald btn-sm !px-4 disabled:opacity-40 disabled:cursor-not-allowed"
+                title={t(lang, "chatSend")}
+                aria-label={t(lang, "chatSend")}
+                className="ai-send"
               >
-                {t(lang, "chatSend")}
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="ai-send__icon">
+                  <path d="M12 19V5" />
+                  <path d="m6 11 6-6 6 6" />
+                </svg>
               </button>
             </form>
           </div>

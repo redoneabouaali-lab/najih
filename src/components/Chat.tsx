@@ -137,7 +137,8 @@ export function Chat({ lang }: { lang: Lang }) {
             <div
               key={i}
               dir={lang === "ar" ? "rtl" : "ltr"}
-              className={`max-w-[85%] ${m.role === "user" ? "ml-auto" : "mr-auto w-full"}`}
+              className={`ai-msg max-w-[85%] ${m.role === "user" ? "ml-auto" : "mr-auto w-full"}`}
+              style={{ animationDelay: `${Math.min(i * 40, 400)}ms` }}
             >
               <div className="mono text-[10px] uppercase tracking-[.14em] text-[var(--l)] mb-1">
                 {m.role === "user"
@@ -161,7 +162,16 @@ export function Chat({ lang }: { lang: Lang }) {
           );
         })}
         {loading && (
-          <p className="mono text-xs text-[var(--p)]">{t(lang, "chatThinking")}</p>
+          <div className="ai-bubble ai-bubble--bot ai-think w-fit">
+            <span className="ai-think__dots">
+              <i />
+              <i />
+              <i />
+            </span>
+            <span className="ai-think__label">
+              {lang === "ar" ? "أحلّل سؤالك… انتظر الإجابة لحظة ✨" : "J'analyse ta question… un instant ✨"}
+            </span>
+          </div>
         )}
         <div ref={bottomRef} />
       </div>
@@ -171,7 +181,7 @@ export function Chat({ lang }: { lang: Lang }) {
           e.preventDefault();
           send();
         }}
-        className="flex gap-2 mt-2 items-center"
+        className="flex gap-2 mt-2 items-center ai-compose"
       >
         <AttachButton lang={lang} onPick={(f) => void handleAttach(f)} disabled={loading || uploading} remaining={uploadLeft ?? undefined} />
         {uploading && (
@@ -184,15 +194,20 @@ export function Chat({ lang }: { lang: Lang }) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={t(lang, "chatPlaceholder")}
-          className="flex-1 p-4 border border-[var(--p)] bg-[var(--w)] text-[var(--b)] text-base rounded-2xl focus:outline-none focus:border-[var(--acc)] transition-colors shadow-sm"
+          className="ai-input ai-input--lg !text-base !py-3.5"
           dir={lang === "ar" ? "rtl" : "ltr"}
         />
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="btn btn-emerald !px-6 disabled:opacity-40 disabled:cursor-not-allowed"
+          title={t(lang, "chatSend")}
+          aria-label={t(lang, "chatSend")}
+          className="ai-send"
         >
-          {t(lang, "chatSend")}
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="ai-send__icon">
+            <path d="M12 19V5" />
+            <path d="m6 11 6-6 6 6" />
+          </svg>
         </button>
       </form>
     </div>
