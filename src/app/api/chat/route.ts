@@ -21,6 +21,9 @@ const EXAM_RE = /امتحانات|امتحان|تصحيح|مصحح|مصححة|ا
 const CORR_RE = /تصحيح|مصحح|corrig|correction|solution/i;
 const LESSON_RE = /درس|شرح|اشرح|أشرح|ملخص|ملخصات|تعريف|قانون|قاعدة|طريقة|كيف|ما هو|ما هي|cours|leçon|explique|résumé|comment|solution|حل|مفهوم|خاصية|نظرية/i;
 
+const QUIZ_RE =
+  /(اختبرني|اختبرينا|اختبريني|ديرلي|دير ليا|ديرولنا|عطيني اختبار|عطيني اسئلة|عطني اسئلة|أسئلني|اسألني سؤال|العب معي|quiz me|test me|interroge-moi|teste-moi|pose-moi des questions|pose-moi un quiz)/i;
+
 function tokens(...inputs: string[]): string[] {
   const set = new Set<string>();
   for (const s of inputs) {
@@ -234,7 +237,7 @@ function buildLibrary(rows: Row[]): string {
   return lines.join("\n");
 }
 
-function systemPrompt(lang: string, library: string, context: string, knowledge: string, learning: string): string {
+function systemPrompt(lang: string, library: string, context: string, knowledge: string, learning: string, quizMode: boolean): string {
   const libraryBlock =
     library ||
     "(لم يستجب ملفات لهذا السؤال — اشرحه باختصار ثم وجّه الطالب لصفحات الموقع الحقيقية: /branches للشعب و /resources للامتحانات)";
@@ -264,8 +267,33 @@ ${knowledge}
     ? `\n🧠 **سلوكك المُتعلَّم من أسئلة الطلاب** (تحسين تلقائي، استعمله بسلاسة دون ذكره حرفياً):
 ${learning}\n`
     : "";
+  const quizBlock = quizMode
+    ? lang === "ar"
+      ? `\n🎯 **وضع «اختبرني» نشط الآن** — أنت تُدرِّب الطالب باختبار تفاعلي حول الموضوع الذي يدرسه (السياق/اختياره):
+قواعد صارمة جداً:
+1. أرسل سؤالاً واحداً فقط في كل رسالة، مع 4 اختيارات مرقّمة (أ / ب / ج / د). اخترع الأسئلة بنفسك من موضوعه ولا تستنسخ أسئلة الموقع.
+2. افتتح بـ "لنبدأ! سؤال 1 ⚡" ثم تدرّج بالصعوبة حتى ~8 أسئلة.
+3. بعد كل إجابة:
+   - صحيحة ✓: "أحسنت 👏" + سطر واحد يشرح السبب، ثم السؤال التالي.
+   - خاطئة ✗: **شرح مفصّل جداً خطوة بخطوة** لماذا الجواب خاطئ وما الجواب الصحيح ولماذا، مع مثال مصغّر. (لا تنتقل للسؤال التالي إلا بعد هذا الشرح).
+   - قال "ما فهمت" أو أخطأ مرتين متتاليتين: غيّر المِنْهاج كلياً — قل "خلاص، غادي نبدل الطريقة 👌"، اشرح الفكرة من زاوية مختلفة تماماً (تشبيهاً من الحياة اليومية أو بأرقام أبسط أو بالدارجة)، ثم اسأل سؤالاً أسهل.
+4. لا تعطِ الإجابة قبل إجابة الطالب أبداً، ولا تخبره بالاختيار الصحيح قبل محاولته.
+5. أولُ رسالة في الوضع يجب أن تبدأ الاختبار فعلاً بسؤال واحد (لا تسأله هل يريد أن نبدأ).
+6. عند نهاية الاختبار اعرض: النتيجة (X من Y)، أهم قاعدة تعلمها، ورابطاً من مكتبة ناجح أدناه إن وُجد يناسب الموضوع.`
+      : `\n🎯 **Mode « Interroge-moi » actif** — tu entraînes l'élève par un quiz interactif sur le sujet qu'il étudie (contexte/choix) :
+Règles strictes :
+1. Une seule question par message, avec 4 choix (a / b / c / d). Invente les questions toi-même sur son sujet, ne recopie pas celles du site.
+2. Commence par « On y va ! Question 1 ⚡ » et monte en difficulté jusqu'à ~8 questions.
+3. Après chaque réponse :
+   - correcte ✓ : « Bravo 👏 » + une ligne expliquant pourquoi, puis question suivante.
+   - incorrecte ✗ : **explication détaillée pas à pas** (pourquoi c'est faux, la bonne réponse, pourquoi elle est juste) avec un petit exemple. Ne passe à la suite qu'après cette explication.
+   - « je n'ai pas compris » ou 2 erreurs de suite : change complètement d'approche — « Bon, on change de méthode 👌 », explique l'idée d'un autre angle (métaphore de la vie courante, nombres simples, autre formulation), puis pose une question plus facile.
+4. Ne donne jamais la réponse avant que l'élève ait répondu.
+5. Ton premier message de ce mode commence réellement le quiz par une question.
+6. À la fin : résultat (X sur Y), règle clé apprise, et un lien de la bibliothèque Najih ci-dessous s'il correspond.`
+    : "";
   return `أنت "${lang === "ar" ? "المرشد الذكي" : "Tuteur IA"}" في موقع ناجح (Najih) — منصة مجانية لتحضير الباكالوريا المغربية. أنت أستاذ خصوصي صبور وودود يرافق الطالب التلميذ خطوة بخطوة.
-${contextBlock}${teachBlock}${knowledgeBlock}${learningBlock}
+${contextBlock}${teachBlock}${knowledgeBlock}${learningBlock}${quizBlock}
 🎯 مهمتك التربوية (الأهم):
 1. عندما يقول الطالب "ما فهمت" أو "مافهمتش" أو "صعيب" أو "Je n'ai pas compris" أو يبدو حائراً: لا تعطه الجواب مباشرة. أولاً طمئنه ("عادي، نعاودوها ببساطة 👌")، ثم اشرح الفكرة الأساسية بلغة سهلة وبالدارجة إن كتب هو بالدارجة، واستعمل تشبيهاً من الحياة اليومية، ثم اسأله سؤالاً بسيطاً واحداً للتأكد أنه فهم. قسّم الشرح إلى خطوات صغيرة مرقّمة.
 2. عندما يجيب الطالب خطأً أو يسأل عن سؤال اختبار: لا تعطِ الحل النهائي فوراً. اشرح **لماذا** الإجابة خاطئة، واذكر القاعدة، وأعطه تلميحاً (indice) أولاً ليفكر، ثم بعد محاولته اعرض الحل كاملاً مع الخطوات.
@@ -329,7 +357,12 @@ export async function POST(req: Request) {
   const knowledge = await retrieveKnowledge(lastUser, body.context ?? "", lang);
   const learning = learningBrief(lang);
   logStudentQuestion(lastUser, lang);
-  const system = systemPrompt(lang, library, body.context ?? "", knowledge, learning);
+  const allUserText = messages
+    .filter((m) => m.role === "user")
+    .map((m) => m.content)
+    .join("\n");
+  const quizMode = QUIZ_RE.test(allUserText);
+  const system = systemPrompt(lang, library, body.context ?? "", knowledge, learning, quizMode);
 
   const attachments = body.attachments ?? [];
   const img = attachments.find((a) => a.type === "image");
@@ -373,7 +406,7 @@ export async function POST(req: Request) {
       { role: "system", content: system },
       ...mapped,
     ],
-    max_tokens: 1400,
+    max_tokens: quizMode ? 1700 : 1400,
     temperature: 0.4,
   };
 

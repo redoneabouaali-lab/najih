@@ -814,6 +814,13 @@ main {
   animation: msgIn .4s var(--ease) both;
 }
 .ai-chip:hover { background: #fff; border-color: var(--acc); transform: translateY(-1px); }
+.ai-chip--quiz {
+  color: #fff; background: linear-gradient(135deg, var(--acc), #4338ca 55%, var(--sky));
+  border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, .35);
+  animation: gradFlow 8s linear infinite;
+  background-size: 250% 100%;
+}
+.ai-chip--quiz:hover { background: linear-gradient(135deg, var(--acc), #4338ca 55%, var(--sky)); background-size: 250% 100%; color: #fff; }
 
 @media (max-width: 767px) {
   .ai-fab { width: 52px; height: 52px; border-radius: 18px; inset-inline-end: 14px; bottom: 14px; }

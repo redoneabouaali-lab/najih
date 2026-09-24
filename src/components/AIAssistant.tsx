@@ -342,6 +342,20 @@ export function AIAssistant({ lang }: { lang: Lang }) {
           <div className="ai-panel__foot">
             {chips.length > 0 && !loading && (
               <div className="flex flex-wrap gap-1.5 px-3 pt-2">
+                <button
+                  key="quiz"
+                  type="button"
+                  onClick={() =>
+                    void sendMessage(
+                      lang === "ar"
+                        ? "اختبرني في ما أدرسه الآن 😊 (اختبار تفاعلي بأسئلة متدرجة)"
+                        : "Interroge-moi sur ce que j'étudie maintenant 😊 (quiz interactif progressif)",
+                    )
+                  }
+                  className="ai-chip ai-chip--quiz"
+                >
+                  🎯 {lang === "ar" ? "اختبرني الآن" : "Interroge-moi"}
+                </button>
                 {chips.map((c) => (
                   <button
                     key={c}
