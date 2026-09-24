@@ -7,6 +7,7 @@ import { prepareAttachment } from "@/lib/attach";
 import { AttachButton } from "@/components/AttachButton";
 import { AiFeedback } from "@/components/AiFeedback";
 import { uploadsExhausted, uploadsRemaining, consumeUpload } from "@/lib/uploads";
+import { sessionId } from "@/lib/session";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -47,6 +48,7 @@ export function Chat({ lang }: { lang: Lang }) {
             { role: "user", content: text },
           ],
           attachments: attachments ?? [],
+          sessionId: sessionId(),
         }),
       });
 

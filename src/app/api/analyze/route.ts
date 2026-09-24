@@ -7,6 +7,8 @@ import {
   type AnalyzeInput,
   type AnalyzeResult,
 } from "@/lib/analyze";
+import { nextApiKey, hasApiKeys, NVIDIA_URL } from "@/lib/keys";
+import { quotaRemaining, chargeTokens } from "@/lib/quota";
 
 export const runtime = "nodejs";
 
@@ -101,17 +103,19 @@ async function resolveSource(input: AnalyzeInput): Promise<Source> {
 }
 
 async function callModel(
-  key: string,
   model: string,
   messages: { role: string; content: unknown }[],
   maxTokens: number,
+  sessionId: string,
 ): Promise<string> {
   const ctrl = new AbortController();
   const tm = setTimeout(() => ctrl.abort(), MODEL_TIMEOUT);
   try {
     let res: Response | null = null;
     for (let attempt = 0; attempt < 5; attempt++) {
-      res = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
+      const key = nextApiKey();
+      if (!key) break;
+      res = await fetch(NVIDIA_URL, {
         method: "POST",
         headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -133,6 +137,7 @@ async function callModel(
     }
     const data = await res.json();
     const content = data?.choices?.[0]?.message?.content;
+    if (sessionId) chargeTokens(sessionId, data?.usage?.total_tokens);
     if (typeof content !== "string" || !content) throw new Error("empty completion");
     return content;
   } finally {
@@ -156,12 +161,22 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, fallback: "retry" }, { status: 400 });
   }
 
-  const key = process.env.NVIDIA_API_KEY;
-  if (!key) {
+  if (!hasApiKeys()) {
     return NextResponse.json({ ok: false, fallback: "retry" }, { status: 500 });
   }
 
   const lang = body.lang === "fr" ? "fr" : "ar";
+  const sessionId = (body.sessionId ?? "").toString().trim();
+  if (sessionId && quotaRemaining(sessionId) <= 0) {
+    return NextResponse.json({
+      ok: false,
+      fallback: "quota",
+      raw:
+        lang === "ar"
+          ? "رصيد جلسة اليوم انتهى 📚. جرّب غداً، أو استعمل الأسئلة المباشرة القصيرة في المرشد الذكي."
+          : "Crédit de la journée épuisé 📚. Réessaye demain, ou pose des questions courtes au tuteur.",
+    } satisfies AnalyzeResult);
+  }
   const instruction = analyzeInstruction(body.kindHint, lang);
 
   try {
@@ -170,7 +185,6 @@ export async function POST(req: Request) {
     let raw: string;
     if (source.type === "image") {
       raw = await callModel(
-        key,
         VISION_MODEL,
         [
           { role: "system", content: instruction },
@@ -186,17 +200,18 @@ export async function POST(req: Request) {
           },
         ],
         2000,
+        sessionId,
       );
     } else if (source.type === "text") {
       const text = source.text.length > MAX_CONTENT ? source.text.slice(0, MAX_CONTENT) : source.text;
       raw = await callModel(
-        key,
         MODEL,
         [
           { role: "system", content: instruction },
           { role: "user", content: buildAnalyzeUser(text, body.title) },
         ],
         1800,
+        sessionId,
       );
     } else {
       return NextResponse.json({

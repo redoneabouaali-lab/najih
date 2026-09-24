@@ -5,6 +5,7 @@ export type AnalyzeInput = {
   kindHint?: "lesson" | "exercise";
   lang?: "ar" | "fr";
   context?: string;
+  sessionId?: string;
 };
 
 export type AnalyzeResult = {
@@ -15,7 +16,7 @@ export type AnalyzeResult = {
   steps?: string[];
   answer?: string;
   notes?: string[];
-  fallback?: "upload" | "retry";
+  fallback?: "upload" | "retry" | "quota";
   raw?: string;
 };
 

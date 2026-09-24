@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { retrieveKnowledge } from "@/lib/knowledge";
 import { logStudentQuestion, learningBrief } from "@/lib/learning";
+import { nextApiKey, hasApiKeys, NVIDIA_URL } from "@/lib/keys";
+import { quotaRemaining, chargeTokens, quotaLimit } from "@/lib/quota";
 
 export const runtime = "nodejs";
 
@@ -250,6 +252,7 @@ export async function POST(req: Request) {
   let body: {
     messages?: { role: string; content: string }[];
     context?: string;
+    sessionId?: string;
     attachments?: { type?: string; dataUrl?: string; text?: string; name?: string }[];
   };
   try {
@@ -263,13 +266,24 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "messages required" }, { status: 400 });
   }
 
-  const key = process.env.NVIDIA_API_KEY;
-  if (!key) {
+  if (!hasApiKeys()) {
     return NextResponse.json({ error: "AI provider key not configured" }, { status: 500 });
   }
 
   const lastUser = [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
   const lang: "ar" | "fr" = messages[0]?.content?.includes("المرشد الذكي") ? "ar" : "fr";
+
+  const sessionId = (body.sessionId ?? "").toString().trim();
+  if (sessionId && quotaRemaining(sessionId) <= 0) {
+    const msg =
+      lang === "ar"
+        ? `رصيد هذه الجلسة انتهى اليوم 📚 (حد ${quotaLimit().toLocaleString("fr-FR")} توكن/24 ساعة). عد غداً، أو استعمل زر «فهم هذا الملف» الأزرق في صفحات الدروس والتمارين، أو أرسل سؤالاً أقصر وأكثر تحديداً. المرشد يبقى متاحاً لإجابات قصيرة.`
+        : `Le crédit de cette session est épuisé aujourd'hui 📚 (plafond ${quotaLimit().toLocaleString("fr-FR")} jetons/24 h). Reviens demain, utilise le bouton « Comprendre ce fichier » sur les pages de cours/exercices, ou pose une question plus courte et précise. Le tuteur reste disponible pour les réponses courtes.`;
+    return NextResponse.json({
+      choices: [{ message: { role: "assistant", content: msg }, finish_reason: "stop" }],
+      usage: { total_tokens: 0 },
+    });
+  }
 
   const rows = await lookup(lastUser);
   const library = buildLibrary(rows);
@@ -327,7 +341,9 @@ export async function POST(req: Request) {
   try {
     let res: Response | null = null;
     for (let attempt = 0; attempt < 5; attempt++) {
-      res = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
+      const key = nextApiKey();
+      if (!key) break;
+      res = await fetch(NVIDIA_URL, {
         method: "POST",
         headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -350,6 +366,7 @@ export async function POST(req: Request) {
 
     const data = await res.json();
     const content = data?.choices?.[0]?.message?.content;
+    if (sessionId) chargeTokens(sessionId, data?.usage?.total_tokens);
     if (typeof content === "string" && rows.length > 0) {
       const mentioned = new Set([...content.matchAll(/https?:\/\/[^\s)\]]+/g)].map((m) => m[0]));
       const extra = buildLibrary(rows)

@@ -9,6 +9,7 @@ import { prepareAttachment, type Attach } from "@/lib/attach";
 import { AttachButton } from "@/components/AttachButton";
 import { AiFeedback } from "@/components/AiFeedback";
 import { uploadsExhausted, uploadsRemaining, consumeUpload } from "@/lib/uploads";
+import { sessionId } from "@/lib/session";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -107,6 +108,7 @@ export function AIAssistant({ lang }: { lang: Lang }) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             context: contextRef.current || (pathname !== "/" ? pathname : ""),
+            sessionId: sessionId(),
             messages: [
               { role: "system", content: system },
               ...history,

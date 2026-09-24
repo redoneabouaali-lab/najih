@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { AnalyzeInput, AnalyzeResult } from "@/lib/analyze";
 import { kindLabel, resultToMarkdown } from "@/lib/analyze";
 import { seedChat } from "@/lib/assist";
+import { sessionId } from "@/lib/session";
 
 type Phase = "reading" | "done" | "failed";
 
@@ -74,7 +75,7 @@ export function ContentUnderstand({
       const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(input),
+        body: JSON.stringify({ ...input, sessionId: sessionId() }),
         signal: ctrl.signal,
       });
       let data: AnalyzeResult;
@@ -93,9 +94,11 @@ export function ContentUnderstand({
             ? lang === "ar"
               ? "لم أتمكن من قراءة هذا الملف."
               : "Je n'ai pas pu lire ce fichier."
-            : lang === "ar"
-              ? "حدث خطأ أثناء التحليل، حاول مجدداً."
-              : "Une erreur est survenue, réessaie.",
+            : data.fallback === "quota"
+              ? (data.raw ?? "")
+              : lang === "ar"
+                ? "حدث خطأ أثناء التحليل، حاول مجدداً."
+                : "Une erreur est survenue, réessaie.",
         );
         setPhase("failed");
       }
