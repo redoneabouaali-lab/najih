@@ -45,7 +45,7 @@ Règles :
 - Si tu ne peux pas déterminer : kind="unknown", summary avec une remarque.
 - Réponds dans la langue du contenu (arabe/darija ou français), sois direct, sans introduction.`;
   }
-  return `حلّل المحتوى التعليمي التالي (درس أو تمرين). أجب حصراً بكائن JSON صالح **بدون أي نص خارجه** بالشكل التالي:
+  return `أنت محلل محتوى تعليمي سريع. كن موجزاً جداً: كل نقطة في summary أو notes أقصاها سطر واحد قصير (≤100 حرف)، وsteps خطوة واحدة قصيرة. أجب حصراً بكائن JSON صالح **بدون أي نص خارجه** بالشكل التالي:
 {"kind":"lesson"|"exercise","title":"...","summary":["...","..."],"steps":["...","..."],"answer":"...","notes":["...","..."]}
 القواعد:
 - إذا كان درساً (kind="lesson"): summary = نقاط أساسية وافية ومرتّبة (5 إلى 7 نقاط) تُلخّص الدرس وتركز على المفاهيم لا النقل الحرفي، steps = خطة مراجعة (3-4 خطوات)، answer = "" (فارغة)، notes = أهم القواعد/الصيغ/المصطلحات.

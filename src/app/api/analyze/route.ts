@@ -199,7 +199,7 @@ export async function POST(req: Request) {
             ],
           },
         ],
-        2000,
+        900,
         sessionId,
       );
     } else if (source.type === "text") {
@@ -210,7 +210,7 @@ export async function POST(req: Request) {
           { role: "system", content: instruction },
           { role: "user", content: buildAnalyzeUser(text, body.title) },
         ],
-        1800,
+        850,
         sessionId,
       );
     } else {

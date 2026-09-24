@@ -59,6 +59,7 @@ export function ContentUnderstand({
   const [result, setResult] = useState<AnalyzeResult | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [supIdx, setSupIdx] = useState(0);
+  const [secs, setSecs] = useState(0);
   const [errText, setErrText] = useState("");
 
   const abortRef = useRef<AbortController | null>(null);
@@ -71,20 +72,42 @@ export function ContentUnderstand({
     abortRef.current = ctrl;
     setPhase("reading");
     setSupIdx(0);
-    try {
-      const res = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...input, sessionId: sessionId() }),
-        signal: ctrl.signal,
-      });
-      let data: AnalyzeResult;
-      try {
-        data = await res.json();
-      } catch {
-        data = { ok: false, fallback: "retry" };
-      }
+    setSecs(0);
+    const failT = setTimeout(() => {
       if (runRef.current !== id) return;
+      ctrl.abort();
+      setErrText(
+        lang === "ar"
+          ? "التحليل يستغرق وقتاً أطول من المعتاد، حاول مجدداً."
+          : "L'analyse prend plus de temps que prévu, réessaie.",
+      );
+      setPhase("failed");
+    }, 90000);
+    try {
+      let data: AnalyzeResult | null = null;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        const res = await fetch("/api/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...input, sessionId: sessionId() }),
+          signal: ctrl.signal,
+        });
+        let d: AnalyzeResult;
+        try {
+          d = await res.json();
+        } catch {
+          d = { ok: false, fallback: "retry" };
+        }
+        if (d.ok || d.fallback !== "retry") {
+          data = d;
+          break;
+        }
+        await new Promise((r) => setTimeout(r, 1500));
+        if (runRef.current !== id) return;
+      }
+      clearTimeout(failT);
+      if (runRef.current !== id) return;
+      if (!data) data = { ok: false, fallback: "retry" };
       setResult(data);
       if (data.ok) {
         setPhase("done");
@@ -96,14 +119,19 @@ export function ContentUnderstand({
               : "Je n'ai pas pu lire ce fichier."
             : data.fallback === "quota"
               ? (data.raw ?? "")
-              : lang === "ar"
-                ? "حدث خطأ أثناء التحليل، حاول مجدداً."
-                : "Une erreur est survenue, réessaie.",
+              : data.fallback === "retry"
+                ? lang === "ar"
+                  ? "الخدمة مشغولة حالياً، حاول مرة أخرى في لحظات."
+                  : "Le service est occupé, réessaie dans un instant."
+                : lang === "ar"
+                  ? "حدث خطأ أثناء التحليل، حاول مجدداً."
+                  : "Une erreur est survenue, réessaie.",
         );
         setPhase("failed");
       }
       onAnalysed?.(data);
     } catch {
+      clearTimeout(failT);
       if (runRef.current !== id) return;
       setErrText(lang === "ar" ? "تعذّر الاتصال، حاول مجدداً." : "Problème de connexion, réessaie.");
       setPhase("failed");
@@ -127,14 +155,15 @@ export function ContentUnderstand({
     };
   }, [auto, autoDelay, fullKey]);
 
-  // status rotation
+  // status rotation + elapsed counter
   useEffect(() => {
     if (phase !== "reading") return;
-    const int = setInterval(
-      () => setSupIdx((i) => (i + 1) % STATUS[lang].length),
-      2400,
-    );
-    return () => clearInterval(int);
+    const rot = setInterval(() => setSupIdx((i) => (i + 1) % STATUS[lang].length), 2400);
+    const tick = setInterval(() => setSecs((s) => s + 1), 1000);
+    return () => {
+      clearInterval(rot);
+      clearInterval(tick);
+    };
   }, [phase, lang]);
 
   const close = useCallback(() => {
@@ -208,6 +237,12 @@ export function ContentUnderstand({
                 {statusLines[supIdx]}
               </span>
             </div>
+            {secs >= 3 && (
+              <div className="u-reading__timer mono" aria-live="polite">
+                {lang === "ar" ? "⏳ قد يستغرق حتى دقيقة • " : "⏳ Jusqu'à une minute • "}
+                {secs < 60 ? `${secs} ث` : `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}`}
+              </div>
+            )}
             <div className="u-progress" aria-hidden />
             <p className="u-reading__cap mono">
               {lang === "ar" ? "المرشد الذكي • ناجح" : "Tuteur IA • Najih"}
