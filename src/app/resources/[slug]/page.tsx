@@ -5,6 +5,7 @@ import { mkMeta } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageContext } from "@/components/PageContext";
+import { ContentUnderstand } from "@/components/ContentUnderstand";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -153,17 +154,29 @@ export default async function BranchResourcesPage({ params }: Props) {
           <div className="label mb-5">01 — {t(lang, "lessonPdfSection")}</div>
           <div className="journal">
             {lessons.map((e, i) => (
-              <a
-                key={e.id}
-                href={e.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="entry"
-              >
-                <span className="entry__idx">0{i + 1}<i /></span>
-                <span className="entry__title block">{lang === "ar" ? e.titleAr : e.titleFr}</span>
-                <span className="entry__meta"><b>⬇ PDF</b></span>
-              </a>
+              <div key={e.id} className="flex gap-2 items-stretch">
+                <a
+                  href={e.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="entry flex-1"
+                >
+                  <span className="entry__idx">0{i + 1}<i /></span>
+                  <span className="entry__title block">{lang === "ar" ? e.titleAr : e.titleFr}</span>
+                  <span className="entry__meta"><b>⬇ PDF</b></span>
+                </a>
+                <ContentUnderstand
+                  storageKey={`resource:${e.id}`}
+                  input={{
+                    resourceUrl: e.url,
+                    title: lang === "ar" ? e.titleAr ?? undefined : e.titleFr ?? undefined,
+                    kindHint: "lesson",
+                    lang: lang === "ar" ? "ar" : "fr",
+                  }}
+                  label={lang === "ar" ? "فهم" : "Comprendre"}
+                  buttonClassName="btn btn-sm !px-3 shrink-0 self-center"
+                />
+              </div>
             ))}
           </div>
         </section>
@@ -174,17 +187,29 @@ export default async function BranchResourcesPage({ params }: Props) {
           <div className="label mb-5">02 — {t(lang, "exerciseSection")}</div>
           <div className="journal">
             {exercises.map((e, i) => (
-              <a
-                key={e.id}
-                href={e.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="entry"
-              >
-                <span className="entry__idx">0{i + 1}<i /></span>
-                <span className="entry__title block">{lang === "ar" ? e.titleAr : e.titleFr}</span>
-                <span className="entry__meta"><b>↗</b></span>
-              </a>
+              <div key={e.id} className="flex gap-2 items-stretch">
+                <a
+                  href={e.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="entry flex-1"
+                >
+                  <span className="entry__idx">0{i + 1}<i /></span>
+                  <span className="entry__title block">{lang === "ar" ? e.titleAr : e.titleFr}</span>
+                  <span className="entry__meta"><b>↗</b></span>
+                </a>
+                <ContentUnderstand
+                  storageKey={`resource:${e.id}`}
+                  input={{
+                    resourceUrl: e.url,
+                    title: lang === "ar" ? e.titleAr ?? undefined : e.titleFr ?? undefined,
+                    kindHint: "exercise",
+                    lang: lang === "ar" ? "ar" : "fr",
+                  }}
+                  label={lang === "ar" ? "فهم" : "Comprendre"}
+                  buttonClassName="btn btn-sm !px-3 shrink-0 self-center"
+                />
+              </div>
             ))}
           </div>
         </section>
@@ -223,6 +248,19 @@ export default async function BranchResourcesPage({ params }: Props) {
                               <a href={subj.sujet.url} target="_blank" rel="noopener noreferrer" className="btn btn-emerald btn-sm">
                                 {t(lang, "kSujet")} ↗
                               </a>
+                            )}
+                            {subj.sujet && (
+                              <ContentUnderstand
+                                storageKey={`resource:${subj.sujet.id}`}
+                                input={{
+                                  resourceUrl: subj.sujet.url,
+                                  title: lang === "ar" ? subj.sujet.titleAr ?? undefined : subj.sujet.titleFr ?? undefined,
+                                  kindHint: "exercise",
+                                  lang: lang === "ar" ? "ar" : "fr",
+                                }}
+                                label={lang === "ar" ? "✦ فهم" : "✦ Comprendre"}
+                                buttonClassName="btn btn-sm !px-3"
+                              />
                             )}
                             {subj.correction && (
                               <a href={subj.correction.url} target="_blank" rel="noopener noreferrer" className="btn btn-sm">

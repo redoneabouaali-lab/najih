@@ -4,7 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { t, type Lang } from "@/lib/lang";
 import { renderMd } from "@/lib/md";
-import { subscribePageContext, type AssistOpenDetail } from "@/lib/assist";
+import { subscribePageContext, subscribeSeedChat, type AssistOpenDetail } from "@/lib/assist";
+import { prepareAttachment, type Attach } from "@/lib/attach";
+import { AttachButton } from "@/components/AttachButton";
+import { AiFeedback } from "@/components/AiFeedback";
+import { uploadsExhausted, uploadsRemaining, consumeUpload } from "@/lib/uploads";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -47,6 +51,8 @@ export function AIAssistant({ lang }: { lang: Lang }) {
   const [loading, setLoading] = useState(false);
   const [chips, setChips] = useState<string[]>([]);
   const [hasGreeted, setHasGreeted] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadLeft, setUploadLeft] = useState<number>(() => uploadsRemaining());
   const inputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const contextRef = useRef<string>("");
@@ -63,6 +69,15 @@ export function AIAssistant({ lang }: { lang: Lang }) {
     });
   }, []);
 
+  useEffect(() => {
+    return subscribeSeedChat((seed) => {
+      if (!seed || seed.length === 0) return;
+      setMsgs((m) => [...m, ...seed]);
+      setChips(suggestFor(lang, pathname));
+      setOpen(true);
+    });
+  }, [lang, pathname]);
+
   const seedWelcome = useCallback(
     (withOpen: boolean) => {
       setMsgs((m) => (m.length === 0 ? [welcomeMsg(lang)] : m));
@@ -74,14 +89,14 @@ export function AIAssistant({ lang }: { lang: Lang }) {
   );
 
   const sendMessage = useCallback(
-    async (raw: string) => {
+    async (raw: string, attachments?: Attach[]) => {
       const text = raw.trim();
-      if (!text || busyRef.current) return;
+      if ((!text && !attachments?.length) || busyRef.current) return;
       busyRef.current = true;
       setLoading(true);
       setInput("");
       const history = msgsRef.current;
-      setMsgs((m) => [...m, { role: "user", content: text }]);
+      setMsgs((m) => [...m, { role: "user", content: text || (lang === "ar" ? "📎 مرفق" : "📎 pièce jointe") }]);
       const system =
         lang === "ar"
           ? "أنت المرشد الذكي في موقع ناجح لتحضير الباكالوريا المغربية."
@@ -97,6 +112,7 @@ export function AIAssistant({ lang }: { lang: Lang }) {
               ...history,
               { role: "user", content: text },
             ],
+            attachments: attachments ?? [],
           }),
         });
         const data = await res.json();
@@ -124,6 +140,65 @@ export function AIAssistant({ lang }: { lang: Lang }) {
       }
     },
     [lang, pathname],
+  );
+
+  const handleAttach = useCallback(
+    async (f: File) => {
+      if (busyRef.current || uploading) return;
+      if (uploadsExhausted()) {
+        setMsgs((m) => [
+          ...m,
+          {
+            role: "assistant",
+            content:
+              lang === "ar"
+                ? "أنت استنفدت تحميلاتك المجانية الثلاثة 📎. جرّب زر «فهم هذا الملف» الأزرق في صفحات الدروس والتمارين، أو اسأل المرشد مباشرة عن الدرس، أو أعد رفع صورة بعد حذف السجل (إعدادات المتصفح)."
+                : "Tu as épuisé tes 3 téléversements gratuits 📎. Utilise le bouton « Comprendre ce fichier » sur les pages de cours/exercices, ou interroge directement le tuteur sur la leçon.",
+          },
+        ]);
+        return;
+      }
+      setUploading(true);
+      setInput("");
+      try {
+        const attach = await prepareAttachment(f);
+        if (attach.type === "pdf" && attach.text.trim().length < 80) {
+          setMsgs((m) => [
+            ...m,
+            {
+              role: "assistant",
+              content:
+                lang === "ar"
+                  ? "😕 يبدو أن هذا الملف غير قابل للقراءة (صفحة ممسوحة أو محمية). جرّب رفع صورة واضحة للسؤال بدلاً منه."
+                  : "😕 Ce fichier semble illisible (page scannée ou protégée). Essaie de joindre une photo nette de la question.",
+            },
+          ]);
+          return;
+        }
+        consumeUpload();
+        setUploadLeft(uploadsRemaining());
+        const prompt =
+          input.trim() ||
+          (lang === "ar"
+            ? "اقرأ هذا الملف واشرحه لي خطوة بخطوة"
+            : "Lis ce fichier et explique-le-moi étape par étape");
+        await sendMessage(prompt, [attach]);
+      } catch {
+        setMsgs((m) => [
+          ...m,
+          {
+            role: "assistant",
+            content:
+              lang === "ar"
+                ? "تعذّر قراءة المرفق، حاول صورة أخرى أو ملف PDF أصغر."
+                : "Impossible de lire la pièce jointe, essaie une autre photo ou un PDF plus léger.",
+          },
+        ]);
+      } finally {
+        setUploading(false);
+      }
+    },
+    [input, lang, uploading, sendMessage],
   );
 
   useEffect(() => {
@@ -207,18 +282,30 @@ export function AIAssistant({ lang }: { lang: Lang }) {
 
           <div className="ai-panel__body" data-lenis-prevent>
             <div className="space-y-3">
-              {msgs.map((m, i) => (
-                <div
-                  key={i}
-                  className={`ai-bubble ${m.role === "user" ? "ai-bubble--user" : "ai-bubble--bot"}`}
-                >
-                  {m.role === "assistant" ? (
-                    <div className="ai-bubble__md">{renderMd(m.content)}</div>
-                  ) : (
-                    <div className="whitespace-pre-wrap text-[14px]">{m.content}</div>
-                  )}
-                </div>
-              ))}
+              {msgs.map((m, i) => {
+                let lastQ = "";
+                for (let k = i - 1; k >= 0; k--) {
+                  if (msgs[k].role === "user") {
+                    lastQ = msgs[k].content;
+                    break;
+                  }
+                }
+                return (
+                  <div
+                    key={i}
+                    className={`ai-bubble ${m.role === "user" ? "ai-bubble--user" : "ai-bubble--bot"}`}
+                  >
+                    {m.role === "assistant" ? (
+                      <>
+                        <div className="ai-bubble__md">{renderMd(m.content)}</div>
+                        <AiFeedback question={lastQ} lang={lang === "ar" ? "ar" : "fr"} />
+                      </>
+                    ) : (
+                      <div className="whitespace-pre-wrap text-[14px]">{m.content}</div>
+                    )}
+                  </div>
+                );
+              })}
               {loading && (
                 <div className="ai-bubble ai-bubble--bot">
                   <div className="typing-dot" />
@@ -253,8 +340,14 @@ export function AIAssistant({ lang }: { lang: Lang }) {
                 e.preventDefault();
                 void sendMessage(input);
               }}
-              className="flex gap-2 p-3"
+              className="flex gap-2 p-3 items-center"
             >
+              <AttachButton lang={lang === "ar" ? "ar" : "fr"} onPick={(f) => void handleAttach(f)} disabled={loading || uploading} remaining={uploadLeft ?? undefined} />
+              {uploading && (
+                <span className="mono text-[11px] text-[var(--l)] whitespace-nowrap">
+                  {lang === "ar" ? "جارٍ تحضير الملف…" : "Préparation du fichier…"}
+                </span>
+              )}
               <input
                 ref={inputRef}
                 name="message"

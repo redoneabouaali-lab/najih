@@ -7,6 +7,7 @@ import { shuffle } from "@/lib/shuffle";
 import Link from "next/link";
 import { Quiz } from "@/components/Quiz";
 import { PageContext } from "@/components/PageContext";
+import { ContentUnderstand } from "@/components/ContentUnderstand";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -95,6 +96,18 @@ export default async function QuizPage({ params }: Props) {
       </div>
     );
 
+  const quizContent = chapter.questions
+    .slice(0, 6)
+    .map((q, i) => {
+      const lines = [
+        `س${i + 1}: ${lang === "ar" ? q.promptAr : q.promptFr}`,
+        ...q.options.map((o) => `- ${lang === "ar" ? o.textAr : o.textFr}`),
+      ];
+      if (q.source) lines.push(`المصدر: ${q.source}`);
+      return lines.join("\n");
+    })
+    .join("\n\n");
+
   return (
     <div>
       <PageContext
@@ -103,6 +116,17 @@ export default async function QuizPage({ params }: Props) {
             ? `\nمثال سؤال على الشاشة الآن: «${lang === "ar" ? questions[0].promptAr : questions[0].promptFr}»`
             : ""
         }`}
+      />
+      <ContentUnderstand
+        storageKey={`quiz:${chapter.id}`}
+        input={{
+          content: quizContent,
+          title: lang === "ar" ? chapter.titleAr : chapter.titleFr,
+          kindHint: "exercise",
+          lang: lang === "ar" ? "ar" : "fr",
+          context: `اختبار تفاعلي في درس ${lang === "ar" ? chapter.titleAr : chapter.titleFr}`,
+        }}
+        auto
       />
       <div className="max-w-2xl mx-auto px-6 pt-6 text-sm">
         <Link

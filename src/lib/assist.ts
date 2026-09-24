@@ -32,3 +32,25 @@ export function subscribePageContext(listener: PageContextListener): () => void 
     contextListeners.delete(listener);
   };
 }
+
+export type SeedMsg = { role: "user" | "assistant"; content: string };
+
+let seedMsgs: SeedMsg[] = [];
+const seedListeners = new Set<(m: SeedMsg[]) => void>();
+
+export function seedChat(messages: SeedMsg[]) {
+  seedMsgs = messages;
+  seedListeners.forEach((l) => l(messages));
+}
+
+export function getSeed(): SeedMsg[] {
+  return seedMsgs;
+}
+
+export function subscribeSeedChat(listener: (m: SeedMsg[]) => void): () => void {
+  seedListeners.add(listener);
+  listener(seedMsgs);
+  return () => {
+    seedListeners.delete(listener);
+  };
+}

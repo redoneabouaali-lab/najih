@@ -3,6 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 import { t, type Lang } from "@/lib/lang";
 import { renderMd } from "@/lib/md";
+import { prepareAttachment } from "@/lib/attach";
+import { AttachButton } from "@/components/AttachButton";
+import { AiFeedback } from "@/components/AiFeedback";
+import { uploadsExhausted, uploadsRemaining, consumeUpload } from "@/lib/uploads";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -10,6 +14,8 @@ export function Chat({ lang }: { lang: Lang }) {
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadLeft, setUploadLeft] = useState<number>(() => uploadsRemaining());
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,11 +25,11 @@ export function Chat({ lang }: { lang: Lang }) {
   const pushAssistant = (content: string) =>
     setMsgs((m) => [...m, { role: "assistant", content }]);
 
-  const send = async () => {
-    const text = input.trim();
-    if (!text || loading) return;
+  const send = async (raw?: string, attachments?: unknown[]) => {
+    const text = (raw ?? input).trim();
+    if ((!text && !attachments?.length) || loading) return;
     setInput("");
-    setMsgs((m) => [...m, { role: "user", content: text }]);
+    setMsgs((m) => [...m, { role: "user", content: text || "📎 مرفق" }]);
     setLoading(true);
     try {
       const system =
@@ -40,6 +46,7 @@ export function Chat({ lang }: { lang: Lang }) {
             ...msgs.map((m) => ({ role: m.role, content: m.content })),
             { role: "user", content: text },
           ],
+          attachments: attachments ?? [],
         }),
       });
 
@@ -67,6 +74,43 @@ export function Chat({ lang }: { lang: Lang }) {
     }
   };
 
+  const handleAttach = async (f: File) => {
+    if (loading || uploading) return;
+    if (uploadsExhausted()) {
+      pushAssistant(
+        lang === "ar"
+          ? "أنت استنفدت تحميلاتك المجانية الثلاثة 📎. جرّب زر «فهم هذا الملف» في صفحات الدروس، أو اسأل المرشد مباشرة."
+          : "Tu as épuisé tes 3 téléversements gratuits 📎. Utilise le bouton « Comprendre ce fichier » ou interroge directement le tuteur.",
+      );
+      return;
+    }
+    setUploading(true);
+    try {
+      const attach = await prepareAttachment(f);
+      if (attach.type === "pdf" && attach.text.trim().length < 80) {
+        pushAssistant(
+          lang === "ar"
+            ? "😕 هذا الملف غير قابل للقراءة (مسح ضوئي أو محمي). جرّب رفع صورة واضحة."
+            : "😕 Ce fichier est illisible (scanné ou protégé). Essaie une photo nette.",
+        );
+        return;
+      }
+      consumeUpload();
+      setUploadLeft(uploadsRemaining());
+      await send(
+        input.trim() ||
+          (lang === "ar" ? "اقرأ هذا الملف واشرحه لي خطوة بخطوة" : "Lis ce fichier et explique-le étape par étape"),
+        [attach],
+      );
+    } catch {
+      pushAssistant(
+        lang === "ar" ? "تعذّر قراءة المرفق، حاول مرة أخرى." : "Impossible de lire la pièce jointe.",
+      );
+    } finally {
+      setUploading(false);
+    }
+  };
+
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-8 py-10 flex flex-col min-h-[78vh]">
       <div className="mb-8">
@@ -79,29 +123,41 @@ export function Chat({ lang }: { lang: Lang }) {
         {msgs.length === 0 && (
           <p className="sec-sub text-[var(--l)]">{t(lang, "chatExample")}</p>
         )}
-        {msgs.map((m, i) => (
-          <div
-            key={i}
-            dir={lang === "ar" ? "rtl" : "ltr"}
-            className={`max-w-[85%] ${m.role === "user" ? "ml-auto" : "mr-auto w-full"}`}
-          >
-            <div className="mono text-[10px] uppercase tracking-[.14em] text-[var(--l)] mb-1">
-              {m.role === "user"
-                ? lang === "ar" ? "أنت" : "Vous"
-                : lang === "ar" ? "المرشد" : "Tuteur"}
-            </div>
+        {msgs.map((m, i) => {
+          let lastQ = "";
+          for (let k = i - 1; k >= 0; k--) {
+            if (msgs[k].role === "user") {
+              lastQ = msgs[k].content;
+              break;
+            }
+          }
+          return (
             <div
-              className={`p-4 rounded-2xl ${m.role === "user" ? "bg-gradient-to-br from-indigo-600 to-indigo-700 text-white shadow-[var(--shadow-md)]" : "panel p-5 text-[var(--b)]"}`}
-              dir="auto"
+              key={i}
+              dir={lang === "ar" ? "rtl" : "ltr"}
+              className={`max-w-[85%] ${m.role === "user" ? "ml-auto" : "mr-auto w-full"}`}
             >
-              {m.role === "assistant" ? (
-                <div className="text-[15px]">{renderMd(m.content)}</div>
-              ) : (
-                <div className="whitespace-pre-wrap">{m.content}</div>
-              )}
+              <div className="mono text-[10px] uppercase tracking-[.14em] text-[var(--l)] mb-1">
+                {m.role === "user"
+                  ? lang === "ar" ? "أنت" : "Vous"
+                  : lang === "ar" ? "المرشد" : "Tuteur"}
+              </div>
+              <div
+                className={`p-4 rounded-2xl ${m.role === "user" ? "bg-gradient-to-br from-indigo-600 to-indigo-700 text-white shadow-[var(--shadow-md)]" : "panel p-5 text-[var(--b)]"}`}
+                dir="auto"
+              >
+                {m.role === "assistant" ? (
+                  <>
+                    <div className="text-[15px]">{renderMd(m.content)}</div>
+                    <AiFeedback question={lastQ} lang={lang} />
+                  </>
+                ) : (
+                  <div className="whitespace-pre-wrap">{m.content}</div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         {loading && (
           <p className="mono text-xs text-[var(--p)]">{t(lang, "chatThinking")}</p>
         )}
@@ -113,8 +169,14 @@ export function Chat({ lang }: { lang: Lang }) {
           e.preventDefault();
           send();
         }}
-        className="flex gap-2 mt-2"
+        className="flex gap-2 mt-2 items-center"
       >
+        <AttachButton lang={lang} onPick={(f) => void handleAttach(f)} disabled={loading || uploading} remaining={uploadLeft ?? undefined} />
+        {uploading && (
+          <span className="mono text-[11px] text-[var(--l)] whitespace-nowrap">
+            {lang === "ar" ? "جارٍ تحضير الملف…" : "Préparation du fichier…"}
+          </span>
+        )}
         <input
           type="text"
           value={input}

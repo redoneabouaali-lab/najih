@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { retrieveKnowledge } from "@/lib/knowledge";
+import { logStudentQuestion, learningBrief } from "@/lib/learning";
 
 export const runtime = "nodejs";
 
 const MODEL = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning";
+const VISION_MODEL = "meta/llama-3.2-90b-vision-instruct";
 
 const STOP = new Set([
   "ما", "هو", "هي", "هل", "ماهو", "ماهي", "ماهي", "كيف", "و", "ف", "في", "على", "من", "إلى", "عن",
@@ -190,7 +193,7 @@ function buildLibrary(rows: Row[]): string {
   return lines.join("\n");
 }
 
-function systemPrompt(lang: string, library: string, context: string): string {
+function systemPrompt(lang: string, library: string, context: string, knowledge: string, learning: string): string {
   const libraryBlock =
     library ||
     "(لم يستجب ملفات لهذا السؤال — اشرحه باختصار ثم وجّه الطالب لصفحات الموقع الحقيقية: /branches للشعب و /resources للامتحانات)";
@@ -206,8 +209,22 @@ function systemPrompt(lang: string, library: string, context: string): string {
 - دائماً: سلّط الضوء على المادة الحالية لا غير (رياضيات/فيزياء/SVT/اقتصاد...)، وكن دقيقاً في المصطلحات.
 `
     : "";
+  const knowledgeBlock = knowledge
+    ? `\n\n📚 **مكتبة دروس ناجح (محتوى حقيقي مسترجع من الموقع الآن)** — هذه دروس ومحتوى فعلي من المنصة يخص سؤال الطالب. اعتمد عليه للإجابة بسرعة ودقة:
+- إن كان السؤال عن درس: اشرح من هذا المحتوى مباشرة وحُلّ إليه بالأمثلة.
+- إن ورد هنا سؤال امتحان محلول (مع اختياراته وشرحه): اجبه مباشرة واشرح لماذا هذا الاختيار صحيح، دون التظاهر بأنك ترى شيئاً آخر.
+- لا تلقّن هذا المحتوى للطالب كما هو: أعد صياغته بأسلوبك التعليمي، وإذا كان ناقصاً وُضّح ذلك.
+
+المحتوى المسترجع:
+${knowledge}
+`
+    : "";
+  const learningBlock = learning
+    ? `\n🧠 **سلوكك المُتعلَّم من أسئلة الطلاب** (تحسين تلقائي، استعمله بسلاسة دون ذكره حرفياً):
+${learning}\n`
+    : "";
   return `أنت "${lang === "ar" ? "المرشد الذكي" : "Tuteur IA"}" في موقع ناجح (Najih) — منصة مجانية لتحضير الباكالوريا المغربية. أنت أستاذ خصوصي صبور وودود يرافق الطالب التلميذ خطوة بخطوة.
-${contextBlock}${teachBlock}
+${contextBlock}${teachBlock}${knowledgeBlock}${learningBlock}
 🎯 مهمتك التربوية (الأهم):
 1. عندما يقول الطالب "ما فهمت" أو "مافهمتش" أو "صعيب" أو "Je n'ai pas compris" أو يبدو حائراً: لا تعطه الجواب مباشرة. أولاً طمئنه ("عادي، نعاودوها ببساطة 👌")، ثم اشرح الفكرة الأساسية بلغة سهلة وبالدارجة إن كتب هو بالدارجة، واستعمل تشبيهاً من الحياة اليومية، ثم اسأله سؤالاً بسيطاً واحداً للتأكد أنه فهم. قسّم الشرح إلى خطوات صغيرة مرقّمة.
 2. عندما يجيب الطالب خطأً أو يسأل عن سؤال اختبار: لا تعطِ الحل النهائي فوراً. اشرح **لماذا** الإجابة خاطئة، واذكر القاعدة، وأعطه تلميحاً (indice) أولاً ليفكر، ثم بعد محاولته اعرض الحل كاملاً مع الخطوات.
@@ -230,7 +247,11 @@ ${libraryBlock}`;
 }
 
 export async function POST(req: Request) {
-  let body: { messages?: { role: string; content: string }[]; context?: string };
+  let body: {
+    messages?: { role: string; content: string }[];
+    context?: string;
+    attachments?: { type?: string; dataUrl?: string; text?: string; name?: string }[];
+  };
   try {
     body = await req.json();
   } catch {
@@ -248,17 +269,56 @@ export async function POST(req: Request) {
   }
 
   const lastUser = [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
-  const lang = messages[0]?.content?.includes("المرشد الذكي") ? "ar" : "fr";
+  const lang: "ar" | "fr" = messages[0]?.content?.includes("المرشد الذكي") ? "ar" : "fr";
 
   const rows = await lookup(lastUser);
   const library = buildLibrary(rows);
-  const system = systemPrompt(lang, library, body.context ?? "");
+  const knowledge = await retrieveKnowledge(lastUser, body.context ?? "", lang);
+  const learning = learningBrief(lang);
+  logStudentQuestion(lastUser, lang);
+  const system = systemPrompt(lang, library, body.context ?? "", knowledge, learning);
+
+  const attachments = body.attachments ?? [];
+  const img = attachments.find((a) => a.type === "image");
+  const pdfs = attachments.filter((a) => a.type === "pdf" && a.text);
+  const model = img ? VISION_MODEL : MODEL;
+
+  const mapped: { role: string; content: unknown }[] = messages.map((m) => ({
+    role: m.role,
+    content: m.content,
+  }));
+  const last = mapped[mapped.length - 1];
+  if (last) {
+    if (img?.dataUrl) {
+      last.content = [
+        {
+          type: "text",
+          text:
+            typeof last.content === "string"
+              ? `${last.content || "اقرأ هذه الصورة وشرح محتواها التعليمي بخطوات، واعرض الحل إن كان سؤالاً."}${
+                  img.name ? `\n(اسم الملف: ${img.name})` : ""
+                }`
+              : "",
+        },
+        { type: "image_url", image_url: { url: img.dataUrl } },
+      ];
+    } else if (pdfs.length > 0) {
+      const base = typeof last.content === "string" ? last.content : "";
+      const appendix = pdfs
+        .map(
+          (p) =>
+            `[📎 مرفق PDF ${p.name ? `«${p.name}»` : ""} — النص المستخرج (قد يكون مبتوراً):]\n«${p.text?.slice(0, 6000) ?? ""}»`,
+        )
+        .join("\n\n");
+      last.content = `${base}\n\n${appendix}`.trim();
+    }
+  }
 
   const payload = {
-    model: MODEL,
+    model,
     messages: [
       { role: "system", content: system },
-      ...messages.map((m) => ({ role: m.role, content: m.content })),
+      ...mapped,
     ],
     max_tokens: 1400,
     temperature: 0.4,

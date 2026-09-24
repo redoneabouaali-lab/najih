@@ -5,6 +5,7 @@ import { mkMeta } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageContext } from "@/components/PageContext";
+import { ContentUnderstand } from "@/components/ContentUnderstand";
 
 type Props = { params: Promise<{ slug: string; matiereSlug: string }> };
 
@@ -126,26 +127,38 @@ export default async function MatiereExamensPage({ params }: Props) {
             <div className="journal">
               {sessions.flatMap((sg) =>
                 sg.rows.map((r, i) => (
-                  <a
-                    key={r.id}
-                    href={r.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="entry"
-                  >
-                    <span className="entry__idx">0{i + 1}<i /></span>
-                    <span>
-                      <span className="entry__title block">
-                        {sg.session ? t(lang, SESSION_KEY[sg.session]) : year}
+                  <div key={r.id} className="flex gap-2 items-stretch">
+                    <a
+                      href={r.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="entry flex-1"
+                    >
+                      <span className="entry__idx">0{i + 1}<i /></span>
+                      <span>
+                        <span className="entry__title block">
+                          {sg.session ? t(lang, SESSION_KEY[sg.session]) : year}
+                        </span>
+                        <span className="entry__role block mt-2">
+                          {r.titleFr.toLowerCase().includes("correction")
+                            ? `✅ ${t(lang, "kCorrection")}`
+                            : `📋 ${t(lang, "kSujet")}`}
+                        </span>
                       </span>
-                      <span className="entry__role block mt-2">
-                        {r.titleFr.toLowerCase().includes("correction")
-                          ? `✅ ${t(lang, "kCorrection")}`
-                          : `📋 ${t(lang, "kSujet")}`}
-                      </span>
-                    </span>
-                    <span className="entry__meta"><b>↗</b></span>
-                  </a>
+                      <span className="entry__meta"><b>↗</b></span>
+                    </a>
+                    <ContentUnderstand
+                      storageKey={`resource:${r.id}`}
+                      input={{
+                        resourceUrl: r.url,
+                        title: lang === "ar" ? r.titleAr ?? undefined : r.titleFr ?? undefined,
+                        kindHint: "exercise",
+                        lang: lang === "ar" ? "ar" : "fr",
+                      }}
+                      label={lang === "ar" ? "فهم" : "Comprendre"}
+                      buttonClassName="btn btn-sm !px-3 shrink-0 self-center"
+                    />
+                  </div>
                 )),
               )}
             </div>

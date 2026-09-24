@@ -9,6 +9,7 @@ import { Markdown } from "@/components/Markdown";
 import { JsonLd } from "@/components/JsonLd";
 import { AskTutorButton } from "@/components/AskTutorButton";
 import { PageContext } from "@/components/PageContext";
+import { ContentUnderstand } from "@/components/ContentUnderstand";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -84,6 +85,17 @@ ${excerpt(lessonContent)}`;
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-8 py-10">
       <PageContext context={assistContext} />
+      <ContentUnderstand
+        storageKey={`lesson:${chapter.id}`}
+        input={{
+          content: lessonContent,
+          title,
+          kindHint: "lesson",
+          lang: lang === "ar" ? "ar" : "fr",
+          context: `الدرس ${title} في مادة ${subjectName} (${branchName})`,
+        }}
+        auto
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -214,11 +226,24 @@ ${excerpt(lessonContent)}`;
           <div className="label mb-5">{t(lang, "exerciseSection")}</div>
           <div className="journal">
             {exercises.map((e, i) => (
-              <a key={e.id} href={e.url} target="_blank" rel="noopener noreferrer" className="entry">
-                <span className="entry__idx">0{i + 1}<i /></span>
-                <span className="entry__title block">{lang === "ar" ? e.titleAr : e.titleFr}</span>
-                <span className="entry__meta"><b>↗</b></span>
-              </a>
+              <div key={e.id} className="flex gap-2 items-stretch">
+                <a href={e.url} target="_blank" rel="noopener noreferrer" className="entry flex-1">
+                  <span className="entry__idx">0{i + 1}<i /></span>
+                  <span className="entry__title block">{lang === "ar" ? e.titleAr : e.titleFr}</span>
+                  <span className="entry__meta"><b>↗</b></span>
+                </a>
+                <ContentUnderstand
+                  storageKey={`resource:${e.id}`}
+                  input={{
+                    resourceUrl: e.url,
+                    title: lang === "ar" ? e.titleAr ?? undefined : e.titleFr ?? undefined,
+                    kindHint: "exercise",
+                    lang: lang === "ar" ? "ar" : "fr",
+                  }}
+                  label={lang === "ar" ? "فهم" : "Comprendre"}
+                  buttonClassName="btn btn-sm !px-3 shrink-0 self-center"
+                />
+              </div>
             ))}
           </div>
         </section>
