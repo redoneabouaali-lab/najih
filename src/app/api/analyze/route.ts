@@ -13,10 +13,11 @@ import { quotaRemaining, chargeTokens } from "@/lib/quota";
 export const runtime = "nodejs";
 
 const MODEL = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning";
+const FAST_MODEL = "openai/gpt-oss-20b";
 const VISION_MODEL = "meta/llama-3.2-90b-vision-instruct";
 
 const FETCH_TIMEOUT = 12_000;
-const MODEL_TIMEOUT = 45_000;
+const MODEL_TIMEOUT = 55_000;
 const MAX_CONTENT = 16_000;
 
 const hits = new Map<string, number[]>();
@@ -204,15 +205,14 @@ export async function POST(req: Request) {
       );
     } else if (source.type === "text") {
       const text = source.text.length > MAX_CONTENT ? source.text.slice(0, MAX_CONTENT) : source.text;
-      raw = await callModel(
-        MODEL,
-        [
-          { role: "system", content: instruction },
-          { role: "user", content: buildAnalyzeUser(text, body.title) },
-        ],
-        850,
-        sessionId,
-      );
+      const msgs = [
+        { role: "system", content: instruction },
+        { role: "user", content: buildAnalyzeUser(text, body.title) },
+      ];
+      raw = await callModel(FAST_MODEL, msgs, 850, sessionId).catch(() => "");
+      if (!raw || !parseAnalyzeJson(raw)) {
+        raw = await callModel(MODEL, msgs, 1000, sessionId);
+      }
     } else {
       return NextResponse.json({
         ok: false,
