@@ -147,13 +147,14 @@ export function ContentUnderstand({
         if (!lsGet(fullKey)) {
           setOpen(true);
           lsSet(fullKey);
+          void runAnalyze();
         }
       }, autoDelay);
     }
     return () => {
       if (tm) clearTimeout(tm);
     };
-  }, [auto, autoDelay, fullKey]);
+  }, [auto, autoDelay, fullKey, runAnalyze]);
 
   // status rotation + elapsed counter
   useEffect(() => {
@@ -198,6 +199,7 @@ export function ContentUnderstand({
         onClick={() => {
           setOpen(true);
           lsSet(fullKey);
+          void runAnalyze();
         }}
         className={buttonClassName || "btn btn-ghost btn-sm"}
         title={label}
