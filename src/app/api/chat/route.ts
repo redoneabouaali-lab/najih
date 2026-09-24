@@ -326,14 +326,14 @@ export async function POST(req: Request) {
 
   try {
     let res: Response | null = null;
-    for (let attempt = 0; attempt < 3; attempt++) {
+    for (let attempt = 0; attempt < 5; attempt++) {
       res = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
         method: "POST",
         headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
       if (res.ok || (res.status !== 429 && res.status < 500)) break;
-      const retryAfter = Number(res.headers.get("retry-after")) || 1.5 * (attempt + 1);
+      const retryAfter = Number(res.headers.get("retry-after")) || 2 * (attempt + 1);
       await new Promise((r) => setTimeout(r, retryAfter * 1000));
     }
     if (!res) {
