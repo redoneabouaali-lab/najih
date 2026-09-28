@@ -7,9 +7,10 @@ interface DemoVideoProps {
   playText: string;
   badgeText: string;
   altText: string;
+  priority?: boolean;
 }
 
-export function DemoVideo({ playText, badgeText, altText }: DemoVideoProps) {
+export function DemoVideo({ playText, badgeText, altText, priority = false }: DemoVideoProps) {
   const frameRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [near, setNear] = useState(false);
@@ -63,9 +64,10 @@ export function DemoVideo({ playText, badgeText, altText }: DemoVideoProps) {
               src="/media/najih-demo-poster.webp"
               alt={altText}
               fill
-              sizes="(max-width: 1280px) 100vw, 1080px"
+              sizes="(max-width: 976px) 92vw, 620px"
               className="object-cover"
-              loading="lazy"
+              priority={priority}
+              loading={priority ? undefined : "lazy"}
               decoding="async"
             />
             <span className="demo-video__veil" aria-hidden />

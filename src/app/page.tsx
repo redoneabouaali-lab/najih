@@ -5,7 +5,6 @@ import { mkMeta } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
-import { Hero3D } from "@/components/Hero3D";
 import { DemoVideo } from "@/components/DemoVideo";
 import { SourceCredits } from "@/components/SourceCredits";
 import { JsonLd } from "@/components/JsonLd";
@@ -140,7 +139,15 @@ export default async function Home() {
 
           <Reveal delay={200} className="relative">
             <div className="float">
-              <Hero3D alt={lang === "ar" ? "طلاب ناجح يدرسون" : "Élèves Najih qui révisent"} />
+              <DemoVideo
+                priority
+                playText={t(lang, "videoPlay")}
+                badgeText={t(lang, "videoBadge")}
+                altText={lang === "ar" ? "فيديو عرض لكيفية عمل ناجح" : "Vidéo de démo de Najih"}
+              />
+              <div className="mt-4 text-center sm:text-start">
+                <span className="label mx-auto sm:mx-0 inline-flex">{t(lang, "videoLabel")}</span>
+              </div>
             </div>
             <div className="float-sm absolute -bottom-5 left-6 sm:left-10 rounded-2xl bg-white border border-[var(--p)] shadow-[var(--shadow-md)] px-5 py-3 flex items-center gap-3" style={{ animationDelay: "0.6s" }}>
               <span className="glow-dot w-2.5 h-2.5 bg-gradient-to-br from-indigo-500 to-sky-400" />
@@ -220,24 +227,6 @@ export default async function Home() {
             </Reveal>
           ))}
         </div>
-      </section>
-
-      {/* DEMO VIDEO */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16">
-        <Reveal>
-          <div className="mb-10 text-center">
-            <span className="label mb-3">{t(lang, "videoLabel")}</span>
-            <h2 className="sec-title text-[var(--b)] mt-2">{t(lang, "videoTitle")}</h2>
-            <p className="sec-sub mt-3 mx-auto">{t(lang, "videoSub")}</p>
-          </div>
-        </Reveal>
-        <Reveal delay={120}>
-          <DemoVideo
-            playText={t(lang, "videoPlay")}
-            badgeText={t(lang, "videoBadge")}
-            altText={lang === "ar" ? "فيديو عرض لكيفية عمل ناجح" : "Vidéo de démo de Najih"}
-          />
-        </Reveal>
       </section>
 
       {/* BRANCHES */}
