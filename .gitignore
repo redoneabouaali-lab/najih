@@ -54,3 +54,10 @@ next-env.d.ts
 dev.db-wal
 dev.db-shm
 
+# scratch / build logs
+/build.log
+/brag-output-2026-09-28-101303/
+/q_live.js
+/r1.txt
+/r_reveal.txt
+

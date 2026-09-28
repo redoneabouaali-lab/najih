@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Hero3D } from "@/components/Hero3D";
+import { DemoVideo } from "@/components/DemoVideo";
 import { SourceCredits } from "@/components/SourceCredits";
 import { JsonLd } from "@/components/JsonLd";
 
@@ -219,6 +220,24 @@ export default async function Home() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      {/* DEMO VIDEO */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16">
+        <Reveal>
+          <div className="mb-10 text-center">
+            <span className="label mb-3">{t(lang, "videoLabel")}</span>
+            <h2 className="sec-title text-[var(--b)] mt-2">{t(lang, "videoTitle")}</h2>
+            <p className="sec-sub mt-3 mx-auto">{t(lang, "videoSub")}</p>
+          </div>
+        </Reveal>
+        <Reveal delay={120}>
+          <DemoVideo
+            playText={t(lang, "videoPlay")}
+            badgeText={t(lang, "videoBadge")}
+            altText={lang === "ar" ? "فيديو عرض لكيفية عمل ناجح" : "Vidéo de démo de Najih"}
+          />
+        </Reveal>
       </section>
 
       {/* BRANCHES */}
