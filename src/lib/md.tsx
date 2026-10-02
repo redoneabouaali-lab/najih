@@ -1,4 +1,10 @@
 import type { ReactNode } from "react";
+import {
+  splitMath,
+  InlineMath,
+  DisplayMath,
+  type Seg,
+} from "./math";
 
 function escapeHtml(s: string): string {
   return s
@@ -8,7 +14,7 @@ function escapeHtml(s: string): string {
     .replace(/"/g, "&quot;");
 }
 
-function renderInline(text: string, keyBase: string): ReactNode[] {
+function renderText(text: string, keyBase: string): ReactNode[] {
   const esc = escapeHtml(text);
   const parts: ReactNode[] = [];
   const re =
@@ -53,7 +59,7 @@ function renderInline(text: string, keyBase: string): ReactNode[] {
           href={m[5]}
           target="_blank"
           rel="noopener noreferrer"
-          className="break-all text-[var(--acc)] underline decoration-2 underline-offset-2"
+          className="text-[var(--acc)] underline decoration-2 underline-offset-2 break-all"
         >
           {m[5]}
         </a>,
@@ -64,6 +70,61 @@ function renderInline(text: string, keyBase: string): ReactNode[] {
   if (last < esc.length)
     parts.push(<span key={`${keyBase}-e${i++}`}>{esc.slice(last)}</span>);
   return parts;
+}
+
+function renderSegs(segs: Seg[], keyBase: string): ReactNode[] {
+  const parts: ReactNode[] = [];
+  let i = 0;
+  for (const seg of segs) {
+    if (seg.type === "text") {
+      if (seg.value === "") continue;
+      parts.push(...renderText(seg.value, `${keyBase}-s${i++}`));
+    } else if (seg.display) {
+      parts.push(<DisplayMath key={`${keyBase}-m${i++}`} latex={seg.value} />);
+    } else {
+      parts.push(<InlineMath key={`${keyBase}-m${i++}`} latex={seg.value} />);
+    }
+  }
+  return parts;
+}
+
+export function renderInlineMd(text: string, keyBase = "i"): ReactNode[] {
+  return renderSegs(splitMath(text), keyBase);
+}
+
+function renderBodyLine(raw: string, keyBase: string): ReactNode[] {
+  const segs = splitMath(raw);
+  if (!segs.some((s) => s.type === "math" && s.display)) {
+    return [
+      <p key={keyBase} className="mb-2 leading-relaxed">
+        {renderSegs(segs, keyBase)}
+      </p>,
+    ];
+  }
+  const out: ReactNode[] = [];
+  let pending: Seg[] = [];
+  let n = 0;
+  const flush = () => {
+    if (pending.length === 0) return;
+    if (pending.some((s) => s.type === "text" && s.value.trim() !== "")) {
+      out.push(
+        <p key={`${keyBase}-p${n++}`} className="mb-2 leading-relaxed">
+          {renderSegs(pending, `${keyBase}-q${n}`)}
+        </p>,
+      );
+    }
+    pending = [];
+  };
+  for (const seg of segs) {
+    if (seg.type === "math" && seg.display) {
+      flush();
+      out.push(<DisplayMath key={`${keyBase}-m${n++}`} latex={seg.value} />);
+    } else {
+      pending.push(seg);
+    }
+  }
+  flush();
+  return out;
 }
 
 export function renderMd(text: string): ReactNode[] {
@@ -79,8 +140,8 @@ export function renderMd(text: string): ReactNode[] {
         className={`${list.type === "ul" ? "list-disc" : "list-decimal"} pl-5 space-y-1 my-2`}
       >
         {list.items.map((it, j) => (
-          <li key={`li-${j}`} className="leading-relaxed">
-            {renderInline(it, `li${k}${j}`)}
+          <li key={`li${j}`} className="leading-relaxed">
+            {renderInlineMd(it, `li${k}${j}`)}
           </li>
         ))}
       </List>,
@@ -94,7 +155,7 @@ export function renderMd(text: string): ReactNode[] {
       flush();
       out.push(
         <p key={`h-${k++}`} className="font-bold text-[15px] my-2">
-          {renderInline(line.replace(/^#{1,4}\s+/, ""), `h${k}`)}
+          {renderInlineMd(line.replace(/^#{1,4}\s+/, ""), `h${k}`)}
         </p>,
       );
       continue;
@@ -110,7 +171,7 @@ export function renderMd(text: string): ReactNode[] {
       continue;
     }
     flush();
-    if (line !== "") out.push(<p key={`p-${k++}`} className="mb-2 leading-relaxed">{renderInline(raw, `p${k}`)}</p>);
+    if (line !== "") out.push(...renderBodyLine(raw, `p${k++}`));
   }
   flush();
   return out;

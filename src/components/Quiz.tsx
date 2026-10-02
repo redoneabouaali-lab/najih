@@ -6,6 +6,7 @@ import { t, type Lang } from "@/lib/lang";
 import { shuffle } from "@/lib/shuffle";
 import { db } from "@/lib/db";
 import { openAssistant } from "@/lib/assist";
+import { renderInlineMd } from "@/lib/md";
 
 type Option = { id: string; textAr: string; textFr: string; isCorrect: boolean };
 
@@ -167,13 +168,16 @@ export function Quiz({
                 {answers[i]?.correct ? "✓" : "✗"} — 0{i + 1}
               </div>
               <p className="font-bold text-[var(--b)]">
-                {lang === "ar" ? q.promptAr : q.promptFr}
+                {renderInlineMd(lang === "ar" ? q.promptAr : q.promptFr, `qp${i}`)}
               </p>
               {!answers[i]?.correct &&
                 ((lang === "ar" && q.explanationAr) ||
                   (lang === "fr" && q.explanationFr)) && (
                   <p className="text-sm mt-2 text-[var(--l)]">
-                    {lang === "ar" ? q.explanationAr : q.explanationFr}
+                    {renderInlineMd(
+                      (lang === "ar" ? q.explanationAr : q.explanationFr) ?? "",
+                      `qe${i}`,
+                    )}
                   </p>
                 )}
               {q.source && (
@@ -204,7 +208,7 @@ export function Quiz({
         </span>
       </div>
       <div className="panel p-6 sm:p-8 text-lg leading-relaxed font-bold text-[var(--b)]">
-        {lang === "ar" ? q.promptAr : q.promptFr}
+        {renderInlineMd(lang === "ar" ? q.promptAr : q.promptFr, "cp")}
       </div>
       <button
         type="button"
@@ -244,7 +248,7 @@ export function Quiz({
               <span className="mono text-xs mr-3 text-[var(--p)]">
                 {String.fromCharCode(97 + oi)}
               </span>
-              {text}
+              {renderInlineMd(text, `opt${oi}`)}
             </button>
           );
         })}
@@ -261,7 +265,10 @@ export function Quiz({
           {((lang === "ar" && q.explanationAr) ||
             (lang === "fr" && q.explanationFr)) && (
             <p className="text-sm text-[var(--l)]">
-              {lang === "ar" ? q.explanationAr : q.explanationFr}
+              {renderInlineMd(
+                (lang === "ar" ? q.explanationAr : q.explanationFr) ?? "",
+                "fex",
+              )}
             </p>
           )}
           {q.source && (

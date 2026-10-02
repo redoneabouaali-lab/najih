@@ -1047,3 +1047,21 @@ html.lenis, html.lenis body { height: auto; }
   .demo-video__play::before { animation: none; }
 }
 
+
+.math-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 0.35rem 0;
+}
+.math-display .katex-display {
+  margin: 0;
+  text-align: center;
+}
+.math-inline .katex {
+  font-size: 1.02em;
+}
+.math-display .katex,
+.math-inline .katex {
+  color: inherit;
+}

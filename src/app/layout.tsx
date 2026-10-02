@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Space_Grotesk, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
+import "katex/dist/katex.min.css";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
 import { prisma } from "@/lib/prisma";
