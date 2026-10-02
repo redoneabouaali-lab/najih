@@ -4,7 +4,12 @@ import { randomUUID } from "node:crypto";
 import path from "node:path";
 
 const require = createRequire(import.meta.url);
-const Database = require("better-sqlite3");
+// Resolve better-sqlite3 through the Prisma adapter. The top-level copy in
+// node_modules is built for the wrong ABI and segfaults on open in the runtime
+// image, which silently skipped this seed step on every deploy.
+const Database = createRequire(require.resolve("@prisma/adapter-better-sqlite3"))(
+  "better-sqlite3",
+);
 
 const SITES_DIR = "content/sites";
 

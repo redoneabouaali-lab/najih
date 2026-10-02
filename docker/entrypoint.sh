@@ -8,17 +8,21 @@ else
 fi
 
 mkdir -p "$(dirname "$DB_FILE")"
-# Only seed the DB when it is missing or unusable. Overwriting it on every start
-# destroys content written at runtime (AI-generated questions) whenever the
-# container is replaced.
-if [ -s "$DB_FILE" ] && node -e "
-const D=require('better-sqlite3');const d=new D(process.argv[1],{readonly:true});
-const n=d.prepare(\"SELECT COUNT(*) n FROM Chapter\").get().n;d.close();
-process.exit(n>0?0:1);
-" "$DB_FILE" 2>/dev/null; then
-  echo "[najih] existing DB preserved (size: $(stat -c%s "$DB_FILE"), chapters>0)"
+
+# Validate with the SQLite file header only. Node's top-level better-sqlite3
+# binary segfaults in this image (Prisma carries its own working nested copy),
+# so a node-based check would always fail and wipe the database.
+is_sqlite_db() {
+  [ -f "$1" ] || return 1
+  [ "$(stat -c%s "$1" 2>/dev/null || echo 0)" -gt 1024 ] || return 1
+  [ "$(head -c 16 "$1" 2>/dev/null)" = "SQLite format 3" ]
+}
+
+if is_sqlite_db "$DB_FILE"; then
+  echo "[najih] existing DB preserved (size: $(stat -c%s "$DB_FILE"))"
 else
   echo "[najih] no usable DB at $DB_FILE (previous size: $(stat -c%s "$DB_FILE" 2>/dev/null || echo missing)), seeding from bundle"
+  rm -f "$DB_FILE" "$DB_FILE-shm" "$DB_FILE-wal"
   cp /app/bundle/dev.db "$DB_FILE"
   echo "[najih] seeded dev.db (size: $(stat -c%s "$DB_FILE"))"
 fi
