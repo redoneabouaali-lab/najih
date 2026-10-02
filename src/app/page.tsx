@@ -8,6 +8,7 @@ import { Reveal } from "@/components/Reveal";
 import { DemoVideo } from "@/components/DemoVideo";
 import { SourceCredits } from "@/components/SourceCredits";
 import { JsonLd } from "@/components/JsonLd";
+import { LessonLinks } from "@/components/LessonLinks";
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
@@ -274,6 +275,28 @@ export default async function Home() {
             })}
           </div>
         </div>
+      </section>
+
+      {/* POPULAR LESSONS */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8 pb-16">
+        <Reveal>
+          <div className="mb-8">
+            <span className="label mb-3">{lang === "ar" ? "دروس مباشرة" : "Leçons directes"}</span>
+            <h2 className="sec-title text-[var(--b)] mt-2">
+              {lang === "ar" ? "ابدأ مباشرة من أي درس" : "Commencez par n'importe quelle leçon"}
+            </h2>
+            <p className="sec-sub mt-3">
+              {lang === "ar"
+                ? "روابط مباشرة لأهم الدروس — للوصول السريع لصفحتك المفضلة."
+                : "Liens directs vers les leçons principales pour accéder vite à votre page préférée."}
+            </p>
+          </div>
+        </Reveal>
+        <LessonLinks
+          lang={lang}
+          limit={48}
+          heading={lang === "ar" ? "جميع الدروس" : "Toutes les leçons"}
+        />
       </section>
 
       {/* FAQ */}

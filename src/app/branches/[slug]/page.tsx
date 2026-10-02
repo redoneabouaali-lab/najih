@@ -7,6 +7,7 @@ import { BranchMatierePicker } from "@/components/BranchMatierePicker";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/seo";
 import { PageContext } from "@/components/PageContext";
+import { LessonLinks } from "@/components/LessonLinks";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -105,6 +106,17 @@ export default async function BranchPage({ params }: Props) {
         branchNameFr={branch.nameFr}
         matieres={matieres}
       />
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 pb-16">
+        <LessonLinks
+          lang={lang}
+          branchSlug={slug}
+          heading={
+            lang === "ar"
+              ? `كل دروس شعبة ${branch.nameAr}`
+              : `Toutes les leçons — ${branch.nameFr}`
+          }
+        />
+      </div>
     </>
   );
 }

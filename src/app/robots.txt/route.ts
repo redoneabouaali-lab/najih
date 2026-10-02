@@ -9,8 +9,7 @@ export function GET() {
     `Disallow: /results\n` +
     `Disallow: /api/\n` +
     `\n` +
-    `Sitemap: ${SITE_URL}/sitemap.xml\n` +
-    `Agentmap: ${SITE_URL}/.well-known/ai-catalog.json\n`;
+    `Sitemap: ${SITE_URL}/sitemap.xml\n`;
   return new Response(body, {
     headers: { "Content-Type": "text/plain; charset=utf-8" },
   });
