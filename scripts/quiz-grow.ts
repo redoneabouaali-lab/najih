@@ -3,12 +3,15 @@ import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
-for (const line of readFileSync(".env", "utf8").split(/\r?\n/)) {
-  const m = line.match(/^([A-Z0-9_]+)=(.*)$/);
-  // Real runtime env wins: the container ships no .env, and a stale local
-  // DATABASE_URL must not point the generator at a different file.
-  if (m && process.env[m[1]] === undefined) {
-    process.env[m[1]] = m[2].replace(/^"(.*)"$/, "$1").trim();
+// The runtime image ships without .env, so read it only when it exists.
+if (existsSync(".env")) {
+  for (const line of readFileSync(".env", "utf8").split(/\r?\n/)) {
+    const m = line.match(/^([A-Z0-9_]+)=(.*)$/);
+    // Real runtime env wins: a stale local DATABASE_URL must not point the
+    // generator at a different file than the app serves.
+    if (m && process.env[m[1]] === undefined) {
+      process.env[m[1]] = m[2].replace(/^"(.*)"$/, "$1").trim();
+    }
   }
 }
 
