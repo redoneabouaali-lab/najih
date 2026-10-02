@@ -17,6 +17,7 @@
     "seed:resources": "tsx scripts/seed-resources.ts",
     "scrape": "node scripts/scrape-resources.mjs",
     "content": "tsx scripts/generate-content.ts",
+    "content:grow": "tsx scripts/quiz-grow.ts",
     "seed:lessons": "tsx scripts/seed-lessons.ts",
     "seed:questions": "tsx scripts/seed-questions.ts",
     "seed:exercises": "tsx scripts/seed-exercises.ts",
