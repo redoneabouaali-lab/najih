@@ -6,7 +6,7 @@ import "katex/dist/katex.min.css";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
 import { prisma } from "@/lib/prisma";
-import { SITE_URL, SITE_NAME } from "@/lib/seo";
+import { SITE_URL, SITE_NAME, TITLE_SUFFIX } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { LangSync } from "@/components/LangSync";
 import { Header } from "@/components/Header";
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: "ناجح | Najih — Préparation Bac Maroc",
-    template: `%s | ${siteName}`,
+    template: `%s | ${TITLE_SUFFIX}`,
   },
   description:
     "Préparation gratuite au Bac Maroc — examens nationaux, quiz interactifs, tuteur IA",

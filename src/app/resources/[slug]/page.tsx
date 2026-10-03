@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
-import { mkMeta } from "@/lib/seo";
+import { mkMeta, branchAr, branchShortAr, branchShortFr } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageContext } from "@/components/PageContext";
@@ -17,17 +17,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     select: { nameAr: true, nameFr: true },
   });
   if (!branch) return {};
+  const branchLabel = branchAr(branch.nameAr);
+  const shortLabel =
+    lang === "ar" ? branchShortAr(slug, branch.nameAr) : branchShortFr(slug, branch.nameFr);
   return mkMeta({
     lang,
     path: `/resources/${slug}`,
     title:
       lang === "ar"
-        ? `موارد وامتحانات شعبة ${branch.nameAr}`
-        : `Ressources & examens — ${branch.nameFr}`,
+        ? `موارد وامتحانات شعبة ${shortLabel}`
+        : `Ressources & examens — ${shortLabel}`,
     description:
       lang === "ar"
-        ? `موارد شعبة ${branch.nameAr}: امتحانات وطنية، تمارين ودروس PDF — تحميل مباشر ومجاني عشية الباكالوريا.`
+        ? `موارد شعبة ${branchLabel}: امتحانات وطنية، تمارين ودروس PDF — تحميل مباشر ومجاني عشية الباكالوريا.`
         : `Ressources ${branch.nameFr} : examens nationaux, exercices et cours PDF — téléchargement direct et gratuit.`,
+    keywords: [branchLabel],
   });
 }
 
@@ -118,7 +122,7 @@ export default async function BranchResourcesPage({ params }: Props) {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10">
       <PageContext
-        context={`الطالب يبحث في صفحة موارد شعبة ${lang === "ar" ? branch.nameAr : branch.nameFr}: دروس PDF (${lessons.length})، تمارين (${exercises.length}) وامتحانات وطنية (${exams.length}) مع تصحيحاتها. الروابط في هذه الصفحة تفتح ملفات PDF. عندما يطلب الطالب مساعدة، اشرح له موضوع المادة وقدم مثالاً محلولاً وبسّط له المفاهيم كمعلم، واذكر له أن الملفات موجودة في السولار أعلاه.`}
+        context={`الطالب يبحث في صفحة موارد شعبة ${lang === "ar" ? branchAr(branch.nameAr) : branch.nameFr}: دروس PDF (${lessons.length})، تمارين (${exercises.length}) وامتحانات وطنية (${exams.length}) مع تصحيحاتها. الروابط في هذه الصفحة تفتح ملفات PDF. عندما يطلب الطالب مساعدة، اشرح له موضوع المادة وقدم مثالاً محلولاً وبسّط له المفاهيم كمعلم، واذكر له أن الملفات موجودة في السولار أعلاه.`}
       />
       <div className="crumb mb-8 flex items-center gap-1">
         <Link href="/">{t(lang, "navHome")}</Link>

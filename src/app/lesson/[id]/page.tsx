@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
-import { mkMeta, SITE_URL } from "@/lib/seo";
+import { mkMeta, SITE_URL, branchAr } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -73,13 +73,14 @@ export default async function LessonPage({ params }: Props) {
   const title = lang === "ar" ? chapter.titleAr : chapter.titleFr;
   const subjectName = lang === "ar" ? chapter.subject.nameAr : chapter.subject.nameFr;
   const branchName = lang === "ar" ? chapter.subject.branch.nameAr : chapter.subject.branch.nameFr;
+  const branchLabel = lang === "ar" ? branchAr(branchName) : branchName;
   const lessonUrl = `${SITE_URL}/lesson/${chapter.id}`;
 
   const excerpt = (s: string) => {
     const plain = s.replace(/[`#>*_\[\]!]/g, " ").replace(/\s+/g, " ").trim();
     return plain.length > 900 ? `${plain.slice(0, 900)}…` : plain;
   };
-  const assistContext = `الطالب يقرأ الآن درس «${title}» في مادة ${subjectName} (شعبة ${branchName}). محتوى الدرس:
+  const assistContext = `الطالب يقرأ الآن درس «${title}» في مادة ${subjectName} (شعبة ${branchLabel}). محتوى الدرس:
 ${excerpt(lessonContent)}`;
 
   return (

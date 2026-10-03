@@ -91,7 +91,6 @@ export function BranchMatierePicker({
 
       <div className="mb-12">
         <div className="label mb-4">01 — {t(viewLang, "matiere")}</div>
-        <h1 className="sec-title text-[var(--b)]">{branchName}</h1>
         <p className="sec-sub mt-3">{t(viewLang, "pickMatiereSub")}</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <span className="tag">{matieres.length} 🧩</span>

@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
-import { mkMeta, SITE_URL } from "@/lib/seo";
+import { mkMeta, SITE_URL, branchAr, branchShortAr, branchShortFr } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
@@ -20,15 +20,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : null;
   if (!branch || !subject) return {};
   const name = lang === "ar" ? subject.nameAr : subject.nameFr;
+  const branchLabel = lang === "ar" ? branchAr(branch.nameAr) : branch.nameFr;
+  const shortLabel =
+    lang === "ar" ? branchShortAr(slug, branch.nameAr) : branchShortFr(slug, branch.nameFr);
   return mkMeta({
     lang,
     path: `/branches/${slug}/matiere/${matiereSlug}`,
-    title: `${subject.icon} ${name} — ${lang === "ar" ? "دروس وتمارين" : "cours et exercices"}`,
+    title:
+      lang === "ar"
+        ? `${subject.icon} دروس ${name} — ${shortLabel}`
+        : `${subject.icon} Cours ${name} — ${shortLabel}`,
+    brandInTitle: false,
     description:
       lang === "ar"
-        ? `دروس وتمارين مادة ${name} لشعبة ${branch.nameAr}: منهاج كامل مع اختبارات تفاعلية وامتحانات.`
+        ? `دروس وتمارين مادة ${name} لشعبة ${branchLabel}: منهاج كامل مع اختبارات تفاعلية وامتحانات.`
         : `Cours et exercices de ${subject.nameFr} (${branch.nameFr}) : programme complet, quiz interactifs et examens.`,
-    keywords: [name],
+    keywords: [name, branchLabel],
   });
 }
 
@@ -88,7 +95,7 @@ export default async function MatierePage({ params }: Props) {
     0,
   );
 
-  const assistContext = `الطالب يتابع دروس مادة ${lang === "ar" ? subject.nameAr : subject.nameFr} لشعبة ${lang === "ar" ? branch.nameAr : branch.nameFr}. تحتوي الصفحة على ${subject.chapters.length} دروس، ${lessonCount} ملف درس PDF، ${exercises.length} تمارين و${examCount} امتحاناً. كن معلمه: عندما يسأل عن مفهوم من هذه المادة، اشرحه ببساطة بالعربية المغربية مع مثال تطبيقي محلول ثم مثال إضافي مختلف.`;
+  const assistContext = `الطالب يتابع دروس مادة ${lang === "ar" ? subject.nameAr : subject.nameFr} لشعبة ${lang === "ar" ? branchAr(branch.nameAr) : branch.nameFr}. تحتوي الصفحة على ${subject.chapters.length} دروس، ${lessonCount} ملف درس PDF، ${exercises.length} تمارين و${examCount} امتحاناً. كن معلمه: عندما يسأل عن مفهوم من هذه المادة، اشرحه ببساطة بالعربية المغربية مع مثال تطبيقي محلول ثم مثال إضافي مختلف.`;
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10">

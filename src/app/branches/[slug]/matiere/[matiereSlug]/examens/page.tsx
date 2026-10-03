@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
-import { mkMeta } from "@/lib/seo";
+import { mkMeta, branchAr, branchShortAr, branchShortFr } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageContext } from "@/components/PageContext";
@@ -20,15 +20,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : null;
   if (!branch || !subject) return {};
   const name = lang === "ar" ? subject.nameAr : subject.nameFr;
+  const branchLabel = lang === "ar" ? branchAr(branch.nameAr) : branch.nameFr;
+  const shortLabel =
+    lang === "ar" ? branchShortAr(slug, branch.nameAr) : branchShortFr(slug, branch.nameFr);
   return mkMeta({
     lang,
     path: `/branches/${slug}/matiere/${matiereSlug}/examens`,
-    title: `${subject.icon} ${name} — ${lang === "ar" ? "الامتحانات الوطنية" : "examens nationaux"}`,
+    title:
+      lang === "ar"
+        ? `${subject.icon} امتحانات ${name} — ${shortLabel}`
+        : `${subject.icon} Examens ${name} — ${shortLabel}`,
+    brandInTitle: false,
     description:
       lang === "ar"
-        ? `جميع الامتحانات الوطنية لمادة ${name} (شعبة ${branch.nameAr}) مع التصحيح، الدورة العادية والاستدراكية.`
+        ? `جميع الامتحانات الوطنية لمادة ${name} (شعبة ${branchLabel}) مع التصحيح، الدورة العادية والاستدراكية.`
         : `Tous les examens nationaux de ${subject.nameFr} (${branch.nameFr}) avec corrections, session normale et rattrapage.`,
-    keywords: [name],
+    keywords: [name, branchLabel],
   });
 }
 
@@ -88,7 +95,7 @@ export default async function MatiereExamensPage({ params }: Props) {
   }
   const years = [...byYear.keys()].sort((a, b) => (b ?? 0) - (a ?? 0));
 
-  const assistContext = `الطالب يتصفح صفحة الامتحانات الوطنية لمادة ${lang === "ar" ? subject.nameAr : subject.nameFr} (شعبة ${lang === "ar" ? branch.nameAr : branch.nameFr}) لفتح ملفات PDF لأسئلة الامتحانات وتصحيحاتها (${years.length} سنوات، ${exams.length} ملف). لا يمكنك رؤية محتوى ملف الـ PDF المفتوح، لذلك اشرح للطالب الطريقة المنهجية لحل موضوع في هذا الامتحان، واعرض مثالاً محلولاً كاملاً بأسلوب "الدورة العادية"، ثم مثالاً إضافياً مختلفاً، ونصيحة للتدرب على التصحيح.`;
+  const assistContext = `الطالب يتصفح صفحة الامتحانات الوطنية لمادة ${lang === "ar" ? subject.nameAr : subject.nameFr} (شعبة ${lang === "ar" ? branchAr(branch.nameAr) : branch.nameFr}) لفتح ملفات PDF لأسئلة الامتحانات وتصحيحاتها (${years.length} سنوات، ${exams.length} ملف). لا يمكنك رؤية محتوى ملف الـ PDF المفتوح، لذلك اشرح للطالب الطريقة المنهجية لحل موضوع في هذا الامتحان، واعرض مثالاً محلولاً كاملاً بأسلوب "الدورة العادية"، ثم مثالاً إضافياً مختلفاً، ونصيحة للتدرب على التصحيح.`;
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10">

@@ -1,11 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
-import { mkMeta } from "@/lib/seo";
+import { mkMeta, SITE_URL, branchAr, branchShortAr, branchShortFr } from "@/lib/seo";
 import type { Metadata } from "next";
 import { t } from "@/lib/lang";
 import { BranchMatierePicker } from "@/components/BranchMatierePicker";
 import { JsonLd } from "@/components/JsonLd";
-import { SITE_URL } from "@/lib/seo";
 import { PageContext } from "@/components/PageContext";
 import { LessonLinks } from "@/components/LessonLinks";
 
@@ -19,17 +18,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     select: { nameAr: true, nameFr: true },
   });
   if (!branch) return {};
+  const branchLabel = branchAr(branch.nameAr);
+  const shortLabel =
+    lang === "ar" ? branchShortAr(slug, branch.nameAr) : branchShortFr(slug, branch.nameFr);
   return mkMeta({
     lang,
     path: `/branches/${slug}`,
     title:
       lang === "ar"
-        ? `شعبة ${branch.nameAr} — دروس وامتحانات`
-        : `${branch.nameFr} — cours et examens`,
+        ? `شعبة ${shortLabel} — دروس وامتحانات`
+        : `${branchShortFr(slug, branch.nameFr)} — cours et examens`,
     description:
       lang === "ar"
-        ? `كل ما تحتاجه لشعبة ${branch.nameAr}: دروس، تمارين، امتحانات وطنية واختبارات تفاعلية عشية الباكالوريا.`
+        ? `كل ما تحتاجه لشعبة ${branchLabel}: دروس، تمارين، امتحانات وطنية واختبارات تفاعلية عشية الباكالوريا.`
         : `Tout pour la filière ${branch.nameFr} : cours, exercices, examens nationaux et quiz interactifs pour préparer le Bac.`,
+    keywords: [branchLabel],
   });
 }
 
@@ -77,7 +80,7 @@ export default async function BranchPage({ params }: Props) {
   return (
     <>
       <PageContext
-        context={`الطالب يختار المواد لشعبة ${branchName}: ${matieres.map((m) => `${m.nameAr} (${m.chapterCount} دروس)`).join("، ")}. كن معلمه: ساعد الطالب في فهم منهج المادة، واشرح ببساطة أي مفهوم مع مثال محلول وإضافة مثال ثاني مختلف.`}
+        context={`الطالب يختار المواد لشعبة ${branchAr(branch.nameAr)}: ${matieres.map((m) => `${m.nameAr} (${m.chapterCount} دروس)`).join("، ")}. كن معلمه: ساعد الطالب في فهم منهج المادة، واشرح ببساطة أي مفهوم مع مثال محلول وإضافة مثال ثاني مختلف.`}
       />
       <JsonLd
         data={{
@@ -99,6 +102,9 @@ export default async function BranchPage({ params }: Props) {
           ],
         }}
       />
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 pt-10">
+        <h1 className="sec-title text-[var(--b)]">{branchName}</h1>
+      </div>
       <BranchMatierePicker
         lang={lang}
         branchSlug={slug}
@@ -112,7 +118,7 @@ export default async function BranchPage({ params }: Props) {
           branchSlug={slug}
           heading={
             lang === "ar"
-              ? `كل دروس شعبة ${branch.nameAr}`
+              ? `كل دروس ${branch.nameAr}`
               : `Toutes les leçons — ${branch.nameFr}`
           }
         />
