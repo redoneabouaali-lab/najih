@@ -60,9 +60,13 @@ export async function LessonLinks({ lang, branchSlug, limit, heading }: Props) {
                 <Icon name="book" size={13} /> {t(lang, "lessonView")}
               </span>
               {ch._count.questions > 0 ? (
-                <span className="tag">
+                <Link
+                  href={`/quiz/${ch.id}`}
+                  className="tag hover:border-[var(--brand)]"
+                  aria-label={t(lang, "startQuiz")}
+                >
                   <Icon name="target" size={13} /> {ch._count.questions}
-                </span>
+                </Link>
               ) : null}
               <Link
                 href={`/branches/${ch.subject.branch.slug}/matiere/${ch.subject.slug}`}

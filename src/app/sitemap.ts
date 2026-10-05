@@ -33,7 +33,12 @@ export default async function sitemap(): Promise<Entry[]> {
     }),
     prisma.chapter.findMany({
       where: { lesson: { isNot: null } },
-      select: { id: true, createdAt: true, lesson: { select: { createdAt: true } } },
+      select: {
+        id: true,
+        createdAt: true,
+        lesson: { select: { createdAt: true } },
+        _count: { select: { questions: true } },
+      },
     }),
   ]);
 
@@ -76,12 +81,15 @@ export default async function sitemap(): Promise<Entry[]> {
       changeFrequency: "monthly",
       priority: 0.7,
     });
-    entries.push({
-      url: `${SITE_URL}/quiz/${c.id}`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    });
+    // A quiz with no questions renders an empty state, so it is not worth indexing.
+    if (c._count.questions > 0) {
+      entries.push({
+        url: `${SITE_URL}/quiz/${c.id}`,
+        lastModified,
+        changeFrequency: "monthly",
+        priority: 0.6,
+      });
+    }
   }
 
   return entries;

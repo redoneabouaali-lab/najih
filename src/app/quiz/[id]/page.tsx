@@ -39,7 +39,11 @@ export default async function QuizPage({ params }: Props) {
     where: { id },
     include: {
       subject: {
-        select: { branch: { select: { slug: true } }, nameAr: true, nameFr: true },
+        select: {
+          branch: { select: { slug: true, nameAr: true, nameFr: true } },
+          nameAr: true,
+          nameFr: true,
+        },
       },
       questions: {
         include: {
@@ -131,14 +135,36 @@ export default async function QuizPage({ params }: Props) {
         }}
         auto
       />
-      <div className="max-w-2xl mx-auto px-6 pt-6 text-sm">
-        <Link
-          href={`/branches/${chapter.subject.branch.slug}`}
-          className="text-[var(--ink)] hover:opacity-60"
-        >
-          ← {t(lang, "backToLessons")}
-        </Link>
+      <div className="max-w-2xl mx-auto px-6">
+        <nav className="crumb mb-6" aria-label={lang === "ar" ? "مسار التنقل" : "fil d'ariane"}>
+          <Link href="/">{t(lang, "navHome")}</Link>
+          <span className="mx-2 text-[var(--line)]">/</span>
+          <Link href={`/branches/${chapter.subject.branch.slug}`}>
+            {lang === "ar" ? chapter.subject.branch.nameAr : chapter.subject.branch.nameFr}
+          </Link>
+          <span className="mx-2 text-[var(--line)]">/</span>
+          <Link href={`/lesson/${chapter.id}`}>
+            {lang === "ar" ? chapter.titleAr : chapter.titleFr}
+          </Link>
+        </nav>
+
+        <div className="mb-8">
+          <div className="label mb-4">
+            {lang === "ar" ? chapter.subject.nameAr : chapter.subject.nameFr} ·{" "}
+            {lang === "ar" ? "اختبار تفاعلي" : "Quiz interactif"}
+          </div>
+          <h1 className="sec-title text-[var(--ink)]">
+            {lang === "ar" ? chapter.titleAr : chapter.titleFr} —{" "}
+            <span className="text-[var(--ink-3)]">
+              {lang === "ar" ? "اختبار تفاعلي" : "Quiz interactif"}
+            </span>
+          </h1>
+          <p className="mono text-sm text-[var(--ink-3)] mt-4">
+            {questions.length} {t(lang, "questions")}
+          </p>
+        </div>
       </div>
+
       <Quiz
         lang={lang}
         chapterId={chapter.id}
