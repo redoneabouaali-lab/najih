@@ -1,5 +1,4 @@
 import { t, type Lang } from "@/lib/lang";
-import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
 
 type Source = {
@@ -58,18 +57,16 @@ export function SourceCredits({ lang }: { lang: Lang }) {
   return (
     <section id="sources" className="bg-[var(--surface)] border-y border-[var(--line)]">
       <div className="max-w-6xl mx-auto px-4 sm:px-8 py-16 sm:py-20">
-        <Reveal>
-          <div className="max-w-2xl">
-            <span className="label">
-              <Icon name="check" size={15} />
-              {t(lang, "thanksLabel")}
-            </span>
-            <h2 className="sec-title text-[var(--ink)] mt-4">{t(lang, "thanksTitle")}</h2>
-            <p className="sec-sub mt-3 text-[17px]">{t(lang, "thanksSub")}</p>
-          </div>
-        </Reveal>
+        <div className="max-w-2xl" data-reveal>
+          <span className="label" data-reveal="rule">
+            <Icon name="check" size={15} />
+            {t(lang, "thanksLabel")}
+          </span>
+          <h2 className="sec-title text-[var(--ink)] mt-4">{t(lang, "thanksTitle")}</h2>
+          <p className="sec-sub mt-3 text-[17px]">{t(lang, "thanksSub")}</p>
+        </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-2">
+        <div className="mt-8 flex flex-wrap items-center gap-2" data-reveal-group data-reveal-step="35" data-reveal-cap="10">
           {SOURCES.map((s) => (
             <span
               key={s.domain}
@@ -81,14 +78,20 @@ export function SourceCredits({ lang }: { lang: Lang }) {
           ))}
         </div>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {SOURCES.map((s, i) => (
-            <Reveal key={s.domain} delay={i * 60} className="h-full">
+        <div
+          className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          data-reveal-group
+          data-reveal-step="70"
+          data-reveal-cap="6"
+        >
+          {SOURCES.map((s) => (
               <a
+                key={s.domain}
                 href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex h-full flex-col rounded-[var(--r-lg)] border border-[var(--line)] bg-[var(--surface)] p-5 transition duration-200 hover:border-[var(--line-strong)] hover:shadow-[var(--shadow-md)]"
+                data-reveal="scale"
+                className="panel panel-hover group flex h-full flex-col p-5"
               >
                 <div className="flex items-center gap-3">
                   <span className="grid h-11 w-11 flex-none place-items-center rounded-[var(--r-md)] border border-[var(--line)] text-[18px] font-semibold text-[var(--brand)]">
@@ -108,24 +111,23 @@ export function SourceCredits({ lang }: { lang: Lang }) {
 
                 <div className="mt-4 flex items-center justify-between">
                   <span className="rounded-[var(--r-pill)] bg-[var(--surface-sunk)] px-3 py-1 text-[13px] font-medium text-[var(--ink-2)] tabular-nums">
-                    {s.count.toLocaleString("fr-FR")}+ {t(lang, "thanksFiles")}
+                    <span data-count-to={s.count}>{s.count.toLocaleString("fr-FR")}</span>+ {t(lang, "thanksFiles")}
                   </span>
                   <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[var(--brand)]">
                     {t(lang, "thanksVisit")} <Icon name="arrowRight" size={14} />
                   </span>
                 </div>
               </a>
-            </Reveal>
           ))}
         </div>
 
-        <Reveal delay={120}>
+        <div data-reveal="scale">
           <div className="mt-12 rounded-[var(--r-lg)] border border-[var(--line)] bg-[var(--surface-sunk)] p-6 sm:p-8">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
               <p className="max-w-2xl text-[16px] font-medium leading-relaxed text-[var(--ink)]">
                 {t(lang, "thanksCta")}
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2" data-reveal-group data-reveal-step="45" data-reveal-cap="8">
                 {SOURCES.map((s) => (
                   <a
                     key={s.domain}
@@ -143,7 +145,7 @@ export function SourceCredits({ lang }: { lang: Lang }) {
               {t(lang, "thanksNote")}
             </p>
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

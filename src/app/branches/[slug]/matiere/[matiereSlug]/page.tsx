@@ -131,18 +131,23 @@ export default async function MatierePage({ params }: Props) {
         <span className="text-[var(--ink)]">{lang === "ar" ? subject.nameAr : subject.nameFr}</span>
       </div>
 
-      <div className="mb-12">
-        <div className="label mb-4">01 — {t(lang, "matiere")}</div>
+      <div className="mb-12" data-reveal>
+        <div className="label mb-4" data-reveal="rule">01 - {t(lang, "matiere")}</div>
         <h1 className="sec-title text-[var(--ink)]">{lang === "ar" ? subject.nameAr : subject.nameFr}</h1>
         <p className="sec-sub mt-3">{lang === "ar" ? branch.nameAr : branch.nameFr}</p>
       </div>
 
       <section className="mb-16">
-        <div className="label mb-5">02 — {t(lang, "lessonsAndQuiz")}</div>
+        <div className="label mb-5" data-reveal="rule">02 - {t(lang, "lessonsAndQuiz")}</div>
         {subject.chapters.length === 0 && (
           <p className="text-[var(--ink-3)]">{t(lang, "noLessonsMatiere")}</p>
         )}
-        <div className="stagger grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          data-reveal-group
+          data-reveal-step="50"
+          data-reveal-cap="10"
+        >
           {subject.chapters.map((ch, i) => (
             <div
               key={ch.id}
@@ -179,8 +184,8 @@ export default async function MatierePage({ params }: Props) {
 
       {lessons.length > 0 && (
         <section className="mb-16">
-          <div className="label mb-5">03 — {t(lang, "lessonPdfSection")}</div>
-          <div className="journal">
+          <div className="label mb-5" data-reveal="rule">03 — {t(lang, "lessonPdfSection")}</div>
+          <div className="journal" data-reveal-group data-reveal-step="45" data-reveal-cap="12">
             {lessons.map((e, i) => (
               <a key={e.id} href={e.url} target="_blank" rel="noopener noreferrer" className="entry">
                 <span className="entry__idx">0{i + 1}<i /></span>
@@ -200,8 +205,8 @@ export default async function MatierePage({ params }: Props) {
 
       {exercises.length > 0 && (
         <section className="mb-16">
-          <div className="label mb-5">04 — {t(lang, "exerciseSection")}</div>
-          <div className="journal">
+          <div className="label mb-5" data-reveal="rule">04 — {t(lang, "exerciseSection")}</div>
+          <div className="journal" data-reveal-group data-reveal-step="45" data-reveal-cap="12">
             {exercises.map((e, i) => (
               <a key={e.id} href={e.url} target="_blank" rel="noopener noreferrer" className="entry">
                 <span className="entry__idx">0{i + 1}<i /></span>
@@ -217,10 +222,11 @@ export default async function MatierePage({ params }: Props) {
 
       {examCount > 0 && (
         <section>
-          <div className="label mb-5">05 — {t(lang, "examSection")}</div>
+          <div className="label mb-5" data-reveal="rule">05 — {t(lang, "examSection")}</div>
           <Link
             href={`/branches/${slug}/matiere/${matiereSlug}/examens`}
             className="panel panel-hover p-5 flex items-center justify-between gap-4"
+            data-reveal="scale"
           >
             <div>
               <div className="flex items-center gap-2 mono text-xs text-[var(--ink-3)] mb-2">
@@ -228,7 +234,9 @@ export default async function MatierePage({ params }: Props) {
                 {t(lang, "examSection")}
               </div>
               <div className="font-bold text-[var(--ink)]">{t(lang, "examsMatiereTitle")}</div>
-              <div className="mt-1 text-sm text-[var(--ink-3)]">{examCount} {t(lang, "countExams")}</div>
+              <div className="mt-1 text-sm text-[var(--ink-3)]">
+                <span data-count-to={examCount}>{examCount}</span> {t(lang, "countExams")}
+              </div>
             </div>
             <span className="btn btn-emerald btn-sm !px-4">↗</span>
           </Link>

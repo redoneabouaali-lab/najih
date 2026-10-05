@@ -292,7 +292,7 @@ export function AIAssistant({ lang }: { lang: Lang }) {
             </button>
           </div>
 
-          <div className="ai-panel__body" data-lenis-prevent>
+          <div className="ai-panel__body">
             <div className="space-y-1">
               {msgs.map((m, i) => {
                 let lastQ = "";

@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { getClientLang, normalizeLang, t, type Lang } from "@/lib/lang";
 import { Icon } from "./Icon";
 import { LangToggle } from "./LangToggle";
-import { ScrollProgress } from "./ScrollProgress";
 import { CommandPalette } from "./CommandPalette";
 
 export function Header() {
@@ -44,7 +43,6 @@ export function Header() {
 
   return (
     <>
-      <ScrollProgress />
       <header className={`hdr ${scrolled ? "scrolled" : ""}`}>
         <div className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-8 py-3">
           <Link href="/" className="flex items-center gap-2.5">

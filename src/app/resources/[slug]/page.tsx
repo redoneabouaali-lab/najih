@@ -133,22 +133,22 @@ export default async function BranchResourcesPage({ params }: Props) {
         <span className="text-[var(--ink)]">{lang === "ar" ? branch.nameAr : branch.nameFr}</span>
       </div>
 
-      <div className="mb-12">
-        <div className="label mb-4">
+      <div className="mb-12" data-reveal>
+        <div className="label mb-4" data-reveal="rule">
           <Icon name="file" size={15} />
           {t(lang, "navResources")}
         </div>
         <h1 className="sec-title text-[var(--ink)]">{lang === "ar" ? branch.nameAr : branch.nameFr}</h1>
         <p className="sec-sub mt-3">{t(lang, "resourcesSub")}</p>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-wrap gap-3" data-reveal-group data-reveal-step="60" data-reveal-cap="3">
           <span className="tag">
-            <Icon name="book" size={13} /> {lessons.length}
+            <Icon name="book" size={13} /> <span data-count-to={lessons.length}>{lessons.length}</span>
           </span>
           <span className="tag">
-            <Icon name="pen" size={13} /> {exercises.length}
+            <Icon name="pen" size={13} /> <span data-count-to={exercises.length}>{exercises.length}</span>
           </span>
           <span className="tag">
-            <Icon name="calendar" size={13} /> {exams.length}
+            <Icon name="calendar" size={13} /> <span data-count-to={exams.length}>{exams.length}</span>
           </span>
         </div>
         <Link
@@ -167,8 +167,8 @@ export default async function BranchResourcesPage({ params }: Props) {
 
       {lessons.length > 0 && (
         <section className="mb-16">
-          <div className="label mb-5">01 — {t(lang, "lessonPdfSection")}</div>
-          <div className="journal">
+          <div className="label mb-5" data-reveal="rule">01 — {t(lang, "lessonPdfSection")}</div>
+          <div className="journal" data-reveal-group data-reveal-step="45" data-reveal-cap="12">
             {lessons.map((e, i) => (
               <div key={e.id} className="flex gap-2 items-stretch">
                 <a
@@ -204,8 +204,8 @@ export default async function BranchResourcesPage({ params }: Props) {
 
       {exercises.length > 0 && (
         <section className="mb-16">
-          <div className="label mb-5">02 — {t(lang, "exerciseSection")}</div>
-          <div className="journal">
+          <div className="label mb-5" data-reveal="rule">02 — {t(lang, "exerciseSection")}</div>
+          <div className="journal" data-reveal-group data-reveal-step="45" data-reveal-cap="12">
             {exercises.map((e, i) => (
               <div key={e.id} className="flex gap-2 items-stretch">
                 <a
@@ -239,7 +239,7 @@ export default async function BranchResourcesPage({ params }: Props) {
         const sessions = byYear.get(year)!.sort((a, b) => sessionOrder(a.session, b.session));
         return (
           <section key={String(year)} className="mb-16">
-            <div className="label mb-5">{String(yi + (lessons.length ? 1 : 0) + (exercises.length ? 1 : 0) + 1).padStart(2, "0")} — {year ?? t(lang, "countExams")}</div>
+            <div className="label mb-5" data-reveal="rule">{String(yi + (lessons.length ? 1 : 0) + (exercises.length ? 1 : 0) + 1).padStart(2, "0")} — {year ?? t(lang, "countExams")}</div>
 
             {sessions.map((sg) => (
               <div key={String(sg.session)} className="mb-8">
@@ -248,7 +248,7 @@ export default async function BranchResourcesPage({ params }: Props) {
                     {t(lang, SESSION_KEY[sg.session])}
                   </div>
                 )}
-                <div className="journal">
+                <div className="journal" data-reveal-group data-reveal-step="40" data-reveal-cap="10">
                   {Object.entries(sg.subjects).map(([subjKey, subj]) => {
                     const meta =
                       SUBJECTS[subjKey] ??

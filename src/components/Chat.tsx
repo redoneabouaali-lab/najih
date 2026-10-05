@@ -112,8 +112,8 @@ export function Chat({ lang }: { lang: Lang }) {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-8 py-10 flex flex-col min-h-[78vh]">
-      <div className="mb-8">
-        <div className="label mb-4">
+      <div className="mb-8" data-reveal>
+        <div className="label mb-4" data-reveal="rule">
           <Icon name="message" size={15} />
           {t(lang, "chatTitle")}
         </div>
@@ -121,7 +121,7 @@ export function Chat({ lang }: { lang: Lang }) {
         <p className="sec-sub mt-3">{t(lang, "chatSub")}</p>
       </div>
 
-      <div className="flex-1 space-y-4 overflow-y-auto mb-4 max-h-[55vh] pr-1" data-lenis-prevent>
+      <div className="flex-1 space-y-4 overflow-y-auto mb-4 max-h-[55vh] pr-1">
         {msgs.length === 0 && (
           <p className="sec-sub text-[var(--ink-3)]">{t(lang, "chatExample")}</p>
         )}

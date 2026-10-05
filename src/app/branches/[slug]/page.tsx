@@ -101,8 +101,10 @@ export default async function BranchPage({ params }: Props) {
           ],
         }}
       />
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 pt-10">
-        <h1 className="sec-title text-[var(--ink)]">{branchName}</h1>
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 pt-10 overflow-hidden" data-reveal="line">
+        <h1 className="sec-title text-[var(--ink)]">
+          <span className="block">{branchName}</span>
+        </h1>
       </div>
       <BranchMatierePicker
         lang={lang}

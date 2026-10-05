@@ -77,7 +77,10 @@
   /* --- motion ------------------------------------------------------------ */
   --dur-1: 160ms;
   --dur-2: 240ms;
+  --dur-3: 620ms;
+  --dur-4: 900ms;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
@@ -135,9 +138,9 @@ body {
 
 a { text-decoration: none; color: inherit; }
 
-main { animation: pageIn var(--dur-2) var(--ease) both; }
+main { animation: pageIn var(--dur-4) var(--ease-out-expo) both; }
 @keyframes pageIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }
 }
 
@@ -441,26 +444,208 @@ main { animation: pageIn var(--dur-2) var(--ease) both; }
   z-index: 10000;
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity var(--dur-2) var(--ease), transform var(--dur-2) var(--ease);
-}
-.reveal.show { opacity: 1; transform: none; }
-.sec-reveal { animation: riseIn var(--dur-2) var(--ease) both; }
 @keyframes riseIn {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: none; }
 }
-.stagger > * { animation: riseIn var(--dur-2) var(--ease) both; }
-.stagger > *:nth-child(2) { animation-delay: 60ms; }
-.stagger > *:nth-child(3) { animation-delay: 120ms; }
-.stagger > *:nth-child(4) { animation-delay: 180ms; }
-.stagger > *:nth-child(5) { animation-delay: 240ms; }
-.stagger > *:nth-child(6) { animation-delay: 300ms; }
-.stagger > *:nth-child(n+7) { animation-delay: 360ms; }
 
-.fade-up { opacity: 0; transform: translateY(14px); animation: riseIn var(--dur-2) var(--ease) forwards; }
+/* ---------------------------------------------------------------------------
+   SCROLL REVEAL
+   The hidden state is gated behind html.has-motion, which the Motion layer
+   adds on mount. Without JS (or for crawlers on the raw HTML) every element
+   stays fully visible — content is never hidden behind a failed observer.
+   --------------------------------------------------------------------------- */
+
+.has-motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--dur-3) var(--ease),
+    transform var(--dur-3) var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.has-motion [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------------------------------------------------------------------------
+   STAGGER - cascade is assigned per scroll batch by the Motion layer via
+   --reveal-delay, so a 500-card grid animates in waves instead of collapsing
+   into one slab. The rules below are the no-JS / pre-hydration fallback.
+
+   The old `.reveal` / `.sec-reveal` / `.fade-up` class names were removed
+   outright. They set `opacity: 0` outside the `html.has-motion` gate, so a
+   future `className="reveal"` would have silently hidden content forever.
+   Motion is opted into with `data-reveal` only.
+   --------------------------------------------------------------------------- */
+
+.stagger > * { animation: riseIn var(--dur-2) var(--ease) both; }
+.stagger > *:nth-child(2) { animation-delay: 55ms; }
+.stagger > *:nth-child(3) { animation-delay: 110ms; }
+.stagger > *:nth-child(4) { animation-delay: 165ms; }
+.stagger > *:nth-child(5) { animation-delay: 220ms; }
+.stagger > *:nth-child(6) { animation-delay: 275ms; }
+.stagger > *:nth-child(7) { animation-delay: 330ms; }
+.stagger > *:nth-child(8) { animation-delay: 385ms; }
+.stagger > *:nth-child(n+9) { animation-delay: 440ms; }
+.has-motion .stagger > * { animation: none; }
+
+/* ============================================================================
+   MOTION — the expressive layer
+   Reveal variants. All of them are opt-in via data-reveal so the Motion layer
+   drives them with the same observer, and all of them are no-ops until
+   .is-revealed lands (gated by html.has-motion, see above).
+   ========================================================================== */
+
+/* Line-by-line mask reveal — for display headings.
+   The <span> clips and rises out from under its own line box. */
+.has-motion [data-reveal="line"] > span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform var(--dur-4) var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.has-motion [data-reveal="line"] > span:nth-child(2) { transition-delay: calc(var(--reveal-delay, 0ms) + 90ms); }
+.has-motion [data-reveal="line"] > span:nth-child(3) { transition-delay: calc(var(--reveal-delay, 0ms) + 180ms); }
+.has-motion [data-reveal="line"].is-revealed > span { transform: none; }
+
+/* Word cascade — for body copy and titles. */
+.has-motion [data-reveal="words"] > span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--dur-3) var(--ease),
+    transform var(--dur-3) var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.has-motion [data-reveal="words"].is-revealed > span { opacity: 1; transform: none; }
+
+/* Rule that draws itself under a kicker/section label. */
+[data-reveal="rule"] { position: relative; }
+.has-motion [data-reveal="rule"]::after {
+  content: "";
+  position: absolute;
+  inset-block-end: -10px;
+  inset-inline-start: 0;
+  width: 46px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--dur-4) var(--ease-out-expo);
+  transition-delay: 120ms;
+}
+.has-motion [data-reveal="rule"].is-revealed::after { transform: scaleX(1); }
+
+/* Scale-in — for panels, thumbnails, badges. */
+.has-motion [data-reveal="scale"] {
+  opacity: 0;
+  transform: translateY(16px) scale(0.975);
+  transition:
+    opacity var(--dur-3) var(--ease),
+    transform var(--dur-4) var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.has-motion [data-reveal="scale"].is-revealed { opacity: 1; transform: none; }
+
+/* ---------------------------------------------------------------------------
+   CARD LIFT — progressive, not a single -2px nudge
+   Lift, ink-tinted shadow, and a one-shot sheen that sweeps across on hover.
+   --------------------------------------------------------------------------- */
+
+.panel-hover {
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease),
+    transform var(--dur-2) var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .panel-hover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      transparent 32%,
+      rgba(37, 99, 235, 0.07) 50%,
+      transparent 68%
+    );
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  .panel-hover:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .panel-hover:hover::before {
+    opacity: 1;
+    transform: translateX(120%);
+    transition: transform 900ms var(--ease-out-expo);
+  }
+  .panel-hover:active { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+}
+
+/* ---------------------------------------------------------------------------
+   STAT COUNTER — tabular figures held steady while the number counts
+   --------------------------------------------------------------------------- */
+
+.stat-num[data-count-to] {
+  font-variant-numeric: tabular-nums;
+  min-width: 1ch;
+}
+.stat-num[data-count-to]::after {
+  content: "";
+  display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
+  margin-inline-start: 0.16em;
+  border-radius: 50%;
+  background: var(--brand);
+  transform: scale(0);
+  transition: transform var(--dur-3) var(--ease-out-expo) 620ms;
+  vertical-align: 0.1em;
+}
+.has-motion .stat-num[data-count-to].is-revealed::after { transform: scale(1); }
+
+/* ---------------------------------------------------------------------------
+   MARQUEE — slow keyword ticker. Pauses on hover/focus so it never fights
+   the reader, and is disabled entirely under reduced-motion.
+   --------------------------------------------------------------------------- */
+
+@keyframes marqueeSlide {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  display: inline-flex;
+  animation: marqueeSlide 48s linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track { animation-play-state: paused; }
+
+/* ---------------------------------------------------------------------------
+   HERO — a slow, one-shot ambient drift on the accent line. Not infinite
+   decoration: it settles and stops.
+   --------------------------------------------------------------------------- */
+
+@keyframes heroDrift {
+  from { opacity: 0; transform: translateY(24px); letter-spacing: 0.06em; }
+  to { opacity: 1; transform: none; letter-spacing: -0.02em; }
+}
+.hero-accent {
+  display: block;
+  animation: heroDrift 1100ms var(--ease-out-expo) both 180ms;
+}
+
 
 /* ============================================================================
    HEADER — flat links, active = brand text + 2px underline
@@ -950,18 +1135,6 @@ main { animation: pageIn var(--dur-2) var(--ease) both; }
 }
 
 /* ============================================================================
-   LENIS SMOOTH SCROLL + SPLIT TEXT
-   ========================================================================== */
-
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
-.lenis.lenis-smooth iframe { pointer-events: none; }
-
-.fx-word { display: inline-block; will-change: transform, opacity; }
-
-/* ============================================================================
    CONTENT UNDERSTAND OVERLAY
    ========================================================================== */
 
@@ -1280,8 +1453,16 @@ html.lenis, html.lenis body { height: auto; }
     scroll-behavior: auto !important;
   }
   main { animation: none; }
-  .reveal,
-  .fade-up,
-  .sec-reveal,
-  .stagger > * { opacity: 1 !important; transform: none !important; }
+  .stagger > *,
+  [data-reveal],
+  [data-reveal] > span,
+  [data-reveal]::after,
+  .hero-accent {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  [data-reveal="rule"]::after { transform: scaleX(1) !important; }
+  .stat-num[data-count-to]::after { transform: scale(1) !important; }
+  .marquee-track { animation: none !important; }
+  .panel-hover::before { display: none !important; }
 }

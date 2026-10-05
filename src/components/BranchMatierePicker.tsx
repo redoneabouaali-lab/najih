@@ -89,26 +89,31 @@ export function BranchMatierePicker({
         <span className="text-[var(--ink)]">{branchName}</span>
       </div>
 
-      <div className="mb-12">
-        <div className="label mb-4">01 — {t(viewLang, "matiere")}</div>
+      <div className="mb-12" data-reveal>
+        <div className="label mb-4" data-reveal="rule">01 - {t(viewLang, "matiere")}</div>
         <p className="sec-sub mt-3">{t(viewLang, "pickMatiereSub")}</p>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-wrap gap-3" data-reveal-group data-reveal-step="60" data-reveal-cap="2">
           <span className="tag">
-            <Icon name="layers" size={13} /> {matieres.length}
+            <Icon name="layers" size={13} /> <span data-count-to={matieres.length}>{matieres.length}</span>
           </span>
           <span className="tag">
-            <Icon name="target" size={13} /> {totalQ}
+            <Icon name="target" size={13} /> <span data-count-to={totalQ}>{totalQ}</span>
           </span>
         </div>
       </div>
 
       <section>
-        <div className="label mb-5">02 — {t(viewLang, "pickMatiere")}</div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="label mb-5" data-reveal="rule">02 - {t(viewLang, "pickMatiere")}</div>
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          data-reveal-group
+          data-reveal-step="70"
+          data-reveal-cap="6"
+        >
           {matieres.map((m, i) => {
             const empty = m.lessonCount === 0 && m.questionCount === 0 && m.chapterCount === 0;
             return (
-              <Link key={m.id} href={`/branches/${branchSlug}/matiere/${m.slug}`} className="svc-card">
+              <Link key={m.id} href={`/branches/${branchSlug}/matiere/${m.slug}`} className="svc-card" data-reveal="scale">
                 <span className="svc-card__idx">0{i + 1} — {viewLang === "ar" ? m.nameAr : m.nameFr}</span>
                 <div className="svc-card__body mt-4">
                   <div className="mb-3 text-[var(--brand)]">

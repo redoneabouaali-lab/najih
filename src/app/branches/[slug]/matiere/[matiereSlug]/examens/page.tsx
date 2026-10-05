@@ -114,12 +114,12 @@ export default async function MatiereExamensPage({ params }: Props) {
         <span className="text-[var(--ink)]">{t(lang, "examsMatiereTitle")}</span>
       </div>
 
-      <div className="mb-12">
-        <div className="label mb-4">05 — {t(lang, "examSection")}</div>
+      <div className="mb-12" data-reveal>
+        <div className="label mb-4" data-reveal="rule">05 — {t(lang, "examSection")}</div>
         <h1 className="sec-title text-[var(--ink)]">{t(lang, "examsMatiereTitle")}</h1>
         <p className="sec-sub mt-3">{lang === "ar" ? branch.nameAr : branch.nameFr}</p>
         <span className="tag mt-4">
-          <Icon name="calendar" size={13} /> {exams.length}
+          <Icon name="calendar" size={13} /> <span data-count-to={exams.length}>{exams.length}</span>
         </span>
       </div>
 
@@ -132,8 +132,8 @@ export default async function MatiereExamensPage({ params }: Props) {
         });
         return (
           <div key={String(year)} className="mb-8">
-            <div className="label mb-3">{year}</div>
-            <div className="journal">
+            <div className="label mb-3" data-reveal="rule">{year}</div>
+            <div className="journal" data-reveal-group data-reveal-step="45" data-reveal-cap="12">
               {sessions.flatMap((sg) =>
                 sg.rows.map((r, i) => (
                   <div key={r.id} className="flex gap-2 items-stretch">

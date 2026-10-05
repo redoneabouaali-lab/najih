@@ -38,8 +38,13 @@ export async function LessonLinks({ lang, branchSlug, limit, heading }: Props) {
 
   return (
     <section className="mt-12">
-      {heading ? <div className="label mb-5">{heading}</div> : null}
-      <div className="stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {heading ? <div className="label mb-5" data-reveal="rule">{heading}</div> : null}
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+        data-reveal-group
+        data-reveal-step="45"
+        data-reveal-cap="12"
+      >
         {lessons.map((ch) => (
           <div
             key={ch.id}

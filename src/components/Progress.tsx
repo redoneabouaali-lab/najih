@@ -33,11 +33,11 @@ export function Progress({ lang }: { lang: Lang }) {
 
   return (
     <div className="max-w-4xl mx-auto p-6 sm:p-8 space-y-6">
-      <div className="label mb-4">
+      <div className="label mb-4" data-reveal="rule">
         <Icon name="trend" size={15} />
         {t(lang, "progressTitle")}
       </div>
-      <h1 className="sec-title text-[var(--ink)]">{t(lang, "progressTitle")}</h1>
+      <h1 className="sec-title text-[var(--ink)]" data-reveal>{t(lang, "progressTitle")}</h1>
 
       {results.length === 0 && (
         <p className="sec-sub mt-6">{t(lang, "progressEmpty")}</p>
@@ -45,28 +45,28 @@ export function Progress({ lang }: { lang: Lang }) {
 
       {results.length > 0 && (
         <div className="space-y-8 mt-8">
-          <div className="stats">
+          <div className="stats" data-reveal-group data-reveal-step="90" data-reveal-cap="4">
             <div className="stat">
-              <div className="stat-num">{results.length}</div>
+              <div className="stat-num" data-count-to={results.length}>{results.length}</div>
               <div className="stat-label">{t(lang, "progressTotal")}</div>
             </div>
             <div className="stat">
-              <div className="stat-num">{avg}%</div>
+              <div className="stat-num" data-count-to={avg}>{avg}%</div>
               <div className="stat-label">{t(lang, "progressAvg")}</div>
             </div>
             <div className="stat">
-              <div className="stat-num">{best}%</div>
+              <div className="stat-num" data-count-to={best}>{best}%</div>
               <div className="stat-label">{t(lang, "progressBest")}</div>
             </div>
             <div className="stat">
-              <div className="stat-num">
+              <div className="stat-num" data-count-to={results.filter((r) => (r.score / r.total) * 100 >= 50).length}>
                 {results.filter((r) => (r.score / r.total) * 100 >= 50).length}
               </div>
               <div className="stat-label">≥ 50%</div>
             </div>
           </div>
 
-          <div className="journal">
+          <div className="journal" data-reveal-group data-reveal-step="45" data-reveal-cap="12">
             {results.map((r) => (
               <div key={r.id} className="entry">
                 <span className="entry__idx">

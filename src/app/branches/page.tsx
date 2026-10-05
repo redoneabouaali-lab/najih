@@ -48,15 +48,20 @@ export default async function BranchesPage() {
         <span className="text-[var(--ink)]">{t(lang, "navBranches")}</span>
       </div>
 
-      <div className="mb-12">
-        <div className="label mb-4">01 — {t(lang, "branchesTitle")}</div>
+      <div className="mb-12" data-reveal>
+        <div className="label mb-4" data-reveal="rule">01 - {t(lang, "branchesTitle")}</div>
         <h1 className="sec-title text-[var(--ink)]">{t(lang, "branchesTitle")}</h1>
         <p className="sec-sub mt-3">{t(lang, "branchesSub")}</p>
       </div>
 
-      <div className="stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        data-reveal-group
+        data-reveal-step="70"
+        data-reveal-cap="6"
+      >
         {branches.map((b, i) => (
-          <Link key={b.id} href={`/branches/${b.slug}`} className="svc-card">
+          <Link key={b.id} href={`/branches/${b.slug}`} className="svc-card" data-reveal="scale">
             <span className="svc-card__idx">0{i + 1} — {lang === "ar" ? b.nameAr : b.nameFr}</span>
             <div className="svc-card__body mt-4">
               <div className="mb-3 text-[var(--brand)]">

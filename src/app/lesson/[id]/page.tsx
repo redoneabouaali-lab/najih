@@ -147,19 +147,19 @@ ${excerpt(lessonContent)}`;
         <span className="text-[var(--ink)]">{lang === "ar" ? chapter.titleAr : chapter.titleFr}</span>
       </div>
 
-      <div className="mb-10">
-        <div className="label mb-4">
+      <div className="mb-10" data-reveal>
+        <div className="label mb-4" data-reveal="rule">
           {lang === "ar" ? chapter.subject.nameAr : chapter.subject.nameFr} · {t(lang, "lessonView")}
         </div>
         <h1 className="sec-title text-[var(--ink)]">{lang === "ar" ? chapter.titleAr : chapter.titleFr}</h1>
         <p className="mono text-sm text-[var(--ink-3)] mt-4">{chapter._count.questions} {t(lang, "questions")}</p>
       </div>
 
-      <div className="panel panel-hover p-6 sm:p-10 mb-10">
+      <div className="panel panel-hover p-6 sm:p-10 mb-10" data-reveal="scale">
         <Markdown content={lessonContent} />
       </div>
 
-      <div className="flex flex-wrap gap-3 mb-12">
+      <div className="flex flex-wrap gap-3 mb-12" data-reveal-group data-reveal-step="60" data-reveal-cap="4">
         {chapter._count.questions > 0 ? (
           <Link href={`/quiz/${chapter.id}`} className="btn">
             <Icon name="target" size={16} />
@@ -223,8 +223,8 @@ ${excerpt(lessonContent)}`;
 
       {exercises.length > 0 && (
         <section>
-          <div className="label mb-5">{t(lang, "exerciseSection")}</div>
-          <div className="journal">
+          <div className="label mb-5" data-reveal="rule">{t(lang, "exerciseSection")}</div>
+          <div className="journal" data-reveal-group data-reveal-step="45" data-reveal-cap="12">
             {exercises.map((e, i) => (
               <div key={e.id} className="flex gap-2 items-stretch">
                 <a href={e.url} target="_blank" rel="noopener noreferrer" className="entry flex-1">

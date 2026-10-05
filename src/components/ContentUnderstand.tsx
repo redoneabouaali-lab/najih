@@ -283,7 +283,7 @@ export function ContentUnderstand({
               </div>
             </header>
 
-            <div className="u-scroll" data-lenis-prevent>
+            <div className="u-scroll">
               {result.summary && result.summary.length > 0 && (
                 <section className="mb-5">
                   <div className="u-sec-label flex items-center gap-2">

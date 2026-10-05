@@ -144,8 +144,8 @@ export default async function QuizPage({ params }: Props) {
           </Link>
         </nav>
 
-        <div className="mb-8">
-          <div className="label mb-4">
+        <div className="mb-8" data-reveal>
+          <div className="label mb-4" data-reveal="rule">
             {lang === "ar" ? chapter.subject.nameAr : chapter.subject.nameFr} ·{" "}
             {lang === "ar" ? "اختبار تفاعلي" : "Quiz interactif"}
           </div>

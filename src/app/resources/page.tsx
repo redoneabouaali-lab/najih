@@ -53,8 +53,8 @@ export default async function ResourcesPage() {
         <span className="text-[var(--ink)]">{t(lang, "navResources")}</span>
       </div>
 
-      <div className="mb-12">
-        <div className="label mb-4">
+      <div className="mb-12" data-reveal>
+        <div className="label mb-4" data-reveal="rule">
           <Icon name="file" size={15} />
           {t(lang, "resourcesTitle")}
         </div>
@@ -62,9 +62,14 @@ export default async function ResourcesPage() {
         <p className="sec-sub mt-3">{t(lang, "resourcesSub")}</p>
       </div>
 
-      <div className="stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        data-reveal-group
+        data-reveal-step="70"
+        data-reveal-cap="6"
+      >
         {branches.map((b, i) => (
-          <Link key={b.id} href={`/resources/${b.slug}`} className="svc-card">
+          <Link key={b.id} href={`/resources/${b.slug}`} className="svc-card" data-reveal="scale">
             <span className="svc-card__idx">0{i + 1} — {lang === "ar" ? b.nameAr : b.nameFr}</span>
             <div className="svc-card__body mt-4">
               <div className="mb-3 text-[var(--brand)]">
@@ -74,7 +79,7 @@ export default async function ResourcesPage() {
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
               <span className="tag">
-                <Icon name="file" size={13} /> {b._count.resources}
+                <Icon name="file" size={13} /> <span data-count-to={b._count.resources}>{b._count.resources}</span>
               </span>
             </div>
             <span className="svc-card__arrow">{t(lang, "homeStart")} <i /></span>

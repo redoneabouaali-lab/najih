@@ -164,24 +164,67 @@ shorthand for search, but never as a UI affordance or as the only label.
 
 ## 8. Motion
 
-- Two durations only: `--dur-1: 160ms`, `--dur-2: 240ms`. One easing curve.
-- Motion must communicate state, feedback, or hierarchy. It is never ambient.
-- **No** infinite decorative animation: aurora, blobs, orbits, sparkles, confetti,
-  marquees, sheen sweeps, gradient shifts, pulse glows, floating loops, 3D tilt.
-- Allowed: page enter, scroll reveal (opacity + 8–18px), count-up on entry, button
-  press, panel and menu open, focus and hover transitions.
-- Hover movement never exceeds 2px and never scales an element past 1.02.
-- `prefers-reduced-motion: reduce` must leave all content visible and static. Scroll
-  reveals fall back to visible; smooth scrolling is disabled.
+Motion communicates state, feedback, and hierarchy. It is never ambient noise, but it
+is also never absent — a page that reads as static and inert is a bug, not minimalism.
+
+**Durations.** `--dur-1: 160ms`, `--dur-2: 240ms` for micro-feedback (hover, press,
+open). `--dur-3: 620ms` and `--dur-4: 900ms` for entrances and hero choreography, both
+on `--ease-out-expo`. One easing curve for everything; easing is the only thing that
+makes a light palette feel considered.
+
+**The one engine.** `src/components/Motion.tsx` is the whole motion runtime: an
+IntersectionObserver plus an rAF-ticked scroll bar. No GSAP, no Lenis, no animation
+library. A page must never ship a motion library to animate a handful of hooks.
+
+**Reveal is progressive enhancement, never a gate.** Every hidden state is gated behind
+`html.has-motion`, which the Motion layer adds on mount. With JS disabled, mid-hydration,
+or on a crawler reading raw HTML, `[data-reveal]` elements are fully visible. Content is
+never hidden behind a failed observer — this is a hard rule, not a preference.
+
+**Cascade is per scroll batch, never per document.** The observer computes
+`--reveal-delay` for only the elements that just entered the viewport, capped by
+`data-reveal-cap`. A 500-card grid animates in waves as you scroll. The old
+`.stagger > *:nth-child(n+7)` approach collapsed every item past the sixth into one
+simultaneous slab and is banned.
+
+**Reveal variants** (all opt-in via `data-reveal`, all no-ops until `.is-revealed`):
+
+| Value | Use |
+| --- | --- |
+| *(bare)* | generic section, copy, and body rise |
+| `line` | display headings; child `<span>`s clip and rise out of their own line box |
+| `scale` | panels, cards, thumbnails — rises with a slight scale |
+| `rule` | kicker labels; draws a short brand underline via `scaleX` |
+| `words` | short headings; per-word cascade |
+
+`data-reveal-group` on a container staggers its direct children; pair it with
+`data-reveal-step` (ms between siblings) and `data-reveal-cap` (max delay steps).
+
+**Count-ups.** `data-count-to="<n>"` counts from zero with cubic ease-out, tabular
+figures held steady so the row never reflows. Server renders the final value, so the
+number is correct without JS. Suppressed on viewports `<= 640px`.
+
+**The one exception to "never ambient."** The keyword marquee ticks at 48s and pauses on
+hover and focus-within. It is the one continuously moving element on the site, it is
+`aria-hidden`, and it exists to give the page a sense of breadth. Everything else is
+finite: hero drift settles and stops, card sheen is hover-triggered, rule draws settle.
+
+**Bounds.** Hover lift never exceeds 3px. Nothing scales past 1.02 on hover. No 3D tilt,
+no perspective transforms, no infinite pulse or glow.
+
+**`prefers-reduced-motion: reduce`** must leave all content visible and static, including
+`[data-reveal]` children, the `rule` underline, the counter dot, the hero accent, and the
+marquee, which stops entirely.
 
 ---
 
 ## 9. Do / don't
 
 **Do** — one brand hue, hairline structure, real whitespace, a 6-step type scale,
-functional motion, SVG line icons, semantic green/amber/red, bilingual parity.
+motion that arrives on scroll and settles, SVG line icons, semantic green/amber/red,
+bilingual parity.
 
 **Don't** — introduce indigo or violet, add a second accent hue, add a gradient to
 text or borders, put content in a card merely to group it, restore a left accent stripe,
-return emoji to the UI, add shadow to static content, or add motion that no one asked
-for.
+return emoji to the UI, add shadow to static content, hide content behind JS-gated CSS,
+or ship an animation library to animate a handful of hooks.
