@@ -54,7 +54,7 @@ export async function GET(req: Request) {
   const chapters = await prisma.chapter.findMany({
     where: { lesson: { isNot: null } },
     include: {
-      subject: { select: { slug: true, nameAr: true, nameFr: true, branch: { select: { slug: true } } } },
+      subject: { select: { nameAr: true, nameFr: true } },
     },
     take: 40,
   });
@@ -62,7 +62,7 @@ export async function GET(req: Request) {
     const title = `${c.titleAr ?? ""} ${c.titleFr ?? ""}`.toLowerCase();
     if (!title.includes(tk)) continue;
     const label = lang === "ar" ? c.titleAr : c.titleFr;
-    const key = `/branches/${c.subject.branch.slug}/matiere/${c.subject.slug}/lesson/${c.id}`;
+    const key = `/lesson/${c.id}`;
     if (seen.has(key)) continue;
     seen.add(key);
     const subj = lang === "ar" ? c.subject.nameAr : c.subject.nameFr;
