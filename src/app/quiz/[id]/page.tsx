@@ -3,6 +3,7 @@ import { getLang } from "@/lib/getLang";
 import { t } from "@/lib/lang";
 import { mkMeta } from "@/lib/seo";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { shuffle } from "@/lib/shuffle";
 import Link from "next/link";
 import { Quiz } from "@/components/Quiz";
@@ -56,12 +57,7 @@ export default async function QuizPage({ params }: Props) {
     },
   });
 
-  if (!chapter)
-    return (
-      <div className="p-8 text-center text-[var(--ink-3)]">
-        {t(lang, "backToLessons")}
-      </div>
-    );
+  if (!chapter) notFound();
 
   const questions = shuffle(
     chapter.questions.map((q) => ({

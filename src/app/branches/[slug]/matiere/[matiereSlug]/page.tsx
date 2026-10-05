@@ -4,6 +4,7 @@ import { t } from "@/lib/lang";
 import { mkMeta, SITE_URL, branchAr, branchShortAr, branchShortFr } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { PageContext } from "@/components/PageContext";
 import { Icon } from "@/components/Icon";
@@ -61,7 +62,7 @@ export default async function MatierePage({ params }: Props) {
   const lang = await getLang();
 
   const branch = await prisma.branch.findUnique({ where: { slug } });
-  if (!branch) return <div className="p-8 text-center text-[var(--ink-3)]">Branch not found</div>;
+  if (!branch) notFound();
 
   const subject = await prisma.subject.findUnique({
     where: { branchId_slug: { branchId: branch.id, slug: matiereSlug } },
@@ -76,7 +77,7 @@ export default async function MatierePage({ params }: Props) {
     },
   });
 
-  if (!subject) return <div className="p-8 text-center text-[var(--ink-3)]">Matière not found</div>;
+  if (!subject) notFound();
 
   const keys = SUBJECT_KEYMAP[subject.slug] ?? [];
   const resources = await prisma.resource.findMany({

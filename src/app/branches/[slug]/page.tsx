@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { getLang } from "@/lib/getLang";
 import { mkMeta, SITE_URL, branchAr, branchShortAr, branchShortFr } from "@/lib/seo";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { t } from "@/lib/lang";
 import { BranchMatierePicker } from "@/components/BranchMatierePicker";
 import { JsonLd } from "@/components/JsonLd";
@@ -61,8 +62,7 @@ export default async function BranchPage({ params }: Props) {
     },
   });
 
-  if (!branch)
-    return <div className="p-8 text-center text-[var(--ink-3)]">Branch not found</div>;
+  if (!branch) notFound();
 
   const matieres = branch.subjects.map((sub) => ({
     id: sub.id,

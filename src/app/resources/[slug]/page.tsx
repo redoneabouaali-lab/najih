@@ -4,6 +4,7 @@ import { t } from "@/lib/lang";
 import { mkMeta, branchAr, branchShortAr, branchShortFr } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { PageContext } from "@/components/PageContext";
 import { ContentUnderstand } from "@/components/ContentUnderstand";
 import { Icon, type IconName } from "@/components/Icon";
@@ -81,8 +82,7 @@ export default async function BranchResourcesPage({ params }: Props) {
     },
   });
 
-  if (!branch)
-    return <div className="p-8 text-center text-[var(--ink-3)]">Branch not found</div>;
+  if (!branch) notFound();
 
   const lessons = branch.resources.filter((r) => r.kind === "lesson");
   const exercises = branch.resources.filter((r) => r.kind === "exercise");
