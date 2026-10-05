@@ -41,21 +41,23 @@ export async function LessonLinks({ lang, branchSlug, limit, heading }: Props) {
       {heading ? <div className="label mb-5">{heading}</div> : null}
       <div className="stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {lessons.map((ch) => (
-          <Link
+          <div
             key={ch.id}
-            href={`/lesson/${ch.id}`}
-            className="panel panel-hover p-4 flex flex-col justify-between gap-3"
+            className="panel panel-hover relative p-4 flex flex-col justify-between gap-3"
           >
             <div>
               <div className="mono text-[11px] text-[var(--ink-3)] mb-1">
                 {lang === "ar" ? ch.subject.branch.nameAr : ch.subject.branch.nameFr} ·{" "}
                 {lang === "ar" ? ch.subject.nameAr : ch.subject.nameFr}
               </div>
-              <div className="font-bold text-[var(--ink)] text-sm leading-snug">
+              <Link
+                href={`/lesson/${ch.id}`}
+                className="font-bold text-[var(--ink)] text-sm leading-snug hover:text-[var(--brand)] after:absolute after:inset-0 after:content-['']"
+              >
                 {lang === "ar" ? ch.titleAr : ch.titleFr}
-              </div>
+              </Link>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="relative z-10 flex flex-wrap items-center gap-2">
               <span className="tag">
                 <Icon name="book" size={13} /> {t(lang, "lessonView")}
               </span>
@@ -75,7 +77,7 @@ export async function LessonLinks({ lang, branchSlug, limit, heading }: Props) {
                 {lang === "ar" ? ch.subject.nameAr : ch.subject.nameFr}
               </Link>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </section>

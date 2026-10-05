@@ -144,16 +144,20 @@ export default async function MatierePage({ params }: Props) {
         )}
         <div className="stagger grid grid-cols-1 sm:grid-cols-2 gap-4">
           {subject.chapters.map((ch, i) => (
-            <Link
+            <div
               key={ch.id}
-              href={`/lesson/${ch.id}`}
-              className="panel panel-hover p-5 flex items-center justify-between gap-4"
+              className="panel panel-hover relative p-5 flex items-center justify-between gap-4"
             >
               <div>
                 <div className="mono text-xs text-[var(--ink-3)] mb-2">0{i + 1} · {lang === "ar" ? branch.nameAr : branch.nameFr}</div>
-                <div className="font-bold text-[var(--ink)]">{lang === "ar" ? ch.titleAr : ch.titleFr}</div>
+                <Link
+                  href={`/lesson/${ch.id}`}
+                  className="font-bold text-[var(--ink)] hover:text-[var(--brand)] after:absolute after:inset-0 after:content-['']"
+                >
+                  {lang === "ar" ? ch.titleAr : ch.titleFr}
+                </Link>
               </div>
-              <div className="flex flex-col gap-2 shrink-0">
+              <div className="relative z-10 flex flex-col gap-2 shrink-0">
                 <span className="btn btn-sm !px-4">
                   <Icon name="book" size={15} />
                   {t(lang, "lessonView")}
@@ -168,7 +172,7 @@ export default async function MatierePage({ params }: Props) {
                   </Link>
                 )}
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </section>
