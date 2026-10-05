@@ -14,7 +14,7 @@ function renderLinks(text: string, keyBase: string) {
           href={m[2]}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[var(--p)] underline break-all"
+          className="text-[var(--line)] underline break-all"
         >
           {renderLinks(m[1], `${keyBase}-r${m.index}`)}
         </a>,
@@ -26,7 +26,7 @@ function renderLinks(text: string, keyBase: string) {
           href={m[3]}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[var(--p)] underline break-all"
+          className="text-[var(--line)] underline break-all"
         >
           {m[3]}
         </a>,
@@ -86,7 +86,7 @@ function renderPara(raw: string, keyBase: string) {
   const segs = splitMath(raw);
   if (!segs.some((s) => s.type === "math" && s.display)) {
     return (
-      <p key={keyBase} className="my-2 leading-relaxed text-[var(--b)]">
+      <p key={keyBase} className="my-2 leading-relaxed text-[var(--ink)]">
         {renderSegs(segs, keyBase)}
       </p>
     );
@@ -98,7 +98,7 @@ function renderPara(raw: string, keyBase: string) {
     if (pending.length === 0) return;
     if (pending.some((s) => s.type === "text" && s.value.trim() !== "")) {
       out.push(
-        <p key={`${keyBase}-p${n++}`} className="my-2 leading-relaxed text-[var(--b)]">
+        <p key={`${keyBase}-p${n++}`} className="my-2 leading-relaxed text-[var(--ink)]">
           {renderSegs(pending, `${keyBase}-q${n}`)}
         </p>,
       );
@@ -125,7 +125,7 @@ function renderLines(content: string) {
   const flushList = (key: string) => {
     if (!list.length) return;
     out.push(
-      <ul key={key} className="list-disc list-inside space-y-1 my-2 text-[var(--b)]">
+      <ul key={key} className="list-disc list-inside space-y-1 my-2 text-[var(--ink)]">
         {list.map((li, i) => (
           <li key={i}>{inline(li, `l${key}-${i}`)}</li>
         ))}
@@ -139,14 +139,14 @@ function renderLines(content: string) {
     if (line.startsWith("### ")) {
       flushList(key + "a");
       out.push(
-        <h3 key={key} className="text-lg font-medium text-[var(--b)] mt-5 mb-2">
+        <h3 key={key} className="text-lg font-medium text-[var(--ink)] mt-5 mb-2">
           {inline(line.slice(4), key + "h")}
         </h3>,
       );
     } else if (line.startsWith("## ")) {
       flushList(key + "a");
       out.push(
-        <h2 key={key} className="text-xl font-medium text-[var(--b)] mt-6 mb-2">
+        <h2 key={key} className="text-xl font-medium text-[var(--ink)] mt-6 mb-2">
           {inline(line.slice(3), key + "h")}
         </h2>,
       );

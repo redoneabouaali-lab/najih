@@ -5,6 +5,7 @@ import { mkMeta } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageContext } from "@/components/PageContext";
+import { Icon, branchIcon, type IconName } from "@/components/Icon";
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
@@ -19,13 +20,13 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-const ICONS: Record<string, string> = {
-  sm: "📐",
-  svt: "🧬",
-  sp: "⚗️",
-  lettres: "📖",
-  eco: "💼",
-  arts: "🎨",
+const ICONS: Record<string, IconName> = {
+  sm: "math",
+  svt: "dna",
+  sp: "flask",
+  lettres: "book",
+  eco: "briefcase",
+  arts: "palette",
 };
 
 export default async function ResourcesPage() {
@@ -48,13 +49,16 @@ export default async function ResourcesPage() {
       />
       <div className="crumb mb-8">
         <Link href="/">{t(lang, "navHome")}</Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
-        <span className="text-[var(--b)]">{t(lang, "navResources")}</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
+        <span className="text-[var(--ink)]">{t(lang, "navResources")}</span>
       </div>
 
       <div className="mb-12">
-        <div className="label mb-4">📄 {t(lang, "resourcesTitle")}</div>
-        <h1 className="sec-title text-[var(--b)]">{t(lang, "resourcesTitle")}</h1>
+        <div className="label mb-4">
+          <Icon name="file" size={15} />
+          {t(lang, "resourcesTitle")}
+        </div>
+        <h1 className="sec-title text-[var(--ink)]">{t(lang, "resourcesTitle")}</h1>
         <p className="sec-sub mt-3">{t(lang, "resourcesSub")}</p>
       </div>
 
@@ -63,11 +67,15 @@ export default async function ResourcesPage() {
           <Link key={b.id} href={`/resources/${b.slug}`} className="svc-card">
             <span className="svc-card__idx">0{i + 1} — {lang === "ar" ? b.nameAr : b.nameFr}</span>
             <div className="svc-card__body mt-4">
-              <div className="text-4xl mb-3">{ICONS[b.slug] ?? "📄"}</div>
+              <div className="mb-3 text-[var(--brand)]">
+                <Icon name={ICONS[b.slug] ?? branchIcon(b.slug)} size={28} />
+              </div>
               <h3>{lang === "ar" ? b.nameAr : b.nameFr}</h3>
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
-              <span className="tag">{b._count.resources} 📄</span>
+              <span className="tag">
+                <Icon name="file" size={13} /> {b._count.resources}
+              </span>
             </div>
             <span className="svc-card__arrow">{t(lang, "homeStart")} <i /></span>
           </Link>

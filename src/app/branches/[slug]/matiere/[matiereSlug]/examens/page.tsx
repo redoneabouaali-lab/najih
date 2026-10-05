@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageContext } from "@/components/PageContext";
 import { ContentUnderstand } from "@/components/ContentUnderstand";
+import { Icon } from "@/components/Icon";
 
 type Props = { params: Promise<{ slug: string; matiereSlug: string }> };
 
@@ -28,8 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     path: `/branches/${slug}/matiere/${matiereSlug}/examens`,
     title:
       lang === "ar"
-        ? `${subject.icon} امتحانات ${name} — ${shortLabel}`
-        : `${subject.icon} Examens ${name} — ${shortLabel}`,
+        ? `امتحانات ${name} — ${shortLabel}`
+        : `Examens ${name} — ${shortLabel}`,
     brandInTitle: false,
     description:
       lang === "ar"
@@ -65,12 +66,12 @@ export default async function MatiereExamensPage({ params }: Props) {
   const lang = await getLang();
 
   const branch = await prisma.branch.findUnique({ where: { slug } });
-  if (!branch) return <div className="p-8 text-center text-gray-500">Branch not found</div>;
+  if (!branch) return <div className="p-8 text-center text-[var(--ink-3)]">Branch not found</div>;
 
   const subject = await prisma.subject.findUnique({
     where: { branchId_slug: { branchId: branch.id, slug: matiereSlug } },
   });
-  if (!subject) return <div className="p-8 text-center text-gray-500">Matière not found</div>;
+  if (!subject) return <div className="p-8 text-center text-[var(--ink-3)]">Matière not found</div>;
 
   const keys = SUBJECT_KEYMAP[subject.slug] ?? [];
   const exams = await prisma.resource.findMany({
@@ -102,26 +103,26 @@ export default async function MatiereExamensPage({ params }: Props) {
       <PageContext context={assistContext} />
       <div className="crumb mb-8">
         <Link href="/">{t(lang, "navHome")}</Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
         <Link href={`/branches/${slug}`}>{lang === "ar" ? branch.nameAr : branch.nameFr}</Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
         <Link href={`/branches/${slug}/matiere/${matiereSlug}`}>
           {lang === "ar" ? subject.nameAr : subject.nameFr}
         </Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
-        <span className="text-[var(--b)]">{t(lang, "examsMatiereTitle")}</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
+        <span className="text-[var(--ink)]">{t(lang, "examsMatiereTitle")}</span>
       </div>
 
       <div className="mb-12">
         <div className="label mb-4">05 — {t(lang, "examSection")}</div>
-        <h1 className="sec-title text-[var(--b)]">
-          {subject.icon} {t(lang, "examsMatiereTitle")}
-        </h1>
+        <h1 className="sec-title text-[var(--ink)]">{t(lang, "examsMatiereTitle")}</h1>
         <p className="sec-sub mt-3">{lang === "ar" ? branch.nameAr : branch.nameFr}</p>
-        <span className="tag mt-4">{exams.length} 🗓️</span>
+        <span className="tag mt-4">
+          <Icon name="calendar" size={13} /> {exams.length}
+        </span>
       </div>
 
-      {years.length === 0 && <p className="text-[var(--l)]">{t(lang, "noResources")}</p>}
+      {years.length === 0 && <p className="text-[var(--ink-3)]">{t(lang, "noResources")}</p>}
 
       {years.map((year) => {
         const sessions = byYear.get(year)!.sort((a, b) => {
@@ -146,10 +147,14 @@ export default async function MatiereExamensPage({ params }: Props) {
                         <span className="entry__title block">
                           {sg.session ? t(lang, SESSION_KEY[sg.session]) : year}
                         </span>
-                        <span className="entry__role block mt-2">
+                        <span className="entry__role mt-2 flex items-center gap-1.5">
+                          <Icon
+                            name={r.titleFr.toLowerCase().includes("correction") ? "check" : "clipboard"}
+                            size={13}
+                          />
                           {r.titleFr.toLowerCase().includes("correction")
-                            ? `✅ ${t(lang, "kCorrection")}`
-                            : `📋 ${t(lang, "kSujet")}`}
+                            ? t(lang, "kCorrection")
+                            : t(lang, "kSujet")}
                         </span>
                       </span>
                       <span className="entry__meta"><b>↗</b></span>

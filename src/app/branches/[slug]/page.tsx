@@ -62,12 +62,11 @@ export default async function BranchPage({ params }: Props) {
   });
 
   if (!branch)
-    return <div className="p-8 text-center text-gray-500">Branch not found</div>;
+    return <div className="p-8 text-center text-[var(--ink-3)]">Branch not found</div>;
 
   const matieres = branch.subjects.map((sub) => ({
     id: sub.id,
     slug: sub.slug,
-    icon: sub.icon,
     nameAr: sub.nameAr,
     nameFr: sub.nameFr,
     chapterCount: sub.chapters.length,
@@ -103,7 +102,7 @@ export default async function BranchPage({ params }: Props) {
         }}
       />
       <div className="max-w-6xl mx-auto px-4 sm:px-8 pt-10">
-        <h1 className="sec-title text-[var(--b)]">{branchName}</h1>
+        <h1 className="sec-title text-[var(--ink)]">{branchName}</h1>
       </div>
       <BranchMatierePicker
         lang={lang}

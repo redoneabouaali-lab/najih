@@ -91,7 +91,7 @@ export default async function RootLayout({
     <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"} className="h-full">
       <head>
         <link rel="manifest" href="/manifest.webmanifest" />
-        <meta name="theme-color" content="#f8fafc" />
+        <meta name="theme-color" content="#f7f7f5" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -136,18 +136,18 @@ export default async function RootLayout({
         <div className="scroll-progress" aria-hidden="true" />
         <Header />
         <main className="flex-1">{children}</main>
-        <footer className="mt-16 bg-gradient-to-r from-indigo-50 via-white to-sky-50 border-t border-[var(--p)] px-6 pt-10 pb-6">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 text-[13px] text-[var(--m)]">
+        <footer className="mt-16 bg-[var(--surface)] border-t border-[var(--line)] px-6 pt-10 pb-6">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 text-[14px] text-[var(--m)]">
             <div className="flex flex-col gap-2">
-              <span className="font-bold text-[var(--acc)]">ناجح / NAJIH</span>
-              <span className="text-[var(--l)]">{t(lang, "footer")}</span>
+              <span className="font-semibold text-[var(--ink)]">ناجح / NAJIH</span>
+              <span className="text-[var(--ink-3)]">{t(lang, "footer")}</span>
             </div>
             <nav aria-label="Footer">
-              <div className="font-bold text-[var(--b)] mb-2">{t(lang, "navBranches")}</div>
+              <div className="font-bold text-[var(--ink)] mb-2">{t(lang, "navBranches")}</div>
               <ul className="flex flex-col gap-1.5">
                 {branches.map((b) => (
                   <li key={b.slug}>
-                    <Link href={`/branches/${b.slug}`} className="text-[var(--p)] underline underline-offset-2 hover:opacity-75">
+                    <Link href={`/branches/${b.slug}`} className="text-[var(--line)] underline underline-offset-2 hover:opacity-75">
                       {lang === "ar" ? b.nameAr : b.nameFr}
                     </Link>
                   </li>
@@ -155,11 +155,11 @@ export default async function RootLayout({
               </ul>
             </nav>
             <nav aria-label="Footer 2">
-              <div className="font-bold text-[var(--b)] mb-2">{t(lang, "navHome")}</div>
+              <div className="font-bold text-[var(--ink)] mb-2">{t(lang, "navHome")}</div>
               <ul className="flex flex-col gap-1.5">
-                <li><Link href="/resources" className="text-[var(--p)] underline underline-offset-2 hover:opacity-75">{t(lang, "navResources")}</Link></li>
-                <li><Link href="/ai" className="text-[var(--p)] underline underline-offset-2 hover:opacity-75">{t(lang, "navAi")}</Link></li>
-                <li><Link href="/results" className="text-[var(--p)] underline underline-offset-2 hover:opacity-75">{t(lang, "navProgress")}</Link></li>
+                <li><Link href="/resources" className="text-[var(--line)] underline underline-offset-2 hover:opacity-75">{t(lang, "navResources")}</Link></li>
+                <li><Link href="/ai" className="text-[var(--line)] underline underline-offset-2 hover:opacity-75">{t(lang, "navAi")}</Link></li>
+                <li><Link href="/results" className="text-[var(--line)] underline underline-offset-2 hover:opacity-75">{t(lang, "navProgress")}</Link></li>
               </ul>
             </nav>
           </div>

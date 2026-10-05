@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { t, type Lang } from "@/lib/lang";
 import { db, type QuizResultRow } from "@/lib/db";
+import { Icon } from "@/components/Icon";
 
 export function Progress({ lang }: { lang: Lang }) {
   const [results, setResults] = useState<QuizResultRow[]>([]);
@@ -32,8 +33,11 @@ export function Progress({ lang }: { lang: Lang }) {
 
   return (
     <div className="max-w-4xl mx-auto p-6 sm:p-8 space-y-6">
-      <div className="label mb-4">📈 {t(lang, "progressTitle")}</div>
-      <h1 className="sec-title text-[var(--b)]">{t(lang, "progressTitle")}</h1>
+      <div className="label mb-4">
+        <Icon name="trend" size={15} />
+        {t(lang, "progressTitle")}
+      </div>
+      <h1 className="sec-title text-[var(--ink)]">{t(lang, "progressTitle")}</h1>
 
       {results.length === 0 && (
         <p className="sec-sub mt-6">{t(lang, "progressEmpty")}</p>
@@ -76,7 +80,7 @@ export function Progress({ lang }: { lang: Lang }) {
                     {lang === "ar" ? r.chapterTitleAr : r.chapterTitleFr}
                   </div>
                   <div className="entry__role mt-2">
-                    {r.score} {t(lang, "of")} {r.total} · <b className={r.score / r.total >= 0.5 ? "text-[var(--b)]" : "text-[var(--l)]"}>{Math.round((r.score / r.total) * 100)}%</b>
+                    {r.score} {t(lang, "of")} {r.total} · <b className={r.score / r.total >= 0.5 ? "text-[var(--ink)]" : "text-[var(--ink-3)]"}>{Math.round((r.score / r.total) * 100)}%</b>
                   </div>
                 </div>
                 <span className="entry__meta">

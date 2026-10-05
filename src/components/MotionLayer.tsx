@@ -106,17 +106,6 @@ export function MotionLayer() {
           scrollTrigger: { trigger: grid, start: "top 85%", once: true },
         });
       });
-
-      const marquee = document.querySelector<HTMLElement>(".marquee");
-      if (marquee) {
-        const setSkew = gsap.quickTo(marquee, "skewX", { duration: 0.5, ease: "power3.out" });
-        ScrollTrigger.create({
-          trigger: document.body,
-          start: 0,
-          end: "max",
-          onUpdate: (self) => setSkew(gsap.utils.clamp(-10, 10, self.getVelocity() / 220)),
-        });
-      }
     });
 
     const id = window.setTimeout(() => {

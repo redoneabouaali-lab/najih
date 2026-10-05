@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { getClientLang, normalizeLang, t, type Lang } from "@/lib/lang";
+import { Icon } from "./Icon";
 import { LangToggle } from "./LangToggle";
 import { ScrollProgress } from "./ScrollProgress";
 import { CommandPalette } from "./CommandPalette";
@@ -47,7 +48,7 @@ export function Header() {
       <header className={`hdr ${scrolled ? "scrolled" : ""}`}>
         <div className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-8 py-3">
           <Link href="/" className="flex items-center gap-2.5">
-            <span className="grid place-items-center w-9 h-9 rounded-xl overflow-hidden shadow-[var(--shadow-md)] bg-white">
+            <span className="grid place-items-center w-9 h-9 rounded-[var(--r-sm)] overflow-hidden bg-[var(--surface)] border border-[var(--line)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/img/logo-sm.png"
@@ -58,8 +59,8 @@ export function Header() {
                 loading="eager"
               />
             </span>
-            <span className="text-[17px] font-bold text-[var(--b)] tracking-tight">
-              ناجح<span className="text-[var(--acc)]">.bac</span>
+            <span className="text-[17px] font-semibold text-[var(--ink)] tracking-tight">
+              ناجح<span className="text-[var(--ink-3)] font-normal">.bac</span>
             </span>
           </Link>
 
@@ -78,8 +79,8 @@ export function Header() {
           <div className="flex items-center gap-2.5">
             <CommandPalette />
             <LangToggle lang={lang} />
-            <Link href="/branches" className="btn btn-emerald btn-sm !py-2.5 hidden md:inline-flex">
-              {t(lang, "homeStart")} <span aria-hidden>→</span>
+            <Link href="/branches" className="btn btn-sm !py-2.5 hidden md:inline-flex">
+              {t(lang, "homeStart")} <Icon name="arrowRight" size={16} />
             </Link>
             <button
               type="button"
@@ -88,14 +89,14 @@ export function Header() {
               onClick={() => setMenuOpen((v) => !v)}
               className="btn btn-ghost btn-sm !px-3.5 md:hidden"
             >
-              <span aria-hidden>{menuOpen ? "✕" : "☰"}</span>
+              <Icon name={menuOpen ? "close" : "menu"} size={18} />
             </button>
           </div>
         </div>
         {menuOpen && (
           <nav
             aria-label="Main mobile"
-            className="md:hidden border-t border-[var(--p)] bg-white/95 backdrop-blur"
+            className="md:hidden border-t border-[var(--line)] bg-[var(--surface)]"
           >
             <div className="max-w-6xl mx-auto flex flex-col px-4 py-3 gap-1">
               {links.map((l) => (
@@ -103,7 +104,7 @@ export function Header() {
                   key={l.href}
                   href={l.href}
                   onClick={closeMenu}
-                  className={`rounded-lg px-4 py-3 text-[15px] font-semibold ${isActive(l.href) ? "text-[var(--acc)]" : "text-[var(--b)]"}`}
+                  className={`rounded-lg px-4 py-3 text-[15px] font-semibold ${isActive(l.href) ? "text-[var(--acc)]" : "text-[var(--ink)]"}`}
                 >
                   {t(lang, l.key)}
                 </Link>

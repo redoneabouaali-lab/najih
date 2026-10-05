@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { AskTutorButton } from "@/components/AskTutorButton";
 import { PageContext } from "@/components/PageContext";
 import { ContentUnderstand } from "@/components/ContentUnderstand";
+import { Icon } from "@/components/Icon";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -52,7 +53,7 @@ export default async function LessonPage({ params }: Props) {
   if (!chapter) notFound();
   if (!chapter.lesson)
     return (
-      <div className="max-w-4xl mx-auto p-6 text-center text-gray-500">
+      <div className="max-w-4xl mx-auto p-6 text-center text-[var(--ink-3)]">
         {t(lang, "lessonNotFound")}
       </div>
     );
@@ -138,20 +139,20 @@ ${excerpt(lessonContent)}`;
       />
       <div className="crumb mb-8">
         <Link href="/">{t(lang, "navHome")}</Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
         <Link href={`/branches/${branchSlug}`}>
           {lang === "ar" ? chapter.subject.branch.nameAr : chapter.subject.branch.nameFr}
         </Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
-        <span className="text-[var(--b)]">{lang === "ar" ? chapter.titleAr : chapter.titleFr}</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
+        <span className="text-[var(--ink)]">{lang === "ar" ? chapter.titleAr : chapter.titleFr}</span>
       </div>
 
       <div className="mb-10">
         <div className="label mb-4">
-          {chapter.subject.icon} {lang === "ar" ? chapter.subject.nameAr : chapter.subject.nameFr} · {t(lang, "lessonView")}
+          {lang === "ar" ? chapter.subject.nameAr : chapter.subject.nameFr} · {t(lang, "lessonView")}
         </div>
-        <h1 className="sec-title text-[var(--b)]">{lang === "ar" ? chapter.titleAr : chapter.titleFr}</h1>
-        <p className="mono text-sm text-[var(--l)] mt-4">{chapter._count.questions} {t(lang, "questions")}</p>
+        <h1 className="sec-title text-[var(--ink)]">{lang === "ar" ? chapter.titleAr : chapter.titleFr}</h1>
+        <p className="mono text-sm text-[var(--ink-3)] mt-4">{chapter._count.questions} {t(lang, "questions")}</p>
       </div>
 
       <div className="panel panel-hover p-6 sm:p-10 mb-10">
@@ -160,28 +161,26 @@ ${excerpt(lessonContent)}`;
 
       <div className="flex flex-wrap gap-3 mb-12">
         {chapter._count.questions > 0 ? (
-          <Link
-            href={`/quiz/${chapter.id}`}
-            className="btn btn-emerald"
-          >
-            🎯 {t(lang, "startQuiz")} ({chapter._count.questions})
+          <Link href={`/quiz/${chapter.id}`} className="btn">
+            <Icon name="target" size={16} />
+            {t(lang, "startQuiz")} ({chapter._count.questions})
           </Link>
         ) : (
           <span className="btn btn-ghost !cursor-default opacity-60">
-            🎯 {t(lang, "questions")} 0
+            <Icon name="target" size={16} />
+            {t(lang, "questions")} 0
           </span>
         )}
         <Link
           href={`/branches/${branchSlug}/matiere/${chapter.subject.slug}/examens`}
           className="btn btn-ghost"
         >
-          🗓️ {t(lang, "examSection")}
+          <Icon name="calendar" size={16} />
+          {t(lang, "examSection")}
         </Link>
-        <Link
-          href={`/resources/${branchSlug}`}
-          className="btn btn-ghost"
-        >
-          📄 {t(lang, "navResources")}
+        <Link href={`/resources/${branchSlug}`} className="btn btn-ghost">
+          <Icon name="file" size={16} />
+          {t(lang, "navResources")}
         </Link>
         <AskTutorButton
           lang={lang}

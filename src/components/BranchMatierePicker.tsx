@@ -6,11 +6,11 @@ import { useRouter } from "next/navigation";
 import { t, type Lang, setClientLang } from "@/lib/lang";
 import { getProfile, saveProfile } from "@/lib/profile";
 import { HomeLangStep } from "./HomeLangStep";
+import { Icon, subjectIcon } from "./Icon";
 
 export type MatiereOption = {
   id: string;
   slug: string;
-  icon: string;
   nameAr: string;
   nameFr: string;
   chapterCount: number;
@@ -83,18 +83,22 @@ export function BranchMatierePicker({
     <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10">
       <div className="crumb mb-8">
         <Link href="/">{t(viewLang, "navHome")}</Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
         <Link href="/branches">{t(viewLang, "navBranches")}</Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
-        <span className="text-[var(--b)]">{branchName}</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
+        <span className="text-[var(--ink)]">{branchName}</span>
       </div>
 
       <div className="mb-12">
         <div className="label mb-4">01 — {t(viewLang, "matiere")}</div>
         <p className="sec-sub mt-3">{t(viewLang, "pickMatiereSub")}</p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <span className="tag">{matieres.length} 🧩</span>
-          <span className="tag">{totalQ} 🎯</span>
+          <span className="tag">
+            <Icon name="layers" size={13} /> {matieres.length}
+          </span>
+          <span className="tag">
+            <Icon name="target" size={13} /> {totalQ}
+          </span>
         </div>
       </div>
 
@@ -107,26 +111,41 @@ export function BranchMatierePicker({
               <Link key={m.id} href={`/branches/${branchSlug}/matiere/${m.slug}`} className="svc-card">
                 <span className="svc-card__idx">0{i + 1} — {viewLang === "ar" ? m.nameAr : m.nameFr}</span>
                 <div className="svc-card__body mt-4">
-                  <div className="text-4xl mb-3">{m.icon}</div>
+                  <div className="mb-3 text-[var(--brand)]">
+                  <Icon name={subjectIcon(m.slug)} size={28} />
+                </div>
                   <h3>{viewLang === "ar" ? m.nameAr : m.nameFr}</h3>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {m.lessonCount > 0 && <span className="tag">{m.lessonCount} 📚</span>}
-                  {m.questionCount > 0 && <span className="tag">{m.questionCount} 🎯</span>}
-                  {m.chapterCount > 0 && <span className="tag">{m.chapterCount} 📖</span>}
+                  {m.lessonCount > 0 && (
+                    <span className="tag">
+                      <Icon name="book" size={13} /> {m.lessonCount}
+                    </span>
+                  )}
+                  {m.questionCount > 0 && (
+                    <span className="tag">
+                      <Icon name="target" size={13} /> {m.questionCount}
+                    </span>
+                  )}
+                  {m.chapterCount > 0 && (
+                    <span className="tag">
+                      <Icon name="file" size={13} /> {m.chapterCount}
+                    </span>
+                  )}
                   {empty && <span className="tag">{t(viewLang, "soon")}</span>}
                 </div>
                 <span className="svc-card__arrow">{t(viewLang, "homeStart")} <i /></span>
               </Link>
             );
           })}
-          {matieres.length === 0 && <p className="text-[var(--l)] py-8">{t(viewLang, "noMatieres")}</p>}
+          {matieres.length === 0 && <p className="text-[var(--ink-3)] py-8">{t(viewLang, "noMatieres")}</p>}
         </div>
       </section>
 
       <div className="mt-16">
         <Link href={`/resources/${branchSlug}`} className="btn btn-ghost">
-          📄 {t(viewLang, "navResources")}
+          <Icon name="file" size={17} />
+          {t(viewLang, "navResources")}
         </Link>
       </div>
     </div>

@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageContext } from "@/components/PageContext";
 import { ContentUnderstand } from "@/components/ContentUnderstand";
+import { Icon, type IconName } from "@/components/Icon";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -42,13 +43,13 @@ export async function generateStaticParams() {
 
 const SUBJECTS: Record<
   string,
-  { ar: string; fr: string; icon: string }
+  { ar: string; fr: string; icon: IconName }
 > = {
-  svt: { ar: "علوم الحياة والأرض", fr: "SVT", icon: "🧬" },
-  sp: { ar: "العلوم الفيزيائية", fr: "Physique-Chimie", icon: "⚗️" },
-  sm: { ar: "العلوم الرياضية", fr: "Mathématiques", icon: "📐" },
-  anglais: { ar: "الإنجليزية", fr: "Anglais", icon: "💬" },
-  maths: { ar: "الرياضيات", fr: "Mathématiques", icon: "📐" },
+  svt: { ar: "علوم الحياة والأرض", fr: "SVT", icon: "dna" },
+  sp: { ar: "العلوم الفيزيائية", fr: "Physique-Chimie", icon: "flask" },
+  sm: { ar: "العلوم الرياضية", fr: "Mathématiques", icon: "math" },
+  anglais: { ar: "الإنجليزية", fr: "Anglais", icon: "message" },
+  maths: { ar: "الرياضيات", fr: "Mathématiques", icon: "math" },
 };
 
 const SESSION_KEY: Record<string, string> = {
@@ -81,7 +82,7 @@ export default async function BranchResourcesPage({ params }: Props) {
   });
 
   if (!branch)
-    return <div className="p-8 text-center text-gray-500">Branch not found</div>;
+    return <div className="p-8 text-center text-[var(--ink-3)]">Branch not found</div>;
 
   const lessons = branch.resources.filter((r) => r.kind === "lesson");
   const exercises = branch.resources.filter((r) => r.kind === "exercise");
@@ -126,31 +127,42 @@ export default async function BranchResourcesPage({ params }: Props) {
       />
       <div className="crumb mb-8 flex items-center gap-1">
         <Link href="/">{t(lang, "navHome")}</Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
         <Link href="/resources">{t(lang, "navResources")}</Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
-        <span className="text-[var(--b)]">{lang === "ar" ? branch.nameAr : branch.nameFr}</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
+        <span className="text-[var(--ink)]">{lang === "ar" ? branch.nameAr : branch.nameFr}</span>
       </div>
 
       <div className="mb-12">
-        <div className="label mb-4">📄 {t(lang, "navResources")}</div>
-        <h1 className="sec-title text-[var(--b)]">{lang === "ar" ? branch.nameAr : branch.nameFr}</h1>
+        <div className="label mb-4">
+          <Icon name="file" size={15} />
+          {t(lang, "navResources")}
+        </div>
+        <h1 className="sec-title text-[var(--ink)]">{lang === "ar" ? branch.nameAr : branch.nameFr}</h1>
         <p className="sec-sub mt-3">{t(lang, "resourcesSub")}</p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <span className="tag">📚 {lessons.length}</span>
-          <span className="tag">{exercises.length} ✍️</span>
-          <span className="tag">{exams.length} 📄</span>
+          <span className="tag">
+            <Icon name="book" size={13} /> {lessons.length}
+          </span>
+          <span className="tag">
+            <Icon name="pen" size={13} /> {exercises.length}
+          </span>
+          <span className="tag">
+            <Icon name="calendar" size={13} /> {exams.length}
+          </span>
         </div>
         <Link
           href={`/branches/${slug}`}
           className="inline-flex items-center gap-2 mt-6 btn btn-ghost"
         >
-          📖 {t(lang, "lessonsAndQuiz")} <span aria-hidden>→</span>
+          <Icon name="book" size={16} />
+          {t(lang, "lessonsAndQuiz")}
+          <Icon name="arrowRight" size={15} />
         </Link>
       </div>
 
       {branch.resources.length === 0 && (
-        <p className="text-[var(--l)]">{t(lang, "noResources")}</p>
+        <p className="text-[var(--ink-3)]">{t(lang, "noResources")}</p>
       )}
 
       {lessons.length > 0 && (
@@ -167,7 +179,11 @@ export default async function BranchResourcesPage({ params }: Props) {
                 >
                   <span className="entry__idx">0{i + 1}<i /></span>
                   <span className="entry__title block">{lang === "ar" ? e.titleAr : e.titleFr}</span>
-                  <span className="entry__meta"><b>⬇ PDF</b></span>
+                  <span className="entry__meta">
+                    <b>
+                      <Icon name="download" size={13} /> PDF
+                    </b>
+                  </span>
                 </a>
                 <ContentUnderstand
                   storageKey={`resource:${e.id}`}
@@ -228,7 +244,7 @@ export default async function BranchResourcesPage({ params }: Props) {
             {sessions.map((sg) => (
               <div key={String(sg.session)} className="mb-8">
                 {sg.session && (
-                  <div className="mono text-[11px] font-semibold tracking-[.14em] uppercase text-[var(--l)] mb-3">
+                  <div className="mono text-[11px] font-semibold tracking-[.14em] uppercase text-[var(--ink-3)] mb-3">
                     {t(lang, SESSION_KEY[sg.session])}
                   </div>
                 )}
@@ -236,10 +252,13 @@ export default async function BranchResourcesPage({ params }: Props) {
                   {Object.entries(sg.subjects).map(([subjKey, subj]) => {
                     const meta =
                       SUBJECTS[subjKey] ??
-                      ({ ar: subjKey, fr: subjKey, icon: "📄" } as const);
+                      ({ ar: subjKey, fr: subjKey, icon: "file" } as const);
                     return (
                       <div key={subjKey} className="entry">
-                        <span className="entry__idx">{meta.icon}<i /></span>
+                        <span className="entry__idx">
+                          <Icon name={meta.icon} size={16} />
+                          <i />
+                        </span>
                         <div>
                           <div className="entry__title">{lang === "ar" ? meta.ar : meta.fr}</div>
                           {subj.sujet && (
@@ -249,8 +268,9 @@ export default async function BranchResourcesPage({ params }: Props) {
                           )}
                           <div className="flex flex-wrap gap-2 mt-3">
                             {subj.sujet && (
-                              <a href={subj.sujet.url} target="_blank" rel="noopener noreferrer" className="btn btn-emerald btn-sm">
-                                {t(lang, "kSujet")} ↗
+                              <a href={subj.sujet.url} target="_blank" rel="noopener noreferrer" className="btn btn-sm">
+                                {t(lang, "kSujet")}
+                                <Icon name="arrowRight" size={14} />
                               </a>
                             )}
                             {subj.sujet && (
@@ -262,24 +282,28 @@ export default async function BranchResourcesPage({ params }: Props) {
                                   kindHint: "exercise",
                                   lang: lang === "ar" ? "ar" : "fr",
                                 }}
-                                label={lang === "ar" ? "✦ فهم" : "✦ Comprendre"}
+                                label={lang === "ar" ? "فهم" : "Comprendre"}
                                 buttonClassName="btn btn-sm !px-3"
                               />
                             )}
                             {subj.correction && (
                               <a href={subj.correction.url} target="_blank" rel="noopener noreferrer" className="btn btn-sm">
-                                {t(lang, "kCorrection")} ↗
+                                {t(lang, "kCorrection")}
+                                <Icon name="arrowRight" size={14} />
                               </a>
                             )}
                             {subj.other?.map((o) => (
                               <a key={o.id} href={o.url} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm">
-                                {lang === "ar" ? o.titleAr : o.titleFr} ↗
+                                {lang === "ar" ? o.titleAr : o.titleFr}
+                                <Icon name="arrowRight" size={14} />
                               </a>
                             ))}
                           </div>
                         </div>
                         <span className="entry__meta">
-                          <b>{subj.sujet ? "✓" : ""}</b>
+                          <b>
+                            {subj.sujet ? <Icon name="check" size={14} /> : null}
+                          </b>
                         </span>
                       </div>
                     );

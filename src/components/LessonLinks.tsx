@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { t, type Lang } from "@/lib/lang";
+import { Icon } from "@/components/Icon";
 
 type Props = {
   lang: Lang;
@@ -46,20 +47,22 @@ export async function LessonLinks({ lang, branchSlug, limit, heading }: Props) {
             className="panel panel-hover p-4 flex flex-col justify-between gap-3"
           >
             <div>
-              <div className="mono text-[11px] text-[var(--l)] mb-1">
+              <div className="mono text-[11px] text-[var(--ink-3)] mb-1">
                 {lang === "ar" ? ch.subject.branch.nameAr : ch.subject.branch.nameFr} ·{" "}
                 {lang === "ar" ? ch.subject.nameAr : ch.subject.nameFr}
               </div>
-              <div className="font-bold text-[var(--b)] text-sm leading-snug">
+              <div className="font-bold text-[var(--ink)] text-sm leading-snug">
                 {lang === "ar" ? ch.titleAr : ch.titleFr}
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <span className="tag">
-                📖 {t(lang, "lessonView")}
+                <Icon name="book" size={13} /> {t(lang, "lessonView")}
               </span>
               {ch._count.questions > 0 ? (
-                <span className="tag">🎯 {ch._count.questions}</span>
+                <span className="tag">
+                  <Icon name="target" size={13} /> {ch._count.questions}
+                </span>
               ) : null}
               <Link
                 href={`/branches/${ch.subject.branch.slug}/matiere/${ch.subject.slug}`}

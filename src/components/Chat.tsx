@@ -8,6 +8,7 @@ import { AttachButton } from "@/components/AttachButton";
 import { AiFeedback } from "@/components/AiFeedback";
 import { uploadsExhausted, uploadsRemaining, consumeUpload } from "@/lib/uploads";
 import { sessionId } from "@/lib/session";
+import { Icon } from "@/components/Icon";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -30,7 +31,7 @@ export function Chat({ lang }: { lang: Lang }) {
     const text = (raw ?? input).trim();
     if ((!text && !attachments?.length) || loading) return;
     setInput("");
-    setMsgs((m) => [...m, { role: "user", content: text || "📎 مرفق" }]);
+    setMsgs((m) => [...m, { role: "user", content: text || "مرفق" }]);
     setLoading(true);
     try {
       const system =
@@ -56,11 +57,7 @@ export function Chat({ lang }: { lang: Lang }) {
       if (!res.ok) {
         const msg =
           data?.error || (lang === "ar" ? "عتذر، حدث خطأ." : "Désolé, une erreur est survenue.");
-        pushAssistant(
-          lang === "ar"
-            ? `⚠️ ${msg}`
-            : `⚠️ ${msg}`,
-        );
+        pushAssistant(msg);
         return;
       }
       const reply =
@@ -81,8 +78,8 @@ export function Chat({ lang }: { lang: Lang }) {
     if (uploadsExhausted()) {
       pushAssistant(
         lang === "ar"
-          ? "أنت استنفدت تحميلاتك المجانية الثلاثة 📎. جرّب زر «فهم هذا الملف» في صفحات الدروس، أو اسأل المرشد مباشرة."
-          : "Tu as épuisé tes 3 téléversements gratuits 📎. Utilise le bouton « Comprendre ce fichier » ou interroge directement le tuteur.",
+          ? "أنت استنفدت تحميلاتك المجانية الثلاثة. جرّب زر «فهم هذا الملف» في صفحات الدروس، أو اسأل المرشد مباشرة."
+          : "Tu as épuisé tes 3 téléversements gratuits. Utilise le bouton « Comprendre ce fichier » ou interroge directement le tuteur.",
       );
       return;
     }
@@ -92,8 +89,8 @@ export function Chat({ lang }: { lang: Lang }) {
       if (attach.type === "pdf" && attach.text.trim().length < 80) {
         pushAssistant(
           lang === "ar"
-            ? "😕 هذا الملف غير قابل للقراءة (مسح ضوئي أو محمي). جرّب رفع صورة واضحة."
-            : "😕 Ce fichier est illisible (scanné ou protégé). Essaie une photo nette.",
+            ? "هذا الملف غير قابل للقراءة (مسح ضوئي أو محمي). جرّب رفع صورة واضحة."
+            : "Ce fichier est illisible (scanné ou protégé). Essaie une photo nette.",
         );
         return;
       }
@@ -116,14 +113,17 @@ export function Chat({ lang }: { lang: Lang }) {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-8 py-10 flex flex-col min-h-[78vh]">
       <div className="mb-8">
-        <div className="label mb-4">🦉 {t(lang, "chatTitle")}</div>
-        <h1 className="sec-title text-[var(--b)]">{t(lang, "chatTitle")}</h1>
+        <div className="label mb-4">
+          <Icon name="message" size={15} />
+          {t(lang, "chatTitle")}
+        </div>
+        <h1 className="sec-title text-[var(--ink)]">{t(lang, "chatTitle")}</h1>
         <p className="sec-sub mt-3">{t(lang, "chatSub")}</p>
       </div>
 
       <div className="flex-1 space-y-4 overflow-y-auto mb-4 max-h-[55vh] pr-1" data-lenis-prevent>
         {msgs.length === 0 && (
-          <p className="sec-sub text-[var(--l)]">{t(lang, "chatExample")}</p>
+          <p className="sec-sub text-[var(--ink-3)]">{t(lang, "chatExample")}</p>
         )}
         {msgs.map((m, i) => {
           let lastQ = "";
@@ -140,13 +140,13 @@ export function Chat({ lang }: { lang: Lang }) {
               className={`ai-msg max-w-[85%] ${m.role === "user" ? "ml-auto" : "mr-auto w-full"}`}
               style={{ animationDelay: `${Math.min(i * 40, 400)}ms` }}
             >
-              <div className="mono text-[10px] uppercase tracking-[.14em] text-[var(--l)] mb-1">
+              <div className="mono text-[10px] uppercase tracking-[.14em] text-[var(--ink-3)] mb-1">
                 {m.role === "user"
                   ? lang === "ar" ? "أنت" : "Vous"
                   : lang === "ar" ? "المرشد" : "Tuteur"}
               </div>
               <div
-                className={`p-4 rounded-2xl ${m.role === "user" ? "bg-gradient-to-br from-indigo-600 to-indigo-700 text-white shadow-[var(--shadow-md)]" : "panel p-5 text-[var(--b)]"}`}
+                className={`p-4 rounded-[var(--r-lg)] ${m.role === "user" ? "bg-[var(--brand)] text-white" : "panel p-5 text-[var(--ink)]"}`}
                 dir="auto"
               >
                 {m.role === "assistant" ? (
@@ -169,7 +169,7 @@ export function Chat({ lang }: { lang: Lang }) {
               <i />
             </span>
             <span className="ai-think__label">
-              {lang === "ar" ? "أحلّل سؤالك… انتظر الإجابة لحظة ✨" : "J'analyse ta question… un instant ✨"}
+              {lang === "ar" ? "أحلّل سؤالك… انتظر الإجابة لحظة" : "J'analyse ta question… un instant"}
             </span>
           </div>
         )}
@@ -185,7 +185,7 @@ export function Chat({ lang }: { lang: Lang }) {
       >
         <AttachButton lang={lang} onPick={(f) => void handleAttach(f)} disabled={loading || uploading} remaining={uploadLeft ?? undefined} />
         {uploading && (
-          <span className="mono text-[11px] text-[var(--l)] whitespace-nowrap">
+          <span className="mono text-[11px] text-[var(--ink-3)] whitespace-nowrap">
             {lang === "ar" ? "جارٍ تحضير الملف…" : "Préparation du fichier…"}
           </span>
         )}

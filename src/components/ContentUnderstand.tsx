@@ -5,6 +5,7 @@ import type { AnalyzeInput, AnalyzeResult } from "@/lib/analyze";
 import { kindLabel, resultToMarkdown } from "@/lib/analyze";
 import { seedChat } from "@/lib/assist";
 import { sessionId } from "@/lib/session";
+import { Icon } from "@/components/Icon";
 
 type Phase = "reading" | "done" | "failed";
 
@@ -204,7 +205,7 @@ export function ContentUnderstand({
         className={buttonClassName || "btn btn-ghost btn-sm"}
         title={label}
       >
-        ✦ {label}
+        <Icon name="sparkles" size={15} /> {label}
       </button>
     );
   }
@@ -215,21 +216,19 @@ export function ContentUnderstand({
   return (
     <div className="u-wrap" dir={dir}>
       <div className="u-backdrop" onClick={phase !== "reading" ? close : undefined} aria-hidden />
-      <div className="u-blob u-blob--a" aria-hidden />
-      <div className="u-blob u-blob--b" aria-hidden />
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="u-title"
         className="u-card u-pop"
       >
-        <div className="u-card__bar" aria-hidden />
-
         {phase === "reading" && (
           <div className="u-reading">
             <div className="u-orb" aria-hidden>
               <span className="u-orb__ring" />
-              <span className="u-orb__core">🦉</span>
+              <span className="u-orb__core">
+                <Icon name="message" size={22} />
+              </span>
             </div>
             <h3 id="u-title" className="u-reading__title">
               {lang === "ar" ? "جارٍ فهم المحتوى…" : "Je comprends le contenu…"}
@@ -241,7 +240,7 @@ export function ContentUnderstand({
             </div>
             {secs >= 3 && (
               <div className="u-reading__timer mono" aria-live="polite">
-                {lang === "ar" ? "⏳ قد يستغرق حتى دقيقة • " : "⏳ Jusqu'à une minute • "}
+                {lang === "ar" ? "قد يستغرق حتى دقيقة • " : "Jusqu'à une minute • "}
                 {secs < 60 ? `${secs} ث` : `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}`}
               </div>
             )}
@@ -266,7 +265,7 @@ export function ContentUnderstand({
                   <button
                     type="button"
                     onClick={() => setRevealed((v) => !v)}
-                    className={`btn btn-ghost btn-sm ${revealed ? "!text-amber-600 !border-amber-400" : ""}`}
+                    className={`btn btn-ghost btn-sm ${revealed ? "!text-[var(--brand)] !border-[var(--brand)]" : ""}`}
                   >
                     {revealed
                       ? lang === "ar" ? "إخفاء الحل" : "Masquer la solution"
@@ -279,7 +278,7 @@ export function ContentUnderstand({
                   aria-label={lang === "ar" ? "إغلاق" : "Fermer"}
                   className="u-close"
                 >
-                  ✕
+                  <Icon name="close" size={16} />
                 </button>
               </div>
             </header>
@@ -287,9 +286,10 @@ export function ContentUnderstand({
             <div className="u-scroll" data-lenis-prevent>
               {result.summary && result.summary.length > 0 && (
                 <section className="mb-5">
-                  <div className="u-sec-label">
+                  <div className="u-sec-label flex items-center gap-2">
+                    <Icon name="book" size={15} />
                     {isLesson
-                      ? lang === "ar" ? "📖 الملخص" : "📖 Résumé"
+                      ? lang === "ar" ? "الملخص" : "Résumé"
                       : lang === "ar" ? "الهدف من التمرين" : "Objectif de l'exercice"}
                   </div>
                   <ul className="u-list">
@@ -305,10 +305,11 @@ export function ContentUnderstand({
 
               {result.steps && result.steps.length > 0 && (
                 <section className="mb-5">
-                  <div className="u-sec-label">
+                  <div className="u-sec-label flex items-center gap-2">
+                    <Icon name={isLesson ? "calendar" : "book"} size={15} />
                     {isLesson
-                      ? lang === "ar" ? "🗺️ خطة المراجعة" : "🗺️ Plan de révision"
-                      : lang === "ar" ? "👣 الشرح خطوة بخطوة" : "👣 Explication pas à pas"}
+                      ? lang === "ar" ? "خطة المراجعة" : "Plan de révision"
+                      : lang === "ar" ? "الشرح خطوة بخطوة" : "Explication pas à pas"}
                   </div>
                   <div className="u-steps">
                     {result.steps.map((s, i) => (
@@ -331,8 +332,8 @@ export function ContentUnderstand({
                     <div className="u-reveal u-fade">
                       <p className="u-reveal__hint">
                         {lang === "ar"
-                          ? "جرّب حل التمرين بنفسك أولاً، ثم كشف الحل للتأكد 👇"
-                          : "Essaie de résoudre l'exercice d'abord, puis révèle la solution pour vérifier 👇"}
+                          ? "جرّب حل التمرين بنفسك أولاً، ثم اكشف الحل للتأكد"
+                          : "Essaie de résoudre l'exercice d'abord, puis révèle la solution pour vérifier"}
                       </p>
                       <div className="flex justify-center">
                         <button
@@ -345,9 +346,10 @@ export function ContentUnderstand({
                                 ?.scrollIntoView({ behavior: "smooth", block: "nearest" });
                             });
                           }}
-                          className="btn btn-emerald !px-8 u-glow"
+                          className="btn !px-8"
                         >
-                          {lang === "ar" ? "🔍 أظهر الإجابة" : "🔍 Révéler la réponse"}
+                          <Icon name="search" size={16} />
+                          {lang === "ar" ? "أظهر الإجابة" : "Révéler la réponse"}
                         </button>
                       </div>
                     </div>
@@ -357,7 +359,7 @@ export function ContentUnderstand({
                       <div className="u-answer u-pop">
                         <div className="u-answer__head">
                           <span className="u-answer__check" aria-hidden>
-                            ✓
+                            <Icon name="check" size={13} />
                           </span>
                           {lang === "ar" ? "الحل الكامل" : "Solution complète"}
                         </div>
@@ -370,8 +372,9 @@ export function ContentUnderstand({
 
               {result.notes && result.notes.length > 0 && (
                 <section className="mt-5">
-                  <div className="u-sec-label">
-                    {lang === "ar" ? "⭐ نصائح مهمة" : "⭐ Conseils importants"}
+                  <div className="u-sec-label flex items-center gap-2">
+                    <Icon name="star" size={15} />
+                    {lang === "ar" ? "نصائح مهمة" : "Conseils importants"}
                   </div>
                   <ul className="u-list">
                     {result.notes.map((s, i) => (
@@ -389,12 +392,14 @@ export function ContentUnderstand({
               <button
                 type="button"
                 onClick={continueToChat}
-                className="btn btn-emerald flex-1"
+                className="btn flex-1"
               >
-                🦉 {lang === "ar" ? "تابع في الشات" : "Continuer dans le chat"}
+                <Icon name="message" size={16} />
+                {lang === "ar" ? "تابع في الشات" : "Continuer dans le chat"}
               </button>
               <button type="button" onClick={retry} className="btn btn-ghost btn-sm">
-                {lang === "ar" ? "↻ إعادة الفهم" : "↻ Re-comprendre"}
+                <Icon name="refresh" size={15} />
+                {lang === "ar" ? "إعادة الفهم" : "Re-comprendre"}
               </button>
             </footer>
           </div>
@@ -402,7 +407,9 @@ export function ContentUnderstand({
 
         {phase === "failed" && (
           <div className="u-fail">
-            <div className="u-fail__icon u-pop">😕</div>
+            <div className="u-fail__icon u-pop">
+              <Icon name="alert" size={32} />
+            </div>
             <h3 id="u-title" className="u-reading__title">{errText}</h3>
             <p className="u-fail__sub">
               {lang === "ar"
@@ -410,11 +417,13 @@ export function ContentUnderstand({
                 : "Tu peux joindre une photo du sujet ou un PDF dans le chat et je le lirai pour toi, ou pose-moi une question sur la matière."}
             </p>
             <div className="flex flex-wrap justify-center gap-3 mt-6">
-              <button type="button" onClick={continueToChat} className="btn btn-emerald">
-                🦉 {lang === "ar" ? "افتح الشات" : "Ouvrir le chat"}
+              <button type="button" onClick={continueToChat} className="btn">
+                <Icon name="message" size={16} />
+                {lang === "ar" ? "افتح الشات" : "Ouvrir le chat"}
               </button>
               <button type="button" onClick={retry} className="btn btn-ghost">
-                ↻ {lang === "ar" ? "إعادة المحاولة" : "Réessayer"}
+                <Icon name="refresh" size={15} />
+                {lang === "ar" ? "إعادة المحاولة" : "Réessayer"}
               </button>
             </div>
             <button type="button" onClick={close} className="u-fail__dismiss">

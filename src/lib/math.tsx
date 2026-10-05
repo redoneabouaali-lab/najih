@@ -64,7 +64,7 @@ export function DisplayMath({ latex }: { latex: string }): ReactNode {
   const html = renderKatex(latex, true);
   if (!html) {
     return (
-      <div dir="ltr" className="my-4 text-center font-mono text-[var(--b)]">
+      <div dir="ltr" className="my-4 text-center font-mono text-[var(--ink)]">
         {latex}
       </div>
     );

@@ -5,6 +5,10 @@ export const alt = "ناجح | Najih — Préparation Bac Maroc";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+/**
+ * Social card follows docs/DESIGN-LOCK.md: flat canvas, hairline frame, ink
+ * typography with a single brand accent. No gradients, no glow.
+ */
 export default function OpengraphImage() {
   return new ImageResponse(
     (
@@ -16,8 +20,10 @@ export default function OpengraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%)",
-          color: "white",
+          background: "#f7f7f5",
+          border: "24px solid #ffffff",
+          outline: "1px solid #e4e4e0",
+          color: "#15181c",
           fontFamily: "sans-serif",
         }}
       >
@@ -25,17 +31,33 @@ export default function OpengraphImage() {
         <img
           src={`${SITE_URL}/img/logo.png`}
           alt=""
-          width={150}
-          height={150}
-          style={{ borderRadius: 34, marginBottom: 30, boxShadow: "0 18px 50px rgba(0,0,0,.28)" }}
+          width={132}
+          height={132}
+          style={{ borderRadius: 28, marginBottom: 28 }}
         />
-        <div style={{ fontSize: 110, fontWeight: 800, display: "flex", letterSpacing: "-0.02em" }}>
-          NAJIH<span style={{ color: "#bae6fd" }}>.bac</span>
+        <div
+          style={{
+            fontSize: 104,
+            fontWeight: 800,
+            display: "flex",
+            letterSpacing: "-0.02em",
+            color: "#15181c",
+          }}
+        >
+          NAJIH<span style={{ color: "#1b3a63" }}>.bac</span>
         </div>
-        <div style={{ fontSize: 42, marginTop: 24, letterSpacing: "0.12em" }}>
+        <div
+          style={{
+            height: 1,
+            width: 180,
+            background: "#cdcdc7",
+            margin: "30px 0 26px",
+          }}
+        />
+        <div style={{ fontSize: 40, letterSpacing: "0.14em", color: "#3b424a" }}>
           Préparation au BAC MAROC
         </div>
-        <div style={{ fontSize: 28, marginTop: 18, opacity: 0.9 }}>
+        <div style={{ fontSize: 27, marginTop: 20, color: "#6b7280" }}>
           Examens nationaux · Cours · Quiz · Tuteur IA — 100% gratuit
         </div>
       </div>

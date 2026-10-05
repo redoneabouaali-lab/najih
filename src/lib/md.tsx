@@ -47,7 +47,7 @@ function renderText(text: string, keyBase: string): ReactNode[] {
       parts.push(
         <code
           key={`${keyBase}-c${i++}`}
-          className="px-1.5 py-0.5 rounded-md bg-indigo-50 text-[12px] font-mono"
+          className="px-1.5 py-0.5 rounded-[var(--r-sm)] bg-[var(--surface-sunk)] text-[12px] font-mono"
         >
           {m[4]}
         </code>,

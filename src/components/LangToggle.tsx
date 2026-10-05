@@ -13,7 +13,7 @@ export function LangToggle({ lang }: { lang: Lang }) {
         setClientLang(lang === "ar" ? "fr" : "ar");
         router.refresh();
       }}
-      className="!text-[13px] !font-bold tracking-wide px-4 py-2 rounded-full bg-[var(--acc-soft)] text-[var(--acc)] hover:bg-[#e0e7ff] hover:text-[var(--acc)] transition-colors"
+      className="!text-[13px] !font-bold tracking-wide px-4 py-2 rounded-full bg-[var(--brand-tint)] text-[var(--brand)] border border-[var(--line)] hover:border-[var(--line-strong)] hover:bg-[var(--surface-sunk)] transition-colors"
     >
       {lang === "ar" ? "FR" : "عربي"}
     </button>

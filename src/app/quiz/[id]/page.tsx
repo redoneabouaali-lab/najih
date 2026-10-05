@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Quiz } from "@/components/Quiz";
 import { PageContext } from "@/components/PageContext";
 import { ContentUnderstand } from "@/components/ContentUnderstand";
+import { Icon } from "@/components/Icon";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -53,7 +54,7 @@ export default async function QuizPage({ params }: Props) {
 
   if (!chapter)
     return (
-      <div className="p-8 text-center text-gray-500">
+      <div className="p-8 text-center text-[var(--ink-3)]">
         {t(lang, "backToLessons")}
       </div>
     );
@@ -82,16 +83,18 @@ export default async function QuizPage({ params }: Props) {
   if (questions.length === 0)
     return (
       <div className="max-w-2xl mx-auto px-6 py-16 text-center">
-        <div className="text-5xl mb-6">📭</div>
-        <h1 className="sec-title text-[var(--b)] mb-4">
+        <div className="mb-6">
+          <span className="inline-grid place-items-center w-16 h-16 rounded-[var(--r-lg)] border border-[var(--line)] text-[var(--ink-3)]">
+            <Icon name="inbox" size={28} />
+          </span>
+        </div>
+        <h1 className="sec-title text-[var(--ink)] mb-4">
           {lang === "ar" ? chapter.titleAr : chapter.titleFr}
         </h1>
-        <p className="text-[var(--l)] mb-8">{t(lang, "noQuestionsYet")}</p>
-        <Link
-          href={`/lesson/${chapter.id}`}
-          className="btn btn-emerald"
-        >
-          ← {t(lang, "backToLessons")}
+        <p className="text-[var(--ink-3)] mb-8">{t(lang, "noQuestionsYet")}</p>
+        <Link href={`/lesson/${chapter.id}`} className="btn">
+          <Icon name="chevronLeft" size={16} />
+          {t(lang, "backToLessons")}
         </Link>
       </div>
     );
@@ -131,7 +134,7 @@ export default async function QuizPage({ params }: Props) {
       <div className="max-w-2xl mx-auto px-6 pt-6 text-sm">
         <Link
           href={`/branches/${chapter.subject.branch.slug}`}
-          className="text-[var(--b)] hover:opacity-60"
+          className="text-[var(--ink)] hover:opacity-60"
         >
           ← {t(lang, "backToLessons")}
         </Link>

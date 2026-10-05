@@ -1,5 +1,6 @@
 ﻿import { prisma } from "@/lib/prisma";
 import { getClientLang } from "@/lib/lang";
+import { branchIcon, subjectIcon, type IconName } from "@/lib/icons";
 
 export const runtime = "nodejs";
 
@@ -10,7 +11,7 @@ export async function GET(req: Request) {
   if (q.length < 2) return Response.json({ items: [] });
 
   const tk = q.toLowerCase();
-  const items: { url: string; label: string; sub: string; icon: string }[] = [];
+  const items: { url: string; label: string; sub: string; icon: IconName }[] = [];
   const seen = new Set<string>();
 
   const branches = await prisma.branch.findMany({
@@ -26,7 +27,7 @@ export async function GET(req: Request) {
       url: key,
       label,
       sub: lang === "ar" ? "الشعبة" : "Filière",
-      icon: "🎓",
+      icon: branchIcon(b.slug),
     });
   }
 
@@ -46,14 +47,14 @@ export async function GET(req: Request) {
       url: key,
       label,
       sub: lang === "ar" ? "مادة" : "Matière",
-      icon: s.icon,
+      icon: subjectIcon(s.slug),
     });
   }
 
   const chapters = await prisma.chapter.findMany({
     where: { lesson: { isNot: null } },
     include: {
-      subject: { select: { slug: true, nameAr: true, nameFr: true } },
+      subject: { select: { slug: true, nameAr: true, nameFr: true, branch: { select: { slug: true } } } },
     },
     take: 40,
   });
@@ -61,7 +62,7 @@ export async function GET(req: Request) {
     const title = `${c.titleAr ?? ""} ${c.titleFr ?? ""}`.toLowerCase();
     if (!title.includes(tk)) continue;
     const label = lang === "ar" ? c.titleAr : c.titleFr;
-    const key = `/branches/${c.subject.slug}/lesson/${c.slug}`;
+    const key = `/branches/${c.subject.branch.slug}/matiere/${c.subject.slug}/lesson/${c.id}`;
     if (seen.has(key)) continue;
     seen.add(key);
     const subj = lang === "ar" ? c.subject.nameAr : c.subject.nameFr;
@@ -69,7 +70,7 @@ export async function GET(req: Request) {
       url: key,
       label,
       sub: `${subj} — ${lang === "ar" ? "درس" : "Cours"}`,
-      icon: "📖",
+      icon: "book",
     });
   }
 
@@ -102,7 +103,7 @@ export async function GET(req: Request) {
       url: key,
       label,
       sub: `${yearStr}${kind}`,
-      icon: r.kind === "exam" ? "🗓" : "📄",
+      icon: r.kind === "exam" ? "calendar" : "file",
     });
   }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Icon } from "@/components/Icon";
 
 type Props = { question: string; lang: "ar" | "fr" };
 
@@ -20,32 +21,32 @@ export function AiFeedback({ question, lang }: Props) {
 
   return (
     <div className="flex items-center gap-1.5 mt-1.5" aria-live="polite">
-      <span className="mono text-[9px] uppercase tracking-[.12em] text-[var(--l)]">
+      <span className="mono text-[9px] uppercase tracking-[.12em] text-[var(--ink-3)]">
         {lang === "ar" ? "مفيد؟" : "utile ?"}
       </span>
       <button
         type="button"
         onClick={() => send(true)}
         aria-label="good"
-        className={`grid place-items-center w-7 h-7 rounded-lg text-sm border transition-all active:scale-90 ${
+        className={`grid place-items-center w-8 h-8 rounded-[var(--r-sm)] border transition-colors duration-200 ${
           v === "good"
-            ? "bg-emerald-100 border-emerald-300"
-            : "border-[var(--p)] bg-transparent hover:bg-emerald-50"
+            ? "bg-[var(--brand-tint)] border-[var(--brand)] text-[var(--brand)]"
+            : "border-[var(--line)] bg-transparent text-[var(--ink-3)] hover:bg-[var(--surface-sunk)]"
         }`}
       >
-        👍
+        <Icon name="thumbsUp" size={15} />
       </button>
       <button
         type="button"
         onClick={() => send(false)}
         aria-label="bad"
-        className={`grid place-items-center w-7 h-7 rounded-lg text-sm border transition-all active:scale-90 ${
+        className={`grid place-items-center w-8 h-8 rounded-[var(--r-sm)] border transition-colors duration-200 ${
           v === "bad"
-            ? "bg-rose-100 border-rose-300"
-            : "border-[var(--p)] bg-transparent hover:bg-rose-50"
+            ? "bg-[var(--brand-tint)] border-[var(--brand)] text-[var(--brand)]"
+            : "border-[var(--line)] bg-transparent text-[var(--ink-3)] hover:bg-[var(--surface-sunk)]"
         }`}
       >
-        👎
+        <Icon name="thumbsDown" size={15} />
       </button>
     </div>
   );

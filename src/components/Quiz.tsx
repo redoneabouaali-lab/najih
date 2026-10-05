@@ -7,6 +7,7 @@ import { shuffle } from "@/lib/shuffle";
 import { db } from "@/lib/db";
 import { openAssistant } from "@/lib/assist";
 import { renderInlineMd } from "@/lib/md";
+import { Icon } from "@/components/Icon";
 
 type Option = { id: string; textAr: string; textFr: string; isCorrect: boolean };
 
@@ -137,13 +138,13 @@ export function Quiz({
   };
 
   if (!deck)
-    return <div className="p-8 text-center text-gray-500">Loading...</div>;
+    return <div className="p-8 text-center text-[var(--ink-3)]">Loading...</div>;
 
   if (deck.length === 0)
     return (
       <div className="p-8 text-center space-y-4">
         <p>{t(lang, "noQuestions")}</p>
-        <Link href="/" className="text-[var(--b)] hover:opacity-60">
+        <Link href="/" className="text-[var(--ink)] hover:opacity-60">
           {t(lang, "backToLessons")}
         </Link>
       </div>
@@ -153,10 +154,13 @@ export function Quiz({
     const pct = Math.round((acc / answers.length) * 100);
     return (
       <div className="max-w-2xl mx-auto p-6 space-y-6">
-        <div className="label mb-4">🎯 {t(lang, "score")}</div>
-        <div className="text-6xl font-bold text-center my-8 text-[var(--b)]">{pct}%</div>
+        <div className="label mb-4">
+          <Icon name="target" size={15} />
+          {t(lang, "score")}
+        </div>
+        <div className="text-6xl font-semibold text-center my-8 text-[var(--ink)] tabular-nums">{pct}%</div>
         <p className="sec-sub text-center mt-2">
-          {acc} {t(lang, "of")} {answers.length} ✓
+          {acc} {t(lang, "of")} {answers.length}
         </p>
         <div className="space-y-4 mt-8">
           {deck.map((q, i) => (
@@ -164,16 +168,21 @@ export function Quiz({
               key={q.id}
               className={`panel p-5 ${answers[i]?.correct ? "" : "ans-wrong"}`}
             >
-              <div className={`mono text-xs mb-2 ${answers[i]?.correct ? "text-[var(--acc)]" : "text-[var(--d)]"}`}>
-                {answers[i]?.correct ? "✓" : "✗"} — 0{i + 1}
+              <div
+                className={`flex items-center gap-2 text-[13px] mb-2 ${
+                  answers[i]?.correct ? "text-[var(--success)]" : "text-[var(--danger)]"
+                }`}
+              >
+                <Icon name={answers[i]?.correct ? "check" : "close"} size={14} />
+                <span className="tabular-nums">0{i + 1}</span>
               </div>
-              <p className="font-bold text-[var(--b)]">
+              <p className="font-bold text-[var(--ink)]">
                 {renderInlineMd(lang === "ar" ? q.promptAr : q.promptFr, `qp${i}`)}
               </p>
               {!answers[i]?.correct &&
                 ((lang === "ar" && q.explanationAr) ||
                   (lang === "fr" && q.explanationFr)) && (
-                  <p className="text-sm mt-2 text-[var(--l)]">
+                  <p className="text-sm mt-2 text-[var(--ink-3)]">
                     {renderInlineMd(
                       (lang === "ar" ? q.explanationAr : q.explanationFr) ?? "",
                       `qe${i}`,
@@ -181,7 +190,7 @@ export function Quiz({
                   </p>
                 )}
               {q.source && (
-                <p className="mono text-[11px] mt-2 text-[var(--p)]">{q.source}</p>
+                <p className="mono text-[11px] mt-2 text-[var(--line)]">{q.source}</p>
               )}
             </div>
           ))}
@@ -201,13 +210,13 @@ export function Quiz({
   const q = deck[idx];
   return (
     <div className="max-w-2xl mx-auto p-6 space-y-6">
-      <div className="flex justify-between items-center mono text-xs uppercase tracking-[.14em] text-[var(--l)]">
-        <span>{t(lang, "score")}: <b className="text-[var(--b)]">{acc}</b></span>
+      <div className="flex justify-between items-center mono text-xs uppercase tracking-[.14em] text-[var(--ink-3)]">
+        <span>{t(lang, "score")}: <b className="text-[var(--ink)]">{acc}</b></span>
         <span>
-          <b className="text-[var(--b)]">{idx + 1}</b> {t(lang, "of")} {deck.length}
+          <b className="text-[var(--ink)]">{idx + 1}</b> {t(lang, "of")} {deck.length}
         </span>
       </div>
-      <div className="panel p-6 sm:p-8 text-lg leading-relaxed font-bold text-[var(--b)]">
+      <div className="panel p-6 sm:p-8 text-lg leading-relaxed font-bold text-[var(--ink)]">
         {renderInlineMd(lang === "ar" ? q.promptAr : q.promptFr, "cp")}
       </div>
       <button
@@ -224,7 +233,7 @@ export function Quiz({
         }
         className="inline-flex align-middle items-center gap-2 px-4 py-2 rounded-xl border border-dashed border-[var(--acc)] text-[13px] font-semibold text-[var(--acc)] hover:bg-[var(--acc-soft)] transition-colors"
       >
-        <span aria-hidden>🦉</span>
+        <Icon name="message" size={15} />
         {lang === "ar" ? "ما فهمت السؤال — أشرحه لي" : "Je n'ai pas compris — explique-moi"}
       </button>
       <div className="space-y-3">
@@ -245,7 +254,7 @@ export function Quiz({
               disabled={feedback}
               className={`block w-full text-right p-4 px-5 border transition-all ${cls}`}
             >
-              <span className="mono text-xs mr-3 text-[var(--p)]">
+              <span className="mono text-xs mr-3 text-[var(--line)]">
                 {String.fromCharCode(97 + oi)}
               </span>
               {renderInlineMd(text, `opt${oi}`)}
@@ -256,15 +265,19 @@ export function Quiz({
       {feedback && (
         <div className="space-y-3">
           <div
-            className={`p-3 text-sm font-medium ${q.options.find((o) => o.id === selected)?.isCorrect ? "ans-correct" : "ans-wrong"}`}
+            className={`flex items-center gap-2 p-3 text-[15px] font-medium ${q.options.find((o) => o.id === selected)?.isCorrect ? "ans-correct" : "ans-wrong"}`}
           >
+            <Icon
+              name={q.options.find((o) => o.id === selected)?.isCorrect ? "check" : "close"}
+              size={16}
+            />
             {q.options.find((o) => o.id === selected)?.isCorrect
-              ? `✓ ${t(lang, "correct")}`
-              : `✗ ${t(lang, "wrong")}`}
+              ? t(lang, "correct")
+              : t(lang, "wrong")}
           </div>
           {((lang === "ar" && q.explanationAr) ||
             (lang === "fr" && q.explanationFr)) && (
-            <p className="text-sm text-[var(--l)]">
+            <p className="text-sm text-[var(--ink-3)]">
               {renderInlineMd(
                 (lang === "ar" ? q.explanationAr : q.explanationFr) ?? "",
                 "fex",
@@ -272,7 +285,7 @@ export function Quiz({
             </p>
           )}
           {q.source && (
-            <p className="mono text-[11px] text-[var(--p)]">{q.source}</p>
+            <p className="mono text-[11px] text-[var(--line)]">{q.source}</p>
           )}
           <button onClick={advance} className="btn btn-emerald w-full">
             {idx + 1 >= deck.length ? t(lang, "finish") : t(lang, "nextQ")}

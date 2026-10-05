@@ -1,6 +1,7 @@
 "use client";
 
 import { openAssistant } from "@/lib/assist";
+import { Icon } from "@/components/Icon";
 
 export function AskTutorButton({
   lang,
@@ -28,7 +29,8 @@ export function AskTutorButton({
     });
   return (
     <button type="button" onClick={send} className={className || "btn btn-ghost"}>
-      🦉 {lang === "ar" ? labelAr : labelFr}
+      <Icon name="message" size={16} />
+      {lang === "ar" ? labelAr : labelFr}
     </button>
   );
 }

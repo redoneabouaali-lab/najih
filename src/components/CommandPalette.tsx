@@ -2,9 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { normalizeLang, getClientLang, t, type Lang } from "@/lib/lang";
+import { normalizeLang, getClientLang, type Lang } from "@/lib/lang";
+import { Icon, type IconName } from "@/components/Icon";
 
-type Item = { url: string; label: string; sub: string; icon: string };
+type Item = { url: string; label: string; sub: string; icon: IconName };
 
 export function CommandPalette() {
   const router = useRouter();
@@ -19,6 +20,13 @@ export function CommandPalette() {
   const seqRef = useRef(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const clickLockRef = useRef<string | null>(null);
+
+  const ar = lang === "ar";
+  const tk = q.trim();
+  const queryReady = tk.length >= 2;
+  const results = queryReady ? items : [];
+  const activeIndex = results.length ? Math.min(active, results.length - 1) : -1;
+  const isLoading = queryReady && loading;
 
   const openPalette = useCallback(() => {
     setLang(normalizeLang(getClientLang()));
@@ -43,7 +51,7 @@ export function CommandPalette() {
         });
       } else if (open && e.key === "Enter") {
         e.preventDefault();
-        const it = items[active];
+        const it = items[activeIndex];
         if (it) {
           const url = it.url;
           setOpen(false);
@@ -56,7 +64,7 @@ export function CommandPalette() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open, items, active, router]);
+  }, [open, items, activeIndex, router]);
 
   useEffect(() => {
     if (open) {
@@ -70,47 +78,32 @@ export function CommandPalette() {
   }, [open]);
 
   useEffect(() => {
-    if (!open) return;
-    const tk = q.trim();
-    if (tk.length < 2) {
-      setItems([]);
-      setActive(-1);
-      setLoading(false);
-      return;
-    }
+    if (!open || !queryReady) return;
     const seq = ++seqRef.current;
-    setLoading(true);
-    setActive(-1);
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(async () => {
+      setLoading(true);
       try {
         const res = await fetch(`/api/search?q=${encodeURIComponent(tk)}&lang=${lang}`);
         const data = await res.json();
         if (seq !== seqRef.current) return;
         setItems(data.items ?? []);
         setActive(data.items?.length ? 0 : -1);
-        setLoading(false);
       } catch {
-        if (seq === seqRef.current) {
-          setItems([]);
-          setLoading(false);
-        }
+        if (seq === seqRef.current) setItems([]);
+      } finally {
+        if (seq === seqRef.current) setLoading(false);
       }
     }, 150);
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [q, open, lang]);
+  }, [tk, open, lang, queryReady]);
 
   useEffect(() => {
     const li = listRef.current?.querySelector<HTMLElement>('[data-active="true"]');
     li?.scrollIntoView({ block: "nearest" });
-  }, [active]);
-
-  const ar = lang === "ar";
-  const truncated =
-    items.length && items.length < 1 ? [] : items;
-  void truncated;
+  }, [activeIndex]);
 
   return (
     <>
@@ -122,7 +115,7 @@ export function CommandPalette() {
         className="palette-btn"
         title={`${ar ? "بحث سريع" : "Recherche rapide"} (Ctrl K)`}
       >
-        <span aria-hidden>🔍</span>
+        <Icon name="search" size={16} />
         <span className="palette-btn-t">{ar ? "ابحث…" : "Rechercher…"}</span>
         <kbd aria-hidden>Ctrl K</kbd>
       </button>
@@ -138,7 +131,9 @@ export function CommandPalette() {
         >
           <div className="palette" dir={ar ? "rtl" : "ltr"}>
             <div className="palette-bar">
-              <span aria-hidden className="palette-dot">🔍</span>
+              <span aria-hidden className="text-[var(--ink-3)] flex-none">
+                <Icon name="search" size={17} />
+              </span>
               <input
                 ref={inputRef}
                 value={q}
@@ -150,7 +145,7 @@ export function CommandPalette() {
                 spellCheck={false}
                 className="palette-input"
               />
-              {loading && <span className="palette-spin" aria-hidden />}
+              {isLoading && <span className="palette-spin" aria-hidden />}
               <button
                 type="button"
                 onClick={() => setOpen(false)}
@@ -161,7 +156,7 @@ export function CommandPalette() {
               </button>
             </div>
 
-            {q.trim().length < 2 ? (
+            {!queryReady ? (
               <div className="palette-hint">
                 {ar
                   ? "ابدأ الكتابة للقفز مباشرة إلى أي درس أو امتحان أو اختبار أو مادة."
@@ -169,11 +164,11 @@ export function CommandPalette() {
               </div>
             ) : (
               <ul ref={listRef} className="palette-list" role="listbox" aria-label={ar ? "نتائج" : "Résultats"}>
-                {items.map((it, i) => (
-                  <li key={it.url} role="option" aria-selected={i === active}>
+                {results.map((it, i) => (
+                  <li key={it.url} role="option" aria-selected={i === activeIndex}>
                     <button
                       type="button"
-                      data-active={i === active}
+                      data-active={i === activeIndex}
                       onMouseEnter={() => setActive(i)}
                       onClick={() => {
                         const url = it.url;
@@ -185,18 +180,20 @@ export function CommandPalette() {
                       }}
                       className="palette-item"
                     >
-                      <span aria-hidden className="palette-ic">{it.icon}</span>
+                      <span aria-hidden className="palette-ic">
+                        <Icon name={it.icon} size={16} />
+                      </span>
                       <span className="palette-tx">
                         <span className="palette-lb">{it.label}</span>
                         <span className="palette-sb">{it.sub}</span>
                       </span>
-                      {i === active && (
+                      {i === activeIndex && (
                         <span aria-hidden className="palette-go">{ar ? "←" : "→"}</span>
                       )}
                     </button>
                   </li>
                 ))}
-                {items.length === 0 && !loading && (
+                {results.length === 0 && !isLoading && (
                   <li className="palette-none">{ar ? "لا نتائج مطابقة." : "Aucun résultat."}</li>
                 )}
               </ul>

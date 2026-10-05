@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { PageContext } from "@/components/PageContext";
+import { Icon } from "@/components/Icon";
 
 type Props = { params: Promise<{ slug: string; matiereSlug: string }> };
 
@@ -28,8 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     path: `/branches/${slug}/matiere/${matiereSlug}`,
     title:
       lang === "ar"
-        ? `${subject.icon} دروس ${name} — ${shortLabel}`
-        : `${subject.icon} Cours ${name} — ${shortLabel}`,
+        ? `دروس ${name} — ${shortLabel}`
+        : `Cours ${name} — ${shortLabel}`,
     brandInTitle: false,
     description:
       lang === "ar"
@@ -60,7 +61,7 @@ export default async function MatierePage({ params }: Props) {
   const lang = await getLang();
 
   const branch = await prisma.branch.findUnique({ where: { slug } });
-  if (!branch) return <div className="p-8 text-center text-gray-500">Branch not found</div>;
+  if (!branch) return <div className="p-8 text-center text-[var(--ink-3)]">Branch not found</div>;
 
   const subject = await prisma.subject.findUnique({
     where: { branchId_slug: { branchId: branch.id, slug: matiereSlug } },
@@ -75,7 +76,7 @@ export default async function MatierePage({ params }: Props) {
     },
   });
 
-  if (!subject) return <div className="p-8 text-center text-gray-500">Matière not found</div>;
+  if (!subject) return <div className="p-8 text-center text-[var(--ink-3)]">Matière not found</div>;
 
   const keys = SUBJECT_KEYMAP[subject.slug] ?? [];
   const resources = await prisma.resource.findMany({
@@ -123,24 +124,22 @@ export default async function MatierePage({ params }: Props) {
       />
       <div className="crumb mb-8">
         <Link href="/">{t(lang, "navHome")}</Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
         <Link href={`/branches/${slug}`}>{lang === "ar" ? branch.nameAr : branch.nameFr}</Link>
-        <span className="mx-2 text-[var(--p)]">/</span>
-        <span className="text-[var(--b)]">{lang === "ar" ? subject.nameAr : subject.nameFr}</span>
+        <span className="mx-2 text-[var(--line)]">/</span>
+        <span className="text-[var(--ink)]">{lang === "ar" ? subject.nameAr : subject.nameFr}</span>
       </div>
 
       <div className="mb-12">
         <div className="label mb-4">01 — {t(lang, "matiere")}</div>
-        <h1 className="sec-title text-[var(--b)]">
-          {subject.icon} {lang === "ar" ? subject.nameAr : subject.nameFr}
-        </h1>
+        <h1 className="sec-title text-[var(--ink)]">{lang === "ar" ? subject.nameAr : subject.nameFr}</h1>
         <p className="sec-sub mt-3">{lang === "ar" ? branch.nameAr : branch.nameFr}</p>
       </div>
 
       <section className="mb-16">
         <div className="label mb-5">02 — {t(lang, "lessonsAndQuiz")}</div>
         {subject.chapters.length === 0 && (
-          <p className="text-[var(--l)]">{t(lang, "noLessonsMatiere")}</p>
+          <p className="text-[var(--ink-3)]">{t(lang, "noLessonsMatiere")}</p>
         )}
         <div className="stagger grid grid-cols-1 sm:grid-cols-2 gap-4">
           {subject.chapters.map((ch, i) => (
@@ -150,13 +149,18 @@ export default async function MatierePage({ params }: Props) {
               className="panel panel-hover p-5 flex items-center justify-between gap-4"
             >
               <div>
-                <div className="mono text-xs text-[var(--l)] mb-2">0{i + 1} · {lang === "ar" ? branch.nameAr : branch.nameFr}</div>
-                <div className="font-bold text-[var(--b)]">{lang === "ar" ? ch.titleAr : ch.titleFr}</div>
+                <div className="mono text-xs text-[var(--ink-3)] mb-2">0{i + 1} · {lang === "ar" ? branch.nameAr : branch.nameFr}</div>
+                <div className="font-bold text-[var(--ink)]">{lang === "ar" ? ch.titleAr : ch.titleFr}</div>
               </div>
               <div className="flex flex-col gap-2 shrink-0">
-                <span className="btn btn-emerald btn-sm !px-4">📖 {t(lang, "lessonView")}</span>
+                <span className="btn btn-sm !px-4">
+                  <Icon name="book" size={15} />
+                  {t(lang, "lessonView")}
+                </span>
                 {ch._count.questions > 0 && (
-                  <span className="tag">🎯 {ch._count.questions}</span>
+                  <span className="tag">
+                    <Icon name="target" size={13} /> {ch._count.questions}
+                  </span>
                 )}
               </div>
             </Link>
@@ -174,7 +178,11 @@ export default async function MatierePage({ params }: Props) {
                 <span>
                   <span className="entry__title block">{lang === "ar" ? e.titleAr : e.titleFr}</span>
                 </span>
-                <span className="entry__meta"><b>⬇ PDF</b></span>
+                <span className="entry__meta">
+                  <b>
+                    <Icon name="download" size={13} /> PDF
+                  </b>
+                </span>
               </a>
             ))}
           </div>
@@ -206,9 +214,12 @@ export default async function MatierePage({ params }: Props) {
             className="panel panel-hover p-5 flex items-center justify-between gap-4"
           >
             <div>
-              <div className="mono text-xs text-[var(--l)] mb-2">🗓️ {t(lang, "examSection")}</div>
-              <div className="font-bold text-[var(--b)]">{t(lang, "examsMatiereTitle")}</div>
-              <div className="mt-1 text-sm text-[var(--l)]">{examCount} {t(lang, "countExams")}</div>
+              <div className="flex items-center gap-2 mono text-xs text-[var(--ink-3)] mb-2">
+                <Icon name="calendar" size={14} />
+                {t(lang, "examSection")}
+              </div>
+              <div className="font-bold text-[var(--ink)]">{t(lang, "examsMatiereTitle")}</div>
+              <div className="mt-1 text-sm text-[var(--ink-3)]">{examCount} {t(lang, "countExams")}</div>
             </div>
             <span className="btn btn-emerald btn-sm !px-4">↗</span>
           </Link>

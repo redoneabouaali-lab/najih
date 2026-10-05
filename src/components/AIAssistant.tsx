@@ -10,6 +10,7 @@ import { AttachButton } from "@/components/AttachButton";
 import { AiFeedback } from "@/components/AiFeedback";
 import { uploadsExhausted, uploadsRemaining, consumeUpload } from "@/lib/uploads";
 import { sessionId } from "@/lib/session";
+import { Icon } from "@/components/Icon";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -39,8 +40,8 @@ function welcomeMsg(lang: Lang): Msg {
     role: "assistant",
     content:
       lang === "ar"
-        ? "أهلاً بك! أنا **المرشد الذكي** 👋 — اسألني عن أي درس أو امتحان أو سؤال في الباك، وأشرح لك بالعربية أو بالفرنسية. فين راك محتاج المساعدة؟"
-        : "Salut ! Je suis le **Tuteur IA** 👋 — pose-moi une question sur n'importe quelle leçon ou examen du Bac, je t'explique en arabe ou en français. Besoin d'aide ?",
+        ? "أهلاً بك! أنا **المرشد الذكي** — اسألني عن أي درس أو امتحان أو سؤال في الباك، وأشرح لك بالعربية أو بالفرنسية. فين راك محتاج المساعدة؟"
+        : "Salut ! Je suis le **Tuteur IA** — pose-moi une question sur n'importe quelle leçon ou examen du Bac, je t'explique en arabe ou en français. Besoin d'aide ?",
   };
 }
 
@@ -97,7 +98,7 @@ export function AIAssistant({ lang }: { lang: Lang }) {
       setLoading(true);
       setInput("");
       const history = msgsRef.current;
-      setMsgs((m) => [...m, { role: "user", content: text || (lang === "ar" ? "📎 مرفق" : "📎 pièce jointe") }]);
+      setMsgs((m) => [...m, { role: "user", content: text || (lang === "ar" ? "مرفق" : "Pièce jointe") }]);
       const system =
         lang === "ar"
           ? "أنت المرشد الذكي في موقع ناجح لتحضير الباكالوريا المغربية."
@@ -125,7 +126,7 @@ export function AIAssistant({ lang }: { lang: Lang }) {
             role: "assistant",
             content:
               reply ??
-              (lang === "ar" ? "⚠️ حدث خطأ، حاول مجدداً." : "⚠️ Erreur, réessaie."),
+              (lang === "ar" ? "حدث خطأ، حاول مجدداً." : "Erreur, réessaie."),
           },
         ]);
       } catch {
@@ -154,8 +155,8 @@ export function AIAssistant({ lang }: { lang: Lang }) {
             role: "assistant",
             content:
               lang === "ar"
-                ? "أنت استنفدت تحميلاتك المجانية الثلاثة 📎. جرّب زر «فهم هذا الملف» الأزرق في صفحات الدروس والتمارين، أو اسأل المرشد مباشرة عن الدرس، أو أعد رفع صورة بعد حذف السجل (إعدادات المتصفح)."
-                : "Tu as épuisé tes 3 téléversements gratuits 📎. Utilise le bouton « Comprendre ce fichier » sur les pages de cours/exercices, ou interroge directement le tuteur sur la leçon.",
+                ? "أنت استنفدت تحميلاتك المجانية الثلاثة. جرّب زر «فهم هذا الملف» في صفحات الدروس والتمارين، أو اسأل المرشد مباشرة عن الدرس، أو أعد رفع صورة بعد حذف السجل (إعدادات المتصفح)."
+                : "Tu as épuisé tes 3 téléversements gratuits. Utilise le bouton « Comprendre ce fichier » sur les pages de cours/exercices, ou interroge directement le tuteur sur la leçon.",
           },
         ]);
         return;
@@ -171,8 +172,8 @@ export function AIAssistant({ lang }: { lang: Lang }) {
               role: "assistant",
               content:
                 lang === "ar"
-                  ? "😕 يبدو أن هذا الملف غير قابل للقراءة (صفحة ممسوحة أو محمية). جرّب رفع صورة واضحة للسؤال بدلاً منه."
-                  : "😕 Ce fichier semble illisible (page scannée ou protégée). Essaie de joindre une photo nette de la question.",
+                  ? "يبدو أن هذا الملف غير قابل للقراءة (صفحة ممسوحة أو محمية). جرّب رفع صورة واضحة للسؤال بدلاً منه."
+                  : "Ce fichier semble illisible (page scannée ou protégée). Essaie de joindre une photo nette de la question.",
             },
           ]);
           return;
@@ -259,7 +260,9 @@ export function AIAssistant({ lang }: { lang: Lang }) {
         className="ai-fab"
         dir="ltr"
       >
-        <span className="ai-fab__icon">🦉</span>
+        <span className="ai-fab__icon">
+          <Icon name="message" size={22} />
+        </span>
         <span className="ai-fab__ping" aria-hidden />
       </button>
 
@@ -268,12 +271,12 @@ export function AIAssistant({ lang }: { lang: Lang }) {
           <div className="ai-panel__head">
             <div className="flex items-center gap-3">
               <span className="ai-avatar">
-                🦉
+                <Icon name="message" size={18} />
                 <span className="ai-avatar__ring" aria-hidden />
               </span>
               <div className="leading-tight">
-                <div className="font-bold text-[15px] text-[var(--b)]">{t(lang, "navAi")}</div>
-                <div className="mono text-[11px] text-emerald-600 flex items-center gap-1">
+                <div className="font-semibold text-[15px] text-[var(--ink)]">{t(lang, "navAi")}</div>
+                <div className="text-[12px] text-[var(--success)] flex items-center gap-1.5">
                   <span className="ai-live" aria-hidden />
                   {lang === "ar" ? "متصل وجاهز للمساعدة" : "En ligne, prêt à aider"}
                 </div>
@@ -285,7 +288,7 @@ export function AIAssistant({ lang }: { lang: Lang }) {
               className="ai-panel__close"
               aria-label={lang === "ar" ? "إغلاق" : "Fermer"}
             >
-              ✕
+              <Icon name="close" size={16} />
             </button>
           </div>
 
@@ -306,7 +309,11 @@ export function AIAssistant({ lang }: { lang: Lang }) {
                     className={`ai-msg ${isAss ? "ai-row--ass" : "ai-row--user"}`}
                     style={{ animationDelay: `${Math.min(i * 40, 400)}ms` }}
                   >
-                    {isAss && <span className="ai-avatar ai-avatar--mini">🦉</span>}
+                    {isAss && (
+                      <span className="ai-avatar ai-avatar--mini">
+                        <Icon name="message" size={13} />
+                      </span>
+                    )}
                     <div className={`ai-bubble ${isAss ? "ai-bubble--bot" : "ai-bubble--user"}`}>
                       {isAss ? (
                         <>
@@ -322,7 +329,9 @@ export function AIAssistant({ lang }: { lang: Lang }) {
               })}
               {loading && (
                 <div className="ai-msg ai-row--ass">
-                  <span className="ai-avatar ai-avatar--mini">🦉</span>
+                  <span className="ai-avatar ai-avatar--mini">
+                    <Icon name="message" size={13} />
+                  </span>
                   <div className="ai-bubble ai-bubble--bot ai-think">
                     <span className="ai-think__dots">
                       <i />
@@ -330,7 +339,7 @@ export function AIAssistant({ lang }: { lang: Lang }) {
                       <i />
                     </span>
                     <span className="ai-think__label">
-                      {lang === "ar" ? "أحلّل سؤالك… انتظر الإجابة لحظة ✨" : "J'analyse ta question… un instant ✨"}
+                      {lang === "ar" ? "أحلّل سؤالك… انتظر الإجابة لحظة" : "J'analyse ta question… un instant"}
                     </span>
                   </div>
                 </div>
@@ -348,13 +357,14 @@ export function AIAssistant({ lang }: { lang: Lang }) {
                   onClick={() =>
                     void sendMessage(
                       lang === "ar"
-                        ? "اختبرني في ما أدرسه الآن 😊 (اختبار تفاعلي بأسئلة متدرجة)"
-                        : "Interroge-moi sur ce que j'étudie maintenant 😊 (quiz interactif progressif)",
+                        ? "اختبرني في ما أدرسه الآن (اختبار تفاعلي بأسئلة متدرجة)"
+                        : "Interroge-moi sur ce que j'étudie maintenant (quiz interactif progressif)",
                     )
                   }
                   className="ai-chip ai-chip--quiz"
                 >
-                  🎯 {lang === "ar" ? "اختبرني الآن" : "Interroge-moi"}
+                  <Icon name="target" size={14} />
+                  {lang === "ar" ? "اختبرني الآن" : "Interroge-moi"}
                 </button>
                 {chips.map((c) => (
                   <button
@@ -382,7 +392,7 @@ export function AIAssistant({ lang }: { lang: Lang }) {
             >
               <AttachButton lang={lang === "ar" ? "ar" : "fr"} onPick={(f) => void handleAttach(f)} disabled={loading || uploading} remaining={uploadLeft ?? undefined} />
               {uploading && (
-                <span className="mono text-[11px] text-[var(--l)] whitespace-nowrap">
+                <span className="mono text-[11px] text-[var(--ink-3)] whitespace-nowrap">
                   {lang === "ar" ? "جارٍ تحضير الملف…" : "Préparation du fichier…"}
                 </span>
               )}
