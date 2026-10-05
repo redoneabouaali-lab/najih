@@ -3,7 +3,8 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-const REVEAL_SELECTOR = "[data-reveal]";
+const REVEAL_ATTR = "data-reveal";
+const REVEAL_SELECTOR = `[${REVEAL_ATTR}]`;
 const GROUP_SELECTOR = "[data-reveal-group]";
 const COUNTER_SELECTOR = "[data-count-to]";
 
@@ -64,7 +65,10 @@ function claimGroupChildren(groups: HTMLElement[]) {
 
     for (const child of Array.from(group.children)) {
       const el = child as HTMLElement;
-      if (!el.hasAttribute(REVEAL_SELECTOR)) el.setAttribute("data-reveal", "");
+      // Guards against overwriting a variant the template already declared:
+      // a group child written as data-reveal="scale" must keep "scale", not
+      // be flattened back to a bare attribute.
+      if (!el.hasAttribute(REVEAL_ATTR)) el.setAttribute(REVEAL_ATTR, "");
       if (step && !el.dataset.revealStep) el.dataset.revealStep = step;
       if (cap && !el.dataset.revealCap) el.dataset.revealCap = cap;
     }
@@ -110,7 +114,7 @@ function observeMotion(scope: ParentNode, allowed: boolean) {
         const el = entry.target as HTMLElement;
         io.unobserve(el);
 
-        if (el.matches(COUNTER_SELECTOR) && !el.hasAttribute(REVEAL_SELECTOR)) {
+        if (el.matches(COUNTER_SELECTOR) && !el.hasAttribute(REVEAL_ATTR)) {
           runCounter(el);
           return;
         }
